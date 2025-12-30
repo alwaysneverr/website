@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Rocker&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    overflow: hidden;
+}
+
+canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+a, 
+p {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Playfair Display", Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+nav, 
+footer{
+    position: fixed;
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: exclusion;
+    z-index: 3;
+}
+
+nav {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+nav > div {
+    flex: 1;
+    display: flex;
+    gap: 2em;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo a{
+    font-family: "New Rocker", Arial, Helvetica, sans-serif;
+    font-size: 48px;
+    font-weight: lighter;
+}
+
+.nav-items:nth-child(3) {
+    justify-content: flex-end;
+}
+
+button {
+    font-family: "Playfair Display", Arial, Helvetica, sans-serif;
+    background-color: #e0e0e0;
+    border: 2px solid #e0e0e0;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.container {
+    width: 100%;
+    height: 2000vh;
+}
+
+.slider {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: preserve-3d;
+    perspective: 500px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.slide {
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    will-change: transform, opacity;
+}
+
+.slide-img {
+    width: 100%;
+    height: 100%;
+    padding: 0.5em;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+.slide-copy {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0.5em;
+    background-color: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+.slide-copy > p {
+    color: #f0f0f0;
+    font-size: 20px;
+    text-transform: none;
+}
+
+.slide:nth-child(10) > .slide-copy {
+    background-color: transparent;
+    border: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1) 100%);
+}

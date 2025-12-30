@@ -116,10 +116,20 @@ export default function (eleventyConfig) {
 	// Layouts
 	eleventyConfig.addLayoutAlias('base', 'base.njk')
 	eleventyConfig.addLayoutAlias('post', 'post.njk')
+	eleventyConfig.addLayoutAlias('empty', 'empty.njk')
+	eleventyConfig.addLayoutAlias('review', 'review.njk')
 
 	// Copy/pass-through files
 	eleventyConfig.addPassthroughCopy('src/assets/css')
 	eleventyConfig.addPassthroughCopy('src/assets/js')
+
+	// add css bundles
+	eleventyConfig.addBundle("css", {
+		toFileDirectory: "dist",
+		// Add all <style> content to `css` bundle (use <style eleventy:ignore> to opt-out)
+		// Supported selectors: https://www.npmjs.com/package/posthtml-match-helper
+		bundleHtmlContentFromSelector: "style",
+	});
 
 	return {
 		templateFormats: ['md', 'njk', 'html', 'liquid'],

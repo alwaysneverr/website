@@ -1,0 +1,30 @@
+main {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+body{
+  color: lime;
+  background-color: #000;
+}
+h1{
+  text-align: center;
+}
+#typedtext{
+  font-size: 115%;
+}
+
+@media only screen and (max-width: 685px) {
+  main {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+.date{
+  text-align: right;
+  font-size: small;
+}

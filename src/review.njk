@@ -1,0 +1,14 @@
+---
+layout: base
+permalink: /reviews/
+eleventyNavigation:
+  key: Reviews
+  order: 3
+---
+
+<div class="container">
+    <h1>Reviews</h1>
+    {% set reviewslist = collections.reviews %}
+    {% include "reviewslist.njk" %}
+</div>
+

@@ -1,0 +1,12 @@
+<ol reversed class="reviewlist">
+{% for review in reviewslist | reverse %}
+  <li class="reviewlist-item{% if review.url == url %} reviewlist-item-active{% endif %}">
+    <a href="{{ review.url | url }}" class="reviewlist-link"><h2>{% if review.data.title %}{{ review.data.title }}{% else %}<code>{{ review.url }}</code>{% endif %}</h2></a>
+    <time class="reviewlist-date" datetime="{{ review.date | dateToFormat('yyyy-MM-dd') }}">{{ review.date | dateToFormat('dd LLL yyyy') }}</time>
+    {% for tag in review.data.tags | filterTagList %}
+      {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+      <a href="{{ tagUrl | url }}" class="review-tag">{{ tag }}</a>
+    {% endfor %}
+  </li>
+{% endfor %}
+</ol>

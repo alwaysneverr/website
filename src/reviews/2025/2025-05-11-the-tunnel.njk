@@ -1,0 +1,72 @@
+---
+layout: empty
+title: The Tunnel
+---
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="The Tunnel">
+    <meta property="og:image" content="/assets/images/The_Tunnel_to_Summer,_the_Exit_of_Goodbyes.jpg">
+    <meta property="og:image:alt" content="Image of the key visual of the movie 'The Tunnel to Summer, the Exit of Goodbyes', featuring main characters Kaoru Touno and Anzu Hanashiro.">
+    <meta property="og:description" content="The review of the anime 'The Tunnel to Summer, the Exit of Goodbyes' by AlwaysNever.">
+    <title>The Tunnel</title>
+    <link rel="stylesheet" href="/assets/css/tunnel.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+    void main(){
+      gl_Position = vec4(position, 1.0);
+    }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+    uniform vec2 iResolution;
+    uniform float iTime;
+    uniform float scrollOffset;
+
+    void mainImage(out vec4 o, vec2 I){
+      I -= o.zw = iResolution.xy / 2.0;
+      float t = iTime * 5.0 + scrollOffset * 200.0;
+      float pattern = sin(atan(I.y, I.x) / 0.1) * sin(20.0 * (o.w /= length(I)) + t) - 1.0 + o.w;
+
+      float monochrome = 1.0 - pattern * 0.5;
+      float invertedMonochrome = 1.0 - monochrome;
+
+      o = vec4(invertedMonochrome, invertedMonochrome, invertedMonochrome, 1.0);
+    }
+
+    void main(){
+      mainImage(gl_FragColor, gl_FragCoord.xy);
+    }
+  </script>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <main>
+    <div class="container">
+      <nav>
+      <div class="nav-items">
+        <a href="/reviews/">Back</a>
+      </div>
+      <div class="logo">
+        <a href="#">The Tunnel</a>
+      </div>
+      <div class="nav-items">
+        <button id="muteButton" class="mute-btn">
+          <span>Mute</span>
+        </button>
+      </div>
+    </nav>
+    <footer>
+      <p>AlwaysNever, ©2025</p>
+    </footer>
+      <div class="overlay"></div>
+      <div class="slider"></div>
+    </div>
+  </main>
+  <script type="module" src="/assets/js/modules/tunnel/visual.js"></script>
+  <script type="module" src="/assets/js/modules/tunnel/music.js"></script>
+</body>
