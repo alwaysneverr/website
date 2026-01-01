@@ -57,11 +57,22 @@
 
   /* Merriweather */
   @font-face {
+    font-display: swap;
     font-family: 'Merriweather';
     font-style: normal;
     font-weight: 500;
     src: local(''),
          url('/assets/fonts/merriweather/Merriweather[opsz,wdth,wght].woff2') format('woff2');
+  }
+
+  /* kosugi-maru-regular - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Kosugi Maru';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+        url('/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
   }
 
 body {
@@ -76,4 +87,12 @@ body {
 
 .merriweather-regular{
     font-family: 'Merriweather';
+}
+
+.allerta-stencil{
+    font-family: 'Allerta Stencil';
+}
+
+.kosugi-maru-regular{
+    font-family: 'Kosugi Maru';
 }
