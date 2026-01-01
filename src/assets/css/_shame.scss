@@ -35,3 +35,38 @@
         width: 50%;
     }
   }
+
+
+/* Love Me Unseriously masks */
+.mask1 {
+  -webkit-mask-image: url(/assets/images/majikoi/masks/dreams.png);
+  mask-image: url(/assets/images/majikoi/masks/dreams.png);
+  mask-repeat: no-repeat;    
+}
+
+.mask2{
+  -webkit-mask-image: url(/assets/images/majikoi/masks/friend.png);
+  mask-image: url(/assets/images/majikoi/masks/friend.png);
+  mask-repeat: no-repeat;    
+}
+
+/* theme button */
+.theme_toggle{
+    padding: .5rem;
+    border-color: rgba(0, 0, 0, 0);
+    transition: all var(--global-transition-time) ease-in-out;
+    background-image: url(/assets/icons/theme-dark.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline;
+    position: relative;
+}
+
+.theme_toggle.light-theme{
+	background-image: url(/assets/icons/theme-light.svg);
+}
