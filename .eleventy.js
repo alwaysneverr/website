@@ -14,6 +14,18 @@ import transforms from './utils/transforms.js'
 import shortcodes from './utils/shortcodes.js'
 
 export default function (eleventyConfig) {
+	// Drafts, see also _data/eleventyDataSchema.js
+	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
+		if (data.draft) {
+			data.title = `${data.title} (draft)`;
+		}
+
+		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+			return false;
+		}
+	});
+
+
 	eleventyConfig.setServerPassthroughCopyBehavior('copy');
 	eleventyConfig.addPassthroughCopy("public");
 
