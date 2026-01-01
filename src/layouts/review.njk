@@ -7,6 +7,16 @@
 
 	<link rel="preload" href="/assets/fonts/dm-sans/dm-sans-v11-latin-regular-subset.woff2" as="font" type="font/woff2" crossorigin="">
 
+    {%- if font == "allerta-stencil" -%}
+    <link rel="preload" href="/assets/fonts/allerta-stencil/allerta-stencil-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="/assets/fonts/allerta-stencil/allerta-stencil-v24-latin-regular.ttf" as="font" type="font/ttf" crossorigin="">
+    {%- endif -%}
+
+    {%- if font == "kosugi-maru" -%}
+    <link rel="preload" href="/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.ttf" as="font" type="font/ttf" crossorigin="">
+    {%- endif -%}
+
     {% include "meta.njk" %}
 
 	<script>
