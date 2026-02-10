@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Kevin Quach's Persona 5 Menu Effect, modified*/
+/* Copyright (c) 2026 by Kevin Quach (https://codepen.io/kevinquach/pen/JNGmKG)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+body {
+  background: #d92323;
+  padding-top: 50px;
+  height: 100vh;
+  margin: 0;
+}
+
+main{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+article{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 25px;
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 25px;
+}
+
+article, #intro, #intro img, #credits {
+    width: 725px;
+  }
+
+/* experimental Persona 5 UI font */
+@font-face {
+    font-display: swap;    
+    font-family: 'Persona5';
+    src: url('/assets/fonts/persona5menufontprototype/Persona5MenuFontPrototype-Regular.otf') format('opentype');
+}
+
+/* deal font */
+@font-face {
+    font-display: swap;    
+    font-family: 'YD Myungjo 550';
+    src: url('/assets/fonts/YD-myungjo-550/YDMjo55.woff2') format('woff2'),
+         url('/assets/fonts/YD-myungjo-550/YDMjo55.woff') format('woff'),
+         url('/assets/fonts/YD-myungjo-550/YDMjo55.eot') format('eot');
+}
+  
+.persona-menu{
+    font-family: 'Persona5';
+}
+
+.arsenal-regular {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.arsenal-bold {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: white;
+}
+
+.arsenal-regular-italic {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.arsenal-bold-italic {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.visible{
+    text-shadow:     
+    -0.5px -0.5px 0 #000,
+     0.5px -0.5px 0 #000,
+    -0.5px  0.5px 0 #000,
+     0.5px  0.5px 0 #000;
+}
+
+.persona-deal{
+  font-family: 'YD Myungjo 550', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: larger;
+  color: white;
+  user-select: none;
+  cursor: default;
+}
+
+.persona-deal > p > span{
+    color: red;
+    text-shadow:     
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+figcaption{
+    text-align: center;
+}
+
+#credits{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
+}
+
+#credits a{
+    color: #7b7b7b;
+}
+
+hr {
+  opacity: 0;
+}
+
+.navbar {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.link-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 0px 16px;
+}
+.link-wrapper .fallback {
+  font-size: 2.25em;
+  letter-spacing: 4px;
+  line-height: 0;
+  opacity: 0;
+  position: relative;
+  top: 15px;
+  left: 0;
+}
+.link-wrapper .shape-wrapper {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.link-wrapper:hover {
+  z-index: 9999;
+}
+.link-wrapper:hover .shape-wrapper {
+  transform: rotate(-6deg);
+  display: block;
+}
+.link-wrapper:hover .shape-wrapper .shape.cyan-fill {
+  transform: scale(3, 0.1);
+}
+.link-wrapper:hover .img-wrapper img {
+  animation: tiltBounce 0.15s ease;
+  animation-fill-mode: forwards;
+  display: block;
+}
+.link-wrapper:hover .img-wrapper img.normal {
+  mix-blend-mode: darken;
+}
+.link-wrapper:nth-child(even):hover .shape-wrapper {
+  transform: rotate(11deg);
+}
+.link-wrapper:nth-child(even):hover .img-wrapper img {
+  animation: tiltBounceAlt 0.15s ease;
+  animation-fill-mode: forwards;
+}
+
+.img-wrapper img {
+  width: auto;
+  height: 40px;
+  display: block;
+  left: 0;
+  right: 0;
+  top: -5px;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 999;
+}
+.img-wrapper img.normal {
+  display: block;
+}
+.img-wrapper img.active {
+  display: none;
+  z-index: -1;
+}
+
+.shape-wrapper {
+  filter: sepia(50%) saturate(3);
+}
+.shape-wrapper .shape {
+  transition: all 0.1s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  overflow: hidden;
+}
+.shape-wrapper .shape svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.shape-wrapper .shape.cyan-fill {
+  mix-blend-mode: screen;
+  animation-delay: 0.05s;
+  animation-duration: 0.4s;
+}
+.shape-wrapper .shape.red-fill {
+  animation-duration: 0.45s;
+  animation-delay: 0.08s;
+  opacity: 0.8;
+}
+
+.jelly {
+  animation-name: jelly;
+  transform-origin: center;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes tiltBounce {
+  0% {
+    transform: scale(1) rotate(-7deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(-7deg);
+  }
+  100% {
+    transform: scale(1.15) rotate(-7deg);
+  }
+}
+@keyframes tiltBounceAlt {
+  0% {
+    transform: scale(1) rotate(7deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(7deg);
+  }
+  100% {
+    transform: scale(1.15) rotate(7deg);
+  }
+}
+@keyframes jelly {
+  0% {
+    width: 100%;
+    transform: scale(1.25, 1) skewX(20deg) translateY(3px) rotateX(40deg) rotateY(10deg) rotateZ(-10deg);
+  }
+  50% {
+    width: 100%;
+    transform: scale(1.25, 1.1) skewX(-15deg) translateY(-2px) translateZ(-30px);
+  }
+  100% {
+    width: 100%;
+    transform: scale(1.25, 1) skewX(20deg) translateY(3px) rotateX(-40deg) rotateY(-10deg) rotateZ(-15deg);
+  }
+}/*# sourceMappingURL=persona.css.map */
+
+@media only screen and (max-width: 685px) {
+  .navbar{
+    margin-top: 0;
+  }
+
+  .navbar a{
+    padding: 10px;
+  }
+
+  article {
+    flex-direction: column;
+  }
+
+  #intro, #intro img, #credits {
+    width: 355px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  article {
+    flex-direction: column;
+  }
+
+  article, #intro, #intro img, #credits {
+    width: 300px;
+  }
+
+  section{
+    padding: 0;
+  }
+}
