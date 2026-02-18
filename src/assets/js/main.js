@@ -24,7 +24,7 @@ import * as theme from './modules/theme'
   let currentThemeSetting = theme.calculateSettingAsThemeString({ localStorageTheme, systemSettingDark });
   
   /**
-  * 3. Update the theme setting and button text accoridng to current settings
+  * 3. Update the theme setting and button text according to current settings
   */
   theme.updateButton({ buttonEl: button, isDark: currentThemeSetting === "dark" });
   theme.updateThemeOnHtmlEl({ theme: currentThemeSetting });

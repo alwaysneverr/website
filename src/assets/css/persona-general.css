@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* experimental Persona 5 UI font */
+@font-face {
+  font-display: swap;
+  font-family: 'Persona5';
+  src: url('/assets/fonts/persona5menufontprototype/Persona5MenuFontPrototype-Regular.otf') format('opentype');
+}
+
+/* deal font */
+@font-face {
+  font-display: swap;
+  font-family: 'YD Myungjo 550';
+  src: url('/assets/fonts/YD-myungjo-550/YDMjo55.woff2') format('woff2'),
+    url('/assets/fonts/YD-myungjo-550/YDMjo55.woff') format('woff'),
+    url('/assets/fonts/YD-myungjo-550/YDMjo55.eot') format('eot');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding-bottom: 50px;
+}
+
+main {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 30px;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 25px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 25px;
+}
+
+article,
+section p,
+#intro img,
+#credits {
+  width: 725px;
+}
+
+fieldset {
+  font-size: large;
+}
+
+.persona-menu {
+  font-family: 'Persona5';
+}
+
+.arsenal-regular {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.arsenal-bold {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: white;
+}
+
+.arsenal-regular-italic {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.arsenal-bold-italic {
+  font-family: "Arsenal", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.visible {
+  text-shadow:
+    -0.5px -0.5px 0 #000,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+}
+
+.persona-deal {
+  font-family: 'YD Myungjo 550', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: larger;
+  color: white;
+  user-select: none;
+  cursor: default;
+}
+
+.persona-deal>p>span {
+  color: red;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+figure img{
+  width: 200px;
+}
+
+figcaption {
+  text-align: center;
+}
+
+#credits {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: small;
+}
+
+a {
+  color: #23D7D7;
+}
+
+@media only screen and (max-width: 685px) {
+  article {
+    flex-direction: column;
+  }
+
+  section p,
+  #intro img,
+  #credits {
+    width: 355px;
+  }
+
+  figure img {
+    padding-left: 25px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  article {
+    flex-direction: column;
+  }
+
+  article,
+  section p,
+  #intro img,
+  #credits {
+    width: 300px;
+  }
+
+  section {
+    padding: 0;
+  }
+
+  figure img {
+    padding-left: 25px;
+  }
+}

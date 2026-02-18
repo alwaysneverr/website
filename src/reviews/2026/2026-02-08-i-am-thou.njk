@@ -5,16 +5,28 @@ title: I Am Thou
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
     <meta property="og:title" content="I Am Thou">
     <meta property="og:image" content="/assets/images/P5R.jpg">
     <meta property="og:image:alt" content="Image of the cover of the game 'Persona 5 Royal', featuring the main cast, the Phantom Thieves.">
     <meta property="og:description" content="The review of the game 'Persona 5 Royal' by AlwaysNever.">
     <title>I Am Thou</title>
-    <link rel="stylesheet" href="/assets/css/persona.css">
+    <link rel="stylesheet" href="/assets/css/persona-general.css">
+    <link rel="stylesheet" href="/assets/css/persona-star.css">
+    <link rel="stylesheet" href="/assets/css/persona-menu.css">
+    <link rel="preload" href="/assets/images/persona/Phantom_Thieves.gif" as="image" type="image/gif" fetchpriority="high" media="(min-width: 768px)">
+    <link rel="preload" href="/assets/images/persona/Phantom_Thieves_mobile.gif" as="image" type="image/gif" fetchpriority="high" media="(min-width: 320px)">
+    <link rel="preload" href="/assets/images/persona/Take Your Heart.png" as="image" type="image/png" fetchpriority="high">
 </head>
 <body>
-  <nav>
+  <!-- Browser Warning for Very Old Browsers -->
+  <noscript>
+    <div style="background: #f44336; color: white; padding: 20px; text-align: center;">
+      <strong>JavaScript is disabled.</strong> This application requires JavaScript to function.
+    </div>
+  </noscript>
+  <div id="main-content">
+    <nav>
     <div class="navbar">
       <a class="link-wrapper" href="/">
         <span class="fallback">Index</span>
@@ -174,26 +186,79 @@ title: I Am Thou
 
     <section id="joker" class="arsenal-bold visible">
       <h2>The Transfer Student</h2>
+      <figure>
+        <img src="/assets/images/persona/Joker (Ren).png" alt="Joker Loading Screen Image" class="hover-change" data-hover-src="/assets/images/persona/Joker (Arsene).png">
+      </figure>
 
-      <p></p>
+      <p>It began when I walked alone on that dimly lit street.</p>
+      <p>I should have minded my own business. I know the kind of people that openly uses violence in the middle of the street at night have enough power to mess with me...</p>
+      <p>But, somehow, I just can't stop myself from interfering...</p>
+
+      <p>And that's how I, or rather, our protagonist that bears my name because it is a self-insert protagonist, began his story, as an incident late at night that he got himself involved in ended up turning him into a criminal, accused of hurting someone powerful enough that he has to live with the reputation forever, and forced by his family to transfer to a private school in Tokyo, out osf shame.</p>
     </section>
 
     <section id="kamoshida" class="arsenal-bold visible">
       <h2>The Teacher</h2>
+      <figure>
+        <img src="/assets/images/persona/Kamoshida Security Level.png" alt="Kamoshida Security Level" class="hover-change" data-hover-src="/assets/images/persona/Shadow Kamoshida Security Level.png">
+      </figure>
 
+      <p></p>
+      <figure>
+        <img src="/assets/images/persona/Morgana Confidant.png" alt="Morgana Confidant Card">
+        <img src="/assets/images/persona/Ryuji Confidant.png" alt="Ryuji Confidant Card">
+        <img src="/assets/images/persona/Ann Confidant.png" alt="Ann Confidant Card">
+        <img src="/assets/images/persona/Igor Confidant.png" alt="Igor Confidant">
+      </figure>
+      <p></p>
+    </section>
+
+    <section id="exam" class="arsenal-bold visible">
+      <h2>The Exam</h2>
+      <figure>
+        <img src="/assets/images/persona/Takemi Confidant.png" alt="Takemi Confidant Card">
+        <img src="/assets/images/persona/Mishima Confidant.png" alt="Mishima Confidant Card">
+        <img src="/assets/images/persona/Sojiro Confidant.png" alt="Sojiro Confidant Card">
+        <img src="/assets/images/persona/Maruki Confidant.png" alt="Maruki Confidant Card">
+      </figure>
       <p></p>
       <p></p>
     </section>
 
     <section id="madarame" class="arsenal-bold visible">
       <h2>The Artist</h2>
+      <figure>
+        <img src="/assets/images/persona/Madarame Security Level.png" alt="Madarame Security Level" class="hover-change" data-hover-src="/assets/images/persona/Shadow Madarame Security Level.png">
+      </figure>
+      <figure>
+        <img src="/assets/images/persona/Yusuke Confidant.png" alt="Yusuke Confidant Card">
+        <img src="/assets/images/persona/Justine & Caroline Confidant.png" alt="Justine & Caroline Confidant Card">
+      </figure>
+      <p></p>
+      <p></p>
+    </section>
 
+    <section id="pull-up" class="arsenal-bold visible">
+      <h2>The Pull-Up</h2>
+      <figure>
+        <img src="/assets/images/persona/Yoshida Confidant.png" alt="Yoshida Confidant Card">
+        <img src="/assets/images/persona/Kasumi Confidant.png" alt="Kasumi Confidant Card">
+        <img src="/assets/images/persona/Kawakami Confidant.png" alt="Kawakami/Becky Confidant Card" class="hover-change" data-hover-src="/assets/images/persona/Becky Confidant.png">
+        <img src="/assets/images/persona/Akechi Confidant.png" alt="Akechi Confidant Card">
+      </figure>
       <p></p>
       <p></p>
     </section>
 
     <section id="kaneshiro" class="arsenal-bold visible">
       <h2>The Criminal</h2>
+      <figure>
+        <img src="/assets/images/persona/Kaneshiro Security Level.png" alt="Kaneshiro Security Level" class="hover-change" data-hover-src="/assets/images/persona/Shadow Kaneshiro Security Level.png">
+      </figure>
+      <figure>
+        <img src="/assets/images/persona/Makoto Confidant.png" alt="Makoto Confidant Card">
+        <img src="/assets/images/persona/Ohya Confidant.png" alt="Ohya Confidant Card">
+      </figure>      
       
       <p></p>
       <p></p>
@@ -201,37 +266,149 @@ title: I Am Thou
 
     <section id="futaba" class="arsenal-bold visible">
       <h2>The Hacker</h2>
+      <figure>
+        <img src="/assets/images/persona/Futaba Security Level.png" alt="Futaba Security Level" class="hover-change" data-hover-src="/assets/images/persona/Shadow Futaba Security Level.png">
+      </figure>
+      <figure>
+        <img src="/assets/images/persona/Futaba Confidant.png" alt="Futaba Confidant Card">
+      </figure>
 
+      <p></p>
+      <p></p>
+    </section>
+
+    <section id="summer" class="arsenal-bold visible">
+      <h2>The Summer Break</h2>
+
+      <figure>
+        <img src="/assets/images/persona/Joker (Hawaii Ren).png" alt="Joker Hawaii Loading Screen Image">
+      </figure>
+      <figure>
+        <img src="/assets/images/persona/Chihaya Confidant.png" alt="Chihaya Confidant Card">
+        <img src="/assets/images/persona/Hifumi Confidant.png" alt="Hifumi Confidant Card">
+        <img src="/assets/images/persona/Iwai Confidant.png" alt="Iwai Confidant Card">
+      </figure>
       <p></p>
       <p></p>
     </section>
 
     <section id="okumura" class="arsenal-bold visible">
       <h2>The Executive</h2>
+      <figure>
+        <img src="/assets/images/persona/Okumura Security Level.png" alt="Okumura Security Level" class="hover-change" data-hover-src="/assets/images/persona/Shadow Okumura Security Level.png">
+      </figure>
+      <figure>
+        <img src="/assets/images/persona/Haru Confidant.png" alt="Haru Confidant Card">
+      </figure>
       
+      <p></p>
+      <p></p>
+    </section>
+
+    <section id="fall-off" class="arsenal-bold visible">
+      <h2>The Fall-Off</h2>
+      <figure>
+        <img src="/assets/images/persona/Shinya Confidant.png" alt="Shinya Confidant Card">
+      </figure>
       <p></p>
       <p></p>
     </section>
 
     <section id="niijima" class="arsenal-bold visible">
       <h2>The Prosecutor</h2>
+      <figure>
+        <img src="/assets/images/persona/Niijima Security Level.png" alt="Niijima Security Level" class="hover-change" data-hover-src="/assets/images/persona/Shadow Niijima Security Level.png">
+      </figure>
+      <figure>
+        <img src="/assets/images/persona/Akechi (Murder) Confidant.png" alt="Akechi (Murder) Confidant Card" class="hover-change" data-hover-src="/assets/images/persona/Akechi Confidant.png">
+        <img src="/assets/images/persona/Sae Confidant.png" alt="Sae Confidant Card">
+      </figure>
+      
+      <p></p>
+      <p></p>
+    </section>
+
+    <section id="shido" class="arsenal-bold visible">
+      <h2>The Politician</h2>
+      <figure>
+        <img src="/assets/images/persona/Shido Security Level.png" alt="Shido Security Level">
+      </figure>
+
+      <p></p>
+      <p></p>
+    </section>
+
+    <section id="mementos" class="arsenal-bold visible">
+      <h2>The Subconciousness</h2>
+      <figure>
+        <img src="/assets/images/persona/Mementos Security Level.png" alt="Mementos Security Level">
+        <img src="/assets/images/persona/Q Security Level.png" alt="Mementos Security Level">
+      </figure>
+      <figure>
+        <img src="/assets/images/persona/Lavenza Confidant.png" alt="Lavenza Confidant Card" class="hover-change" data-hover-src="/assets/images/persona/Justine & Caroline Confidant.png">
+        <img src="/assets/images/persona/Sumire Confidant.png" alt="Sumire Confidant Card" class="hover-change" data-hover-src="/assets/images/persona/Kasumi Confidant.png">
+      </figure>
+      
+      <p></p>
+      <p></p>
+    </section>
+
+    <section id="maruki" class="arsenal-bold visible">
+      <h2>The Mastermind</h2>
+      <figure>
+        <img src="/assets/images/persona/Maruki Security Level.png" alt="Maruki Security Level" class="hover-change" data-hover-src="/assets/images/persona/Shadow Maruki Security Level.png">
+      </figure>
       
       <p></p>
       <p></p>
     </section>
   </main>
 
-    <footer>
+  <footer>
       <div id="credits" class="arsenal-bold visible">
         <p>Thanks to these people, for which this page would never be able to be created:</p>
         <ol>
           <li>ATLUS, for making the game</li>
           <li>Frazzle for giving the game to me for free</li>
           <li>Steam, just because</li>
+          <li>A certain website that has all of the game's assets that shall remain nameless</li>
           <li>Kevin Quach and his <a href="https://codepen.io/kevinquach/pen/JNGmKG">Persona 5 Menu Effect</a> codepen</li>
           <li>u/Gamerverise's <a href="https://www.reddit.com/r/Persona5/comments/gmw6hz/persona_5_royal_fonts_if_i_find_more_about_the/">reddit post</a> on r/Persona5 about Persona 5 Royal's fonts (massive help)</li>
           <li>u/LazyTuga's comment on this <a href="https://www.reddit.com/r/Persona5/comments/onc1mx/the_i_am_thou_thou_art_i_font/">reddit post</a> about the Persona awakening chant font</li>
+          <li>u/NerfEko's <a href="https://www.reddit.com/r/Persona5/comments/bpsktv/i_remade_a_hd_version_of_the_phantom_thieves_icon/">reddit post</a> of the HD version of the Phantom Thieves icon</li>
+          <li>SenpaisWeave's <a href="https://www.deviantart.com/senpaisweave/art/Phantom-Thieves-Logo-801362995">deviantart post</a> of the HD version of the Phantom Thieves icon</li>
         </ol>
       </div>
-    </footer>
+  </footer>
+</div>
+
+  <div id="splash" role="dialog" aria-labelledby="splash-heading" aria-modal="true">
+    <button class="skip-btn" id="skipBtn" aria-label="Skip animation and enter site immediately">
+      Skip Animation
+    </button>
+    <div class="splash-content">
+      <picture class="splash-images" role="img" aria-label="Animated Phantom Thieves Logo">
+        <source media="(min-width: 768px)" srcset="/assets/images/persona/Phantom_Thieves.gif">
+        <source media="(min-width: 320px)" srcset="/assets/images/persona/Phantom_Thieves_mobile.gif" width="300px">
+        <img src="/assets/images/persona/Phantom_Thieves.gif" alt="Phantom Thieves Logo GIF">
+      </picture>
+      <button class="enter-btn image-button" id="enterBtn" aria-label="Begin star wipe transition to enter the main site">
+        <img src="/assets/images/persona/Take Your Heart.png" alt="Take Your Heart">
+      </button>
+    </div>
+  </div>
+  
+  <!-- Star Wipe Canvas -->
+  <div id="star-wipe" aria-hidden="true">
+    <canvas id="starCanvas" id="starCanvas" role="presentation"></canvas>
+  </div>
+
+  <!-- Screen reader announcements -->
+  <div role="status" aria-live="polite" aria-atomic="true" class="sr-only" id="a11y-status"></div>
+
+  <!-- 
+        ES6 Module - Main entry point
+        Note: type="module" is required for ES6 imports
+    -->
+  <script type="module" src="/assets/js/modules/persona/main.js"></script>
 </body>

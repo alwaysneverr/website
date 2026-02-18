@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
 /* Kevin Quach's Persona 5 Menu Effect, modified*/
 /* Copyright (c) 2026 by Kevin Quach (https://codepen.io/kevinquach/pen/JNGmKG)
 
@@ -15,128 +13,7 @@ body {
   padding-top: 50px;
   height: 100vh;
   margin: 0;
-}
-
-main{
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-article{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 50px;
-}
-
-section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 0 25px;
-}
-
-footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 25px;
-}
-
-article, #intro, #intro img, #credits {
-    width: 725px;
-  }
-
-/* experimental Persona 5 UI font */
-@font-face {
-    font-display: swap;    
-    font-family: 'Persona5';
-    src: url('/assets/fonts/persona5menufontprototype/Persona5MenuFontPrototype-Regular.otf') format('opentype');
-}
-
-/* deal font */
-@font-face {
-    font-display: swap;    
-    font-family: 'YD Myungjo 550';
-    src: url('/assets/fonts/YD-myungjo-550/YDMjo55.woff2') format('woff2'),
-         url('/assets/fonts/YD-myungjo-550/YDMjo55.woff') format('woff'),
-         url('/assets/fonts/YD-myungjo-550/YDMjo55.eot') format('eot');
-}
-  
-.persona-menu{
-    font-family: 'Persona5';
-}
-
-.arsenal-regular {
-  font-family: "Arsenal", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.arsenal-bold {
-  font-family: "Arsenal", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  color: white;
-}
-
-.arsenal-regular-italic {
-  font-family: "Arsenal", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.arsenal-bold-italic {
-  font-family: "Arsenal", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.visible{
-    text-shadow:     
-    -0.5px -0.5px 0 #000,
-     0.5px -0.5px 0 #000,
-    -0.5px  0.5px 0 #000,
-     0.5px  0.5px 0 #000;
-}
-
-.persona-deal{
-  font-family: 'YD Myungjo 550', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: larger;
-  color: white;
-  user-select: none;
-  cursor: default;
-}
-
-.persona-deal > p > span{
-    color: red;
-    text-shadow:     
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000;
-}
-
-figcaption{
-    text-align: center;
-}
-
-#credits{ 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: small;
-}
-
-a{
-    color: #7b7b7b;
+  overflow: hidden;
 }
 
 hr {
@@ -284,7 +161,7 @@ hr {
     width: 100%;
     transform: scale(1.25, 1) skewX(20deg) translateY(3px) rotateX(-40deg) rotateY(-10deg) rotateZ(-15deg);
   }
-}/*# sourceMappingURL=persona.css.map */
+}/*# sourceMappingURL=persona-menu.css.map */
 
 @media only screen and (max-width: 685px) {
   .navbar{
@@ -293,27 +170,5 @@ hr {
 
   .navbar a{
     padding: 10px;
-  }
-
-  article {
-    flex-direction: column;
-  }
-
-  #intro, #intro img, #credits {
-    width: 355px;
-  }
-}
-
-@media only screen and (max-width: 375px) {
-  article {
-    flex-direction: column;
-  }
-
-  article, #intro, #intro img, #credits {
-    width: 300px;
-  }
-
-  section{
-    padding: 0;
   }
 }

@@ -1,0 +1,382 @@
+/* Splash Page */
+#splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#splash.hidden {
+  display: none;
+}
+
+#splash.transitioning {
+  background: transparent;
+}
+
+.splash-content {
+  text-align: center;
+  color: white;
+  transition: opacity 0.3s ease;
+}
+
+#splash.transitioning .splash-content,
+#splash.transitioning .splash-content .splash-images,
+#splash.transitioning .splash-content .enter-btn {
+  opacity: 0;
+}
+
+/* Skip button for accessibility */
+.skip-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.skip-btn:hover,
+.skip-btn:focus {
+  background: rgba(255, 255, 255, 0.3);
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+.splash-content h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease;
+}
+
+.splash-images {
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 1s ease 0.1s backwards;
+}
+
+.splash-images img {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.splash-images img:hover {
+  transform: scale(1.05);
+}
+
+.splash-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease 0.2s backwards;
+}
+
+/* Enter button - IMAGE VERSION */
+.enter-btn.image-button {
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    display: inline-block;
+}
+
+.enter-btn.image-button img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 50px; /* Adjust as needed */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.enter-btn.image-button:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.enter-btn.image-button:active img {
+    transform: scale(0.98);
+}
+
+/* Star Wipe Transition */
+#star-wipe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+#star-wipe canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Media queries and responsive styles
+ */
+
+/* Tablet breakpoint (768px and below) */
+@media (max-width: 768px) {
+    /* Splash heading */
+    .splash-content h1 {
+        font-size: 2.5rem;
+    }
+
+    /* Splash images */
+    .splash-images img {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* Splash text */
+    .splash-content p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    /* Enter button */
+    .enter-btn {
+        padding: 0.875rem 2.5rem;
+        font-size: 1.1rem;
+    }
+
+    /* Skip button */
+    .skip-btn {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* Mobile breakpoint (480px and below) */
+@media (max-width: 480px) {
+    /* Splash heading */
+    .splash-content h1 {
+        font-size: 2rem;
+    }
+
+    /* Splash images */
+    .splash-images {
+        gap: 0.5rem;
+    }
+
+    .splash-images img {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* Splash text */
+    .splash-content p {
+        font-size: 1rem;
+    }
+
+    /* Enter button */
+    .enter-btn {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+    }
+
+    /* Skip button */
+    .skip-btn {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.7rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+}
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+    .splash-content h1 {
+        font-size: 5rem;
+    }
+
+    .splash-content p {
+        font-size: 1.75rem;
+    }
+
+    .splash-images img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .splash-content h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .splash-images {
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .splash-images img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .splash-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .enter-btn {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .skip-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Print styles (hide splash screen when printing) */
+@media print {
+    #splash,
+    #star-wipe {
+        display: none !important;
+    }
+
+    body {
+        overflow: visible;
+    }
+}
+
+/**
+ * Accessibility-specific styles (a11y)
+ */
+
+/* Skip button for accessibility */
+.skip-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+    z-index: 10;
+}
+
+.skip-btn:hover,
+.skip-btn:focus {
+    background: rgba(255, 255, 255, 0.3);
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* Enhanced focus indicators */
+.enter-btn:focus,
+.skip-btn:focus {
+    outline: 3px solid white;
+    outline-offset: 4px;
+}
+
+.enter-btn:focus-visible,
+.skip-btn:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 4px;
+}
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .enter-btn,
+    .skip-btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .splash-content h1,
+    .splash-content p,
+    .splash-images,
+    .enter-btn {
+        animation: none !important;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users (only) */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Ensure focus is visible for keyboard users */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
