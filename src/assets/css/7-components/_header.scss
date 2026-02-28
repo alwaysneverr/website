@@ -3,7 +3,9 @@
     &__container {
         position: relative;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
+        align-items: center;
         max-width: var(--container-max-width);
         margin: 0 auto;
         padding: 2rem 1rem; // fallback
@@ -21,13 +23,13 @@
             .nav__item{
                 position: relative;
                 display: inline-block;
-                margin: 10px;
+                margin: 5px;
             }
 
         }
         
         ul {
-            font-size: var(--fluid-2);
+            font-size: var(--fluid-1);
             margin: 0.75rem 0;
         }
         
