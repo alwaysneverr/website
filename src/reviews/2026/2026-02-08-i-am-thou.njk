@@ -1,16 +1,16 @@
 ---
 layout: empty
 title: I Am Thou
+description: "The review of the game 'Persona 5 Royal' by AlwaysNever."
+images: "/assets/images/P5R.jpg"
+imagesalt: "Image of the cover of the game 'Persona 5 Royal', featuring the main cast, the Phantom Thieves."
 ---
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
-    <meta property="og:title" content="I Am Thou">
-    <meta property="og:image" content="/assets/images/P5R.jpg">
-    <meta property="og:image:alt" content="Image of the cover of the game 'Persona 5 Royal', featuring the main cast, the Phantom Thieves.">
-    <meta property="og:description" content="The review of the game 'Persona 5 Royal' by AlwaysNever.">
-    <title>I Am Thou</title>
+    {% include "meta.njk" %}
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="/assets/css/persona-general.css">
     <link rel="stylesheet" href="/assets/css/persona-star.css">
     <link rel="stylesheet" href="/assets/css/persona-menu.css">
