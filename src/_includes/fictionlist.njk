@@ -1,0 +1,12 @@
+<ol reversed class="fictionlist">
+{% for fiction in fictionslist | reverse %}
+  <li class="fictionlist-item{% if fiction.url == url %} fictionlist-item-active{% endif %}">
+    <a href="{{ fiction.url | url }}" class="fictionlist-link"><h2>{% if fiction.data.title %}{{ fiction.data.title }}{% else %}<code>{{ fiction.url }}</code>{% endif %}</h2></a>
+    <time class="fictionlist-date" datetime="{{ fiction.date | dateToFormat('yyyy-MM-dd') }}">{{ fiction.date | dateToFormat('dd LLL yyyy') }}</time>
+    {% for tag in fiction.data.tags | filterTagList %}
+      {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
+      <a href="{{ tagUrl | url }}" class="fiction-tag">{{ tag }}</a>
+    {% endfor %}
+  </li>
+{% endfor %}
+</ol>

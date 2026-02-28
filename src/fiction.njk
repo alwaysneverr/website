@@ -1,0 +1,13 @@
+---
+layout: base
+permalink: /fiction/
+eleventyNavigation:
+  key: Fiction
+  order: 5
+---
+
+<div class="container">
+    <h1>Fictions</h1>
+    {% set fictionslist = collections.fiction %}
+    {% include "fictionlist.njk" %}
+</div>

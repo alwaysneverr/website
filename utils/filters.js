@@ -31,7 +31,7 @@ export default {
     },
 
     filterTagList (tags) {
-        return (tags || []).filter(tag => ["all", "nav", "post", "posts", "reviews"].indexOf(tag) === -1);
+        return (tags || []).filter(tag => ["all", "nav", "post", "posts", "reviews", "fiction"].indexOf(tag) === -1);
     },
 
     min: function(...numbers) {
