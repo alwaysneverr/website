@@ -130,6 +130,8 @@ export default function (eleventyConfig) {
 	eleventyConfig.addLayoutAlias('post', 'post.njk')
 	eleventyConfig.addLayoutAlias('empty', 'empty.njk')
 	eleventyConfig.addLayoutAlias('review', 'review.njk')
+	eleventyConfig.addLayoutAlias('play', 'play.njk')
+	eleventyConfig.addLayoutAlias('fiction', 'fiction.njk')
 
 	// Copy/pass-through files
 	eleventyConfig.addPassthroughCopy('src/assets/css')

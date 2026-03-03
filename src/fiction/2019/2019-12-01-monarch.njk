@@ -1,34 +1,9 @@
 ---
-layout: empty
+layout: fiction
 title: Monarch
-font: merriweather
+description: "A short story about futility, loss, and a butterfly that anchors space and time. Takes place in the Stickverse. Originally written in December 2019."
 ---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monarch</title>
-
-    {% include "meta.njk" %}
-    <link rel="stylesheet" href="/assets/css/main.scss">
-    <link rel="preload" href="/assets/fonts/merriweather/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2">
-</head>
-
-<body class="container">
-    <header>
-        <nav>
-            <span>
-                <form action="/fiction/">
-                    <input type="submit" value="Back" />
-                </form>
-            </span>
-            <span>
-                <button type="button" data-theme-toggle aria-label="Change to light theme"
-                    class="theme_toggle light-theme" style="float: right;"></button>
-            </span>
-        </nav>
-    </header>
-    <main class="merriweather-regular">
         <p><img src="/assets/icons/butterfly.svg"
                 alt="Butterfly icon by Evan MacDonald (The Noun Project)"
                 style="display: block; margin-left: auto; margin-right: auto;" width="40px" class="filter"></p>
@@ -134,8 +109,3 @@ font: merriweather
         <p>He was depressed, she was determined. A beautifully tragic pattern. The butterfly can't judge; it was there
             just as a clue. As an anchor to the looping space and time, as the one that brings stabilization to the
             dimensions.</p>
-    </main>
-    {% include "footer.njk" %}
-
-    <script type="module" src="{{ '/assets/js/main.js' | url }}"></script>
-</body>
