@@ -1,11 +1,10 @@
 {
   "name": "eleventy-plus-vite",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "type": "module",
-  "description": "A clean and simple Eleventy 2 Starter Kit with Vite",
+  "description": "A clean and simple Eleventy Starter Kit with Vite",
   "browserslist": [
-    "> 0.5%",
-    "not IE 11"
+    "> 0.5%"
   ],
   "scripts": {
     "start": "npx @11ty/eleventy --serve",
@@ -18,39 +17,39 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://matthiasott@github.com/matthiasott/11ty22.git"
+    "url": "git+https://matthiasott@github.com/matthiasott/eleventy-plus-vite.git"
   },
   "author": "Matthias Ott",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/matthiasott/11ty22/issues"
+    "url": "https://github.com/matthiasott/eleventy-plus-vite/issues"
   },
-  "homepage": "https://github.com/matthiasott/11ty22#readme",
+  "homepage": "https://github.com/matthiasott/eleventy-plus-vite#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
-    "@11ty/eleventy-img": "^6.0.4",
+    "@11ty/eleventy-img": "^7.0.0",
     "@11ty/eleventy-navigation": "^1.0.5",
     "@11ty/eleventy-plugin-rss": "^3.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "@11ty/eleventy-plugin-vite": "^7.0.0",
-    "autoprefixer": "^10.4.20",
-    "cssnano": "^7.0.5",
+    "@11ty/eleventy-plugin-vite": "^8.0.0",
+    "autoprefixer": "^10.5.4",
+    "cssnano": "^7.1.8",
     "cssremedy": "^0.1.0-beta.2",
-    "del-cli": "^5.1.0",
+    "del-cli": "^7.0.0",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
     "focus-visible": "^5.2.1",
     "luxon": "^3.7.2",
-    "markdown-it": "^14.1.0",
-    "markdown-it-anchor": "^9.0.1",
+    "markdown-it": "^14.3.0",
+    "markdown-it-anchor": "^9.2.1",
     "npm-run-all": "^4.1.5",
-    "postcss-nesting": "^13.0.0",
-    "rollup-plugin-critical": "^1.0.13",
-    "sass": "^1.77.8",
-    "vite": "^7.3.0",
+    "postcss-nesting": "^14.0.0",
+    "rollup-plugin-critical": "^1.0.18",
+    "sass": "^1.101.3",
+    "vite": "^8.1.5",
     "zod": "^4.3.6",
     "zod-validation-error": "^5.0.0"
   }
