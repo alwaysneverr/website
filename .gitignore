@@ -13,6 +13,7 @@ _site/
 # Misc
 .DS_Store
 .env
+*.code-workspace
 
 # Local Netlify folder
 .netlify
