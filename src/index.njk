@@ -5,26 +5,29 @@ description: The homepage of my website.... it's work in progress okay?! Jesus..
 eleventyNavigation:
   key: Home
   order: 1
-numberOfLatestreviewsToShow: 5
 ---
 
-<div class="container">
-  {% set reviewsCount = collections.reviews | length %}
-  {% set latestreviewsCount = reviewsCount | min(numberOfLatestreviewsToShow) %}
-  <h2>Latest {{ latestreviewsCount }} Post{% if latestreviewsCount != 1 %}s{% endif %}</h2>
-  {% set reviewslist = collections.reviews | head(-1 * numberOfLatestreviewsToShow) %}
-  {% set reviewslistCounter = reviewsCount %}
-  {%- css %}.postlist { counter-reset: start-from {{ (reviewslistCounter or reviewslist.length) + 1 }} }{% endcss %}
-  <ol reversed class="postlist">
-    {% for post in reviewslist | reverse %}
-    <li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-      <a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-      <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-    </li>
-    {% endfor %}
-  </ol>
-  {% set morereviews = reviewsCount - numberOfLatestreviewsToShow %}
-  {% if morereviews > 0 %}
-  <p>{{ morereviews }} more post{% if morereviews != 1 %}s{% endif %} can be found in <a href="/reviews/">the archive</a>.</p>
-  {% endif %}
-</div>
+<section class="content-showcase" aria-label="Latest Publications">
+  <div class="content-showcase__grid">
+    
+    <div class="content-column">
+      <h2 class="content-column__title">Recent Articles</h2>
+      <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0;">
+        {%- set postList = collections.posts if collections.posts and collections.posts.length > 0 else collections.all | head(-3) -%}
+        {%- for post in postList | reverse | limit(3) -%}
+          {% reviewCard post %} <!-- Single-line calling component with fallback -->
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="content-column">
+      <h2 class="content-column__title">Latest Reviews</h2>
+      <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0;">
+        {%- for review in collections.automatedReviewTransitions | limit(3) -%}
+          {% reviewCard review, loop.index %} <!-- Automatically passes loops tokens for View Transitions -->
+        {%- endfor -%}
+      </ul>
+    </div>
+    
+  </div>
+</section>

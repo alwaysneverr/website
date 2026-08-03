@@ -1,0 +1,85 @@
+/* ==========================================================================
+   COMPONENT: IMMERSIVE SINGLE REVIEW METADATA CARD
+   ========================================================================== */
+
+.review-meta-card {
+  width: 100% !important;
+  max-width: 500px !important;
+  margin: var(--step-2, 24px) 0 !important;
+  background: var(--nav-color-bg, rgba(255, 255, 255, 0.02)) !important;
+  border: 1px solid var(--nav-color-border, rgba(255, 255, 255, 0.08)) !important;
+  border-left: 4px solid var(--score-color) !important; // Accents card edge to match rating color scale
+  border-radius: 8px !important;
+  padding: 20px !important;
+}
+
+.review-meta-card__content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+
+  @media (min-width: 480px) {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+}
+
+/* Score Block Typography */
+.review-meta-card__score-box {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.review-meta-card__score-label,
+.review-meta-card__details-label {
+  font-size: var(--step--2, 0.65rem) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: var(--nav-color-muted, #64748b) !important;
+  font-weight: 600 !important;
+}
+
+.review-meta-card__score-value {
+  font-size: var(--step-2, 1.5rem) !important;
+  font-weight: 800 !important;
+  color: var(--score-color) !important;
+  font-family: monospace !important;
+}
+
+.review-meta-card__addon {
+  font-size: var(--step--1, 0.8rem) !important;
+  margin-top: 4px !important;
+}
+
+/* Series Block Typography */
+.review-meta-card__details {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  
+  @media (min-width: 480px) {
+    text-align: right !important;
+    align-items: flex-end !important;
+  }
+}
+
+.review-meta-card__series-title {
+  font-size: var(--step-0, 1.1rem) !important;
+  color: var(--nav-color-text, #f8fafc) !important;
+  margin: 0 !important;
+}
+
+.review-meta-card__media-badge {
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--nav-color-text, #f8fafc) !important;
+  padding: 2px 8px !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--nav-color-border, rgba(255, 255, 255, 0.08)) !important;
+  width: fit-content !important;
+}

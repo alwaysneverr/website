@@ -1,16 +1,57 @@
 ---
 layout: base
-permalink: /posts/
 title: Posts
 description: List of blogposts I made. There is another...
 eleventyNavigation:
   key: Posts
   order: 2
+pagination:
+  data: collections.posts
+  size: 10
+  alias: postslist
+  reverse: true
+permalink: "posts/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% else %}index.html{% endif %}"
 ---
-
 <div class="container">
-    <h1>Posts</h1>
-    {% set postslist = collections.posts %}
-    {% include "postslist.njk" %}
-</div>
+  <h1>Posts</h1>
 
+  {% include "postslist.njk" %}
+
+  <!-- ADVANCED NUMERICAL PAGE JUMPER NAV SYSTEM -->
+  {% if pagination.pages.length > 1 %}
+    <nav class="pagination-nav" aria-label="Archive Pagination" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 40px auto; padding: 20px 0; border-top: 1px solid var(--nav-color-border, rgba(255,255,255,0.08)); flex-wrap: wrap;">
+      
+      <!-- 1. Previous Button Arrow Link -->
+      {% if pagination.href.previous %}
+        <a class="custom-menu__badge" href="{{ pagination.href.previous | url }}" style="text-decoration: none; padding: 6px 12px; background: rgba(255,255,255,0.05); color: var(--nav-color-text);">←</a>
+      {% endif %}
+
+      <!-- 2. Dynamically Rendered Numerical Page Jump Track Array Loops -->
+      {% for pageEntry in pagination.pages %}
+        {% set pageNumber = loop.index %}
+        {% set isCurrentPage = (pagination.pageNumber + 1 == pageNumber) %}
+        {% set isNearCurrent = (pageNumber - (pagination.pageNumber + 1)) | abs < 3 %}
+        {% set isEdgePage = (pageNumber == 1 or pageNumber == pagination.pages.length) %}
+
+        {% if isEdgePage or isNearCurrent %}
+          <!-- Render a direct clickable layout route link button -->
+          <a class="custom-menu__badge" 
+             href="{{ pagination.hrefs[loop.index0] | url }}" 
+             style="text-decoration: none; padding: 6px 12px; font-family: monospace; font-weight: bold; 
+                    {% if isCurrentPage %}background: var(--nav-color-accent, #00f2fe) !important; color: #000 !important; border-color: var(--nav-color-accent) !important;{% else %}background: rgba(255,255,255,0.03); color: var(--nav-color-text);{% endif %}">
+            {{ pageNumber }}
+          </a>
+        {% elif pageNumber == 2 or pageNumber == pagination.pages.length - 1 %}
+          <!-- Render a clean ellipsis text break layout block gap spacer element -->
+          <span style="padding: 0 4px; opacity: 0.4; font-family: monospace; user-select: none;">...</span>
+        {% endif %}
+      {% endfor %}
+
+      <!-- 3. Next Button Arrow Link -->
+      {% if pagination.href.next %}
+        <a class="custom-menu__badge" href="{{ pagination.href.next | url }}" style="text-decoration: none; padding: 6px 12px; background: rgba(255,255,255,0.05); color: var(--nav-color-text);">→</a>
+      {% endif %}
+
+    </nav>
+  {% endif %}
+</div>

@@ -47,7 +47,22 @@ export default {
 		}
 
 		return array.slice(0, n);
+    },
+
+    limit: function (array, n) {
+        if(!Array.isArray(array) || array.length === 0) {
+            return [];
+        }
+        return array.slice(0, n);
+    },
+
+    truncateChars: function (str, maxChars = 140) {
+        if (!str || typeof str !== 'string') {
+            return '';
+        }
+        if (str.length <= maxChars) {
+            return str;
+        }
+        return str.slice(0, maxChars) + '...';
     }
-
 }
-

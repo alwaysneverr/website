@@ -92,6 +92,19 @@ export default function (eleventyConfig) {
 		}
 	})
 
+	// Collection
+
+	eleventyConfig.addCollection("automatedReviewTransitions", function(collectionApi) {
+		const reviews = collectionApi.getFilteredByTag("reviews").sort((a, b) => b.date - a.date);
+		
+		reviews.slice(0, 3).forEach((review, index) => {
+			review.data.transitionIndex = index + 1;
+		});
+
+		return reviews;
+	});
+
+
 	// Filters
 	Object.keys(filters).forEach((filterName) => {
 		eleventyConfig.addFilter(filterName, filters[filterName])

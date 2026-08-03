@@ -8,6 +8,7 @@
 @use "2-design-tokens/media-queries";
 @use "2-design-tokens/spacing";
 @use "2-design-tokens/typography";
+@use "2-design-tokens/menu-tokens";
 
 /* 3. Tools */
 @use "3-tools/aspect-ratio";
@@ -37,6 +38,10 @@
 @use "7-components/header";
 @use "7-components/footer";
 @use "7-components/postlist";
+@use "7-components/3d-menu" as menu;
+@use "7-components/content-showcase";
+@use "7-components/review-pagination";
+@use "7-components/review-meta-card";
 
 // 8. Utilities
 @use "8-utilities/modifiers";

@@ -1,0 +1,33 @@
+/* ==========================================================================
+   COMPONENT: IMMERSIVE REVIEW PAGINATION
+   ========================================================================= */
+
+.review-pagination {
+  width: 100% !important;
+}
+
+.review-pagination__slot {
+  a {
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: transform;
+    
+    span:last-child {
+      transition: text-shadow 0.25s ease !important;
+    }
+  }
+
+  // Micro-interactions that stay bound to our custom --media-color variable
+  &--prev a:hover {
+    transform: translateX(-6px) !important;
+    span:last-child {
+      text-shadow: 0 0 8px var(--media-color) !important;
+    }
+  }
+
+  &--next a:hover {
+    transform: translateX(6px) !important;
+    span:last-child {
+      text-shadow: 0 0 8px var(--media-color) !important;
+    }
+  }
+}
