@@ -1,0 +1,89 @@
+---
+title: "Al's Project.io (Legacy Archive)"
+description: "it's a cool website or whatever"
+permalink: "legacy-site/index.html"
+legacy_url: "/legacy-site/"
+modern_url: "/"
+---
+
+<!-- EXTRA ASSET REGISTRATION FOR JQUERY & OLD PORTFOLIO MODULES -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div class="legacy-archive-content">
+  <main id="main">
+    
+    <!-- 1. YOUR ORIGINAL SLIDER ENGINE MATRIX CONTROLLERS -->
+    <div id="portal_slider" class="portal_container">
+      <div class="portal_body">
+        <div id="portal_content-0" class="portal_content">
+          <div id="portal_slide-0" class="portal_main">
+            <div class="portal_body">
+              
+              <div class="portal_sliderlink portal_sliderlink-1">
+                <a href="/legacy-site/">
+                  <img src="/assets/images/preview.jpg" alt="Preview screenshot graphic">
+                  <div class="portal_slidertext">Al's Project</div>
+                </a>
+              </div>
+              
+              <div class="portal_sliderlink portal_sliderlink-2">
+                <div class="portal_slidertext">Contract Reviews</div>
+              </div>
+              
+              <div class="portal_sliderlink portal_sliderlink-3">
+                <div class="portal_slidertext">Other Reviews</div>
+              </div>
+              
+              <div class="portal_sliderlink portal_sliderlink-4">
+                <div class="portal_slidertext">Blog</div>
+              </div>
+              
+              <div class="portal_sliderlink portal_sliderlink-5">
+                <div class="portal_slidertext">About</div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="other-pages">
+      <h1>Other Pages:</h1>
+      <div class="gallery">
+        <div class="image-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/GravityTap.jpg" alt="Image of Schlenkerla Rauchbier being poured from a cask into a beer glass, taken from the Wikipedia page for 'Beer'." loading="lazy">
+          <a href="./beer/" class="image-link">Beers</a>
+        </div>
+        <div class="image-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Humanit%C3%A9s_Num%C3%A9riques.JPG/960px-Humanit%C3%A9s_Num%C3%A9riques.JPG" alt="Image of Schlenkerla Rauchbier being poured from a cask into a beer glass, taken from the Wikipedia page for 'Beer'." loading="lazy">
+          <a href="./experiments/" class="image-link">Experiments</a>
+        </div>
+      </div>
+    </div>
+
+        
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- 3. INTERACTION AND SYSTEM SYNCHRONIZATION EVENT LISTENERS -->
+<script>
+  // Safe validation check to make sure your button listener doesn't throw a crash null error
+  const legacyBtn = document.querySelector('.old-homepage button');
+  if (legacyBtn) {
+    legacyBtn.addEventListener('click', () => {
+      window.location.href = '/legacy-site/index2.html';
+    });
+  }
+
+  // Forces your modern horizontal header dropdown element block to show the right environment state selection track
+  document.addEventListener('DOMContentLoaded', () => {
+    const envSelector = document.querySelector('#site-version-select');
+    if (envSelector) {
+      envSelector.value = "/legacy-site/";
+    }
+  });
+</script>
