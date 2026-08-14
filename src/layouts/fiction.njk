@@ -1,36 +1,34 @@
 ---
-layout: empty
+layout: base
 ---
+<!-- ==========================================================================
+     DYNAMIC STORY EXTRA-THEMING OVERRIDES
+     ========================================================================== -->
+<link rel="preload" href="/assets/fonts/merriweather/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title or meta.title }}</title>
+<div class="container" style="padding-top: var(--step-2, 24px);">
+  
+  <header class="fiction-nav-header" style="margin-bottom: var(--step-4, 48px); border-bottom: 1px dashed var(--nav-color-border, rgba(255,255,255,0.08)); padding-bottom: 12px;">
+    <a href="/fiction/" style="color: var(--nav-color-accent, #00f2fe); text-decoration: none; font-family: monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
+      ← Return to Fictions Grid
+    </a>
+  </header>
 
-    {% include "meta.njk" %}
-    <link rel="stylesheet" href="/assets/css/main.scss">
-    <link rel="preload" href="/assets/fonts/merriweather/merriweather-v33-latin-regular.woff2" as="font" type="font/woff2">
-</head>
-
-<body class="container">
-    <header>
-        <nav>
-            <span>
-                <form action="/fiction/">
-                    <input type="submit" value="Back" />
-                </form>
-            </span>
-            <span>
-                <button type="button" data-theme-toggle aria-label="Change to light theme"
-                    class="theme_toggle light-theme" style="float: right;"></button>
-            </span>
-        </nav>
-    </header>
-    <main class="merriweather-regular">
-        {{ content | safe }}
-    </main>
+  <article class="fiction-story-container">
     
-    {% include "footer.njk" %}
+    {% if story_icon %}
+      <img src="/assets/icons/{{ story_icon }}.svg" class="fiction-story-icon filter" alt="{{ title }} concept icon">
+    {% endif %}
 
-    <script type="module" src="{{ '/assets/js/main.js' | url }}"></script>
-</body>
+    <header class="story-title-block" style="text-align: center; margin-bottom: var(--step-3, 36px);">
+      <h1 style="font-size: var(--step-4, 2.5rem); margin: 0 0 8px 0; color: var(--text-main); font-weight: 800;">{{ title }}</h1>
+      {% if description %}
+        <p style="font-style: italic; color: var(--text-muted); font-size: 0.9rem; max-width: 100% !important;">{{ description }}</p>
+      {% endif %}
+    </header>
+
+    {{ content | markdown | safe }}
+
+  </article>
+
+</div>
