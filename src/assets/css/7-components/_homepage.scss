@@ -1,0 +1,388 @@
+/* ==========================================================================
+   COMPONENT: HOMEPAGE DASHBOARD MASTER LAYOUT
+   ========================================================================== */
+
+.home-shell {
+  padding: var(--step-2, 24px) var(--step-1, 16px) var(--step-4, 40px) !important;
+  max-width: 1180px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* ---------------------------------------------------- 1. HERO BRAND PANEL */
+.home-hero {
+  max-width: 720px !important;
+  margin: 0 auto 24px !important;
+  text-align: center !important;
+  padding: 0 6px !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  h1 {
+    margin: 0 !important;
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    line-height: 1.05 !important;
+    color: var(--text-main) !important;
+  }
+
+  p {
+    margin: 12px auto 0 !important;
+    max-width: 560px !important;
+    color: var(--text-muted) !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  
+  &__avatar-wrapper {
+    // 1. MOBILE FIRST DEFAULT: Kept at your compact 80px footprint
+    width: 80px !important;  
+    height: 80px !important; 
+    margin-bottom: 16px !important;
+    position: relative !important;
+    
+    // 2. PC JUMP VIEWPORT CEILING: Scales up beautifully on wide desktop screens!
+    @media (min-width: 768px) {
+      width: 140px !important;  // Makes the avatar noticeably bigger on PC layout tracks
+      height: 140px !important; // Keeps it a perfectly proportional square canvas
+      margin-bottom: 24px !important;
+    }
+  }
+
+  &__avatar {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important; // Locks your image frames into clean perfect circles
+    border: 2px solid var(--border-subtle) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+    object-fit: cover !important;
+    display: block !important;
+    
+    // Smooth opacity hardware interpolation parameters rule for image transitions
+    transition: opacity 300ms ease-in-out !important; 
+    will-change: opacity;
+  }
+}
+
+.home-quote {
+  max-width: 680px !important;
+  margin: 0 auto 22px !important;
+  padding: 16px 20px !important;
+  border-radius: 16px !important;
+  background: var(--site-card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+
+  p {
+    margin: 0 !important;
+    color: var(--text-main) !important;
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+  }
+}
+
+/* ---------------------------------------------------- 2. INTERACTIVE SOCIALS & HERO NAV */
+
+.home-socials {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 18px !important;
+  margin: 0 auto 24px !important;
+}
+
+.social-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  text-decoration: none !important;
+  transition: transform 180ms ease, box-shadow 180ms ease !important;
+
+  &:hover, &:focus-visible {
+    transform: scale(1.08) !important;
+    
+    .social-icon {
+      transform: scale(1.12) !important;
+    }
+  }
+}
+
+.social-icon {
+  width: 38px !important;
+  height: 38px !important;
+  display: block !important;
+  transition: transform 180ms ease, filter 180ms ease !important;
+  
+  // 1. LIGHT MODE VISUAL CEILING: Kept at default raw asset state (Solid Black)
+  filter: invert(0) !important; 
+
+  // 2. DARK MODE VISUAL PRESENTATION INVERSION ENGINE
+  // Automatically catches your root element theme toggle attributes!
+  html[data-theme="dark"] & {
+    // Inverts black lines into stark, pristine, highly-readable solid white vectors!
+    filter: invert(1) brightness(2) !important; 
+  }
+}
+
+.home-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin: 22px auto 0 !important;
+
+  a {
+    padding: 8px 12px !important;
+    border-radius: 9999px !important;
+    background: var(--site-card-bg) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-subtle) !important;
+    text-decoration: none !important;
+    font-size: 0.88rem !important;
+    white-space: nowrap !important;
+  }
+}
+
+
+/* ==========================================================================
+   COMPONENT: STREAMLINED SINGLE-COLUMN TIMELINE DASHBOARD LAYOUT
+   ========================================================================== */
+
+.home-layout {
+  display: flex !important;
+  flex-direction: column !important; // Forces all blocks into a perfect, clean vertical stack
+  gap: 20px !important;
+  width: 100% !important;
+  max-width: 680px !important; // Clamps the width on PC so it never over-stretches widescreen viewports!
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  
+  // Intersection Observer slide up animation hooks
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 560ms cubic-bezier(.2,.9,.3,1), transform 560ms cubic-bezier(.2,.9,.3,1) !important;
+  will-change: opacity, transform !important;
+
+  &.revealed {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+/* 1. STANDALONE UNIFIED FEED BLOCKS PANEL */
+.dashboard-block {
+  background: var(--site-card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 20px !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+
+  h2 {
+    margin: 0 0 12px 0 !important;
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px !important;
+    color: var(--text-main) !important;
+  }
+}
+
+.dashboard-list {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.card-link {
+  color: var(--text-main) !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+
+  &:hover {
+    text-decoration: underline !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+  }
+}
+
+.card-desc {
+  color: var(--text-muted) !important;
+  margin-top: 6px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+}
+
+.dashboard-footer {
+  margin-top: 14px !important;
+  padding-top: 10px !important;
+  border-top: 1px dashed var(--border-subtle) !important;
+}
+
+.dashboard-footer-link {
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  color: var(--nav-color-accent, #00f2fe) !important;
+  text-decoration: none !important;
+  font-family: monospace !important;
+}
+
+/* 2. COMPACT META SUB-ROW SPLITS (NOW PLAYING + TERMINAL STATUS) */
+.dashboard-meta-row {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important; // Desktop view: Split side-by-side perfectly
+  gap: 16px !important;
+  width: 100% !important;
+
+  @media (max-width: 580px) {
+    grid-template-columns: 1fr !important; // Mobile view collapses to stacked single column
+  }
+}
+
+.cta-tile {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: center !important;
+  padding: 14px !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--border-subtle) !important;
+  background: var(--site-card-bg) !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+  transition: transform 0.2s ease, border-color 0.2s ease !important;
+
+  &:hover {
+    transform: translateY(-2px) !important;
+    border-color: var(--nav-color-accent, #00f2fe) !important;
+  }
+}
+
+.cta-thumb {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 10px !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+}
+
+.cta-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  strong { font-size: 0.85rem !important; color: var(--text-main) !important; }
+}
+
+.cta-note {
+  font-size: 0.78rem !important;
+  color: var(--text-muted) !important;
+  line-height: 1.3 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* TERMINAL STATUS MONITOR PANEL CARD */
+.terminal-status-card {
+  background: var(--site-card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.terminal-header {
+  display: block !important;
+  font-size: 0.72rem !important;
+  font-family: monospace !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: var(--text-muted) !important;
+  margin-bottom: 6px !important;
+  text-align: left !important;
+}
+
+.terminal-metrics {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  font-family: monospace !important;
+  font-size: 0.72rem !important;
+  color: var(--text-main) !important;
+  text-align: left !important;
+
+  li {
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+}
+
+.status-indicator-pulse {
+  animation: statusBreathe 2s infinite ease-in-out !important;
+  will-change: opacity;
+}
+
+@keyframes statusBreathe {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+  50%      { opacity: 0.6; filter: drop-shadow(0 0 0px transparent); }
+}
+
+/* ---------------------------------------------------- 5. FLUID BREAKPOINT RESPONSIVE FALLBACKS */
+@media (max-width: 960px) {
+  .home-layout {
+    grid-template-columns: 1fr !important; // Collapses asymmetric columns down into a stacked timeline on tablet viewports
+  }
+}
+
+@media (max-width: 640px) {
+  .home-shell {
+    padding: var(--step-1, 16px) !important;
+  }
+  
+  .home-left {
+    min-height: 40vh !important;
+    padding: 14px !important;
+  }
+  
+  .sidebar-card {
+    padding: 14px !important;
+  }
+  
+  .cta-tile {
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+  
+  .cta-thumb {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  
+  .tag-pill {
+    padding: 5px 8px !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-shell {
+    padding: 12px 10px 16px !important;
+  }
+  
+  .home-hero p {
+    font-size: 0.95rem !important;
+  }
+}

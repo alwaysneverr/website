@@ -1,0 +1,51 @@
+---
+title: "Al's Project.io (Legacy Archive) - Old Version"
+description: "it's a cool website or whatever"
+permalink: "legacy-site/old-index/index.html"
+---
+
+    <div class="legacy-archive-content">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="beer/">Beer</a></li>
+                <li><a href="fcreviews/">Contract Reviews</a></li>
+                <li><a href="normalreviews/">Other Reviews</a></li>
+                <li><a href="experiments/">Experiments</a></li>
+                <li><a href="https://alwaysnever25-blog.netlify.app/">Blog</a></li>
+            </ul>
+        </nav>
+
+        <main>
+
+            <div class="container">
+                <div class="content" id="content-0">
+                    <p>Welcome to AlwaysNever's Project Website!</p>
+                    <p>Here you can see AlwaysNever, or better known as Al, trying his best to look like he knows what he's
+                        doing, but he's just blubbering in the darkness like a blind man.</p>
+                    <p>Either way, click the menu on top to check out more on his projects! </p>
+                    <p>Or click below to go back to the newer and more modern homepage.</p>
+                </div>
+            </div>
+
+            <div class="content-container">
+                <div class="content" id="content-1">
+                    <p><a href="index.html">Go Back to New Homepage</a></p>
+                </div>
+                <!-- Inside public/legacy-site/index.html -->
+                <div class="version-back-link">
+                <a href="/">← Switch back to the modern website experience</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- SECURE SYNCHRONIZATION OVERRIDE CODE BLOCK -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const envSelector = document.querySelector('#site-version-select');
+        if (envSelector) {
+        envSelector.value = "/legacy-site/";
+        }
+    });
+    </script>

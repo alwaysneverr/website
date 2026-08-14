@@ -1,0 +1,86 @@
+/* ==========================================================================
+   COMPONENT: IMMERSIVE SINGLE REVIEW MOVEMENT NAVIGATION FOOTER
+   ========================================================================== */
+
+.review-pagination {
+  width: 100% !important;
+  max-width: 680px !important; // FIX: Clamps the navigation track to match your story/review width ceiling perfectly!
+  margin: var(--step-4, 48px) auto 0 auto !important; // Absolutely centers the navigation row on desktop views
+  padding-top: var(--step-1, 16px) !important;
+  border-top: 1px dashed var(--border-subtle) !important;
+  
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+
+.review-pagination__slot {
+  display: block !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+
+  a {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    text-decoration: none !important;
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: transform;
+    width: 100% !important;
+
+    // Direct metadata text properties bindings
+    .nav-label {
+      font-family: monospace !important;
+      font-size: 0.7rem !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      color: var(--text-muted) !important;
+      margin-bottom: 4px !important;
+    }
+
+    .nav-title {
+      font-size: var(--step--1, 0.9rem) !important;
+      font-weight: 700 !important;
+      color: var(--text-main) !important;
+      transition: color 0.25s ease, text-shadow 0.25s ease !important;
+      display: -webkit-box !important;
+      -webkit-box-orient: vertical !important;
+      -webkit-line-clamp: 1 !important; // Safeguard: Clamps long title overflows onto a clean single row
+      overflow: hidden !important;
+    }
+  }
+
+  /* ---------------------------------------------------- PREVIOUS CARD ACTION SLIDE */
+  &--prev {
+    a {
+      text-align: left !important;
+      align-items: flex-start !important;
+
+      &:hover {
+        transform: translateX(-6px) !important; // Glides card links gracefully to the left
+        
+        .nav-title {
+          color: var(--title-color) !important;
+          [data-theme="dark"] & { text-shadow: 0 0 8px var(--title-color) !important; }
+        }
+      }
+    }
+  }
+
+  /* ---------------------------------------------------- NEXT CARD ACTION SLIDE */
+  &--next {
+    a {
+      text-align: right !important;
+      align-items: flex-end !important;
+
+      &:hover {
+        transform: translateX(6px) !important; // Glides card links gracefully to the right
+        
+        .nav-title {
+          color: var(--title-color) !important;
+          [data-theme="dark"] & { text-shadow: 0 0 8px var(--title-color) !important; }
+        }
+      }
+    }
+  }
+}

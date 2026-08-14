@@ -1,0 +1,176 @@
+/* ==========================================================================
+   COMPONENT: HIGH-DENSITY TIMELINE REVIEWS & POSTS LINK CARDS
+   ========================================================================== */
+
+.custom-menu__list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--nav-gap) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+  width: 100% !important;
+}
+
+.custom-menu__item {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.custom-menu__link {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 16px !important;
+  width: 100% !important;
+  padding: 14px 16px !important;
+  text-decoration: none !important;
+  background: var(--site-card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-main) !important;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 0.3s ease, 
+              background-color 0.3s ease, 
+              box-shadow 0.3s ease !important;
+
+  @media (min-width: 480px) {
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 12px 24px !important;
+  }
+}
+
+.custom-menu__thumb-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  height: 160px !important;
+  flex-shrink: 0 !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid var(--nav-color-border) !important;
+
+  @media (min-width: 480px) {
+    width: 90px !important;
+    height: 120px !important;
+  }
+}
+
+.custom-menu__thumb {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transition: transform 0.3s ease !important;
+
+  &--fallback {
+    opacity: 0.45 !important;
+    filter: grayscale(100%) !important;
+  }
+}
+
+.custom-menu__meta {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.custom-menu__text {
+  font-size: var(--step-0) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  overflow: hidden !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  color: var(--title-color) !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+}
+
+.custom-menu__series-subtitle {
+  font-size: var(--step--1, 0.75rem) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+  letter-spacing: 0.5px !important;
+  color: var(--title-color, var(--text-muted)) !important;
+  transition: color 0.3s ease !important;
+}
+
+.custom-menu__row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.custom-menu__score {
+  font-size: var(--step--1) !important;
+  font-weight: bold !important;
+  font-family: monospace !important;
+  color: var(--score-color) !important;
+  transition: color 0.3s ease !important;
+}
+
+.custom-menu__date {
+  font-size: var(--step--1) !important;
+  font-family: monospace !important;
+  color: var(--text-muted) !important;
+}
+
+.custom-menu__indicator {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 4px !important;
+  height: 100% !important;
+  border-radius: 4px 0 0 4px !important;
+  transform: scaleY(0) !important;
+  opacity: 0 !important;
+  transition: transform 0.3s ease, opacity 0.3s ease !important;
+  background: var(--score-color) !important;
+}
+
+/* INTERACTIVE ENGINE HOVERS */
+.custom-menu__link:hover {
+  background: var(--site-card-hover) !important;
+  border-color: var(--score-color) !important;
+
+  .custom-menu__indicator { transform: scaleY(1) !important; opacity: 1 !important; }
+  .custom-menu__thumb     { transform: scale(1.05) !important; }
+
+  [data-theme="dark"] & {
+    transform: translateX(6px) !important;
+    box-shadow: 0 0 15px var(--shadow-glow) !important;
+    .custom-menu__text { text-shadow: 0 0 4px var(--title-color), 0 0 12px var(--title-color) !important; }
+    .custom-menu__series-subtitle { color: var(--title-color) !important; }
+  }
+
+  [data-theme="light"] & {
+    transform: translateX(4px) !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+    .custom-menu__text { text-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.12) !important; }
+    .custom-menu__series-subtitle { color: var(--text-muted) !important; }
+  }
+}
+
+.custom-menu__score--perfect {
+  color: var(--score-gold) !important;
+  font-weight: 900 !important;
+  
+  // Creates a highly-polished, multilayered neon golden glow trace effect!
+  text-shadow: 0 0 4px rgba(255, 190, 11, 0.6),
+               0 0 12px rgba(255, 190, 11, 0.3) !important;
+               
+  // Progressive enhancement: adds a subtle matching border glow onto its card indicator bar
+  .custom-menu__item:has(&) {
+    box-shadow: 0 0 15px rgba(255, 190, 11, 0.08) !important;
+    border-color: rgba(255, 190, 11, 0.3) !important;
+  }
+}

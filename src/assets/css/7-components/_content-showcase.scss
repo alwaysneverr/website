@@ -1,0 +1,30 @@
+/* ==========================================================================
+   COMPONENT: MAIN HUB CONTENT GRID
+   ========================================================================== */
+
+.content-showcase {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 40px auto !important;
+  padding: 0 20px !important;
+}
+
+.content-showcase__grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 40px !important;
+
+  // On larger viewports, split into a clear double-column grid framework
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.content-column__title {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.5px !important;
+  color: var(--text-main) !important;
+  margin-bottom: 20px !important;
+}
+

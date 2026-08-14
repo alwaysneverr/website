@@ -1,0 +1,103 @@
+/* ==========================================================================
+   COMPONENT: DETACHED WHEAT RECTRO LEGACY ENVIRONMENT CONTROLLER
+   ========================================================================== */
+
+.beer-legacy-wheat-canvas {
+  // 1. RE-APPLY YOUR ORIGINAL STATIC WHEAT DISPLAY LAYER VARIABLES
+  background-color: wheat !important;
+  color: #000000 !important;
+  font-family: Arial, sans-serif !important;
+  
+  // Implements your global widescreen text editor boundaries matrix
+  margin: 40px auto !important;
+  padding: 50px !important;
+  max-width: 1100px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+
+  .center {
+    text-align: center !important;
+  }
+
+  p, span, i, b, small {
+    color: #000000 !important; // Blocks global text overrides from changing font visibility
+  }
+
+  /* 2. CORE RETRO FONTS RATIOS BRANDING */
+  .beer-title {
+    font-size: 200% !important;
+    font-weight: bold !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  .beer-subtitle {
+    font-size: 75% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  /* 3. RE-ENGINEERED 4-COLUMN MACRO GRID INFRASTRUCTURE */
+  .review-grid {
+    display: grid !important;
+    border: 1px solid #000000 !important;
+    padding: 10px !important;
+    gap: 10px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    background: transparent !important;
+    margin-top: 24px !important;
+  }
+
+  .title-grid {
+    grid-column-start: 1 !important;
+    grid-column-end: 5 !important;
+    text-align: center !important;
+    font-size: 150% !important;
+    font-weight: bold !important;
+    border-bottom: 1px solid #000000 !important;
+    padding-bottom: 6px !important;
+  }
+
+  /* 4. BASE COMPONENT CARD SPLITTING RULES */
+  .card1, .card2, .card3 {
+    border: 1px solid #000000 !important;
+    padding: 10px !important;
+    text-align: center !important;
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    transition: background-color 0.2s ease !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.8) !important;
+    }
+  }
+
+  .card1 { grid-column-start: 1 !important; grid-column-end: 3 !important; }
+  .card2 { grid-column-start: 3 !important; grid-column-end: 5 !important; }
+  .card3 { grid-column-start: 1 !important; grid-column-end: 5 !important; }
+
+  .legacy-img-bounding {
+    margin-top: 10px !important;
+    img {
+      max-width: 100% !important;
+      height: 200px !important;
+      object-fit: contain !important;
+    }
+  }
+
+  /* 5. NARROW SCREEN RESPONSIVE FALLBACK CONSTRAINTS */
+  @media only screen and (max-width: 685px) {
+    padding: 20px !important;
+    margin: 10px !important;
+
+    .review-grid {
+      padding: 5px !important;
+      gap: 5px !important;
+    }
+
+    .card1, .card2, .card3 {
+      grid-column-start: 1 !important;
+      grid-column-end: 5 !important;
+      padding: 5px !important;
+    }
+  }
+}

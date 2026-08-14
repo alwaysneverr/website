@@ -1,15 +1,153 @@
 ---
 layout: base
-title: Fictions
-description: List of my fictional stories... for better or worse.
-permalink: /fiction/
+title: "Fictions"
+permalink: "/fiction/"
+legacy_url: "/legacy-site/fiction/"
 eleventyNavigation:
-  key: Fiction
-  order: 5
+  key: Fictions
+  order: 4
 ---
 
-<div class="container">
-    <h1>Fictions</h1>
-    {% set fictionslist = collections.fiction %}
-    {% include "fictionlist.njk" %}
+<!-- ==========================================================================
+     CUSTOM PORTFOLIO CONTENT FIELD
+     ========================================================================== -->
+<div class="fictions-canvas">
+  <main id="main">
+    
+    <!-- 1. AUTHOR PROFILE SPECS ROW -->
+    <section class="portfolio-hero-block">
+      <div class="paragraph">
+        <div class="column">
+          <div style="display: flex; flex-wrap: wrap; flex-direction: row; align-items: baseline;">
+            <h2 style="font-size: 39px; margin-right: 10px; margin-bottom: 5px; font-weight: normal; font-style: italic;">Professional Bum</h2>
+            <h3 style="font-size: 24px; color: var(--nav-color-accent, #00f2fe); margin-bottom: 5px; font-weight: normal; font-style: italic;">noun</h3>
+          </div>
+          <div class="center">
+            <p>Here are some experimental fictions that I've made.</p>
+          </div>
+        </div>
+        <div class="profile-image">
+          <img src="/assets/images/default-fallback.png" alt="Picture of the website's author." width="300px" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. THE CHUNKS SECTION GRID -->
+    <section>
+      <div class="experiments">
+        <div class="experiments-title" id="prose">Prose</div>
+        
+        <div class="card1" id="oc">
+          <a href="/fiction/myproject/book1/" class="card-title"><i>Book of Original Characters</i></a><br>
+          <small>Working Title: MYPROJECT Book 1: Characters</small><br><br>
+          <div class="image">
+            <a href="/fiction/myproject/book1/"><img src="/assets/images/experiments/characters.jpg" alt="Gray Concrete Wall" loading="lazy"></a>
+          </div>
+          <p>This book contains a list of original characters that are made by me from the past decade for the universe I called <i>Stickverse</i>.</p>
+          <p>It is originally created on a real book with pencil drawings and writings, but have been in the process to be digitally converted for some time.</p>
+        </div>
+
+        <div class="card2" id="weapons">
+          <a href="/fiction/myproject/book2/" class="card-title"><i>Book of Weapons</i></a><br>
+          <small>Working Title: MYPROJECT Book 2: Weapons</small><br><br>
+          <div class="image">
+            <a href="/fiction/myproject/book2/"><img src="/assets/images/experiments/swords.jpg" alt="A Bunch of Different Types of Tools" loading="lazy"></a>
+          </div>
+          <p>This book contains a list of weapons that are made by me from the past decade for the universe I called <i>Stickverse</i>.</p>
+          <p>It is originally created on a real book with pencil drawings and writings, but have been in the process to be digitally converted for some time.</p>
+        </div>
+
+        <div class="card3" id="creation">
+          <a href="/fiction/creation/" class="card-title"><i>Book of Creation</i></a><br><br><br>
+          <div class="image">
+            <a href="/fiction/creation/"><img src="/assets/images/experiments/creation.jpg" alt="A Star Filled with lots of stars" loading="lazy"></a>
+          </div>
+          <p><i>The</i> Holy Book in-world of <i>Stickverse</i>.</p>
+          <p>Based on <i>Book of Genesis</i>, it covers the initial creation of <i>Stickverse</i> itself, and The Creator's struggle against the Entropy system (known as the Deep) and the intricate balance The Creator must maintain to control the Deep.</p>
+        </div>
+
+        <div class="card1" id="fourthday">
+          <a href="/fiction/finalday/" class="card-title"><i>The Fourth Day, Six Hours Left</i></a><br><br>
+          <div class="image">
+            <a href="/fiction/finalday/"><img src="/assets/images/experiments/bench.jpg" alt="Park bench backdrop" loading="lazy"></a>
+          </div>
+          <p>An unfinished short story about two people finding each other at the end of the world.</p>
+        </div>
+
+        <div class="card2" id="finalday">
+          <a href="/fiction/finalday/play/" class="card-title"><i>The Final Day, Six Hours Remain</i></a><br><br>
+          <div class="image">
+            <a href="/fiction/finalday/play/"><img src="/assets/images/experiments/bench-couple.jpg" alt="Two people sitting on a bench in a park" loading="lazy"></a>
+          </div>
+          <p>A semi-finished play based on the unfinished short story <i>The Fourth Day, Six Hours Left</i> with a definitive ending, more characters, and expanded backstory.</p>
+        </div>
+
+        <div class="card3" id="monarch">
+          <a href="/fiction/monarch/" class="card-title"><i>Monarch</i></a><br><br>
+          <div class="image">
+            <a href="/fiction/monarch/"><img src="/assets/images/experiments/Monarch.jpg" alt="Butterfly scaling space time" loading="lazy"></a>
+          </div>
+          <p>A short story about futility, loss, and a butterfly that anchors space and time. Takes place in the <i>Stickverse</i>.</p>
+          <p>Originally written in December 2019.</p>
+        </div>
+
+        <div class="card1" id="birds">
+          <a href="/fiction/birds/" class="card-title"><i>BIRDS</i></a><br><br>
+          <div class="image">
+            <a href="/fiction/birds/"><img src="/assets/images/experiments/birds.png" alt="Caged bird matrix" loading="lazy"></a>
+          </div>
+          <p>A short story about being stuck, experiments, and birds that are stuck in a cage.</p>
+          <p>Originally written in December 2021.</p>
+        </div>
+
+        <div class="card2" id="sleep">
+          <a href="/fiction/dream/" class="card-title"><i>Sleep</i></a><br><br>
+          <div class="image">
+            <a href="/fiction/dream/"><img src="/assets/images/experiments/dreams.jpg" alt="Dream logs panorama" loading="lazy"></a>
+          </div>
+          <p>A collection of story taking place within someone's dream, containing the stories <i>Cover</i> and <i>Shadow</i>.</p>
+        </div>
+
+        <div class="card3" id="fantasia">
+          <a href="/fiction/fantasia/" class="card-title"><i>Fantasia</i></a><br><br>
+          <div class="image">
+            <a href="/fiction/fantasia/"><img src="/assets/images/experiments/cyberpunk.jpg" alt="Cyberpunk city grid" loading="lazy"></a>
+          </div>
+          <p>A collection of stories taking place in the <i>Fantasia</i> cluster of the <i>Stickverse</i>, in the point of view of a group that will be known in the future as The Seven.</p>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- 3. GAME ARCHIVE ENGINE LAYOUTS -->
+      <div class="experiments">
+        <div class="experiments-title" id="games">Games</div>
+        
+        <div class="cardfull">
+          <a href="https://orteil.dashnet.org/igm/?g=https://pastebin.com/raw/J0hPSBEK" class="card-title"><i>Runner</i></a>
+          <p>An unfinished idle game about runners. Made with Orteil's game engine Idle Game Maker.</p>
+          <p>Originally hosted on <a href="https://pastebin.com/cA8A0SUu">Pastebin</a> as a .txt file, it has since been moved <a href="/fiction/runners/runners.txt">here</a> and refactored to make it work with the latest version of Idle Game Maker.</p>
+        </div>
+
+        <div class="cardfull">
+          <span class="card-title" style="display: block; font-weight: bold; margin-bottom: 8px;"><i>The Final Day, Six Hours Remain</i></span>
+          <div class="images" style="margin-bottom: 12px;">
+            <img src="/assets/images/experiments/The_Final_Day_VN.png" alt="Visual novel snapshot preview" style="max-width: 100%; border-radius: 4px;" loading="lazy">
+          </div>
+          <p>The visual novel version of the play <i>The Final Day, Six Hours Remain</i> made with the Ren'Py engine.</p>
+          <p>No definitive plans to develop this further, or release it. Only listed here so that future me can remember to go back to it if he forget about it (he will).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. LIGHTBOX CONTENT FRAME TARGETS -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-content">
+        <div class="loading" id="loading"></div>
+        <img class="modal-image" id="modalImage" alt="Expanded Image">
+        <button class="close-btn" id="closeBtn">&times;</button>
+      </div>
+    </div>
+
+  </main>
 </div>

@@ -1,0 +1,70 @@
+---
+pagination:
+  data: collections.paginatedTagsCollection
+  size: 1
+  alias: chunk
+layout: base
+eleventyComputed:
+  title: "Entries Tagged “{{ chunk.tagName }}”"
+  permalink: "/tags/{{ chunk.slug }}/{% if chunk.pageNumber > 0 %}{{ chunk.pageNumber }}/{% endif %}index.html"
+---
+
+<div class="container" style="padding-top: var(--step-2, 24px); padding-bottom: var(--step-5, 64px);">
+  
+  <!-- FILTERED FEED HEADER BANNER -->
+  <header class="archive-header" style="text-align: center; margin-bottom: var(--step-4, 48px);">
+    <h1 style="font-size: var(--step-3, 2.2rem); color: var(--text-main); font-weight: 800; margin: 0 0 8px 0;">
+      Filtered Feed: <span style="color: var(--nav-color-accent, #00f2fe);">#{{ chunk.tagName }}</span>
+    </h1>
+    {% if chunk.totalPages > 1 %}
+      <p style="font-family: monospace; font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+        Viewing Page {{ chunk.pageNumber + 1 }} of {{ chunk.totalPages }}
+      </p>
+    {% endif %}
+  </header>
+
+  <!-- UNIFIED DASHBOARD LAYOUT GRID BLOCK -->
+  <div class="content-column" style="max-width: 800px; margin: 0 auto;">
+    
+    <!-- THE NATIVE FEED LOOP MATRIX (100% UNTOUCHED & OPERATIONAL) -->
+    <ol class="postlist" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--nav-gap, 24px);">
+      {% for item in chunk.posts %}
+        {% reviewCard item %}
+      {% else %}
+        <li style="color: var(--text-muted); text-align: center;">No timeline posts found carrying this specific taxonomy parameter tag.</li>
+      {% endfor %}
+    </ol>
+
+    <!-- 2. NEW RESPONSIVE PAGINATION LINK CONTROL STRIPS -->
+    {% if chunk.totalPages > 1 %}
+      <nav class="pagination-nav-strip" aria-label="Tag Feed Pagination" style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: var(--step-4, 48px); margin-bottom: var(--step-3, 36px); padding: 12px; background: var(--site-card-bg); border: 1px solid var(--border-subtle); border-radius: 8px;">
+        
+        {# PREVIOUS PAGE BUTTON LAYOUT #}
+        {% if chunk.pageNumber > 0 %}
+          {% set prevPageNum = chunk.pageNumber - 1 %}
+          <a href="/tags/{{ chunk.slug }}/{% if prevPageNum > 0 %}{{ prevPageNum }}/{% endif %}" style="color: var(--nav-color-accent, #00f2fe); text-decoration: none; font-weight: 700; font-family: monospace;">← Previous</a>
+        {% else %}
+          <span style="color: var(--text-muted); opacity: 0.4; font-family: monospace;">← Previous</span>
+        {% endif %}
+
+        <span style="font-family: monospace; font-size: 0.85rem; color: var(--text-main);">Page {{ chunk.pageNumber + 1 }}</span>
+
+        {# NEXT PAGE BUTTON LAYOUT #}
+        {% if chunk.pageNumber + 1 < chunk.totalPages %}
+          {% set nextPageNum = chunk.pageNumber + 1 %}
+          <a href="/tags/{{ chunk.slug }}/{{ nextPageNum }}/" style="color: var(--nav-color-accent, #00f2fe); text-decoration: none; font-weight: 700; font-family: monospace;">Next →</a>
+        {% else %}
+          <span style="color: var(--text-muted); opacity: 0.4; font-family: monospace;">Next →</span>
+        {% endif %}
+
+      </nav>
+    {% endif %}
+
+    <!-- BACK FOOTER TRACK DIRECTORY BACK LINK -->
+    <footer style="text-align: center; padding-top: var(--step-1, 16px); border-top: 1px dashed var(--border-subtle); margin-top: var(--step-4, 48px);">
+      <p style="font-size: 0.95rem; color: var(--text-muted);">
+        Looking for something else? See <a href="/tags/" style="color: var(--nav-color-accent, #00f2fe); font-weight: 700; text-decoration: none;">all available website tags →</a>
+      </p>
+    </footer>
+
+</div>

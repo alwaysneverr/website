@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="{{ meta.lang }}">
 <head>
+	<script>
+	(function() {
+		const saved = localStorage.getItem("theme");
+		const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
+		// If no preference exists in memory, match the user's system theme when available.
+		document.documentElement.setAttribute("data-theme", saved || (systemSettingDark.matches ? "dark" : "light"));
+	})();
+	</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ meta.title }}</title>
 
 	<link rel="preload" href="/assets/fonts/dm-sans/dm-sans-v11-latin-regular-subset.woff2" as="font" type="font/woff2" crossorigin="">
 
+    {%- if font == "allerta-stencil" -%}
+    <link rel="preload" href="/assets/fonts/allerta-stencil/allerta-stencil-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="/assets/fonts/allerta-stencil/allerta-stencil-v24-latin-regular.ttf" as="font" type="font/ttf" crossorigin="">
+    {%- endif -%}
+
+    {%- if font == "kosugi-maru" -%}
+    <link rel="preload" href="/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.ttf" as="font" type="font/ttf" crossorigin="">
+    {%- endif -%}
+	
     {% include "meta.njk" %}
 
 	<script>
@@ -37,7 +55,6 @@
 		}
 	})();
 	</script>
-    
 	<link rel="stylesheet" href="/assets/css/main.scss">
 </head>
 <body>
@@ -45,7 +62,7 @@
 
     <div class="layout" role="document">
         {% include "header.njk" %}
-        <main id="main" class="main">
+        <main id="main">
             {{ content | safe }}
         </main>
         {% include "footer.njk" %}

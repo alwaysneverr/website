@@ -1,0 +1,123 @@
+/* ==========================================================================
+   COMPONENT: INDEPENDENT TRANSLUCENT RETRO BEER DATABASE HUB
+   ========================================================================== */
+
+.beer-database-wrapper {
+  width: 100% !important;
+  margin: 0 auto !important;
+  font-family: 'Montserrat', sans-serif !important;
+
+  // Global utilities
+  .center {
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  /* 1. EXCLUSIVE BEER DATABASE HEADER BANNER TYPOGRAPHY */
+  .beer-title {
+    font-size: var(--step-4, 2.5rem) !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+    margin: 0 0 4px 0 !important;
+  }
+
+  .beer-subtitle {
+    font-size: var(--step-0, 1rem) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+    margin: 0 !important;
+  }
+
+  /* 2. THE HISTORICAL 6-COLUMN GRID STRUCTURAL MAPPINGS */
+  .review-grid {
+    display: grid !important;
+    padding: 16px !important;
+    gap: 20px !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    border: 1px solid var(--border-subtle) !important;
+    background: var(--site-card-bg) !important;
+    border-radius: 8px !important;
+    margin-top: var(--step-3, 36px) !important;
+  }
+
+  .title-grid {
+    grid-column: 1 / 7 !important; // Absolute full-width span override logic tracking
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: var(--step-2, 1.5rem) !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+    padding: 10px 16px !important;
+    color: var(--text-main) !important;
+    border-bottom: 2px solid var(--border-subtle) !important;
+    background: rgba(128, 128, 128, 0.02) !important;
+    border-radius: 4px !important;
+  }
+
+  /* 3. RETRO CELL GRID SPACES LAYOUTS */
+  .card1, .card2 {
+    background: rgba(128, 128, 128, 0.01) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+    text-align: left !important;
+    transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease !important;
+
+    &:hover {
+      background: var(--site-card-hover) !important;
+      border-color: var(--nav-color-accent, #00f2fe) !important;
+      transform: translateY(-2px) !important;
+    }
+  }
+
+  // Enforces your original 3-column desktop presentation splits with zero overlapping errors!
+  .card1 { grid-column: span 3 !important; }
+  .card2 { grid-column: span 3 !important; }
+
+  @media only screen and (max-width: 850px) {
+    .card1, .card2 {
+      grid-column: span 6 !important; // Automatically collapses cards into clean full-width stacked list rows on tablets/phones
+    }
+  }
+
+  /* 4. CONTENT COMPONENT TEXT STRINGS */
+  .beer-name {
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+
+    [data-theme="light"] & {
+      color: #0369a1 !important; // High-contrast navy replacement for perfect light-mode readability
+    }
+  }
+
+  .chapter-label {
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    color: var(--text-muted) !important;
+  }
+
+  /* 5. UNIFORM PACKAGING IMAGE COVER METRICS */
+  .beer-image-frame {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    height: 220px !important;
+    margin-top: 12px !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid var(--border-subtle) !important;
+
+    img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important; // Keeps your custom bottle outlines from stretching or distorting
+      padding: 12px !important;
+      transition: transform 0.3s ease !important;
+    }
+
+    &:hover img {
+      transform: scale(1.04) !important;
+    }
+  }
+}

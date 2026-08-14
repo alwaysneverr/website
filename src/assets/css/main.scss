@@ -8,6 +8,7 @@
 @use "2-design-tokens/media-queries";
 @use "2-design-tokens/spacing";
 @use "2-design-tokens/typography";
+@use "2-design-tokens/menu-tokens";
 
 /* 3. Tools */
 @use "3-tools/aspect-ratio";
@@ -37,6 +38,21 @@
 @use "7-components/header";
 @use "7-components/footer";
 @use "7-components/postlist";
+@use "7-components/animations";
+@use "7-components/badges";
+@use "7-components/beer-page";
+@use "7-components/beer-legacy";
+@use "7-components/review_cards";
+@use "7-components/tag-cloud";
+@use "7-components/content-showcase";
+@use "7-components/review-pagination";
+@use "7-components/review-meta-card";
+@use "7-components/version-selector";
+@use "7-components/site-header";
+@use "7-components/matrix-grid";
+@use "7-components/fictions-hub";
+@use "7-components/stories";
+@use "7-components/homepage";
 
 // 8. Utilities
 @use "8-utilities/modifiers";
@@ -44,3 +60,13 @@
 
 /* Shame on you! */
 @use "shame";
+
+/* ==========================================================================
+   LEGACY ARCHIVE ASSETS BUNDLE REGISTRY (SANDBOXED SCOPE)
+   ========================================================================== */
+
+// FIX: This wrapper acts as a firewall, trapping all retro styles inside it!
+.legacy-archive-content {
+  @import "legacy-site-style.css";
+  @import "testquery.css";
+}

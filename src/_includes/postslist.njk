@@ -1,12 +1,5 @@
-<ol reversed class="postlist">
-{% for post in postslist | reverse %}
-  <li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-    <a href="{{ post.url | url }}" class="postlist-link"><h2>{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</h2></a>
-    <time class="postlist-date" datetime="{{ post.date | dateToFormat('yyyy-MM-dd') }}">{{ post.date | dateToFormat('dd LLL yyyy') }}</time>
-    {% for tag in post.data.tags | filterTagList %}
-      {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
-      <a href="{{ tagUrl | url }}" class="post-tag">{{ tag }}</a>
-    {% endfor %}
-  </li>
-{% endfor %}
+<ol class="postlist" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--nav-gap, 24px);">
+  {% for item in postslist %}
+    {% reviewCard item %}
+  {% endfor %}
 </ol>

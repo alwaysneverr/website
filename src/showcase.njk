@@ -1,0 +1,47 @@
+---
+layout: base
+title: Showcase
+description: All recent articles and latest reviews.
+permalink: "/showcase/"
+---
+
+<section class="content-showcase" aria-label="Latest Publications">
+  <div class="content-showcase__grid">
+    
+    <div class="content-column">
+      <h2 class="content-column__title">Recent Articles</h2>
+      <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0;">
+        {%- set postList = collections.posts if collections.posts and collections.posts.length > 0 else collections.all | head(-3) -%}
+        {%- for post in postList | reverse | limit(3) -%}
+          <li style="margin-bottom: var(--step-0, 12px);">
+            {% reviewCard post %}
+          </li>
+        {%- else -%}
+          <li style="font-style: italic; color: var(--text-muted); font-size: 0.9rem;">
+            No active articles indexed in database.
+          </li>          
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <!-- THE HIGH-DENSITY RECENT REVIEWS CARD MODULE -->
+    <div class="content-column">
+      <h2 class="content-column__title" style="font-size: var(--step-1, 1.25rem); font-weight: 800; text-transform: uppercase; color: var(--text-main); margin-bottom: var(--step-0, 16px);">
+        Latest Reviews
+      </h2>
+      
+      <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--nav-gap, 20px); width: 100%;">
+        {%- for review in collections.recentReviews -%}
+          <li style="margin-bottom: var(--step-0, 12px);">
+            {% reviewCard review %}
+          </li>
+        {%- else -%}
+          <li style="font-style: italic; color: var(--text-muted); font-size: 0.9rem;">
+            No active reviews indexed in database.
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+  </div>
+</section>
