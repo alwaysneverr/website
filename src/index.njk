@@ -1,33 +1,145 @@
 ---
 layout: base
-title: Al's 11ty Website
+title: "Al's 11ty Website"
 description: The homepage of my website.... it's work in progress okay?! Jesus....
+legacy_url: "/legacy-site/"
 eleventyNavigation:
   key: Home
   order: 1
 ---
 
-<section class="content-showcase" aria-label="Latest Publications">
-  <div class="content-showcase__grid">
+<div class="home-shell">
+  <div class="home-hero">
+      <div class="home-hero__avatar-wrapper">
+    <img id="dynamicHeroAvatar" 
+         src="/assets/images/cha.png" 
+         alt="AlwaysNever Avatar Profile Visual Card Stream" 
+         class="home-hero__avatar"
+         data-avatar-pool='["/assets/images/cha.png", "/assets/images/vir.png", "/assets/images/default-fallback.png"]'
+         loading="eager">
+  </div>
+    <h1>AlwaysNever@11ty</h1>
+    {% set quote = homeQuotes.quotes | randomItem %}
+    {% if quote %}
+      <p>“{{ quote }}”</p>
+    {% endif %}
+    <br/>
+    <div class="home-hero-extra">
+
+      <div class="home-socials">
+        {% for social in socialsList.socials %}
+          <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visit {{ social.name }}">
+            <img src="{{ social.icon }}" alt="{{ social.name }}" class="social-icon">
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+<!-- 2. UNIFIED SINGLE-COLUMN DASHBOARD STACK (REMOVED SIDEBAR & LEFT GRIDS) -->
+  <div class="home-layout">
     
-    <div class="content-column">
-      <h2 class="content-column__title">Recent Articles</h2>
-      <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0;">
-        {%- set postList = collections.posts if collections.posts and collections.posts.length > 0 else collections.all | head(-3) -%}
-        {%- for post in postList | reverse | limit(3) -%}
-          {% reviewCard post %} <!-- Single-line calling component with fallback -->
+    <!-- ELEMENT 1: LATEST ARTICLE PANEL -->
+    <div class="dashboard-block">
+      <h2>Latest Article</h2>
+      <ul class="dashboard-list">
+        {%- set postList = collections.posts if collections.posts and collections.posts.length > 0 else collections.all | head(-1) -%}
+        {%- for post in postList | reverse | limit(1) -%}
+          <li>
+            <a href="{{ post.url }}" class="card-link">{{ post.data.title or post.title }}</a>
+            <div class="card-desc">{{ post.data.description or (post.excerpt | safe) }}</div>
+          </li>
         {%- endfor -%}
       </ul>
+      <div class="dashboard-footer"><a href="/showcase/" class="dashboard-footer-link">See all articles →</a></div>
     </div>
 
-    <div class="content-column">
-      <h2 class="content-column__title">Latest Reviews</h2>
-      <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0;">
-        {%- for review in collections.automatedReviewTransitions | limit(3) -%}
-          {% reviewCard review, loop.index %} <!-- Automatically passes loops tokens for View Transitions -->
+    <!-- ELEMENT 2: LATEST REVIEW PANEL (USES GOLD GLOW 10/10 CONSTRUCTORS) -->
+    <div class="dashboard-block">
+      <h2>Latest Review</h2>
+      <ul class="dashboard-list">
+        {%- for review in collections.recentReviews | slice(0,1) -%}
+          <li>{% reviewCard review %}</li>
+        {%- else -%}
+          <li class="review-empty">No recent reviews active.</li>
         {%- endfor -%}
       </ul>
+      <div class="dashboard-footer"><a href="/showcase/" class="dashboard-footer-link">See all reviews →</a></div>
     </div>
-    
+
+    <!-- ELEMENT 3: NOW CONSUMING & SYSTEM METRICS COMBINED ROW PANELS -->
+    <div class="dashboard-meta-row">
+      
+      <!-- NOW PLAYING STATUS LINK CARD -->
+      <a href="/now-playing/" class="cta-tile">
+        {% set firstNow = nowPlaying | first %}
+        {% if firstNow %}
+          {% set mediaType = firstNow.type | default(firstNow.media, true) | lower %}
+          {% if mediaType in 'light novel' or mediaType in 'manga' %}
+            {% set nowLabel = 'Now Reading' %}
+          {% elif mediaType in 'anime' %}
+            {% set nowLabel = 'Now Watching' %}
+          {% else %}
+            {% set nowLabel = 'Now Playing' %}
+          {% endif %}
+          <img src="{{ firstNow.coverImage or '/assets/images/cha.png' }}" alt="{{ firstNow.title }}" class="cta-thumb">
+          <div class="cta-content">
+            <strong>{{ nowLabel }}</strong>
+            <div class="cta-note">{{ firstNow.title }} · {{ firstNow.type }}</div>
+          </div>
+        {% else %}
+          <img src="/assets/images/cha.png" alt="Fallback artwork" class="cta-thumb">
+          <div class="cta-content">
+            <strong>Now Playing</strong>
+            <div class="cta-note">Open the full consumption matrix and artwork gallery.</div>
+          </div>
+        {% endif %}
+      </a>
+
+      <!-- CORE HARDWARE TERMINAL MONITOR STATUS DISPLAY PANEL -->
+      <div class="terminal-status-card">
+        <span class="terminal-header">System Terminal Core</span>
+        <ul class="terminal-metrics">
+          <li>
+            <span>Environment:</span>
+            <span style="color: var(--nav-color-accent, #00f2fe); font-weight: bold;">v2_prod.production</span>
+          </li>
+          <li>
+            <span>Engine Platform:</span>
+            <span>Eleventy v3 + Vite</span>
+          </li>
+          <li>
+            <span>Interface State:</span>
+            <span class="status-indicator-pulse" style="color: #10b981; display: inline-flex; align-items: center; gap: 4px;">
+              <span style="width: 6px; height: 6px; background: currentColor; border-radius: 50%;"></span> Operational
+            </span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
   </div>
-</section>
+</div>
+
+<!-- SINGLE CONSOLIDATED COMPONENT INTERSECTION LIFECYCLE CONTROLLER -->
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var layout = document.querySelector('.home-layout');
+    if(!layout) return;
+    
+    if (layout.getBoundingClientRect().top < window.innerHeight) {
+      layout.classList.add('revealed');
+      return;
+    }
+    
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          layout.classList.add('revealed');
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    io.observe(layout);
+  });
+</script>
