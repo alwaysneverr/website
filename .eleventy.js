@@ -28,7 +28,7 @@ export default function (eleventyConfig) {
 
 	eleventyConfig.setServerPassthroughCopyBehavior('copy');
 	eleventyConfig.addPassthroughCopy("public");
-
+	
 	// Plugins
 	eleventyConfig.addPlugin(EleventyPluginNavigation)
 	eleventyConfig.addPlugin(EleventyPluginRss)
@@ -94,14 +94,58 @@ export default function (eleventyConfig) {
 
 	// Collection
 
-	eleventyConfig.addCollection("automatedReviewTransitions", function(collectionApi) {
-		const reviews = collectionApi.getFilteredByTag("reviews").sort((a, b) => b.date - a.date);
+	eleventyConfig.addCollection("recentReviews", function(collectionApi) {
+	// Fetch all items tagged as "reviews" and sort them newest-first natively
+	const sortedReviews = collectionApi.getFilteredByTag("reviews")
+		.sort((a, b) => b.date - a.date);
+
+	// Safe slice buffer: returns exactly your top 3 newest timeline posts
+	return sortedReviews.slice(0, 3);
+	});
+
+	eleventyConfig.addCollection("paginatedTagsCollection", function(collectionApi) {
+		const POSTS_PER_PAGE = 10;
+		const excludedTags = ["all", "nav", "post", "posts", "review", "reviews", "fiction", "automatedReviewTransitions"];
+		const chunksCollection = [];
 		
-		reviews.slice(0, 3).forEach((review, index) => {
-			review.data.transitionIndex = index + 1;
+		// Use collectionApi to fetch all items safely
+		const allItems = collectionApi.getAll();
+		const tagMap = {};
+
+		// 1. Manually group posts by tags to avoid early-boot data null errors
+		allItems.forEach(item => {
+			if (item.data && item.data.tags) {
+			item.data.tags.forEach(tag => {
+				if (excludedTags.indexOf(tag) === -1) {
+				if (!tagMap[tag]) tagMap[tag] = [];
+				tagMap[tag].push(item);
+				}
+			});
+			}
 		});
 
-		return reviews;
+		// 2. Chunk each tag's timeline array into individual pages
+		Object.keys(tagMap).forEach(tag => {
+			const fullItemsList = [...tagMap[tag]].reverse(); // Most recent first
+			const totalPagesCount = Math.ceil(fullItemsList.length / POSTS_PER_PAGE);
+
+			for (let pageIdx = 0; pageIdx < totalPagesCount; pageIdx++) {
+			const startOffset = pageIdx * POSTS_PER_PAGE;
+			const endOffset = startOffset + POSTS_PER_PAGE;
+			const slicedPostsPage = fullItemsList.slice(startOffset, endOffset);
+			const sluggedTagName = tag.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+			chunksCollection.push({
+				tagName: tag,
+				slug: sluggedTagName,
+				posts: slicedPostsPage,
+				pageNumber: pageIdx,
+				totalPages: totalPagesCount
+			});
+			}
+		});
+
+		return chunksCollection;
 	});
 
 
