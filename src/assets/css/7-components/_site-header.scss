@@ -1,0 +1,329 @@
+/* ==========================================================================
+   COMPONENT: THEME-AWARE SITE HEADER (HIGH CONTRAST EDITION)
+   ========================================================================== */
+
+.site-header {
+  width: 100% !important;
+  padding: 12px 0 !important;
+  position: relative !important;
+  z-index: 100 !important; // Ensures the header container sits on top of all page elements
+
+  // 1. DYNAMIC COLOR SCHEMES BOUND TO YOUR HTML ROOT TOKEN
+  [data-theme="dark"] & {
+    background: #0b0f19 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    --header-text-main: #f8fafc;
+    --header-text-muted: #64748b;
+    --header-border: rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme="light"] & {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    --header-text-main: #0f172a; // CRISP DARK GREY: Guarantees high readability on light views
+    --header-text-muted: #475569;
+    --header-border: #cbd5e1;
+  }
+
+  /* ==========================================================================
+     INTERNAL CONTENT GROUP BOXES & BRAND ALIGNMENTS RESPONSIVE MOBILE-FIRST HEADER SYSTEM DESIGN
+     ========================================================================== */
+    .site-header__container {
+      display: flex !important;
+      flex-direction: column !important; // MOBILE FIRST: Stacks logo on top, menu and buttons below
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 12px !important;
+      width: 100% !important;
+      max-width: 1200px !important;
+      margin: 0 auto !important;
+      padding: 0 16px !important;
+
+      // DESKTOP TRANSITION JUMP: Snaps into a single row alignment on larger screens
+      @media (min-width: 650px) {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        gap: 16px !important;
+      }
+    }
+
+    .site-header__brand-group,
+    .site-header__right-group {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      flex-wrap: nowrap !important;
+      gap: 8px !important;
+      width: 100% !important; // Stretches nicely on mobile to fill centered channel
+      min-width: 0 !important;
+      flex-shrink: 1 !important;
+
+      @media (min-width: 650px) {
+        width: auto !important; // Gives up full width to sit cleanly inline on desktop screens
+      }
+    }
+
+    .site-header__logo-link {
+      display: inline-flex !important;
+      align-items: center !important;
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+
+    .site-header__title-text {
+      margin: 0 !important;
+      line-height: 1.2 !important;
+      font-size: 1rem !important;
+      text-align: center !important;
+      min-width: 0 !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      white-space: normal !important;
+    }
+
+    .site-header__title-text br {
+      display: block !important;
+      line-height: 1 !important;
+    }
+
+    /* DECORATIVE SEPARATOR RULES */
+    .site-header__separator {
+      width: 1px !important;
+      height: 16px !important;
+      background: var(--border-subtle, rgba(255, 255, 255, 0.1)) !important;
+
+      &--hide-mobile {
+        display: none !important; // Removes duplicate vertical lines on narrow phone layout chains
+
+        @media (min-width: 650px) {
+          display: block !important;
+        }
+      }
+    }
+
+    /* MINIMALIST CONTROLLER THEME TOGGLE BUTTON LAYOUT */
+    .theme-toggle-btn {
+      background: transparent !important;
+      background-color: var(--site-card-bg) !important;
+      border: 1px solid var(--border-subtle) !important;
+      cursor: pointer !important;
+      padding: 6px 12px !important;
+      border-radius: 4px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+
+      .theme-icon-dark, .theme-icon-light {
+        width: 28px !important;
+        height: 28px !important;
+        vertical-align: middle !important;
+        object-fit: contain !important;
+      }
+
+      @media (min-width: 900px) {
+        .theme-icon-dark, .theme-icon-light {
+          width: 32px !important;
+          height: 32px !important;
+        }
+      }
+
+      &:hover {
+        background-color: var(--site-card-hover) !important;
+        border-color: var(--nav-color-accent, #00f2fe) !important;
+        transform: translateY(-1px) !important;
+      }
+    }
+    .theme-toggle-btn {
+      background: transparent !important;
+      border: none !important;
+      cursor: pointer !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: none !important;
+    }
+
+
+  /* ==========================================================================
+     THEME TOGGLE COMPONENT LEVEL INTERACTIVITY CORES
+     ========================================================================== */
+
+  .theme-toggle-btn {
+    position: relative !important;
+    z-index: 110 !important; // FIX: Forces the button to remain clickable above all hidden overlays
+    pointer-events: auto !important; // Overrides any accidental parent blocking rules
+    background: transparent !important;
+    border: 1px solid var(--header-border) !important;
+    color: var(--header-text-main) !important;
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-family: monospace !important;
+    font-size: 0.7rem !important;
+    font-weight: bold !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease !important;
+
+    &:hover {
+      background: rgba(128, 128, 128, 0.08) !important;
+      border-color: var(--nav-color-accent, #00f2fe) !important;
+    }
+  }
+    .theme-toggle-btn {
+    position: relative !important;
+    z-index: 110 !important; // FIX: Forces the button to remain clickable above all hidden overlays
+    pointer-events: auto !important; // Overrides any accidental parent blocking rules
+    background: transparent !important;
+    border: none !important;
+    color: var(--header-text-main) !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    cursor: pointer !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    }
+
+    .theme-toggle-btn:hover {
+      background: transparent !important;
+      border-color: transparent !important;
+      transform: none !important;
+    }
+
+  /* ==========================================================================
+     ENVIRONMENT VERSION SELECTOR MODIFIERS
+     ========================================================================== */
+
+  /* ==========================================================================
+     SCOPED PRIMARY LINK MENU RESTRUCTURES
+     ========================================================================== */
+
+  .site-header__nav-group {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+
+    @media (min-width: 768px) {
+      width: auto !important;
+      justify-content: flex-end !important;
+    }
+  }
+
+  .custom-menu__list {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: var(--nav-gap, 16px) !important;
+    width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+
+    @media (min-width: 768px) {
+      justify-content: flex-end !important;
+    }
+  }
+
+  .custom-menu__item {
+    width: auto !important;
+    white-space: nowrap !important;
+  }
+
+  .custom-menu__link {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 6px 12px !important;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    box-shadow: none !important;
+
+    &:hover {
+      transform: none !important;
+      background: transparent !important;
+    }
+  }
+
+  .custom-menu__text {
+    display: inline-block !important;
+    -webkit-line-clamp: unset !important;
+    margin: 0 !important;
+    font-size: var(--step--1, 0.85rem) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: var(--header-text-muted) !important;
+    transition: color 0.2s ease !important;
+  }
+
+  // Active or hovered links pop cleanly to our core title text color channels
+  .custom-menu__link:hover .custom-menu__text,
+  .custom-menu__link.is-active .custom-menu__text {
+    color: var(--header-text-main) !important;
+  }
+
+  /* ==========================================================================
+   MINIMAL SYSTEM THEME TOGGLE OVERRIDES
+   ========================================================================== */
+
+.theme-toggle-btn {
+  /* circular faux-button centered on the SVG icon
+     - uses a CSS token for the icon size so hover circle exactly hugs the SVG
+     - hover bg and glow are taken from the site's theme tokens so it matches dark/light themes */
+  --theme-icon-size: 28px !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  width: calc(var(--theme-icon-size) + 12px) !important;
+  height: calc(var(--theme-icon-size) + 12px) !important;
+  padding: 0 !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.14s ease, transform 0.09s ease, box-shadow 0.16s ease !important;
+
+  /* size bump on wider screens follows the icon media query */
+  @media (min-width: 900px) {
+    --theme-icon-size: 32px !important;
+    width: calc(var(--theme-icon-size) + 12px) !important;
+    height: calc(var(--theme-icon-size) + 12px) !important;
+  }
+
+  /* ensure the contained SVG/image exactly matches the token size */
+  .theme-icon-dark,
+  .theme-icon-light {
+    width: var(--theme-icon-size) !important;
+    height: var(--theme-icon-size) !important;
+    object-fit: contain !important;
+  }
+
+  &:hover {
+    background: var(--site-card-hover) !important;
+    box-shadow: 0 6px 18px var(--shadow-glow, rgba(0,0,0,0.06)) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  &:active {
+    transform: translateY(0) !important;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--nav-color-accent, #00f2fe) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+}

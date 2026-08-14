@@ -1,0 +1,63 @@
+/* ==========================================================================
+   COMPONENT: THEME-AWARE DYNAMIC CATEGORY AND TOPIC BADGE PILLS
+   ========================================================================== */
+
+.custom-menu__badge {
+  display: inline-block !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  font-family: monospace !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  border: 1px solid transparent !important;
+  text-decoration: none !important;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+
+  /* --- DARK ENVIRONMENT PILL STATE --- */
+  [data-theme="dark"] & {
+    color: #f8fafc !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+
+    &[data-tag-type="fiction"] { background-color: rgba(192, 132, 252, 0.15) !important; border-color: rgba(192, 132, 252, 0.1) !important; }
+    &[data-tag-type="anime"]   { background-color: rgba(56, 189, 248, 0.15) !important;  border-color: rgba(56, 189, 248, 0.1) !important; }
+    &[data-tag-type="manga"]   { background-color: rgba(252, 211, 77, 0.15) !important;  border-color: rgba(252, 211, 77, 0.1) !important; }
+    &[data-tag-type="gaming"]  { background-color: rgba(244, 63, 94, 0.15) !important;   border-color: rgba(244, 63, 94, 0.1) !important; }
+  }
+
+  /* --- LIGHT ENVIRONMENT PILL STATE --- */
+  [data-theme="light"] & {
+    border-color: #cbd5e1 !important;
+    background-color: #f1f5f9 !important;
+    color: #334155 !important;
+
+    &[data-tag-type="fiction"] { background-color: #f3e8ff !important; color: #6b21a8 !important; border-color: #e9d5ff !important; }
+    &[data-tag-type="anime"]   { background-color: #e0f2fe !important; color: #0369a1 !important; border-color: #bae6fd !important; }
+    &[data-tag-type="manga"]   { background-color: #fef3c7 !important; color: #b45309 !important; border-color: #fde68a !important; }
+    &[data-tag-type="gaming"]  { background-color: #ffe4e6 !important; color: #9f1239 !important; border-color: #fecdd3 !important; }
+  }
+
+  &:hover {
+    background-color: var(--nav-color-accent, #00f2fe) !important;
+    color: #000000 !important;
+    border-color: var(--nav-color-accent, #00f2fe) !important;
+  }
+}
+
+/* CONTENT TYPE IDENTIFIER METADATA LABEL MIXINS */
+.custom-menu__badge--type-label {
+  border: 1px solid transparent !important;
+
+  [data-theme="dark"] & {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-main, #f8fafc) !important;
+  }
+
+  [data-theme="light"] & {
+    background-color: #e2e8f0 !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+}

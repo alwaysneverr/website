@@ -1,6 +1,6 @@
 button, .button {
     background-color: var(--textColor);
-    color: white;
+    color: var(--text-main) !important;
     
     display: inline-flex;
     align-items: center;

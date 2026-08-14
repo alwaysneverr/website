@@ -1,0 +1,373 @@
+.fictions-canvas {
+  // FIX: Clamps your portfolio canvas layout tightly so it never over-stretches on ultrawide PC monitors
+  width: 100% !important;
+  max-width: 1200px !important; 
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  
+  text-align: center !important;
+  color: var(--text-main) !important;
+
+  p {
+    color: var(--text-main) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+
+  small {
+    color: var(--text-muted) !important;
+    font-family: monospace !important;
+  }
+
+  /* 1. STRUCTURAL PROFILE INFRASTRUCTURE LAYOUT BLOCKS */
+  .paragraph {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px !important;
+    flex-direction: column-reverse !important; // Mobile first: stacks avatar photo above description blocks
+    
+    @media (min-width: 768px) {
+      flex-direction: row !important; // PC grid transition view: floats layout items side-by-side horizontally
+    }
+  }
+
+  .column {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 20px !important;
+  }
+
+  .profile-image img {
+    width: 200px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--border-subtle) !important;
+    
+    @media (min-width: 768px) {
+      width: 300px !important;
+    }
+  }
+  /* Part 2: Asymmetric Grid Architecture Matrices */
+
+  /* 2. THE 6-COLUMN MACRO GRID TRACKER */
+  .experiments {
+    display: grid !important;
+    padding: 16px !important;
+    gap: 20px !important;
+    grid-template-columns: repeat(6, 1fr) !important; // Re-establishes your authentic 6-column presentation layout splits
+    border: 1px dashed var(--border-subtle) !important;
+    border-radius: 8px !important;
+    background: var(--site-card-bg) !important;
+    margin-bottom: var(--step-4, 48px) !important;
+  }
+
+  .experiments-title {
+    font-size: var(--step-2, 1.75rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    grid-column: 1 / 7 !important; // Absolute full-width span override logic tracking
+    padding: 12px 0 !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+    border-bottom: 2px solid var(--border-subtle) !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* 3. CARD COLUMN CELL COORDINATORS CORES */
+  .card1, .card2, .card3, .cardfull {
+    background: rgba(128, 128, 128, 0.02) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+    text-align: left !important;
+    transition: background-color 0.25s ease, border-color 0.25s ease !important;
+
+    &:hover {
+      background: var(--site-card-hover) !important;
+      border-color: var(--nav-color-accent, #00f2fe) !important;
+    }
+  }
+
+  // Maps your exact, customized cell spanning blocks
+  .card1 { grid-column: 1 / 3 !important; } // Spans first 2 column lanes
+  .card2 { grid-column: 3 / 5 !important; } // Spans center 2 column lanes
+  .card3 { grid-column: 5 / 7 !important; } // Spans final 2 column lanes
+  .cardfull { grid-column: 1 / 7 !important; } // Stretches fully across the grid floor to wrap game engines blocks
+
+  .card-title {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+
+    [data-theme="light"] & {
+      color: #0369a1 !important; // Clean saturated ocean navy for light mode views
+    }
+    
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+  /* Part 3: Cover Thumbnails Animations and Breakpoint Interceptors */
+
+  /* 4. COVER PORTFOLIO THUMBNAIL LAYERS */
+  .image {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    height: 200px !important; // Constrained uniformity bounding ceiling
+    margin: 12px 0 !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid var(--border-subtle) !important;
+    cursor: pointer !important;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease !important;
+
+    img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      transition: transform 0.4s ease !important;
+    }
+
+    &:hover {
+      transform: translateY(-4px) !important;
+      
+      [data-theme="dark"] &  { box-shadow: 0 0 12px var(--nav-color-accent) !important; }
+      [data-theme="light"] & { box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06) !important; }
+      
+      img {
+        transform: scale(1.05) !important; // Subtle focus zoom animation effect
+      }
+    }
+  }
+
+  /* 5. UTOPIA LAYOUT RESPONSIVE MEDIA BREAKPOINTS */
+  @media only screen and (max-width: 900px) {
+    .card1, .card2, .card3 {
+      grid-column: 1 / 7 !important; // Automatically snaps columns full-width into a clean vertical list row layout on mobile screens
+    }
+  }
+
+  // Miscellaneous Utility Hooks
+  .no-pointer { cursor: default !important; }
+  .ml3 { font-weight: 900 !important; font-size: 2.5em !important; }
+  .center { align-items: center !important; text-align: center !important; }
+  /* Part 4: Interactive Crosshair Morphing About Avatar */
+
+  /* ==========================================================================
+     ABOUT INTERACTIVE HOVER AVATAR CORE
+     ========================================================================== */
+  .about-avatar-hoverbox {
+    position: relative !important;
+    width: 115px !important;
+    height: 115px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    border: 2px solid var(--border-subtle) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    cursor: crosshair !important;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease !important;
+
+    &:hover {
+      transform: scale(1.05) !important;
+      border-color: var(--nav-color-accent, #00f2fe) !important;
+
+      // When parent container box is hovered, hide the default face and fade in the alternate form beautifully!
+      .avatar-image--default {
+        opacity: 0 !important;
+        transform: scale(0.9) !important;
+      }
+
+      .avatar-image--hover {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+      }
+    }
+  }
+
+  .avatar-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease !important;
+
+    &--default {
+      opacity: 1 !important;
+      z-index: 2 !important;
+    }
+
+    &--hover {
+      opacity: 0 !important;
+      z-index: 1 !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   COMPONENT: SCOPED RETRO BLACK ENVIRONMENT FICTIONS HUB LAYOUT
+   ========================================================================== */
+
+.fictions-archive-wrapper {
+  // 1. RE-ESTABLISH YOUR AUTHENTIC CHOSEN BLACK BACKDROP LAYER VARIABLES
+  background-color: black !important;
+  color: #f0f0f0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  text-align: center !important;
+  
+  // Implements your global margins parameters
+  margin: 40px auto !important;
+  padding: 20px !important;
+  max-width: 1200px !important;
+  box-sizing: border-box !important;
+
+  p, span, i, b, small, h2, h3 {
+    color: #f0f0f0 !important; // Forces font visibility states to stay light
+  }
+
+  .center {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .no-pointer {
+    cursor: default !important;
+  }
+
+  .ml3 {
+    font-weight: 900 !important;
+    font-size: 3.5em !important;
+    line-height: 1.1 !important;
+    color: #f0f0f0 !important;
+  }
+
+  .date {
+    text-align: right !important;
+    font-size: small !important;
+  }
+
+  .paragraph {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px !important;
+    flex-direction: column-reverse !important; // Mobile first stack rule
+
+    @media (min-width: 768px) {
+      flex-direction: row !important; // PC view side-by-side split
+    }
+  }
+
+  .column {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 20px !important;
+  }
+
+  .profile-image img {
+    width: 300px !important;
+    border-radius: 8px !important;
+    border: 1px solid #f0f0f0 !important;
+
+    @media (max-width: 850px) {
+      width: 150px !important; // Snaps down on smaller screens
+    }
+  }
+
+  /* 2. CORE THE 6-COLUMN MACRO GRID INFRASTRUCTURES */
+  .experiments {
+    display: grid !important;
+    border: 1px solid #f0f0f0 !important;
+    padding: 10px !important;
+    gap: 10px !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    background: transparent !important;
+    margin-top: 24px !important;
+  }
+
+  .experiments-title {
+    font-size: 30px !important;
+    font-weight: bold !important;
+    grid-column-start: 1 !important;
+    grid-column-end: 7 !important;
+    grid-row-start: 1 !important;
+    grid-row-end: 3 !important;
+    text-align: center !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+  }
+
+  /* 3. CARD COLUMN CELL COORDINATORS SPANS MAPS */
+  .card1, .card2, .card3, .cardfull {
+    border: 1px solid #f0f0f0 !important;
+    padding: 10px !important;
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    box-sizing: border-box !important;
+  }
+
+  .card1 { grid-column-start: 1 !important; grid-column-end: 3 !important; }
+  .card2 { grid-column-start: 3 !important; grid-column-end: 5 !important; }
+  .card3 { grid-column-start: 5 !important; grid-column-end: 7 !important; }
+  .cardfull { grid-column-start: 1 !important; grid-column-end: 7 !important; padding: 10px !important; }
+
+  .card-title {
+    font-size: 20px !important;
+    text-decoration: none !important;
+    color: darkcyan !important;
+    font-weight: 700 !important;
+    display: inline-block !important;
+
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+
+  /* 4. COVER PORTFOLIO THUMBNAIL LAYERS ANIMATIONS */
+  .image {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+    height: 300px !important; // Fixed height configuration for all images matching your old specs!
+    margin: 12px 0 !important;
+
+    img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important; // Insures layout scales cleanly into bounding boxes
+      object-position: center !important;
+      transition: transform 0.3s ease !important;
+    }
+
+    &:hover {
+      transform: translateY(-8px) scale(1.02) !important;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+
+      img {
+        transform: scale(1.1) !important;
+      }
+    }
+  }
+
+  /* 5. UTOPIA BREAKPOINT COLLAPSE CONSTRAINTS MAPS */
+  @media only screen and (max-width: 850px) {
+    .card1, .card2, .card3 {
+      grid-column-start: 1 !important;
+      grid-column-end: 7 !important; // Automatically collapses cell items full width on mobile viewports safely
+    }
+  }
+}
+
+// Global baseline screen safeguard overrides adjustments
+@media only screen and (max-width: 350px) {
+  html:has(.fictions-archive-wrapper) body {
+    margin: auto !important;
+  }
+}

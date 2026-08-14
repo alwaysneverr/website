@@ -1,0 +1,101 @@
+/* ==========================================================================
+   COMPONENT: INDEPENDENT THEME-AWARE FICTION READING CANVAS
+   ========================================================================== */
+
+/* STORY ENGINE VARIABLES CASCADE */
+.fiction-story-container {
+  // 1. TYPOGRAPHY MATRIX SELECTION
+  font-family: 'Merriweather', Georgia, serif !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.1px !important;
+  font-size: var(--step-0, 1.05rem) !important;
+  max-width: 680px !important; // Optimized line-length tracking width for absolute reading comfort
+  margin: 0 auto !important;
+  padding: var(--step-2, 24px) 0 var(--step-5, 64px) 0 !important;
+}
+
+/* ACCESSIBLE COLOR TRACK SWITCHERS */
+[data-theme="dark"] .fiction-story-container {
+  color: #dad8d8 !important;
+  --story-link: #00f2fe;
+}
+
+[data-theme="light"] .fiction-story-container {
+  color: #1e293b !important; // Deep slate for high-readability on light viewports
+  --story-link: #0284c7;
+}
+
+/* TYPOGRAPHY AND MARKUP RE-BALANCINGS */
+.fiction-story-container p {
+  margin-bottom: 1.5rem !important;
+  text-indent: 0 !important;
+}
+
+.fiction-story-container p:first-of-type::first-letter {
+  font-weight: 800 !important;
+  float: left !important;
+  line-height: 1 !important;
+  margin-right: 10px !important;
+  color: var(--story-link) !important;
+  
+  // MOBILE FIRST: Scaled down gracefully on phone screens to prevent text overlap
+  font-size: var(--step-2, 1.75rem) !important;
+
+  // DESKTOP UPGRADE: Snaps cleanly onto your immersive large scale display footprint
+  @media (min-width: 480px) {
+    font-size: var(--step-3, 2.5rem) !important;
+  }
+}
+
+.fiction-story-container a {
+  color: var(--story-link) !important;
+  text-decoration: underline !important;
+}
+
+/* SVG ICON HIGHLIGHT PHYSICS */
+.fiction-story-icon {
+  display: block !important;
+  margin: 0 auto var(--step-2, 24px) auto !important;
+  width: 45px !important;
+  height: auto !important;
+  transition: transform 0.3s ease !important;
+}
+
+.fiction-story-container:hover .fiction-story-icon {
+  transform: scale(1.08) rotate(2deg) !important;
+}
+
+/* ==========================================================================
+   FIXED: FICTION ENGINE SCENE SEPARATOR CENTER ALIGNMENTS
+   ========================================================================== */
+.fiction-scene-separator {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important; // Centers your icon on the horizontal axis
+  width: 100% !important;
+  margin: var(--step-3, 36px) auto !important; // Enforces perfect fluid vertical spacing loops
+  padding: 12px 0 !important;
+  clear: both !important;
+}
+
+.fiction-scene-separator__icon {
+  display: block !important;
+  width: 40px !important; // Constrains the width tightly so it never stretches full-screen!
+  height: auto !important;
+  opacity: 0.8 !important;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease !important;
+
+  // Changes appearance cleanly based on your global theme attributes
+  [data-theme="light"] & {
+    filter: brightness(0.2) contrast(1.2) !important; // Saturated deep tones in Light Mode
+  }
+  
+  [data-theme="dark"] & {
+    filter: brightness(0.9) drop-shadow(0 0 6px var(--story-link, rgba(0,242,254,0.1))) !important;
+  }
+}
+
+.fiction-scene-separator:hover .fiction-scene-separator__icon {
+  opacity: 1 !important;
+  transform: scale(1.12) rotate(5deg) !important;
+}

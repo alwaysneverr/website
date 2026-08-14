@@ -1,6 +1,7 @@
 body {
-    color: var(--textColor);
-    background-color: var(--backgroundColor);
+    background-color: var(--site-bg) !important;
+    color: var(--text-main) !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
     padding-right: var(--scrollbarComp);
     overflow-x: hidden;
 }

@@ -1,13 +1,13 @@
 /* ==========================================================================
-   COMPONENT: IMMERSIVE SINGLE REVIEW METADATA CARD
+   COMPONENT: IMMERSIVE SINGLE REVIEW METADATA CARD (FIXED HYBRID TRACK)
    ========================================================================== */
 
 .review-meta-card {
   width: 100% !important;
   max-width: 500px !important;
   margin: var(--step-2, 24px) 0 !important;
-  background: var(--nav-color-bg, rgba(255, 255, 255, 0.02)) !important;
-  border: 1px solid var(--nav-color-border, rgba(255, 255, 255, 0.08)) !important;
+  background: var(--site-card-bg, rgba(255, 255, 255, 0.02)) !important;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08)) !important;
   border-left: 4px solid var(--score-color) !important; // Accents card edge to match rating color scale
   border-radius: 8px !important;
   padding: 20px !important;
@@ -17,7 +17,6 @@
   display: flex !important;
   flex-direction: column !important;
   gap: 20px !important;
-
   @media (min-width: 480px) {
     flex-direction: row !important;
     align-items: center !important;
@@ -32,12 +31,12 @@
   gap: 2px !important;
 }
 
-.review-meta-card__score-label,
+.review-meta-card__score-label, 
 .review-meta-card__details-label {
   font-size: var(--step--2, 0.65rem) !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
-  color: var(--nav-color-muted, #64748b) !important;
+  color: var(--text-muted, #64748b) !important;
   font-weight: 600 !important;
 }
 
@@ -51,6 +50,7 @@
 .review-meta-card__addon {
   font-size: var(--step--1, 0.8rem) !important;
   margin-top: 4px !important;
+  color: var(--text-main) !important;
 }
 
 /* Series Block Typography */
@@ -58,7 +58,6 @@
   display: flex !important;
   flex-direction: column !important;
   gap: 4px !important;
-  
   @media (min-width: 480px) {
     text-align: right !important;
     align-items: flex-end !important;
@@ -67,19 +66,34 @@
 
 .review-meta-card__series-title {
   font-size: var(--step-0, 1.1rem) !important;
-  color: var(--nav-color-text, #f8fafc) !important;
-  margin: 0 !important;
+  color: var(--text-main, #f8fafc) !important;
+  margin: 0 0 4px 0 !important;
+  font-weight: 700 !important;
 }
 
+/* FIX: RE-ROUTED TO LEVERAGE YOUR THEME-AWARE DYNAMIC CONFIGURATIONS */
 .review-meta-card__media-badge {
+  // Inherits all baseline typography metrics from .custom-menu__badge automatically!
+  display: inline-block !important;
   font-size: 0.65rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.5px !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  color: var(--nav-color-text, #f8fafc) !important;
   padding: 2px 8px !important;
   border-radius: 4px !important;
-  border: 1px solid var(--nav-color-border, rgba(255, 255, 255, 0.08)) !important;
-  width: fit-content !important;
+  text-decoration: none !important;
+
+  /* --- 1. DARK MODE AUTOMATIC COMPLIANCE --- */
+  [data-theme="dark"] & {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #f8fafc !important;
+  }
+
+  /* --- 2. LIGHT MODE AUTOMATIC COMPLIANCE (PASTEL CONTRST INVERSION) --- */
+  [data-theme="light"] & {
+    background-color: #e2e8f0 !important; // Crisp high-contrast soft grey backdrop
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;            // Deep charcoal text for pristine readability
+  }
 }

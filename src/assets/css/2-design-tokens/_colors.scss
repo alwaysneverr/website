@@ -5,15 +5,68 @@
     --backgroundColor: #ffffff;
 }
 
-// Very basic support for a dark color scheme
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-mode: 'dark';
-    }
+/* ==========================================================================
+   CENTRALIZED CONTRAST HARMONY MODULES
+   ========================================================================== */
 
-    :root:not([data-user-color-scheme]) {
-        --backgroundColor: #1A1A1A;
-        --textColor: #eeeeee;
-        --primaryColor: #A15CFF;
-    }
+/* 1. DARK ENVIROMENT THEME TOKENS */
+:root,
+html[data-theme="dark"] {
+  --site-bg: #0b0f19 !important;
+  --text-main: #f8fafc !important;
+  --text-muted: #64748b !important;
+  --border-subtle: rgba(255, 255, 255, 0.06) !important;
+  --site-card-bg: rgba(255, 255, 255, 0.02) !important;
+  --site-card-hover: rgba(255, 255, 255, 0.05) !important;
+  --shadow-glow: rgba(0, 242, 254, 0.04) !important;
+
+  // Bright Neon Media Identities
+  --media-novel: #c084fc;   // Light Purple
+  --media-anime: #38bdf8;   // Light Cyan Blue
+  --media-manga: #fcd34d;   // Light Amber Gold
+  --media-game: #f43f5e;    // Light Rose Red
+  --media-white: #f8fafc;   // Standard White Glow
+  
+  // Rating System Indicators
+  --score-gold: #ffbe0b !important; 
+  --score-high: #10b981;
+  --score-mid: #00f2fe;
+  --score-low: #f59e0b;
+  --score-bad: #ef4444;
 }
+
+/* 2. AUTOMATED LIGHT ENVIRONMENT CONTRAST TRUCKS */
+html[data-theme="light"] {
+  --site-bg: #f8fafc !important;
+  --text-main: #0f172a !important;   // High-Contrast Deep Charcoal
+  --text-muted: #475569 !important;  // Legible Muted Slate
+  --border-subtle: #cbd5e1 !important;
+  --site-card-bg: #ffffff !important;
+  --site-card-hover: #f1f5f9 !important;
+  --shadow-glow: rgba(15, 23, 42, 0.03) !important;
+
+  // Saturated Deep-Tone Media Overrides (Perfect 4.5:1 Web Accessibility Contrast)
+  --media-novel: #6b21a8 !important;   // Royal Amethyst
+  --media-anime: #0369a1 !important;   // Ocean Blue
+  --media-manga: #b45309 !important;   // Burnt Amber
+  --media-game: #9f1239 !important;    // Crimson Velvet
+  --media-white: #0f172a !important;   // Charcoal (Inverts White to Dark Glow)
+  
+  // Saturated Rating System Indicators
+  --score-gold: #b45309 !important; 
+  --score-high: #065f46 !important;
+  --score-mid: #075985 !important;
+  --score-low: #9a3412 !important;
+  --score-bad: #9f1239 !important;
+}
+
+/* ==========================================================================
+   CORE SCAFFOLD LAYOUT SHEET BINDINGS
+   ========================================================================== */
+
+
+// Automatically ensure your master container layouts match background variables
+main, .container {
+  color: var(--text-main) !important;
+}
+

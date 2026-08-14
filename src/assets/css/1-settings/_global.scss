@@ -5,3 +5,21 @@
 @view-transition {
 	navigation: auto;
 }
+
+/* ==========================================================================
+   FLICKER-FREE CORE CANVAS CONFIGURATIONS
+   ========================================================================== */
+
+body {
+  background-color: var(--site-bg) !important;
+  color: var(--text-main) !important;
+  
+  // FIX 2: Restrict transition animations purely to interactive clicks.
+  // This completely stops page loads from accidentally animating background frames!
+  transition: color 0.1s ease !important;
+}
+
+// Target active theme attribute changes explicitly for smooth interactive click updates
+html[data-theme] body {
+  transition: background-color 0.25s ease, color 0.25s ease !important;
+}
