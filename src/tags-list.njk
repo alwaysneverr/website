@@ -1,0 +1,92 @@
+---
+permalink: /tags/
+layout: base
+title: "Global Tags Index Directory"
+---
+
+<div class="container">
+  <section class="tag-explorer-section" style="margin: 0 0 var(--step-4, 48px) 0; padding: var(--step-1, 20px); background: var(--site-card-bg); border: 1px dashed var(--border-subtle); border-radius: 6px;">
+    
+  <header class="archive-header" style="margin-bottom: var(--step-4, 48px); border-bottom: 1px dashed var(--nav-color-border, rgba(255,255,255,0.08)); padding-bottom: var(--step-1, 16px);">
+    <p style="font-family: monospace; font-size: 0.75rem; text-transform: uppercase; color: var(--nav-color-muted); margin: 0 0 4px 0; letter-spacing: 1px;">
+      Tags
+    </p>
+     <h1 style="margin: 0; font-size: var(--step-3, 2rem); color: var(--nav-color-text); font-weight: 800;">Archive Tags/Categories Sorted By Amount</h2>
+  </header>
+
+    <div class="explorer-cloud-wrapper" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+      {# Execute our automated data loop calculations #}
+      {% set popularTagsList = collections.all | getPopularTags %}
+      
+      {% for tagNode in popularTagsList %}
+        {% set tagText = tagNode.name | lower %}
+        
+        {# Determine data tag type classifications for perfect styling synchronization #}
+        {% set tagType = "default" %}
+        {% if "story" in tagText or "writing" in tagText or "fiction" in tagText %}
+          {% set tagType = "fiction" %}
+        {% elif "anime" in tagText or "movie" in tagText or "show" in tagText %}
+          {% set tagType = "anime" %}
+        {% elif "manga" in tagText or "book" in tagText or "novel" in tagText %}
+          {% set tagType = "manga" %}
+        {% elif "gaming" in tagText or "dev" in tagText or "tech" in tagText or "game" in tagText %}
+          {% set tagType = "gaming" %}
+        {% endif %}
+
+        <object style="display: inline-block;">
+          <a href="/tags/{{ tagNode.slug }}/" 
+            class="custom-menu__badge explorer-pill" 
+            data-tag-type="{{ tagType }}"
+            style="text-decoration: none; display: inline-flex !important; align-items: center; gap: 6px; padding: 6px 10px; font-size: 0.75rem;">
+            
+            <span class="explorer-pill__text">{{ tagNode.name }}</span>
+            <span class="explorer-pill__count">{{ tagNode.count }}</span>
+            
+          </a>
+        </object>
+      {% endfor %}
+    </div>
+  <br />
+  <br />
+
+  <header class="archive-header" style="margin-bottom: var(--step-4, 48px); border-bottom: 1px dashed var(--nav-color-border, rgba(255,255,255,0.08)); padding-bottom: var(--step-1, 16px);">
+    <p style="font-family: monospace; font-size: 0.75rem; text-transform: uppercase; color: var(--nav-color-muted); margin: 0 0 4px 0; letter-spacing: 1px;">
+      Tags
+    </p>
+    <h1 style="margin: 0; font-size: var(--step-3, 2rem); color: var(--nav-color-text); font-weight: 800;">
+      All Archive Categories/Tags Explorer
+    </h1>
+  </header>
+
+  <!-- 2. RE-DESIGNED FLEX EMBED CLOUD MATRIX CONTAINER -->
+  <div class="tags-cloud-explorer-wrapper" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+    {% for tag in collections.all | getAllTags | filterTagList %}
+      {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+      {% set tagText = tag | lower %}
+      
+      {# AUTOMATION: Map proper tag types natively to toggle your SCSS colors safely #}
+      {% set tagType = "default" %}
+      {% if "story" in tagText or "writing" in tagText or "fiction" in tagText or "novel" in tagText %}
+        {% set tagType = "fiction" %}
+      {% elif "anime" in tagText or "movie" in tagText or "show" in tagText or "animation" in tagText %}
+        {% set tagType = "anime" %}
+      {% elif "manga" in tagText or "book" in tagText or "comic" in tagText %}
+        {% set tagType = "manga" %}
+      {% elif "gaming" in tagText or "dev" in tagText or "tech" in tagText or "game" in tagText %}
+        {% set tagType = "gaming" %}
+      {% endif %}
+
+      <a href="{{ tagUrl }}" 
+         class="custom-menu__badge" 
+         data-tag-type="{{ tagType }}" 
+         style="text-decoration: none; padding: 6px 12px; font-size: 0.8rem; letter-spacing: 0.3px;">
+        {{ tag }}
+      </a>
+    {% else %}
+      <p style="font-style: italic; color: var(--nav-color-muted); font-size: 0.95rem;">
+        No active collection tags extracted from files database yet.
+      </p>
+    {% endfor %}
+  </div>
+
+</div>
