@@ -1,6 +1,5 @@
 <nav class="nav nav--primary custom-menu" role="navigation" tabindex="-1" aria-label="Primary Navigation">
-  <ul class="custom-menu__list">
-    
+  <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center;">
     {%- for item in collections.all | eleventyNavigation -%}
       {%- if item.url -%}
         {%- set isCurrent = (item.url == page.url) -%}
@@ -8,17 +7,15 @@
         
         <li class="custom-menu__item">
           <a class="custom-menu__link {% if isCurrent or isParent %}is-active{% endif %}" 
-             href="{% if isCurrent %}#main{% else %}{{ item.url | url }}{% endif %}" 
-             {% if isCurrent %} aria-current="page" {% endif %}>
-             
+             href="{% if isCurrent %}#main{% else %}{{ item.url | url }}{% endif %}"
+             {% if isCurrent %}
+               aria-current="page"
+             {% endif %}>
             <span class="custom-menu__text">{{ item.title }}</span>
             <span class="custom-menu__indicator"></span>
-            
           </a>
         </li>
-        
       {%- endif -%}
     {%- endfor -%}
-    
   </ul>
 </nav>

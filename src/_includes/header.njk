@@ -1,10 +1,108 @@
-<header class="site-header" role="banner">
-    <div class="site-header__container">
-        <div class="site-header__left">
-            <h3><strong>AlwaysNever <br>Website@11ty</strong></h3>
+<header class="site-header" role="banner" style="width: 100%; border-bottom: 1px solid var(--border-subtle); background: var(--site-card-bg); padding: var(--step--1, 12px) 0;">
+  
+  <div class="site-header__container">
+    
+    <!-- LEFT SIDE GROUP: BRAND LOGO & CONTEXTUAL SWITCHER -->
+    <div class="site-header__brand-group">
+      <div class="site-header__logo">
+        <a href="/" class="site-header__logo-link" aria-label="Go to homepage">
+          <h3 class="site-header__title-text">
+            <strong>AlwaysNever <br>Website@11ty</strong>
+          </h3>
+        </a>
+      </div>
+      
+      {# DYNAMIC CONTEXTUAL VERSION DROP-MENU TRACK SWITCHER #}
+      {% if legacy_url or modern_url %}
+        <div class="site-header__separator"></div>
+        
+        <div class="site-version-selector" data-site-version-selector>
+          <span class="site-version-selector__label">Env:</span>
+          <div class="site-version-selector__wrapper">
+            <button type="button"
+                    class="site-version-selector__trigger"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+              <span class="site-version-selector__trigger-text site-version-selector__trigger-text--short">
+                {% if modern_url %}
+                  v1
+                {% else %}
+                  v2
+                {% endif %}
+              </span>
+              <span class="site-version-selector__trigger-text site-version-selector__trigger-text--full">
+                {% if modern_url %}
+                  v1 (Legacy)
+                {% else %}
+                  v2 (Modern)
+                {% endif %}
+              </span>
+            </button>
+
+            <ul class="site-version-selector__menu" hidden>
+              {% if modern_url %}
+                <li>
+                  <button type="button"
+                          class="site-version-selector__option"
+                          data-version-url="{{ modern_url }}">
+                    <span class="site-version-selector__option-text site-version-selector__option-text--short">v2</span>
+                    <span class="site-version-selector__option-text site-version-selector__option-text--full">v2 (Modern)</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button"
+                          class="site-version-selector__option"
+                          aria-current="true"
+                          data-version-url="">
+                    <span class="site-version-selector__option-text site-version-selector__option-text--short">v1</span>
+                    <span class="site-version-selector__option-text site-version-selector__option-text--full">v1 (Legacy)</span>
+                  </button>
+                </li>
+              {% else %}
+                <li>
+                  <button type="button"
+                          class="site-version-selector__option"
+                          aria-current="true"
+                          data-version-url="/">
+                    <span class="site-version-selector__option-text site-version-selector__option-text--short">v2</span>
+                    <span class="site-version-selector__option-text site-version-selector__option-text--full">v2 (Modern)</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button"
+                          class="site-version-selector__option"
+                          data-version-url="{{ legacy_url }}">
+                    <span class="site-version-selector__option-text site-version-selector__option-text--short">v1</span>
+                    <span class="site-version-selector__option-text site-version-selector__option-text--full">v1 (Legacy)</span>
+                  </button>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
-        <div class="site-header__right">
-            {% include "navigation.njk" %}
-        </div>
+      {% endif %}
     </div>
+
+    <!-- RIGHT SIDE GROUP: NAVIGATION LINKS AND EXTENDED THEME SWITCHER -->
+    <div class="site-header__right-group">
+      
+      <!-- Primary Automated Navigation Menu Links -->
+      <div class="site-header__nav-group">
+        {% include "navigation.njk" %}
+      </div>
+      
+      <div class="site-header__separator site-header__separator--hide-mobile"></div>
+
+      <!-- MINIMALIZED SYSTEM THEME SELECT BUTTON -->
+      <button data-theme-toggle="true" 
+          class="theme-toggle-btn" 
+          aria-label="Toggle website display theme mode"
+          aria-live="polite">
+        <img src="/assets/icons/theme-dark.svg" class="theme-icon-dark" alt="Dark theme" />
+        <img src="/assets/icons/theme-light.svg" class="theme-icon-light" alt="Light theme" style="display: none;" />
+      </button>
+
+    </div>
+
+  </div>
 </header>
