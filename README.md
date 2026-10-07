@@ -1,88 +1,26 @@
-# Eleventy Plus Vite <br>🏃💨
+# Website
+It's a website
 
-A clean and fast Eleventy Starter Project with Vite.
+## What website tho
+It's MY website (static)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ef99b4ea-199f-497b-84c1-48c34355da8a/deploy-status)](https://app.netlify.com/sites/eleventyplusvite/deploys)
-## Features
+## What's gonna be in it
+Stuff
 
-* Eleventy v3
-* Eleventy Dev Server with live reload
-* Vite v8
-* Vite as Middleware in Eleventy Dev Server (uses [eleventy-plugin-vite](https://github.com/11ty/eleventy-plugin-vite/))
-* Eleventy build output is post-processed by [Vite](https://vitejs.dev) (with Rollup)
-* CSS/Sass post-processing with PostCSS incl. [Autoprefixer](https://github.com/postcss/autoprefixer) and cssnano
-* Uses [my own opinionated CSS/Sass structure](https://matthiasott.com/notes/how-i-structure-my-css)
-* Critical CSS, generated and inlined via [rollup-plugin-critical](https://github.com/nystudio107/rollup-plugin-critical). The main CSS file is then loaded asynchronously with [Scott Jehl’s `media` loading strategy](https://www.filamentgroup.com/lab/load-css-simpler/) (adds `media="print"` and swaps to `media="all"` once loaded)
-* Example implementation of a web font loading strategy ([critical FOFT with preload](https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-preload))
-* Basic fluid typography based on [Utopia](https://utopia.fyi)
-* Basic dark mode support (using `prefers-color-scheme` and CSS Custom Properties)
-* Polyfill for [focus-visible](https://matthiasott.com/notes/focus-visible-is-here)
-* RSS feed 🧡
-* XML sitemap
-* Four Hundos Lighthouse score 💯💯💯💯
+Okay not just stuff. Stories, reviews, blogposts. Hell, maybe even games, if that's possible
 
-## Getting started
+## Why are you even doing this
+I wanna show the whole world who I am
 
-Start by [generating a new repository based on this project](https://github.com/matthiasott/eleventy-plus-vite/generate).
+This is the only way I can think of
 
-After cloning (or downloading) the repository to your local machine, install all dependencies with the command
+Well, that, and writing a story and publish it on Royal Road or somethin
 
-```sh
-npm install
-```
-
-## Run dev server
-
-The project comes with Eleventy’s built-in development server. You can start the server with
-
-```sh
-npm start
-````
-
-or
-
-```sh
-npx @11ty/eleventy --serve
-````
-
-
-## Build
-
-To trigger a production build, use
-
-```sh
-npm run build
-````
-
-or
-
-```sh
-npx @11ty/eleventy
-```
-
-## Deploy a fork of this template to Netlify
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/matthiasott/eleventy-plus-vite)
-
-## CSS
-By default, this starter project uses Sass with an opinionated folder structure. Feel free to replace this structure with your own. If you prefer to write standards-compliant, good old plain CSS, this is also supported. Nesting is then possible via the [PostCSS Nesting plugin](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting), following the [CSS Nesting specification](https://drafts.csswg.org/css-nesting-1/).
-
-[Autoprefixer](https://github.com/postcss/autoprefixer) adds necessary browser prefixes. The [browserslist](https://github.com/browserslist/browserslist) settings can be adjusted in `package.json`.
-
-## Roadmap
-* Add more base styles and a demo page that shows example styles and components
-* Add a toggle button for the dark mode theme
-* More advanced base styles for modern CSS layout
-* Webmention/IndieWeb support
-
-## Feedback
-
-Please provide feedback! 🤗 Ideally by [filing an issue here](https://github.com/matthiasott/eleventy-plus-vite/issues) – or via a pull request.
-## Thank you!
-
-This starter project would not have been possible without the many great sites and projects I was able to learn from, use as inspiration, and shamelessly copy code from:
-
-* Zach Leatherman [zachleat.com](https://github.com/zachleat/zachleat.com)
-* Max Böck’s [Eleventastic](https://github.com/maxboeck/eleventastic)
-* Stephanie Eckles’s [11ty Netlify Jumpstart](https://github.com/5t3ph/11ty-netlify-jumpstart)
-* Miriam Suzanne [miriamsuzanne.com](https://www.miriamsuzanne.com)
+# Prerequisites
+- Node 24+
+- npm
+- vite v8
+- eleventy v3
+- a mind beeg enough to understand scss
+- anything else on that package.json idk
+- listen to your npm audit warnings, tons of CVEs on packages these days
