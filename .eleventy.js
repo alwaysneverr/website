@@ -1,6 +1,5 @@
 import markdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
-
 import EleventyPluginNavigation from '@11ty/eleventy-navigation';
 import EleventyPluginRss from '@11ty/eleventy-plugin-rss'
 import EleventyPluginSyntaxhighlight from '@11ty/eleventy-plugin-syntaxhighlight'

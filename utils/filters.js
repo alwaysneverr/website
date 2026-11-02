@@ -28,6 +28,12 @@ export default {
         return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
 	},
 
+    readableGitDate: function(dateStr, format){
+        if (!dateStr) return "";
+        // Uses fromISO instead of fromJSDate to parse string data layers natively!
+        return DateTime.fromISO(dateStr).toFormat(format || "dd LLLL yyyy");
+    },
+
     obfuscate: function (str) {
         const chars = []
         for (var i = str.length - 1; i >= 0; i--) {

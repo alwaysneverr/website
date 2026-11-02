@@ -1,7 +1,13 @@
 // src/utils/shortcodes.js
 import fs from 'fs';
 import path from 'path';
+import { gitEngine, gitCache } from "../src/_data/gitDates.js";
+import { DateTime } from "luxon";
 
+function normalizeRepoPath(value) {
+  if (!value) return "";
+  return value.replace(/^\.\//, "").replace(/\\/g, "/").toLowerCase();
+}
 
 export default {
   reviewCard: function(itemData, viewIndex) {
@@ -167,5 +173,29 @@ export default {
     }
     
     return `<!-- SVG NOT FOUND: ${filename} -->`;
+  },
+
+  gitinfo: function(pubDate) {
+    const inputPath = this.page?.inputPath;
+    if (!inputPath) return "";
+
+    const gitData = gitEngine.getLog(normalizeRepoPath(inputPath));
+
+    // Ensure we have a valid tracked Git history block timestamp to parse
+    if (gitData && gitData.unixTimestamp) {
+      const gitDateTime = DateTime.fromMillis(gitData.unixTimestamp * 1000);
+      const pubDateTime = DateTime.fromJSDate(pubDate);
+
+      // Clean fallback check: If the last update matches the publish date exactly, 
+      // return empty so the template doesn't draw a duplicate timestamp on screen!
+      if (gitDateTime.toFormat("d LLLL yyyy") === pubDateTime.toFormat("d LLLL yyyy")) {
+        return "";
+      }
+
+      // Return a clean machine-readable ISO 8601 string: e.g. "2026-08-20T20:27:00.000Z"
+      return gitDateTime.toISO();
+    }
+
+    return "";
   }
 };
