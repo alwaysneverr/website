@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ meta.lang }}">
 <head>
-	<script>
-	(function() {
-		const saved = localStorage.getItem("theme");
-		const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
-		// If no preference exists in memory, match the user's system theme when available.
-		document.documentElement.setAttribute("data-theme", saved || (systemSettingDark.matches ? "dark" : "light"));
-	})();
-	</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title or meta.title }}</title>
@@ -26,6 +18,15 @@
     {%- endif -%}
 	
     {% include "meta.njk" %}
+
+	<script>
+	(function() {
+		const saved = localStorage.getItem("theme");
+		const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
+		// If no preference exists in memory, match the user's system theme when available.
+		document.documentElement.setAttribute("data-theme", saved || (systemSettingDark.matches ? "dark" : "light"));
+	})();
+	</script>
 
 	<script>
 	/* Font loading: Critical FOFT with preload, see: https://www.zachleat.com/web/comprehensive-webfonts/#critical-foft-with-preload */

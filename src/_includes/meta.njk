@@ -1,5 +1,8 @@
     {%- set absolutePageUrl -%}{{ page.url | url | absoluteUrl(meta.url) }}{%- endset -%}
 
+    {# Keep this ahead of every script and stylesheet: Chrome aborts an incoming transition if a style update runs before it sees the opt-in. #}
+    <style>@view-transition { navigation: auto; }</style>
+
     {# General #}
     <meta name="description" content="{{ description or meta.description }}">
     <link rel="canonical" href="{{ absolutePageUrl }}">
