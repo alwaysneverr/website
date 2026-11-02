@@ -44,13 +44,11 @@ layout: base
       <div class="post-tags-row">
         <span class="tags-row-label">Tags:</span>
         <div class="tags-pill-wrapper">
-          {% for tag in tags %}
-            {# Safely block Eleventy's master collections names from rendering as badges #}
-            {% if tag not in ["all", "nav", "post", "posts", "review", "reviews"] %}
-              <a href="/tags/{{ tag | slugify }}/" class="post-tag-pill">
-                #{{ tag }}
-              </a>
-            {% endif %}
+          {# Safely block Eleventy's master collections names from rendering as badges #}
+          {% for tag in tags | filterTagList %}
+            <a href="/tags/{{ tag | tagSlug }}/" class="post-tag-pill">
+              #{{ tag }}
+            </a>
           {% endfor %}
         </div>
       </div>

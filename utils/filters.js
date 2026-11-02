@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import MarkdownIt from 'markdown-it'
+import { isContentTag, tagSlug } from './taxonomy.js'
 const mdCompiler = new MarkdownIt({
   html: true, // Guarantees your custom {% divider %} HTML fragments pass through un-shredded
   breaks: true,
@@ -43,8 +44,10 @@ export default {
     },
 
     filterTagList (tags) {
-        return (tags || []).filter(tag => ["all", "nav", "post", "posts", "reviews", "fiction"].indexOf(tag) === -1);
+        return (tags || []).filter(isContentTag);
     },
+
+    tagSlug,
 
     min: function(...numbers) {
         return Math.min.apply(null, numbers);
@@ -80,13 +83,12 @@ export default {
 
     getPopularTags: function (collectionsAll) {
         const tagCounts = {};
-        const excludedTags = ["all", "nav", "post", "posts", "review", "reviews", "fiction", "automatedReviewTransitions"];
 
         // 1. Loop through all content items and tally occurrences
         collectionsAll.forEach(item => {
             if (item.data && item.data.tags) {
             item.data.tags.forEach(tag => {
-                if (excludedTags.indexOf(tag) === -1) {
+                if (isContentTag(tag)) {
                 tagCounts[tag] = (tagCounts[tag] || 0) + 1;
                 }
             });
@@ -98,7 +100,7 @@ export default {
             .map(tag => ({
             name: tag,
             count: tagCounts[tag],
-            slug: tag.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+            slug: tagSlug(tag)
             }))
             .sort((a, b) => b.count - a.count) // Sort highest count frequency first
             .slice(0, 15); // Ceiling cap at top 15 items to maintain high-density canvas balance

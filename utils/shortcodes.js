@@ -4,6 +4,7 @@ import path from 'path';
 import { gitEngine, gitCache } from "../src/_data/gitDates.js";
 import { DateTime } from "luxon";
 import filters from "./filters.js";
+import { isContentTag, tagSlug } from "./taxonomy.js";
 
 function normalizeRepoPath(value) {
   if (!value) return "";
@@ -30,13 +31,10 @@ export default {
     // 5. CATEGORY TAXONOMY BADGES LOOPS UTILITIES
     let tagsMarkup = "";
     if (itemData.data.tags) {
-      const filteredTags = itemData.data.tags.filter(tag => 
-        ["all", "nav", "post", "posts", "review", "reviews", "fiction", "automatedReviewTransitions"].indexOf(tag) === -1
-      );
-      
+      const filteredTags = itemData.data.tags.filter(isContentTag);
+
       filteredTags.forEach(tag => {
-        const sluggedTag = tag.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        const tagUrl = `/tags/${sluggedTag}/`;
+        const tagUrl = `/tags/${tagSlug(tag)}/`;
         const tagText = tag.toLowerCase();
 
         let tagType = "default";

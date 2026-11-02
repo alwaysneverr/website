@@ -61,7 +61,7 @@ title: "Global Tags Index Directory"
   <!-- 2. RE-DESIGNED FLEX EMBED CLOUD MATRIX CONTAINER -->
   <div class="tags-cloud-explorer-wrapper" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
     {% for tag in collections.all | getAllTags | filterTagList %}
-      {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+      {% set tagUrl %}/tags/{{ tag | tagSlug }}/{% endset %}
       {% set tagText = tag | lower %}
       
       {# AUTOMATION: Map proper tag types natively to toggle your SCSS colors safely #}

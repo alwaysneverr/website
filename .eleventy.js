@@ -11,6 +11,7 @@ import rollupPluginCritical from 'rollup-plugin-critical'
 import filters from './utils/filters.js'
 import transforms from './utils/transforms.js'
 import shortcodes from './utils/shortcodes.js'
+import { isContentTag, tagSlug } from './utils/taxonomy.js'
 
 export default function (eleventyConfig) {
 	// Drafts, see also _data/eleventyDataSchema.js
@@ -104,7 +105,6 @@ export default function (eleventyConfig) {
 
 	eleventyConfig.addCollection("paginatedTagsCollection", function(collectionApi) {
 		const POSTS_PER_PAGE = 10;
-		const excludedTags = ["all", "nav", "post", "posts", "review", "reviews", "fiction", "automatedReviewTransitions"];
 		const chunksCollection = [];
 		
 		// Use collectionApi to fetch all items safely
@@ -115,7 +115,7 @@ export default function (eleventyConfig) {
 		allItems.forEach(item => {
 			if (item.data && item.data.tags) {
 			item.data.tags.forEach(tag => {
-				if (excludedTags.indexOf(tag) === -1) {
+				if (isContentTag(tag)) {
 				if (!tagMap[tag]) tagMap[tag] = [];
 				tagMap[tag].push(item);
 				}
@@ -132,7 +132,7 @@ export default function (eleventyConfig) {
 			const startOffset = pageIdx * POSTS_PER_PAGE;
 			const endOffset = startOffset + POSTS_PER_PAGE;
 			const slicedPostsPage = fullItemsList.slice(startOffset, endOffset);
-			const sluggedTagName = tag.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+			const sluggedTagName = tagSlug(tag);
 
 			chunksCollection.push({
 				tagName: tag,
