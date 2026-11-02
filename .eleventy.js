@@ -52,7 +52,7 @@ export default function (eleventyConfig) {
 				// This puts CSS and JS in subfolders – remove if you want all of it to be in /assets instead
 				rolldownOptions: {
 					output: {
-						assetFileNames: 'assets/css/main.[hash].css',
+						assetFileNames: 'assets/css/[name].[hash][extname]',
 						chunkFileNames: 'assets/js/[name].[hash].js',
 						entryFileNames: 'assets/js/[name].[hash].js'
 					},
@@ -65,6 +65,8 @@ export default function (eleventyConfig) {
 								{ uri: '404.html', template: '404' },
 							],
 							criticalConfig: {
+								// Only the sitewide bundle: the plugin otherwise feeds in every page's CSS (Madoka, Tunnel, ...)
+								css: ['./_site/assets/css/main.*.css'],
 								inline: true,
 								dimensions: [
 									{
