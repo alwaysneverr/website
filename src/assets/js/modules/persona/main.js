@@ -81,9 +81,6 @@ class StarWipeApp {
     checkPreferences() {
         this.prefersReducedMotion = checkReducedMotion();
         
-        if (this.prefersReducedMotion) {
-            console.log('Reduced motion enabled');
-        }
     }
 
     /**
@@ -291,8 +288,6 @@ class StarWipeApp {
         if (this.starWipe) {
             this.starWipe.destroy();
         }
-        
-        console.log('App cleaned up');
     }
 }
 

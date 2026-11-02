@@ -161,7 +161,7 @@ hr {
     width: 100%;
     transform: scale(1.25, 1) skewX(20deg) translateY(3px) rotateX(-40deg) rotateY(-10deg) rotateZ(-15deg);
   }
-}/*# sourceMappingURL=persona-menu.css.map */
+}
 
 @media only screen and (max-width: 685px) {
   .navbar{

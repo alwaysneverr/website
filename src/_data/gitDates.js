@@ -1,93 +1,52 @@
 import { execSync } from 'child_process';
 import path from 'node:path';
 
-export const gitCache = new Map();
-let isGitBulkLoaded = false;
+const gitCache = new Map();
 
 function bulkLoadGitData() {
-	if (isGitBulkLoaded) return;
+	let stdout;
 	try {
-		console.log("🛠️ DEBUG: Starting native unix bulk timestamp lookup...");
-		
-		// First, verify we're in a valid git repository
-		try {
-			execSync("git rev-parse --git-dir", { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], cwd: process.cwd() });
-		} catch (e) {
-			console.log("⚠️ Not a valid git repository or git not available");
-			isGitBulkLoaded = true;
-			return;
-		}
-		
-		// Try multiple approaches to get git log, falling back if one fails (Netlify robustness)
-		let stdout = null;
-		const commands = [
-			`git log --format="%at|%H|%s" --name-only`,  // Current branch only (no remote access needed)
-		];
-		
-		for (const cmd of commands) {
-			try {
-				// Disable SSH to prevent "Permission denied (publickey)" errors on Netlify
-				stdout = execSync(cmd, { 
-					encoding: 'utf8', 
-					stdio: ['ignore', 'pipe', 'pipe'], 
-					cwd: process.cwd(),
-					maxBuffer: 10 * 1024 * 1024,  // 10MB buffer for large repos
-					env: { ...process.env, GIT_SSH: '/bin/false' }  // Disable SSH completely
-				});
-				if (stdout) {
-					console.log("✅ Git log loaded successfully");
-					break;  // Success, use this output
-				}
-			} catch (e) {
-				console.log(`⚠️ Git command failed: ${cmd}`);
-				console.log(`   Error: ${e.message}`);
-				// Continue to next command
-			}
-		}
-		
-		if (!stdout) {
-			console.log("⚠️ All git log attempts failed; skipping git metadata");
-			isGitBulkLoaded = true;
-			return;
-		}
-
-		if (!stdout) return;
-
-		const lines = stdout.split(/\r?\n/);
-		let currentGitInfo = null;
-
-		for (const line of lines) {
-			const trimmed = line.trim();
-			if (!trimmed) continue;
-
-			if (trimmed.includes('|')) {
-				// FIX 2: Safe split via Regex that ONLY matches the first two pipes. 
-				// This allows user commit messages to contain pipes safely!
-				const match = trimmed.match(/^([^|]+)\|([^|]+)\|(.*)$/);
-				if (match) {
-					const [_, unixTimestamp, longHash, message] = match;
-					currentGitInfo = { 
-						unixTimestamp: parseInt(unixTimestamp, 10), 
-						longHash,
-						message: message || "Updated content"
-					};
-				}
-			} else if (currentGitInfo) {
-				// FIX 1: Save using the FULL repository-relative path normalized to lowercase
-				// Strips leading/trailing slashes, matches: "content/blog/day1.md"
-				const repoRelativePath = trimmed.replace(/\\/g, "/").toLowerCase();
-				
-				if (repoRelativePath && !gitCache.has(repoRelativePath)) {
-					gitCache.set(repoRelativePath, currentGitInfo);
-				}
-			}
-		}
-		isGitBulkLoaded = true;
+		// Disable SSH to prevent "Permission denied (publickey)" errors on Netlify
+		stdout = execSync(`git log --format="%at|%H|%s" --name-only`, {
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'pipe'],
+			cwd: process.cwd(),
+			maxBuffer: 10 * 1024 * 1024,  // 10MB buffer for large repos
+			env: { ...process.env, GIT_SSH: '/bin/false' }  // Disable SSH completely
+		});
 	} catch (e) {
-		console.log("❌ DEBUG CRASH: Git execSync failed!");
-		console.log(`   Error message: ${e.message}`);
-		console.log(`   Error details: ${e.stderr || e.stdout || JSON.stringify(e)}`);
-		isGitBulkLoaded = true; 
+		console.warn(`[gitDates] Skipping git metadata: ${e.message}`);
+		return;
+	}
+
+	const lines = stdout.split(/\r?\n/);
+	let currentGitInfo = null;
+
+	for (const line of lines) {
+		const trimmed = line.trim();
+		if (!trimmed) continue;
+
+		if (trimmed.includes('|')) {
+			// FIX 2: Safe split via Regex that ONLY matches the first two pipes.
+			// This allows user commit messages to contain pipes safely!
+			const match = trimmed.match(/^([^|]+)\|([^|]+)\|(.*)$/);
+			if (match) {
+				const [_, unixTimestamp, longHash, message] = match;
+				currentGitInfo = {
+					unixTimestamp: parseInt(unixTimestamp, 10),
+					longHash,
+					message: message || "Updated content"
+				};
+			}
+		} else if (currentGitInfo) {
+			// FIX 1: Save using the FULL repository-relative path normalized to lowercase
+			// Strips leading/trailing slashes, matches: "content/blog/day1.md"
+			const repoRelativePath = trimmed.replace(/\\/g, "/").toLowerCase();
+
+			if (repoRelativePath && !gitCache.has(repoRelativePath)) {
+				gitCache.set(repoRelativePath, currentGitInfo);
+			}
+		}
 	}
 }
 

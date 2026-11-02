@@ -1,7 +1,5 @@
 // src/utils/shortcodes.js
-import fs from 'fs';
-import path from 'path';
-import { gitEngine, gitCache } from "../src/_data/gitDates.js";
+import { gitEngine } from "../src/_data/gitDates.js";
 import { DateTime } from "luxon";
 import filters from "./filters.js";
 import { isContentTag, tagSlug } from "./taxonomy.js";
@@ -140,23 +138,6 @@ export default {
   <img src="/assets/icons/${storyIcon}.svg" class="fiction-scene-separator__icon filter" alt="${title} concept divider" loading="lazy">
 </div>
     `.trim();
-  },
-
-  svg: function(filename, className =""){
-    const relativeFilePath = path.join(__dirname, `src/assets/svg/${filename}.svg`);
-    
-    if (fs.existsSync(relativeFilePath)) {
-      let svgContent = fs.readFileSync(relativeFilePath, 'utf8');
-      
-      // Optional: Inject a custom CSS class dynamically into the root <svg> tag
-      if (className) {
-        svgContent = svgContent.replace('<svg', `<svg class="${className}"`);
-      }
-      
-      return svgContent;
-    }
-    
-    return `<!-- SVG NOT FOUND: ${filename} -->`;
   },
 
   gitinfo: function(pubDate) {

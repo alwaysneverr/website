@@ -21,8 +21,6 @@ export function initAvatarCycler() {
 
   if (!imagePool || imagePool.length <= 1) return;
 
-  console.log(`🎭 Avatar Engine: Active rotation track loaded for ${imagePool.length} distinct asset frames.`);
-
   // 2. RANDOM INITIAL ENTRY: Pick a random image to display on fresh page load entry points
   let currentActiveIndex = Math.floor(Math.random() * imagePool.length);
   avatarImg.src = imagePool[currentActiveIndex];

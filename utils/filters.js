@@ -35,23 +35,11 @@ export default {
         return DateTime.fromISO(dateStr).toFormat(format || "dd LLLL yyyy");
     },
 
-    obfuscate: function (str) {
-        const chars = []
-        for (var i = str.length - 1; i >= 0; i--) {
-            chars.unshift(['&#', str[i].charCodeAt(), ';'].join(''))
-        }
-        return chars.join('')
-    },
-
     filterTagList (tags) {
         return (tags || []).filter(isContentTag);
     },
 
     tagSlug,
-
-    min: function(...numbers) {
-        return Math.min.apply(null, numbers);
-    },
 
     head: function (array, n) {
         if(!Array.isArray(array) || array.length === 0) {
@@ -69,16 +57,6 @@ export default {
             return [];
         }
         return array.slice(0, n);
-    },
-
-    truncateChars: function (str, maxChars = 140) {
-        if (!str || typeof str !== 'string') {
-            return '';
-        }
-        if (str.length <= maxChars) {
-            return str;
-        }
-        return str.slice(0, maxChars) + '...';
     },
 
     getPopularTags: function (collectionsAll) {

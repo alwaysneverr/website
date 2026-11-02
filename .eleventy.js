@@ -9,7 +9,6 @@ import rollupPluginCritical from 'rollup-plugin-critical'
 
 
 import filters from './utils/filters.js'
-import transforms from './utils/transforms.js'
 import shortcodes from './utils/shortcodes.js'
 import { isContentTag, tagSlug } from './utils/taxonomy.js'
 
@@ -153,17 +152,10 @@ export default function (eleventyConfig) {
 		eleventyConfig.addFilter(filterName, filters[filterName])
 	})
 
-	// Transforms
-	Object.keys(transforms).forEach((transformName) => {
-		eleventyConfig.addTransform(transformName, transforms[transformName])
-	})
-
 	// Shortcodes
 	Object.keys(shortcodes).forEach((shortcodeName) => {
 		eleventyConfig.addShortcode(shortcodeName, shortcodes[shortcodeName])
 	})
-
-	eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`)
 
 	// Customize Markdown library and settings:
 	let markdownLibrary = markdownIt({
@@ -192,14 +184,6 @@ export default function (eleventyConfig) {
 	// Copy/pass-through files
 	eleventyConfig.addPassthroughCopy('src/assets/css')
 	eleventyConfig.addPassthroughCopy('src/assets/js')
-
-	// add css bundles
-	eleventyConfig.addBundle("css", {
-		toFileDirectory: "dist",
-		// Add all <style> content to `css` bundle (use <style eleventy:ignore> to opt-out)
-		// Supported selectors: https://www.npmjs.com/package/posthtml-match-helper
-		bundleHtmlContentFromSelector: "style",
-	});
 
 	return {
 		templateFormats: ['md', 'njk', 'html', 'liquid'],

@@ -72,7 +72,3 @@
   @include meta.load-css("legacy-site-style.css");
   @include meta.load-css("testquery.css");
 }
-
-.the-letter-wrapper{
-  @include meta.load-css("the-letter.css");
-}

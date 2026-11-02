@@ -18,7 +18,6 @@ export function initModernLightbox() {
   // If there are no legacy images or modal overlay panels present on this view, exit quietly!
   if (!images.length || !overlay || !modalImg) return;
 
-  console.log(`📸 Legacy Lightbox Matrix: Active tracking established over ${images.length} retro archive nodes.`);
 
   // 1. OPEN MODAL EVENT LOGIC
   images.forEach(card => {
