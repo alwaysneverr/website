@@ -140,25 +140,34 @@ export default {
     `.trim();
   },
 
-  gitinfo: function(pubDate) {
+  gitinfo: function(pubDate, lastUpdated, migratedOn) {
     const inputPath = this.page?.inputPath;
     if (!inputPath) return "";
 
     const gitData = gitEngine.getLog(normalizeRepoPath(inputPath));
 
     // Ensure we have a valid tracked Git history block timestamp to parse
-    if (gitData && gitData.unixTimestamp) {
-      const gitDateTime = DateTime.fromMillis(gitData.unixTimestamp * 1000);
+    let updatedDateTime = gitData && gitData.unixTimestamp ? DateTime.fromMillis(gitData.unixTimestamp * 1000) : null;
+
+    // Posts moved from the old blog keep its date, until a commit after the move edits them
+    if (lastUpdated && migratedOn) {
+      const movedAt = DateTime.fromISO(migratedOn, { zone: "utc" }).endOf("day");
+      if (!updatedDateTime || updatedDateTime <= movedAt) {
+        updatedDateTime = DateTime.fromJSDate(lastUpdated);
+      }
+    }
+
+    if (updatedDateTime) {
       const pubDateTime = DateTime.fromJSDate(pubDate);
 
-      // Clean fallback check: If the last update matches the publish date exactly, 
+      // Clean fallback check: If the last update matches the publish date exactly,
       // return empty so the template doesn't draw a duplicate timestamp on screen!
-      if (gitDateTime.toFormat("d LLLL yyyy") === pubDateTime.toFormat("d LLLL yyyy")) {
+      if (updatedDateTime.toFormat("d LLLL yyyy") === pubDateTime.toFormat("d LLLL yyyy")) {
         return "";
       }
 
       // Return a clean machine-readable ISO 8601 string: e.g. "2026-08-20T20:27:00.000Z"
-      return gitDateTime.toISO();
+      return updatedDateTime.toISO();
     }
 
     return "";

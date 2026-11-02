@@ -3,4 +3,5 @@ export default {
 		"posts", "Nine Thousand Days"
 	],
 	"layout": "post",
+	migratedOn: "2026-11-02",
 }

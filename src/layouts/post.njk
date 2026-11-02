@@ -23,7 +23,7 @@ layout: base
 
     <!-- GIT INFRASTRUCTURE DYNAMIC MACHINE-READABLE TIMESTAMP OVERLAYS -->
       {% set gitISOString %}
-        {% gitinfo page.date %}
+        {% gitinfo page.date, lastUpdated, migratedOn %}
       {% endset %}
         
         {% if gitISOString | trim %}
