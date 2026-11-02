@@ -1,0 +1,438 @@
+/*******************************************
+                jQuery Slider CSS
+ *******************************************/
+/**
+ * Based on CSS for "Template:Slider generator"
+ * original code made by "Tierrie" for the Dragon Age Wiki based on MediaWiki 1.39
+ * updated and reviewed by "leviathan_89" for the One Piece Wiki
+ * reused and repurposed for this website by AlwaysNever
+ */
+
+body {
+    background-color: #447fdb;
+    font-family: "Segoe UI", Helvetica, Verdana, "sans-serif";
+}
+/* container and common settings */
+.portal_container {
+    max-width: 860px;
+    position: relative;
+    z-index: 1;
+    border: 1px solid #000;
+    text-align: left;
+    font-family: "Segoe UI", Helvetica, Verdana, "sans-serif";
+    overflow: hidden;
+    margin: 0 auto 5px auto;
+}
+.portal_container,
+.portal_main,
+.portal_slide {
+    height: 450px;
+    overflow: hidden;
+}
+    /** text and links **/
+.portal_container,
+.portal_container a,
+.portal_main,
+.portal_main a,
+.portal_slide,
+.portal_slide a {
+    color: #fff;
+    text-shadow: 1px 1px 0 #000, 2px 1px 0 #000, 1px 2px 0 #000, 2px 2px 0 #000, 3px 3px 4px #000;
+}
+        /*** hovering links (excluding main menù) ***/
+div.portal_body a:hover {
+    color: #fdd600;
+    text-shadow: 1px 1px 0 #000, 2px 1px 0 #000, 1px 2px 0 #000, 2px 2px 0 #000, 3px 3px 4px #000;
+}
+
+/* give black background for fading to black while sliding */
+.portal_container > .portal_body:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color: rgb(0, 0, 0);
+    z-index: -2;
+}
+
+/* avoid rendering borders twice */
+.portal_container .portal_main,
+.portal_container .portal_slide {
+    border: none;
+}
+/* paddings */
+div.portal_container .ui-tabs-panel {
+    padding: 0;
+}
+div.portal_container,
+div.portal_container .portal_body {
+    padding: 0;
+}
+
+/* main menù */
+.portal_main .portal_slidertext {
+    text-transform: uppercase;
+    font-size: 22px;
+}
+    /** text **/
+.portal_main .portal_slidertext {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+	z-index: 3;
+}
+.portal_main .portal_sliderlink-1 .portal_slidertext {
+    display: block;
+    font-size: 50px;
+    margin-right: 220px;
+    line-height: 1em;
+}
+    /** panels **/
+.portal_main .portal_sliderlink-1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+	z-index: 1;
+}
+.portal_main .portal_sliderlink-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25%;
+    cursor: pointer;
+	z-index: 2;
+}
+.portal_main .portal_sliderlink-3 {
+    position: absolute;
+    top: 25%;
+    right: 0;
+    height: 25%;
+    cursor: pointer;
+	z-index: 2;
+}
+.portal_main .portal_sliderlink-4 {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 25%;
+    cursor: pointer;
+	z-index: 2;
+}
+.portal_main .portal_sliderlink-5 {
+    position: absolute;
+    top: 75%;
+    right: 0;
+    height: 25%;
+    cursor: pointer;
+	z-index: 2;
+}
+    /** images **/
+.portal_main img {
+    width: 100%;
+    height: 100%;
+}
+    /** small panels width **/
+.portal_main .portal_sliderlink-2,
+.portal_main .portal_sliderlink-3,
+.portal_main .portal_sliderlink-4,
+.portal_main .portal_sliderlink-5 {
+    width: 215px;
+}
+
+    /** panels hover/shadow effect **/
+.portal_main .portal_sliderlink:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.2;
+}
+.portal_main .portal_sliderlink:hover:after {
+    display: none;
+}
+
+/* single slide */
+	/** padding **/
+.portal_slide .portal_vtab {
+    padding: 0;
+}
+    /** slide tabs **/
+div.portal_slide .ui-tabs-nav {
+    border: none;
+    padding: 0;
+    width: 200px;
+    float: left;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+div.portal_slide .ui-tabs-nav li {
+    margin: 0;
+    top: 0;
+    width: 100%;
+	white-space: normal;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+        /*** selecting/hovering tabs ***/
+div.portal_slide .ui-tabs-nav li.ui-state-active {
+    background-color: transparent;
+	padding: 0;
+}
+div.portal_slide .ui-tabs-nav li.ui-state-hover {
+    background-color: transparent;
+}
+        /*** tab links (overwriting global styles) ***/
+div.portal_slide .ui-tabs-nav li a,
+div.portal_slide .ui-tabs-nav li.ui-tabs-selected a {
+    width: 180px; /* ".ui-tabs-nav" width - padding */
+	margin: 0;
+	padding: 10px 10px;
+	background: none;
+	cursor: pointer;
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+}
+        /*** continue tabs column even if there are no more elements ***/
+div.portal_slide .ui-tabs-nav:after {
+    height: 450px;
+    content: "";
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+    /** slides background **/
+#portal_slide1 {
+    background-image: url("/images/preview.jpg");
+    background-size: cover;
+}
+#portal_slide2 {
+    background-image: url("/images/preview.jpg");
+    background-size: cover;
+}
+#portal_slide3 {
+    background-image: url("/images/preview.jpg");
+    background-size: cover;
+}
+#portal_slide4 {
+    background-image: url("/images/preview.jpg");
+    background-size: cover;
+}
+#portal_slide5 {
+    background-image: url("/images/preview.jpg");
+    background-size: cover;
+}
+
+    /** icons **/
+        /*** container ***/
+.portal_slide .portal_buttons {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    z-index: 2;
+}
+        /*** hovering effect ***/
+.portal_slide .portal_buttons .portal_icon {
+    opacity: 0.7
+}
+
+.portal_slide .portal_buttons .portal_icon:hover {
+    opacity: 1
+}
+        /*** hiding text link ***/
+.portal_slide .portal_buttons a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+        /*** home link ***/
+/*.portal_slide .portal_buttons .portal_homelink {
+    float: left;
+    width: 35px;
+    height: 35px;
+    background-image: url("/images/Slider_home.png");
+    background-size: cover;
+    cursor: pointer
+}*/
+        /*** nav links ***/
+.portal_slide .portal_buttons .portal_navlink {
+    float: left;
+}
+
+/* .portal_slide .portal_buttons .portal_navlink div {
+    float: left;
+    width: 35px;
+    height: 35px;
+    background-image: url("/images/Slider_arrow.png");
+    background-size: cover;
+    cursor: pointer
+}*/
+
+        /*** reversing "next" button ***/
+.portal_slide .portal_buttons .portal_next {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    -ms-filter: "FlipH";
+    filter: FlipH;
+}
+        /*** hiding unnecessary nav buttons ***/
+.portal_container #portal_content-1 .portal_buttons .portal_prev,
+.portal_container .portal_content:last-child .portal_buttons .portal_next {
+	display: none;
+}
+        /*** leaving a blank space for missing button ***/
+.portal_container #portal_content-1 .portal_buttons .portal_navlink:before,
+.portal_container .portal_content:last-child .portal_buttons .portal_navlink:after {
+    float: left;
+    width: 35px;
+    height: 35px;
+    content: "";
+}
+        /*** edit button ***/
+/***
+.portal_slide .portal_buttons .portal_editlink {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("/images/Slider_edit.png");
+    background-size: cover;
+    cursor: pointer
+}***/
+
+    /** panel content **/
+div.portal_slide .ui-tabs-panel {
+    height: 450px;
+	padding: 4px;
+	overflow: auto;
+}
+div.portal_slide .ui-tabs-panel ul {
+	list-style: none;
+	margin-left: 0.5em;
+}
+
+/* Monobook fixes */
+.portal_container .ui-widget-content {
+	background: inherit;
+    color: inherit;
+	border: inherit;
+}
+.portal_container.ui-corner-all,
+.portal_container .ui-corner-all {
+	border-radius: inherit;
+}
+.portal_container .ui-widget-header {
+	background: inherit;
+	color: inherit;
+	font-weight: inherit;
+}
+.portal_container .ui-widget {
+	font-family: inherit;
+}
+.portal_container .ui-tabs-nav li {
+	background: inherit;
+	color: inherit;
+}
+.portal_container .ui-state-default {
+	border: inherit;
+	border-radius: inherit;
+}
+/* END jQuery Slider */
+
+/* Start old homepage button */
+.old-homepage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.old-homepage button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.old-homepage button:hover {
+    background-color: #0056b3;
+}
+/* End old homepage button  */
+
+/* Other pages button */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+.image-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 300px; /* Fixed height for all images */
+}
+
+.image-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures images fill the container while maintaining aspect ratio */
+    object-position: center; /* Centers the image within the container */
+    transition: transform 0.3s ease;
+}
+
+.image-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Image Link Label */
+.image-link {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 10;
+}
+
+.image-link:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.image-link:active {
+    transform: translateY(0);
+}

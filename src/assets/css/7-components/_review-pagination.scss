@@ -1,86 +1,77 @@
 /* ==========================================================================
-   COMPONENT: IMMERSIVE SINGLE REVIEW MOVEMENT NAVIGATION FOOTER
+   COMPONENT: IMMERSIVE SINGLE REVIEW MOVEMENT NAVIGATION FOOTER RESPONSIVE COLLISION-PROOF REVIEW PAGINATION STRIP
    ========================================================================== */
 
 .review-pagination {
-  width: 100% !important;
-  max-width: 680px !important; // FIX: Clamps the navigation track to match your story/review width ceiling perfectly!
-  margin: var(--step-4, 48px) auto 0 auto !important; // Absolutely centers the navigation row on desktop views
-  padding-top: var(--step-1, 16px) !important;
-  border-top: 1px dashed var(--border-subtle) !important;
+  margin-top: var(--step-4, 40px) !important;
+  padding-top: var(--step-1, 20px) !important;
+  border-top: 1px solid var(--border-subtle) !important;
   
+  // MOBILE FIRST DEFAULT: Stacks the links vertically so they get their own independent rows!
   display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 20px !important;
-}
+  flex-direction: column !important;
+  gap: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 
-.review-pagination__slot {
-  display: block !important;
-  flex: 1 !important;
-  min-width: 0 !important;
+  // DESKTOP LAYOUT JUMP: Switches smoothly back to side-by-side splits on wider PC screens
+  @media (min-width: 600px) {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    gap: 24px !important;
+  }
 
-  a {
-    display: inline-flex !important;
-    flex-direction: column !important;
-    text-decoration: none !important;
-    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    will-change: transform;
+  &__slot {
+    flex: 1 !important;
+    min-width: 0 !important; // Essential for working with ellipsis clipping functions
     width: 100% !important;
 
-    // Direct metadata text properties bindings
-    .nav-label {
-      font-family: monospace !important;
-      font-size: 0.7rem !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.5px !important;
-      color: var(--text-muted) !important;
-      margin-bottom: 4px !important;
-    }
-
-    .nav-title {
-      font-size: var(--step--1, 0.9rem) !important;
-      font-weight: 700 !important;
-      color: var(--text-main) !important;
-      transition: color 0.25s ease, text-shadow 0.25s ease !important;
-      display: -webkit-box !important;
-      -webkit-box-orient: vertical !important;
-      -webkit-line-clamp: 1 !important; // Safeguard: Clamps long title overflows onto a clean single row
-      overflow: hidden !important;
-    }
-  }
-
-  /* ---------------------------------------------------- PREVIOUS CARD ACTION SLIDE */
-  &--prev {
-    a {
+    // Forces mobile layout text items to span centered or left-aligned beautifully
+    &--prev {
       text-align: left !important;
-      align-items: flex-start !important;
-
-      &:hover {
-        transform: translateX(-6px) !important; // Glides card links gracefully to the left
-        
-        .nav-title {
-          color: var(--title-color) !important;
-          [data-theme="dark"] & { text-shadow: 0 0 8px var(--title-color) !important; }
-        }
+    }
+    &--next {
+      text-align: right !important;
+      
+      @media (min-width: 600px) {
+        text-align: right !important; // Pushes next link text blocks right on PC screens
       }
     }
   }
 
-  /* ---------------------------------------------------- NEXT CARD ACTION SLIDE */
-  &--next {
-    a {
-      text-align: right !important;
-      align-items: flex-end !important;
+  // Anchor target wrappers styles reset
+  a {
+    text-decoration: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: transform 0.2s ease !important;
 
-      &:hover {
-        transform: translateX(6px) !important; // Glides card links gracefully to the right
-        
-        .nav-title {
-          color: var(--title-color) !important;
-          [data-theme="dark"] & { text-shadow: 0 0 8px var(--title-color) !important; }
-        }
-      }
+    &:hover {
+      transform: translateY(-2px) !important;
     }
+  }
+
+  &__label {
+    font-size: var(--step--2, 0.65rem) !important;
+    text-transform: uppercase !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.5px !important;
+    font-family: monospace !important;
+  }
+
+  &__title {
+    font-size: var(--step-0, 1rem) !important;
+    font-weight: 600 !important;
+    color: var(--media-color, var(--text-main)) !important;
+    display: block !important;
+    width: 100% !important;
+    
+    // Safety firewall: Smoothly clips extraordinarily long header strings into dots if space vanishes!
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 }

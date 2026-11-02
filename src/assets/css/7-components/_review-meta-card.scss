@@ -5,30 +5,94 @@
 .review-meta-card {
   width: 100% !important;
   max-width: 500px !important;
-  margin: var(--step-2, 24px) 0 !important;
+  
+  // FIXED: Added center auto margins to cleanly position the card shell in your single-column line
+  margin: var(--step-2, 24px) auto !important; 
+  
   background: var(--site-card-bg, rgba(255, 255, 255, 0.02)) !important;
   border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08)) !important;
   border-left: 4px solid var(--score-color) !important; // Accents card edge to match rating color scale
   border-radius: 8px !important;
   padding: 20px !important;
+  box-sizing: border-box !important;
 }
 
 .review-meta-card__content {
   display: flex !important;
+  
+  // FIXED: Permanently stacks items in a column and locks horizontal alignments to the center
   flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  
   gap: 20px !important;
-  @media (min-width: 480px) {
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* NEW FEATURE: FLEXIBLE AUTO-BALANCING COVERS GALLERY MATRIX */
+.review-meta-card__gallery {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;     // Mobile protection: wraps images into a vertical column if viewport pinches
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px !important;          // Balanced gutter spacing between side-by-side cover panels
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* THUMBNAIL CONTAINER CONSTRAINTS */
+.review-meta-card__thumb-wrapper {
+  width: 110px !important;       // Slightly optimized width to fit dual-portrait book displays perfectly
+  height: 155px !important;      // Standard light novel ratio boundary track
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08)) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  flex-shrink: 0 !important;
+}
+
+.review-meta-card__image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;    // Prevents cover artwork from stretching or distorting
+  object-position: center !important;
+}
+
+/* Series Block Typography */
+.review-meta-card__details {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 240px !important;
+}
+
+.review-meta-card__series-title {
+  font-size: var(--step-0, 1.1rem) !important;
+  color: var(--text-main, #f8fafc) !important;
+  margin: 0 0 4px 0 !important;
+  font-weight: 700 !important;
 }
 
 /* Score Block Typography */
 .review-meta-card__score-box {
   display: flex !important;
   flex-direction: column !important;
+  align-items: center !important; // FIXED: Centers score digits, labels, and addons
+  
+  // Adds an elegant separating divider track right above the Series info
+  border-top: 1px dashed var(--border-subtle, rgba(255, 255, 255, 0.08)) !important;   
+  padding-top: 16px !important;
+  
+  text-align: center !important;
   gap: 2px !important;
+  width: 100% !important;
 }
 
 .review-meta-card__score-label, 
@@ -45,6 +109,11 @@
   font-weight: 800 !important;
   color: var(--score-color) !important;
   font-family: monospace !important;
+  
+  // Inherits global text shadow glows automatically if it evaluates as a perfect 10/10 gold score!
+  .custom-menu__score--perfect & {
+    text-shadow: 0 0 4px rgba(255, 190, 11, 0.4) !important;
+  }
 }
 
 .review-meta-card__addon {
@@ -53,27 +122,8 @@
   color: var(--text-main) !important;
 }
 
-/* Series Block Typography */
-.review-meta-card__details {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 4px !important;
-  @media (min-width: 480px) {
-    text-align: right !important;
-    align-items: flex-end !important;
-  }
-}
-
-.review-meta-card__series-title {
-  font-size: var(--step-0, 1.1rem) !important;
-  color: var(--text-main, #f8fafc) !important;
-  margin: 0 0 4px 0 !important;
-  font-weight: 700 !important;
-}
-
 /* FIX: RE-ROUTED TO LEVERAGE YOUR THEME-AWARE DYNAMIC CONFIGURATIONS */
 .review-meta-card__media-badge {
-  // Inherits all baseline typography metrics from .custom-menu__badge automatically!
   display: inline-block !important;
   font-size: 0.65rem !important;
   font-weight: 700 !important;
@@ -90,7 +140,7 @@
     color: #f8fafc !important;
   }
 
-  /* --- 2. LIGHT MODE AUTOMATIC COMPLIANCE (PASTEL CONTRST INVERSION) --- */
+  /* --- 2. LIGHT MODE AUTOMATIC COMPLIANCE (PASTEL CONTRAST INVERSION) --- */
   [data-theme="light"] & {
     background-color: #e2e8f0 !important; // Crisp high-contrast soft grey backdrop
     border: 1px solid #cbd5e1 !important;

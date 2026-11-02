@@ -1,5 +1,6 @@
 /* 1. Settings */
 @use 'cssremedy/css/remedy';
+@use "sass:meta";
 @use "1-settings/global";
 
 /* 2. Design Tokens */
@@ -53,6 +54,7 @@
 @use "7-components/fictions-hub";
 @use "7-components/stories";
 @use "7-components/homepage";
+@use "7-components/post-layout"; 
 
 // 8. Utilities
 @use "8-utilities/modifiers";
@@ -62,11 +64,15 @@
 @use "shame";
 
 /* ==========================================================================
-   LEGACY ARCHIVE ASSETS BUNDLE REGISTRY (SANDBOXED SCOPE)
+   ASSETS BUNDLE REGISTRY (SANDBOXED SCOPE)
    ========================================================================== */
 
 // FIX: This wrapper acts as a firewall, trapping all retro styles inside it!
 .legacy-archive-content {
-  @import "legacy-site-style.css";
-  @import "testquery.css";
+  @include meta.load-css("legacy-site-style.css");
+  @include meta.load-css("testquery.css");
+}
+
+.the-letter-wrapper{
+  @include meta.load-css("the-letter.css");
 }

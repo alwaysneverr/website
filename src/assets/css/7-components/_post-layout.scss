@@ -1,0 +1,111 @@
+/* ==========================================================================
+   COMPONENT: DETACHED STANDALONE POST LAYOUT HEADER ENGINE
+   ========================================================================== */
+
+.post-header-shell {
+  margin-bottom: var(--step-3, 36px) !important;
+  border-bottom: 1px dashed var(--border-subtle) !important;
+  padding-bottom: var(--step-1, 16px) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.post-header-title {
+  margin-bottom: 12px !important;
+  line-height: 1.15 !important;
+  color: var(--text-main) !important;
+}
+
+.post-lead-desc {
+  font-size: var(--step-0, 1.1rem) !important;
+  color: var(--text-muted) !important;
+  line-height: 1.5 !important;
+  margin: 0 0 16px 0 !important;
+  font-style: italic !important;
+  text-align: left !important;
+}
+
+/* ARTICLE TOP METADATA ROW LISTS */
+.post-metadata {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px 24px !important;
+  font-family: monospace !important;
+  font-size: 0.8rem !important;
+  color: var(--text-muted) !important;
+
+  li {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .meta-label {
+    font-weight: 700 !important;
+  }
+
+  .meta-value, time {
+    color: var(--text-main) !important;
+  }
+
+  small {
+    font-family: monospace !important;
+  }
+}
+
+/* TAXONOMY CLOUD PILLS BAR EXTRAS */
+.post-tags-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 14px !important;
+  align-items: center !important;
+}
+
+.tags-row-label {
+  font-family: monospace !important;
+  font-size: 0.72rem !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.5px !important;
+  margin-right: 4px !important;
+}
+
+.tags-pill-wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.post-tag-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 3px 10px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border-radius: 9999px !important;
+  background: var(--site-card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-muted) !important;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+
+  &:hover {
+    border-color: var(--nav-color-accent, #00f2fe) !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+    
+    [data-theme="dark"] & {
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.05) !important;
+    }
+  }
+}
+
+/* GENERAL POST CONTENT INJECTION ALIGNMENTS */
+.post-content-render-zone {
+  text-align: left !important;
+  line-height: 1.6 !important;
+  color: var(--text-main) !important;
+}
