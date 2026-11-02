@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const link2 = document.querySelector('.portal_sliderlink-2');
   if (link2) {
     link2.addEventListener('click', () => {
-      window.location.href = "/legacy-site/fcreviews";
+      window.location.href = "/reviews/";
     });
   }
 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const link3 = document.querySelector('.portal_sliderlink-3');
   if (link3) {
     link3.addEventListener('click', () => {
-      window.location.href = "/legacy-site/normalreviews";
+      window.location.href = "/reviews/";
     });
   }
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const link4 = document.querySelector('.portal_sliderlink-4');
   if (link4) {
     link4.addEventListener('click', () => {
-      window.location.href = "/legacy-site/blog/";
+      window.location.href = "/posts/";
     });
   }
 

@@ -34,10 +34,10 @@ var aText = new Array(
       iIndex++;
       if ( iIndex != aText.length ) {
        iArrLength = aText[iIndex].length;
-       setTimeout("typewriter()", 500);
+       setTimeout(typewriter, 500);
       }
      } else {
-      setTimeout("typewriter()", iSpeed);
+      setTimeout(typewriter, iSpeed);
      }
     }
     
