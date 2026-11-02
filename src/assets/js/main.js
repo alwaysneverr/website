@@ -10,6 +10,7 @@ import './modules/legacy-testquery.js';
 import { initBeerQuotesTooltips } from './modules/beer-tooltips.js';
 import { initVersionSelector } from './modules/version-selector';
 import { initAvatarCycler } from './modules/avatar-cycler.js';
+import { initAvatarHover } from './modules/hover-swap.js';
 
 // 1. FIXED GLOBAL SCOPE ANCHOR: Tracks your active theme state globally across all pages!
 let currentThemeSetting = "dark";
@@ -67,6 +68,7 @@ function initPageModules() {
   initModernLightbox();
   initVersionSelector();
   initAvatarCycler();
+  initAvatarHover();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

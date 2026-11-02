@@ -17,7 +17,7 @@ import {
     createAriaLiveRegion
 } from './accessibility.js';
 import { CONFIG, ARIA_LABELS, KEYBOARD } from './config.js';
-import { ImageHover, initImageHover } from './hover.js';
+import { initImageHover } from '../hover-swap.js';
 
 /**
  * Main application class
@@ -302,17 +302,4 @@ if (typeof window !== 'undefined') {
 
 export default app;
 
-// Simple usage
 initImageHover('figure img.hover-change');
-
-// Or with options
-initImageHover('figure img.hover-change', {
-    hoverSrcAttr: 'data-hover-src',
-    preload: true,
-    resetOnTapOutside: true
-});
-
-// Or using the class directly
-const imageHover = new ImageHover('.gallery img.hover-effect', {
-    preload: true
-});
