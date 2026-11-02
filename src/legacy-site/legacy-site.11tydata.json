@@ -1,6 +1,6 @@
 {
   "layout": "base",
-  "permalink": "legacy-site/{{ page.fileSlug }}/{% if page.fileSlug == 'index' %}index.html{% else %}index.html{% endif %}",
+  "permalink": "legacy-site/{{ page.fileSlug }}/index.html",
   "eleventyExcludeFromCollections": true,
   "meta": {
     "robots": "noindex, nofollow, noarchive"

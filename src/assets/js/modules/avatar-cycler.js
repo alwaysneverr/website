@@ -46,6 +46,10 @@ export function initAvatarCycler() {
         avatarImg.src = nextImageSourceUrl;
         avatarImg.style.opacity = '1'; // Trigger hardware fade back in cleanly
       };
+      // Keep showing the current image if the next one fails to load
+      preloaderImg.onerror = () => {
+        avatarImg.style.opacity = '1';
+      };
     }, 300);
 
   }, 6000); // 6000ms = 6 Seconds display visibility frame duration loop

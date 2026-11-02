@@ -40,13 +40,11 @@ export default function (eleventyConfig) {
 			publicDir: 'public',
 			clearScreen: false,
 			server: {
-				mode: 'development',
 				middlewareMode: true,
 			},
 			appType: 'custom',
 			assetsInclude: ['**/*.xml', '**/*.txt'],
 			build: {
-				mode: 'production',
 				sourcemap: true,
 				manifest: true,
 				// This puts CSS and JS in subfolders – remove if you want all of it to be in /assets instead
@@ -176,9 +174,9 @@ export default function (eleventyConfig) {
 		permalink: markdownItAnchor.permalink.ariaHidden({
 			placement: 'after',
 			class: 'direct-link',
-			symbol: '#',
-			level: [1, 2, 3, 4]
+			symbol: '#'
 		}),
+		level: [1, 2, 3, 4],
 		slugify: eleventyConfig.getFilter('slug')
 	})
 	eleventyConfig.setLibrary('md', markdownLibrary)
@@ -206,7 +204,6 @@ export default function (eleventyConfig) {
 	return {
 		templateFormats: ['md', 'njk', 'html', 'liquid'],
 		htmlTemplateEngine: 'njk',
-		passthroughFileCopy: true,
 		dir: {
 			input: 'src',
 			// better not use "public" as the name of the output folder (see above...)

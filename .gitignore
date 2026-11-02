@@ -5,10 +5,10 @@ npm-debug.log*
 
 # Dependencies
 node_modules/
-package-lock.json
 
 # Eleventy
 _site/
+.11ty-vite/
 
 # Misc
 .DS_Store

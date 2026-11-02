@@ -1,8 +1,8 @@
 {
-  "name": "eleventy-plus-vite",
+  "name": "website",
   "version": "1.4.0",
   "type": "module",
-  "description": "A clean and simple Eleventy Starter Kit with Vite",
+  "description": "AlwaysNever's personal website, built on the Eleventy Plus Vite starter",
   "browserslist": [
     "> 0.5%"
   ],
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://matthiasott@github.com/matthiasott/eleventy-plus-vite.git"
+    "url": "git+https://github.com/alwaysneverr/website.git"
   },
-  "author": "Matthias Ott",
+  "author": "alwaysneverr",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/matthiasott/eleventy-plus-vite/issues"
+    "url": "https://github.com/alwaysneverr/website/issues"
   },
-  "homepage": "https://github.com/matthiasott/eleventy-plus-vite#readme",
+  "homepage": "https://github.com/alwaysneverr/website#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-img": "^7.0.0",
