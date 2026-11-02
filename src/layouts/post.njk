@@ -2,6 +2,101 @@
 layout: base
 ---
 <article class="container">
-    <h1>{{ title }}</h1>
+  
+  <!-- 1. HIGH-DENSITY HEADLINE & METADATA MONITOR -->
+  <header class="post-header-shell">
+    <h1 class="post-header-title">{{ title }}</h1>
+    
+    <!-- CONTEXTUAL SUBTITLE DESCRIPTION DISPATCHER -->
+    {% if description %}
+      <p class="post-lead-desc">
+        {{ description }}
+      </p>
+    {% endif %}
+
+    <ul class="post-metadata">
+      <!-- TIMELINE TIMESTAMP BLOCKS -->
+      <li>
+        <span class="meta-label">Published:</span> 
+        <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+      </li>
+
+    <!-- GIT INFRASTRUCTURE DYNAMIC MACHINE-READABLE TIMESTAMP OVERLAYS -->
+      {% set gitISOString %}
+        {% gitinfo page.date %}
+      {% endset %}
+        
+        {% if gitISOString | trim %}
+            {% set cleanISO = gitISOString | trim %}
+            <li>
+            <span class="meta-label">Last Updated:</span> 
+            <!-- Semantic time element injecting your pristine machine ISO code paths -->
+            <time datetime="{{ cleanISO }}">
+                {# FIX: Call your new string-friendly filter to process the ISO text cleanly! #}
+                {{ cleanISO | readableGitDate }}
+            </time>
+            </li>
+        {% endif %}
+    </ul>
+
+    <!-- DYNAMIC TAXONOMY CHUNKS FLOW PILLS BAR -->
+    {% if tags and tags.length > 0 %}
+      <div class="post-tags-row">
+        <span class="tags-row-label">Tags:</span>
+        <div class="tags-pill-wrapper">
+          {% for tag in tags %}
+            {# Safely block Eleventy's master collections names from rendering as badges #}
+            {% if tag not in ["all", "nav", "post", "posts", "review", "reviews"] %}
+              <a href="/tags/{{ tag | slugify }}/" class="post-tag-pill">
+                #{{ tag }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+  </header>
+
+  <!-- 2. LIVING MANUSCRIPT BODY CONTENT CHUNK -->
+  <div class="post-content-render-zone">
     {{ content | safe }}
+  </div>
+
+  <!-- 3. AUTOMATION: PREVIOUS & NEXT ROUTING ENGINE FOR CHRONOLOGICAL POSTS -->
+  {%- if collections.posts -%}
+    {%- set previousPost = collections.posts | getPreviousCollectionItem(page) -%}
+    {%- set nextPost = collections.posts | getNextCollectionItem(page) -%}
+
+    {%- if previousPost or nextPost -%}
+      <nav class="review-pagination" aria-label="Post Navigation">
+        
+        <!-- Left Slot: Older Post Link -->
+        <div class="review-pagination__slot review-pagination__slot--prev">
+          {%- if previousPost -%}
+            <a id="prev-review-link" href="{{ previousPost.url | url }}" style="--media-color: var(--text-main);">
+              <span class="review-pagination__label">← Older Post</span>
+              <span class="review-pagination__title">
+                {{ previousPost.data.title }}
+              </span>
+            </a>
+          {%- endif -%}
+        </div>
+
+        <!-- Right Slot: Newer Post Link -->
+        <div class="review-pagination__slot review-pagination__slot--next">
+          {%- if nextPost -%}
+            <a id="next-review-link" href="{{ nextPost.url | url }}" style="--media-color: var(--text-main);">
+              <span class="review-pagination__label">Newer Post →</span>
+              <span class="review-pagination__title">
+                {{ nextPost.data.title }}
+              </span>
+            </a>
+          {%- endif -%}
+        </div>
+
+      </nav>
+    {%- endif -%}
+  {%- endif -%}
+
 </article>
