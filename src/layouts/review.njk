@@ -21,7 +21,7 @@ layout: base
   {{ content | safe }}
 
   <!-- REPOSITIONED REVIEW METADATA SUMMARY CARD -->
-  <section class="review-meta-card" style="--score-color: {{ scoreColor or '#00f2fe' }};">
+  <section class="review-meta-card" style="--score-color: {{ rating | scoreColor }};">
     <div class="review-meta-card__content">
 
       {%- if images -%}
@@ -72,18 +72,7 @@ layout: base
       <!-- Left Slot: Older Review Link -->
       <div class="review-pagination__slot review-pagination__slot--prev">
         {%- if previousPost -%}
-          {# 1. PROCESS OLDER ITEM MEDIA COLOR #}
-          {% set prevColor = "#f8fafc" %}
-          {% if previousPost.data.media %}
-            {% set prevMedia = previousPost.data.media | lower %}
-            {% if "light novel" in prevMedia or "novel" in prevMedia %} {% set prevColor = "#c084fc" %}
-            {% elif "anime" in prevMedia or "movie" in prevMedia or "show" in prevMedia %} {% set prevColor = "#38bdf8" %}
-            {% elif "manga" in prevMedia or "comic" in prevMedia %} {% set prevColor = "#fcd34d" %}
-            {% elif "game" in prevMedia or "visual novel" in prevMedia %} {% set prevColor = "#f43f5e" %}
-            {% endif %}
-          {% endif %}
-
-          <a id="prev-review-link" href="{{ previousPost.url | url }}" style="--media-color: {{ prevColor }};">
+          <a id="prev-review-link" href="{{ previousPost.url | url }}" style="--media-color: {{ previousPost.data.media | mediaColor }};">
             <span class="review-pagination__label">← Older Review</span>
             <span class="review-pagination__title">
               {{ previousPost.data.title }}
@@ -95,18 +84,7 @@ layout: base
       <!-- Right Slot: Newer Review Link -->
       <div class="review-pagination__slot review-pagination__slot--next">
         {%- if nextPost -%}
-          {# 2. PROCESS NEWER ITEM MEDIA COLOR #}
-          {% set nextColor = "#f8fafc" %}
-          {% if nextPost.data.media %}
-            {% set nextMedia = nextPost.data.media | lower %}
-            {% if "light novel" in nextMedia or "novel" in nextMedia %} {% set nextColor = "#c084fc" %}
-            {% elif "anime" in nextMedia or "movie" in nextMedia or "show" in nextMedia %} {% set nextColor = "#38bdf8" %}
-            {% elif "manga" in nextMedia or "comic" in nextMedia %} {% set nextColor = "#fcd34d" %}
-            {% elif "game" in nextMedia or "visual novel" in nextMedia %} {% set nextColor = "#f43f5e" %}
-            {% endif %}
-          {% endif %}
-
-          <a id="next-review-link" href="{{ nextPost.url | url }}" style="--media-color: {{ nextColor }};">
+          <a id="next-review-link" href="{{ nextPost.url | url }}" style="--media-color: {{ nextPost.data.media | mediaColor }};">
             <span class="review-pagination__label">Newer Review →</span>
             <span class="review-pagination__title">
               {{ nextPost.data.title }}

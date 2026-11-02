@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { gitEngine, gitCache } from "../src/_data/gitDates.js";
 import { DateTime } from "luxon";
+import filters from "./filters.js";
 
 function normalizeRepoPath(value) {
   if (!value) return "";
@@ -21,25 +22,10 @@ export default {
     const truncatedDesc = description.length > 120 ? description.slice(0, 120) + "…" : description;
 
     // 2. DYNAMIC COLOR MATRIX PROCESSING
-    let scoreColor = "var(--text-muted)";
-    if (itemData.data.rating) {
-      const numericRating = parseInt(itemData.data.rating, 10);
-      if (numericRating === 10) scoreColor = "var(--score-gold)";
-      if (numericRating >= 9) scoreColor = "var(--score-high)";
-      else if (numericRating >= 7) scoreColor = "var(--score-mid)";
-      else if (numericRating >= 5) scoreColor = "var(--score-low)";
-      else scoreColor = "var(--score-bad)";
-    }
+    const scoreColor = filters.scoreColor(itemData.data.rating);
 
     // 3. MEDIA CATEGORIES TYPEFACE MAPPING
-    let titleColor = "var(--media-white)";
-    if (itemData.data.media) {
-      const mediaText = itemData.data.media.toLowerCase();
-      if (mediaText.includes("light novel") || mediaText.includes("novel")) titleColor = "var(--media-novel)";
-      else if (mediaText.includes("anime") || mediaText.includes("movie") || mediaText.includes("show")) titleColor = "var(--media-anime)";
-      else if (mediaText.includes("manga") || mediaText.includes("comic")) titleColor = "var(--media-manga)";
-      else if (mediaText.includes("game") || mediaText.includes("visual novel")) titleColor = "var(--media-game)";
-    }
+    const titleColor = filters.mediaColor(itemData.data.media);
 
     // 5. CATEGORY TAXONOMY BADGES LOOPS UTILITIES
     let tagsMarkup = "";

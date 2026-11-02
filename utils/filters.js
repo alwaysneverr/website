@@ -112,6 +112,26 @@ export default {
         return Array.from(tagSet);
 	},
 
+    scoreColor: function (rating) {
+        if (!rating) return "var(--text-muted)";
+        const numericRating = parseInt(rating, 10);
+        if (numericRating === 10) return "var(--score-gold)";
+        if (numericRating >= 9) return "var(--score-high)";
+        if (numericRating >= 7) return "var(--score-mid)";
+        if (numericRating >= 5) return "var(--score-low)";
+        return "var(--score-bad)";
+    },
+
+    mediaColor: function (media) {
+        const mediaText = (media || "").toLowerCase();
+        // "visual novel" has to be checked before "novel"
+        if (mediaText.includes("game") || mediaText.includes("visual novel")) return "var(--media-game)";
+        if (mediaText.includes("novel")) return "var(--media-novel)";
+        if (["anime", "donghua", "movie", "show"].some(type => mediaText.includes(type))) return "var(--media-anime)";
+        if (["manga", "manhwa", "manhua", "comic"].some(type => mediaText.includes(type))) return "var(--media-manga)";
+        return "var(--media-white)";
+    },
+
     markdown: function (rawContentString) {
         if (!rawContentString) return "";
         return mdCompiler.render(rawContentString);
