@@ -3,47 +3,63 @@ layout: base
 ---
 
 <article class="container">
-    <h1>{{ title }}</h1>
-    {%- if images -%}
-        <div class="images">
-            <img src="{{ images }}" alt="{{ imagesalt }}">
-            {%- if images2 -%}
-                <img src="{{ images2 }}" alt="{{ images2alt }}">
-            {%- endif -%}
-        </div>
-    {%- endif -%}
-    <div class="intro-paragraph">
-        <div class="column">
-                {{ intro | safe }}
-            </div>
-        </div>
+  <h1>{{ title }}</h1>
+  {%- if images -%}
+    <div class="images">
+      <img src="{{ images }}" alt="{{ imagesalt }}">
+      {%- if images2 -%}
+        <img src="{{ images2 }}" alt="{{ images2alt }}">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="intro-paragraph">
+    <div class="column">
+      {{ intro | safe }}
+    </div>
+  </div>
 
-        {{ content | safe }}
+  {{ content | safe }}
 
-    <!-- REPOSITIONED REVIEW METADATA SUMMARY CARD -->
-    <section class="review-meta-card" style="--score-color: {{ scoreColor or '#00f2fe' }};">
+  <!-- REPOSITIONED REVIEW METADATA SUMMARY CARD -->
+  <section class="review-meta-card" style="--score-color: {{ scoreColor or '#00f2fe' }};">
     <div class="review-meta-card__content">
-        
-        <!-- Left Column: Primary Rating Score Metric -->
-        <div class="review-meta-card__score-box">
+
+      {%- if images -%}
+      <div class="review-meta-card__gallery">
+              
+        <div class="review-meta-card__thumb-wrapper">
+        <img src="{{ images }}" alt="{{ imagesalt or title }}" class="review-meta-card__image" loading="eager">
+        </div>
+              
+        {%- if images2 -%}
+        <div class="review-meta-card__thumb-wrapper">
+          <img src="{{ images2 }}" alt="{{ images2alt or title }}" class="review-meta-card__image" loading="lazy">
+        </div>
+        {%- endif -%}
+
+        </div>
+      {%- endif -%}
+          
+      <!-- Left Column: Contextual Series Registry Details -->
+      {%- if series or media -%}
+      <div class="review-meta-card__details">
+        <span class="review-meta-card__details-label">Series</span>
+        <p class="review-meta-card__series-title"><b>{{ series }}</b></p>
+        <span class="review-meta-card__media-badge">{{ media }}</span>
+      </div>
+      {%- endif -%}
+
+      <!-- Right Column: Primary Rating Score Metric -->
+      <div class="review-meta-card__score-box">
         <span class="review-meta-card__score-label">Rating</span>
         <span class="review-meta-card__score-value">★ {{ rating }}/10</span>
         {%- if ratingaddon -%}
-            <div class="review-meta-card__addon">{{ ratingaddon | safe }}</div>
+          <div class="review-meta-card__addon">{{ ratingaddon | safe }}</div>
         {%- endif -%}
-        </div>
-
-        <!-- Right Column: Contextual Series Registry Details -->
-        {%- if series or media -%}
-        <div class="review-meta-card__details">
-            <span class="review-meta-card__details-label">Classification</span>
-            <p class="review-meta-card__series-title"><b>{{ series }}</b></p>
-            <span class="review-meta-card__media-badge">{{ media }}</span>
-        </div>
-        {%- endif -%}
+      </div>
 
     </div>
-    </section>
+  </section>
 
 <!-- AUTOMATION: PREVIOUS & NEXT ROUTING ENGINE WITH DYNAMIC COLORS -->
 {%- if collections.reviews -%}
@@ -51,10 +67,10 @@ layout: base
   {%- set nextPost = collections.reviews | getNextCollectionItem(page) -%}
 
   {%- if previousPost or nextPost -%}
-    <nav class="review-pagination" aria-label="Review Navigation" style="margin-top: var(--step-4, 40px); padding-top: var(--step-1, 20px); border-top: 1px solid var(--nav-color-border, rgba(255, 255, 255, 0.08)); display: flex; justify-content: space-between; gap: 20px;">
+    <nav class="review-pagination" aria-label="Review Navigation">
       
       <!-- Left Slot: Older Review Link -->
-      <div class="review-pagination__slot review-pagination__slot--prev" style="flex: 1; text-align: left; min-width: 0;">
+      <div class="review-pagination__slot review-pagination__slot--prev">
         {%- if previousPost -%}
           {# 1. PROCESS OLDER ITEM MEDIA COLOR #}
           {% set prevColor = "#f8fafc" %}
@@ -67,9 +83,9 @@ layout: base
             {% endif %}
           {% endif %}
 
-          <a id="prev-review-link" href="{{ previousPost.url | url }}" style="text-decoration: none; display: flex; flex-direction: column; gap: 4px; --media-color: {{ prevColor }};">
-            <span style="font-size: var(--step--2, 0.65rem); text-transform: uppercase; color: var(--nav-color-muted, #64748b); letter-spacing: 0.5px;">← Older Review</span>
-            <span style="font-size: var(--step-0, 1rem); font-weight: 600; color: var(--media-color) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">
+          <a id="prev-review-link" href="{{ previousPost.url | url }}" style="--media-color: {{ prevColor }};">
+            <span class="review-pagination__label">← Older Review</span>
+            <span class="review-pagination__title">
               {{ previousPost.data.title }}
             </span>
           </a>
@@ -77,7 +93,7 @@ layout: base
       </div>
 
       <!-- Right Slot: Newer Review Link -->
-      <div class="review-pagination__slot review-pagination__slot--next" style="flex: 1; text-align: right; min-width: 0;">
+      <div class="review-pagination__slot review-pagination__slot--next">
         {%- if nextPost -%}
           {# 2. PROCESS NEWER ITEM MEDIA COLOR #}
           {% set nextColor = "#f8fafc" %}
@@ -90,9 +106,9 @@ layout: base
             {% endif %}
           {% endif %}
 
-          <a id="next-review-link" href="{{ nextPost.url | url }}" style="text-decoration: none; display: flex; flex-direction: column; gap: 4px; --media-color: {{ nextColor }};">
-            <span style="font-size: var(--step--2, 0.65rem); text-transform: uppercase; color: var(--nav-color-muted, #64748b); letter-spacing: 0.5px;">Newer Review →</span>
-            <span style="font-size: var(--step-0, 1rem); font-weight: 600; color: var(--media-color) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">
+          <a id="next-review-link" href="{{ nextPost.url | url }}" style="--media-color: {{ nextColor }};">
+            <span class="review-pagination__label">Newer Review →</span>
+            <span class="review-pagination__title">
               {{ nextPost.data.title }}
             </span>
           </a>
