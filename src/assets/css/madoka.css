@@ -2,7 +2,7 @@
 
 
 :root{
-    --spacing: 350px;
+    --spacing: max(350px, 32vh);
 
     font-family: "Playfair Display", Arial, Helvetica, sans-serif;
     font-weight: 400;
@@ -21,15 +21,18 @@ html, body {
 }
 #bg {
    width: 100%;
-   height: 100%;
+   /* The large viewport height, so a phone's collapsing address bar doesn't resize the scene */
+   height: 100lvh;
    display: block;
 }
 
-nav, 
+nav,
 footer{
     position: fixed;
-    width: 95%;
-    padding: 2em;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: clamp(0.75rem, 2.5vw, 2rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,22 +55,30 @@ nav > div {
 }
 
 a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.5em;
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 25px;
+    font-size: clamp(1rem, 0.6rem + 1.2vw, 1.75rem);
     color: #e0e0e0;
     background-color: rgba(0, 0, 0, 0.88);
 }
 
 main {
     position: absolute;
-    width: 100vw;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /* Keeps the text together on an ultrawide screen, instead of at the far edges */
+    max-width: 2200px;
     z-index: 99;
     margin: 0px auto;
     padding: 120px 0px;
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 h1, h2, h3, blockquote{
@@ -78,21 +89,25 @@ h1, h2, h3, blockquote{
 
 header {
     grid-column: 2 / span 5;
-    font-size: 2.5rem;
+    font-size: clamp(1.75rem, 3.125vw, 4rem);
     padding: 2rem;
     margin-bottom: var(--spacing);
 }
 
 header h1, header p {
+    width: fit-content;
     background: rgba(0, 0, 0, 1);
     color: #e0e0e0;
 }
 
 section {
     grid-column: 2 / 8;
+    justify-self: start;
+    /* Holds lines to a readable length once the column outgrows the text */
+    max-width: 36em;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.88);
-    font-size: 1.25rem;
+    font-size: clamp(1.125rem, 0.6rem + 0.75vw, 1.75rem);
     line-height: 1.5;
     margin-bottom: var(--spacing);
 }
@@ -108,16 +123,23 @@ blockquote {
     margin-bottom: var(--spacing);
 }
 
+/* One break ends the line; the second would only add a gap */
+blockquote br + br {
+    display: none;
+}
+
 blockquote p {
     color: black;
     background-color: white;
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 4.5vw, 6rem);
     display: inline;
-    line-height: 1;
+    /* Tall enough that a wrapped line's highlight doesn't cover the line above it */
+    line-height: 1.33;
 }
 
 .left {
     grid-column: 6 / 12;
+    justify-self: end;
 }
 
 button {
@@ -134,14 +156,14 @@ button {
 button > span {
     font-family: "Playfair Display", Arial, Helvetica, sans-serif;
     text-transform: uppercase;
-    font-size: 25px;
+    font-size: clamp(1rem, 0.6rem + 1.2vw, 1.75rem);
 }
 
 .mute-btn {
     color: #e0e0e0;
     background-color: rgba(0, 0, 0, 0.88);
 }
-  
+
 .mute-btn:hover {
     background-color: #1a202c;
 }
@@ -155,5 +177,67 @@ button > span {
 .controls {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1rem;
+}
+
+/* Tablets and landscape phones: wider columns, still alternating sides */
+@media only screen and (max-width: 1100px) {
+    header {
+        grid-column: 2 / span 6;
+    }
+
+    blockquote {
+        grid-column: 2 / 12;
+    }
+
+    section {
+        grid-column: 2 / 11;
+    }
+
+    .left {
+        grid-column: 3 / 12;
+    }
+}
+
+/* Phones: one full-width column */
+@media only screen and (max-width: 640px) {
+    :root {
+        --spacing: max(240px, 40vh);
+    }
+
+    /* Text scrolls right under the buttons at this width, and blending makes both unreadable */
+    nav {
+        mix-blend-mode: normal;
+    }
+
+    main {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 96px 1rem;
+        box-sizing: border-box;
+    }
+
+    header,
+    section,
+    blockquote,
+    .left {
+        grid-column: 1;
+    }
+
+    section,
+    .left {
+        justify-self: stretch;
+    }
+
+    header {
+        font-size: clamp(1.5rem, 7vw, 2.5rem);
+        padding: 0;
+    }
+
+    blockquote p {
+        font-size: clamp(1.6rem, 7.5vw, 2.5rem);
+    }
+
+    button {
+        min-height: 44px;
+        padding: 0 1rem;
+    }
 }

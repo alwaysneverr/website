@@ -2,18 +2,29 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.m
 import WebGL from 'https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/capabilities/WebGL.js';
 // import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-const AMOUNT = 6;
+// Scroll distance the cards' depths below line up with. Scroll is mapped onto it as a percentage,
+// so each card stays with its section however tall the layout makes the page.
+const SCROLL_DEPTH = 22000;
+// At 1920x1080, each card comes into view at the same point in the text as it did on the original layout.
+// Pairs of [share of the page scrolled, camera travel], with one stop per card.
+const FULL_HD_PATH = [[0, 0], [0.3392, 5900], [0.5106, 9000], [0.6103, 10870], [0.7736, 13980], [0.9057, 16450], [1, 18176]];
+const FOV = 75;
+// Narrower screens widen the view until they can see this much to each side of centre.
+const MIN_HALF_WIDTH = Math.tan(THREE.MathUtils.degToRad(30));
+const POSTER_DISTANCE = 3;
+const POSTER_X = 2;
+const POSTER_PORTRAIT_Y = -1.1;
 
 if (WebGL.isWebGL2Available()) {
 
+  const canvas = document.querySelector('#bg');
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector('#bg'),
-  });
+  const camera = new THREE.PerspectiveCamera(FOV, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas });
 
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  // A phone's 3x screen would cost far more than it shows
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
   camera.position.setZ(30);
   camera.position.setX(-3);
 
@@ -60,8 +71,20 @@ if (WebGL.isWebGL2Available()) {
 
   // Background
 
-  const spaceTexture = new THREE.TextureLoader().load('/assets/images/madoka/space.png');
+  const spaceTexture = new THREE.TextureLoader().load('/assets/images/madoka/space.png', coverBackground);
   scene.background = spaceTexture;
+
+  // Crops the background to fill the screen, the way CSS background-size: cover does, rather than stretching it
+  function coverBackground() {
+    if (!spaceTexture.image) return;
+
+    const scale = camera.aspect / (spaceTexture.image.width / spaceTexture.image.height);
+    const repeatX = Math.min(scale, 1);
+    const repeatY = Math.min(1 / scale, 1);
+
+    spaceTexture.repeat.set(repeatX, repeatY);
+    spaceTexture.offset.set((1 - repeatX) / 2, (1 - repeatY) / 2);
+  }
 
   // Avatar
 
@@ -85,8 +108,8 @@ if (WebGL.isWebGL2Available()) {
   const madoka = new THREE.Mesh(new THREE.BoxGeometry(2, 3, 0.1), new THREE.MeshBasicMaterial({ map: madokaTexture }));
 
   scene.add(poster);
-  poster.position.z = -3;
-  poster.position.x = 2;
+  poster.position.z = -POSTER_DISTANCE;
+  poster.position.x = POSTER_X;
 
   scene.add(mami);
   mami.position.z = 59;
@@ -132,8 +155,20 @@ if (WebGL.isWebGL2Available()) {
 
   // Scroll Animation
 
+  function cameraTravel(progress) {
+    // Toolbars leave a maximized 1080p browser shorter than 1080, so only the width has to match exactly
+    if (window.innerWidth !== 1920 || window.innerHeight > 1080) return progress * SCROLL_DEPTH;
+
+    const clamped = THREE.MathUtils.clamp(progress, 0, 1);
+    const next = FULL_HD_PATH.findIndex(([share], i) => i > 0 && share >= clamped);
+    const [fromShare, fromTravel] = FULL_HD_PATH[next - 1];
+    const [toShare, toTravel] = FULL_HD_PATH[next];
+    return THREE.MathUtils.mapLinear(clamped, fromShare, toShare, fromTravel, toTravel);
+  }
+
   function moveCamera() {
-    const t = document.body.getBoundingClientRect().top;
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const t = scrollable > 0 ? -cameraTravel(window.scrollY / scrollable) : 0;
     moon.rotation.x += 0.05;
     moon.rotation.y += 0.075;
     moon.rotation.z += 0.05;
@@ -147,7 +182,6 @@ if (WebGL.isWebGL2Available()) {
   }
 
   document.body.onscroll = moveCamera;
-  moveCamera();
 
   // Animation Loop
 
@@ -169,37 +203,28 @@ if (WebGL.isWebGL2Available()) {
 
   function onWindowResize() {
 
-    const ASPECT_RATIO = window.innerWidth / window.innerHeight;
-    const WIDTH = (window.innerWidth / AMOUNT) * window.devicePixelRatio;
-    const HEIGHT = (window.innerHeight / AMOUNT) * window.devicePixelRatio;
+    const aspect = canvas.clientWidth / canvas.clientHeight;
+    const halfHeight = Math.tan(THREE.MathUtils.degToRad(FOV / 2));
+    const fittedHalfHeight = Math.max(halfHeight, MIN_HALF_WIDTH / aspect);
 
-    camera.aspect = ASPECT_RATIO;
+    camera.aspect = aspect;
+    camera.fov = THREE.MathUtils.radToDeg(Math.atan(fittedHalfHeight)) * 2;
     camera.updateProjectionMatrix();
 
-    for (let y = 0; y < AMOUNT; y++) {
+    // Slide the poster in from the right until it fits on narrower screens
+    const halfWidth = fittedHalfHeight * aspect;
+    poster.position.x = Math.min(POSTER_X, POSTER_DISTANCE * halfWidth * 0.9 - 1);
+    // On a portrait screen the title spans the width, so the poster goes below it
+    poster.position.y = aspect < 1 ? POSTER_PORTRAIT_Y : 0;
 
-      for (let x = 0; x < AMOUNT; x++) {
-
-        const subcamera = camera.cameras[AMOUNT * y + x];
-
-        subcamera.viewport.set(
-          Math.floor(x * WIDTH),
-          Math.floor(y * HEIGHT),
-          Math.ceil(WIDTH),
-          Math.ceil(HEIGHT));
-
-        subcamera.aspect = ASPECT_RATIO;
-        subcamera.updateProjectionMatrix();
-
-      }
-
-    }
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    coverBackground();
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    moveCamera();
 
   }
 
   window.addEventListener('resize', onWindowResize);
+  onWindowResize();
 
   animate();
 
