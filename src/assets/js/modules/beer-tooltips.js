@@ -1,8 +1,11 @@
 // src/assets/js/beer-tooltips.js
 
+const POINTER_OFFSET = 20;
+const EDGE_MARGIN = 8;
+
 /**
- * AUTOMATION LAYOUT INITIALIZER: LIGHT NOVEL BEER QUOTES MOUSE HOVER POPUPS
- * Automatically hooks up your modern MouseFollow windows to your data attributes!
+ * LIGHT NOVEL BEER QUOTES MOUSE HOVER POPUPS
+ * Shows a card's data-hover-quote in one shared panel that follows the pointer.
  */
 export function initBeerQuotesTooltips() {
   // Grabs every single element on the canvas that has a data-hover-quote attribute
@@ -10,23 +13,29 @@ export function initBeerQuotesTooltips() {
 
   if (!novelBeerCards.length) return;
 
-  console.log(`🍺 Beer Engine: Activating hover quote tracking nodes for ${novelBeerCards.length} database blocks.`);
+  const tooltip = document.createElement('div');
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.hidden = true;
+  tooltip.style.cssText = 'position: fixed; z-index: 1000; pointer-events: none; background-color: gold; border: 2px solid black; padding: 10px; color: #000000; font-size: 0.85rem; max-width: 280px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-radius: 4px; line-height: 1.4;';
+  document.body.append(tooltip);
+
+  const followPointer = (event) => {
+    // Stay on screen when the pointer is near the right or bottom edge
+    const x = Math.min(event.clientX + POINTER_OFFSET, window.innerWidth - tooltip.offsetWidth - EDGE_MARGIN);
+    const y = Math.min(event.clientY + POINTER_OFFSET, window.innerHeight - tooltip.offsetHeight - EDGE_MARGIN);
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${y}px`;
+  };
 
   novelBeerCards.forEach(card => {
-    // Dynamically pull the light novel quote text out of your HTML element tag data block
-    const novelQuoteString = card.getAttribute('data-hover-quote');
-
-    // Boot up the native mousefollow instance for this specific card matrix
-    new MouseFollow(card, {
-      // Re-applies your classic visual presentation parameters: gold panel, black frame outline
-      html: `
-        <div style="background-color: gold; border: 2px solid black; padding: 10px; color: #000000; font-size: 0.85rem; max-width: 280px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-radius: 4px; line-height: 1.4;">
-          ${novelQuoteString}
-        </div>
-      `,
-      speed: 150,
-      x: 20,
-      y: 20
+    card.addEventListener('mouseenter', (event) => {
+      tooltip.innerHTML = card.getAttribute('data-hover-quote');
+      tooltip.hidden = false;
+      followPointer(event);
+    });
+    card.addEventListener('mousemove', followPointer);
+    card.addEventListener('mouseleave', () => {
+      tooltip.hidden = true;
     });
   });
 }
