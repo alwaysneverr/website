@@ -57,8 +57,8 @@ eleventyNavigation:
     <div class="dashboard-block">
       <h2>Latest Review</h2>
       <ul class="dashboard-list">
-        {%- for review in collections.recentReviews | slice(0,1) -%}
-          <li>{% reviewCard review %}</li>
+        {%- for review in collections.recentReviews | limit(1) -%}
+          {% reviewCard review %}
         {%- else -%}
           <li class="review-empty">No recent reviews active.</li>
         {%- endfor -%}

@@ -32,9 +32,7 @@ permalink: "/showcase/"
       
       <ul class="custom-menu__list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--nav-gap, 20px); width: 100%;">
         {%- for review in collections.recentReviews -%}
-          <li style="margin-bottom: var(--step-0, 12px);">
-            {% reviewCard review %}
-          </li>
+          {% reviewCard review %}
         {%- else -%}
           <li style="font-style: italic; color: var(--text-muted); font-size: 0.9rem;">
             No active reviews indexed in database.
