@@ -5,6 +5,7 @@ date: 2024-02-06
 lastUpdated: 2024-03-10
 tags: 
   - February 2024
+  - AMQ
 ---
 
 Today we have our first Laboratory class, and it was honestly just HTML and CSS, which I already kinda learn whilst trying to build my github pages... they do delve into semantics HTML as well, but other than that, it's not noteworthy.

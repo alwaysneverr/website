@@ -6,6 +6,7 @@ lastUpdated: 2024-12-18
 tags: 
   - March 2024
   - Tomb Raider (2013)
+  - Rise of the Tomb Raider
 ---
 
 I persevered! Finished Tomb Raider (2013) with 98% completion... missing a few challenges that honestly is a pain to track down. But I did get all the relics, GPS Cache, and documents! Basically all the collectibles... that actually provide some good lore for the game... I like these kinds of collectible. It's optional still, but if you do get it, you'd understand the full picture of what is happening. Not like you don't get it from just the actual story though, it just... enriches them, you get me?

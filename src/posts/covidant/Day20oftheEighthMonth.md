@@ -5,6 +5,7 @@ date: 2021-08-20
 lastUpdated: 2024-05-26
 tags:
   - August 2021
+  - Travel
 ---
 
 an idea.

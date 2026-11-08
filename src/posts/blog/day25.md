@@ -5,6 +5,7 @@ date: 2024-01-25
 lastUpdated: 2024-03-10
 tags: 
   - January 2024
+  - NTR
 ---
 
 The first hour of being twenty-four, I spent opening the gift that she sends me. We talked over Whatsapp, and I posted some vague story about being 24 in Instagram. One person replied, and I replied to a separate, non-birthday related story by a former underclassman. I also recorded some stuff and takes picture of the gift I got. A bag, a wallet, a card holder, and a cable protector. My dad also say "Happy Birthday" to me.

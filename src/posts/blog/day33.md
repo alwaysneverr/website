@@ -8,6 +8,7 @@ tags:
   - Imosae
   - Your Throne
   - Movies
+  - Oshi no Ko
 ---
 
 I finally decided to read ten more chapters of *Your Throne*. It's a pretty heavy chapter... I usually would be able to binge them, but I find that in such heavy series, it's the matter of mood and how it might dissipate when you are interrupted.

@@ -6,6 +6,7 @@ lastUpdated: 2025-08-23
 tags: 
   - January 2024
   - Work
+  - Oshi no Ko
 ---
 
 Spent the day on my dad's office, moving and fixing his PC and whatnot. Reminds me of a time when I became that, back when I was still green. Now I feel older and still incompetent, cause I cannot for the life of me figure out why these PC cannot interact with each other anymore like they used to be, even though they already have ethernet cable plugged. I hate this...

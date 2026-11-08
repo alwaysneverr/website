@@ -7,6 +7,7 @@ tags:
   - February 2024
   - Dungeons & Dragons
   - Vtuber
+  - AMQ
 ---
 
 First day back to college, it's like I never left.

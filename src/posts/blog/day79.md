@@ -6,6 +6,7 @@ lastUpdated: 2024-12-18
 tags: 
   - March 2024
   - The Finals
+  - Honkai Star Rail
 ---
 
 Not much I can say today... I could recap what I've read but I'm not feeling like it.

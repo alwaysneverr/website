@@ -6,6 +6,7 @@ lastUpdated: 2024-12-18
 tags: 
   - April 2024
   - Kendrick Lamar vs. Drake
+  - Honkai Star Rail
 ---
 
 J. Cole responded to Kendrick's diss with "7 Minute Drill". Response is not as biting as I'd like it to be but wow, he really responded.

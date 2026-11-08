@@ -7,6 +7,7 @@ tags:
   - February 2024
   - Imosae
   - Honkai Star Rail
+  - Mato Seihei no Slave
 ---
 
 Tonight, just before I slept, I forgot to save for the progress of my secret santa gift. I almost lost all will of doing anything after I found out that the whole work are not saved at all, and unlike Word, Premiere does NOT have autosave. All those progress... I have to face the music at that point, and decided to scrap some of the ideas I have in favor of a completely new one, just a full MV instead of MV with embellishment.

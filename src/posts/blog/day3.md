@@ -5,6 +5,8 @@ date: 2024-01-03
 lastUpdated: 2024-03-10
 tags:
   - January 2024
+  - Imosae
+  - Cosmere
 ---
 Had to help my sister fix a tablet today. I did leave yesterday too, but I don't feel like saying it in the entry. Now I have to, since this makes it two days in a row where I have to go out.
 

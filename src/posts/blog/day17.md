@@ -7,6 +7,7 @@ tags:
   - January 2024
   - Honkai Star Rail
   - Paripi Koumei
+  - Dead Mount Death Play
 ---
 
 Starting to work on putting my Two Thousand Twenty Words project [here](/tags/two-thousand-twenty-words/). I also considered putting up stories here, stories that might be a bit undercooked though. I'm keeping big, potentially working out story on my main website.

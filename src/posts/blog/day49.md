@@ -6,6 +6,7 @@ lastUpdated: 2024-12-18
 tags: 
   - February 2024
   - Hyouka
+  - Imosae
 ---
 
 Today... I basically spent 15 hours in bed. It's Sunday, and I don't have to go anywhere. This day might be my last day of being free, as my days are completely filled for the next... two weeks? Crazy, I'm already this busy, and I'm not even working... what if I do...

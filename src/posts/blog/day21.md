@@ -6,6 +6,9 @@ lastUpdated: 2024-03-10
 tags: 
   - January 2024
   - Imosae
+  - Giji Harem
+  - The Dangers in My Heart
+  - Solo Leveling
 ---
 
 I've worked on something for the last few days. No, not another project. It's just a training assignment for my finals, but it make me forget to update my blog for a bit.

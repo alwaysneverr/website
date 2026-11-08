@@ -8,6 +8,9 @@ tags:
   - Your Throne
   - Rise of the Tomb Raider
   - The Letter
+  - Oshi no Ko
+  - Imosae
+  - Sasakoi
 ---
 
 April Fools! Especially to me, who returns to a short 5 day class before having an actual break for three weeks... why are they scheduling things like this...

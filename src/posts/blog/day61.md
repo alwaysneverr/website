@@ -6,6 +6,7 @@ lastUpdated: 2024-03-10
 tags: 
   - March 2024
   - Imosae
+  - The Letter
 ---
 
 Today I have no class, which means... time to laze around- NOT. Turns out, my maid picked this exact day to go back home, so for a bit, the chore around the house are going to be shared between the family, and that includes me.
