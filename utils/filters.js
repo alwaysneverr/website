@@ -35,6 +35,19 @@ export default {
         return DateTime.fromISO(dateStr).toFormat(format || "dd LLLL yyyy");
     },
 
+    // 21 -> "Twenty-One", for chapter headings written out the way the books print them
+    numberToWords: function (value) {
+        const n = Number(value);
+        if (!Number.isInteger(n) || n < 0 || n > 999) return String(value);
+        const ones = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+            "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+        const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+        const belowHundred = (x) => x < 20 ? ones[x] : tens[Math.floor(x / 10)] + (x % 10 ? `-${ones[x % 10]}` : "");
+        if (n < 100) return belowHundred(n);
+        const rest = n % 100;
+        return `${ones[Math.floor(n / 100)]} Hundred${rest ? ` ${belowHundred(rest)}` : ""}`;
+    },
+
     filterTagList (tags) {
         return (tags || []).filter(isContentTag);
     },
@@ -84,12 +97,15 @@ export default {
             .slice(0, 15); // Ceiling cap at top 15 items to maintain high-density canvas balance
     },
 
+    // Tags ordered by their most recent post, newest first
     getAllTags: function (collection) {
-        let tagSet = new Set();
+        const newestPost = new Map();
         for(let item of collection) {
-            (item.data.tags || []).forEach(tag => tagSet.add(tag));
+            (item.data.tags || []).forEach(tag => {
+                if (!newestPost.has(tag) || item.date > newestPost.get(tag)) newestPost.set(tag, item.date);
+            });
         }
-        return Array.from(tagSet);
+        return Array.from(newestPost.keys()).sort((a, b) => newestPost.get(b) - newestPost.get(a));
 	},
 
     scoreColor: function (rating) {

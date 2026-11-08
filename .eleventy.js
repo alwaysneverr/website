@@ -6,11 +6,18 @@ import EleventyPluginSyntaxhighlight from '@11ty/eleventy-plugin-syntaxhighlight
 import EleventyVitePlugin from '@11ty/eleventy-plugin-vite'
 
 import rollupPluginCritical from 'rollup-plugin-critical'
+import path from 'node:path'
 
 
 import filters from './utils/filters.js'
 import shortcodes from './utils/shortcodes.js'
 import { isContentTag, tagSlug } from './utils/taxonomy.js'
+
+// The dev server's Vite compiles CSS/JS straight from src instead of from copies in _site.
+// Copying them on every rebuild made Vite recompile main.scss dozens of times mid-reload,
+// and pages sometimes came back without their stylesheet.
+const isServing = process.env.ELEVENTY_RUN_MODE === 'serve'
+const srcAssets = path.resolve('src/assets').replace(/\\/g, '/')
 
 export default function (eleventyConfig) {
 	// Drafts, see also _data/eleventyDataSchema.js
@@ -20,6 +27,8 @@ export default function (eleventyConfig) {
 		}
 
 		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+			// Returning false alone skips writing the page but leaves it in collections, so lists linked to a 404
+			data.eleventyExcludeFromCollections = true;
 			return false;
 		}
 	});
@@ -43,6 +52,9 @@ export default function (eleventyConfig) {
 				middlewareMode: true,
 			},
 			appType: 'custom',
+			resolve: {
+				alias: isServing ? { '/assets/css': `${srcAssets}/css`, '/assets/js': `${srcAssets}/js` } : {},
+			},
 			assetsInclude: ['**/*.xml', '**/*.txt'],
 			build: {
 				sourcemap: true,
@@ -124,7 +136,9 @@ export default function (eleventyConfig) {
 
 		// 2. Chunk each tag's timeline array into individual pages
 		Object.keys(tagMap).forEach(tag => {
-			const fullItemsList = [...tagMap[tag]].reverse(); // Most recent first
+			// Newest first. getAll() isn't date-ordered, so sort explicitly; same-day posts go by file name (day10 after day9)
+			const fullItemsList = [...tagMap[tag]].sort((a, b) =>
+				(b.date - a.date) || b.inputPath.localeCompare(a.inputPath, undefined, { numeric: true }));
 			const totalPagesCount = Math.ceil(fullItemsList.length / POSTS_PER_PAGE);
 
 			for (let pageIdx = 0; pageIdx < totalPagesCount; pageIdx++) {
@@ -181,9 +195,15 @@ export default function (eleventyConfig) {
 	eleventyConfig.addLayoutAlias('play', 'play.njk')
 	eleventyConfig.addLayoutAlias('fiction', 'fiction.njk')
 
-	// Copy/pass-through files
-	eleventyConfig.addPassthroughCopy('src/assets/css')
-	eleventyConfig.addPassthroughCopy('src/assets/js')
+	// Copy/pass-through files. Builds still need these in _site for Vite to bundle; the dev server reads src (see isServing).
+	if (!isServing) {
+		eleventyConfig.addPassthroughCopy('src/assets/css')
+		eleventyConfig.addPassthroughCopy('src/assets/js')
+	} else {
+		// Not copied while serving, so watch them to still reload the page when they change
+		eleventyConfig.addWatchTarget('src/assets/css/')
+		eleventyConfig.addWatchTarget('src/assets/js/')
+	}
 
 	return {
 		templateFormats: ['md', 'njk', 'html', 'liquid'],
