@@ -1,66 +1,86 @@
 // src/assets/js/modules/legacy-lightbox-modal.js
 
 /**
- * PORTFOLIO HUB IMAGE LIGHTBOX OVERLAY ENGINE
- * Isolated strictly to Legacy Pages via structural container classes!
+ * LEGACY FICTIONS ARCHIVE IMAGE LIGHTBOX
+ * Opens the screenshot and the card images that aren't links, like the old site did.
+ * Linked card images (Monarch, BIRDS) keep navigating to their story.
  */
 let lightboxGlobalKeydownBound = false;
 const LIGHTBOX_BOUND_ATTR = 'data-lightbox-bound';
+const TRIGGERS = '.fictions-archive-wrapper .images img, .fictions-archive-wrapper .image img';
 
 export function initModernLightbox() {
-  // FIX: Swapped global tracker to target ONLY images nested inside old .legacy-content-archive layout cells!
-  const images = document.querySelectorAll('.legacy-content-archive .image');
   const overlay = document.getElementById('modalOverlay');
   const modalImg = document.getElementById('modalImage');
   const closeBtn = document.getElementById('closeBtn');
   const loadingSpinner = document.getElementById('loading');
 
-  // If there are no legacy images or modal overlay panels present on this view, exit quietly!
-  if (!images.length || !overlay || !modalImg) return;
+  // Only the legacy fictions page carries the overlay markup
+  if (!overlay || !modalImg) return;
 
+  const images = [...document.querySelectorAll(TRIGGERS)].filter((img) => !img.closest('a'));
+  let lastTrigger = null;
 
   // 1. OPEN MODAL EVENT LOGIC
-  images.forEach(card => {
-    if (card.hasAttribute(LIGHTBOX_BOUND_ATTR)) return;
-    card.setAttribute(LIGHTBOX_BOUND_ATTR, 'true');
-    
-    card.addEventListener('click', (event) => {
-      // Blocks normal page link routing ONLY for legacy entries!
-      event.preventDefault();
-      
-      const targetImg = card.querySelector('img');
-      if (!targetImg) return;
+  const openModal = (targetImg) => {
+    lastTrigger = targetImg;
+    if (loadingSpinner) loadingSpinner.style.display = 'block';
+    modalImg.removeAttribute('src');
+    overlay.classList.add('is-active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
 
-      if (loadingSpinner) loadingSpinner.style.display = 'block';
-      overlay.classList.add('is-active');
-      overlay.style.display = 'flex';
+    const tempImg = new Image();
+    tempImg.onload = tempImg.onerror = () => {
+      modalImg.src = targetImg.currentSrc || targetImg.src;
+      modalImg.alt = targetImg.alt;
+      if (loadingSpinner) loadingSpinner.style.display = 'none';
+    };
+    tempImg.src = targetImg.currentSrc || targetImg.src;
+    if (closeBtn) closeBtn.focus();
+  };
 
-      const tempImg = new Image();
-      tempImg.src = targetImg.src;
-      tempImg.onload = () => {
-        modalImg.src = targetImg.src;
-        if (loadingSpinner) loadingSpinner.style.display = 'none';
-      };
+  images.forEach((img) => {
+    if (img.hasAttribute(LIGHTBOX_BOUND_ATTR)) return;
+    img.setAttribute(LIGHTBOX_BOUND_ATTR, 'true');
+    img.setAttribute('role', 'button');
+    img.setAttribute('tabindex', '0');
+    img.addEventListener('click', () => openModal(img));
+    img.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openModal(img);
+      }
     });
   });
 
   // 2. CLOSE MODAL SHARED FUNCTIONS MODULE
   const closeModal = () => {
+    if (!overlay.classList.contains('is-active')) return;
     overlay.classList.remove('is-active');
-    overlay.style.display = 'none';
-    modalImg.src = ''; // Flush image cache strings to save device memory footprint lines
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastTrigger) lastTrigger.focus();
   };
 
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  
-  overlay.addEventListener('click', (event) => {
-    if (event.target === overlay) closeModal();
-  });
+  if (closeBtn && !closeBtn.hasAttribute(LIGHTBOX_BOUND_ATTR)) {
+    closeBtn.setAttribute(LIGHTBOX_BOUND_ATTR, 'true');
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) closeModal();
+    });
+  }
 
-  // Global escape key check mechanism
+  // Global escape key check mechanism. Tab stays on the close button, the popup's only control.
   if (!lightboxGlobalKeydownBound) {
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && overlay.style.display === 'flex') closeModal();
+      const open = document.getElementById('modalOverlay')?.classList.contains('is-active');
+      if (!open) return;
+      if (event.key === 'Escape') document.getElementById('closeBtn')?.click();
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        document.getElementById('closeBtn')?.focus();
+      }
     });
     lightboxGlobalKeydownBound = true;
   }

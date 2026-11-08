@@ -148,11 +148,11 @@ modern_url: "/fiction/"
     </section>
 
     <!-- 4. LIGHTBOX CONTENT FRAME TARGETS -->
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true">
       <div class="modal-content">
         <div class="loading" id="loading"></div>
-        <img class="modal-image" id="modalImage" alt="Expanded Image">
-        <button class="close-btn" id="closeBtn">&times;</button>
+        <img class="modal-image" id="modalImage" alt="">
+        <button type="button" class="close-btn" id="closeBtn" aria-label="Close enlarged image">&times;</button>
       </div>
     </div>
 

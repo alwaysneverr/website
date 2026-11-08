@@ -242,7 +242,7 @@
 
   .ml3 {
     font-weight: 900 !important;
-    font-size: 3.5em !important;
+    font-size: clamp(2em, 9vw, 3.5em) !important; // "Professional" at 3.5em is wider than a phone
     line-height: 1.1 !important;
     color: #f0f0f0 !important;
   }
@@ -358,13 +358,114 @@
     }
   }
 
-  /* 5. UTOPIA BREAKPOINT COLLAPSE CONSTRAINTS MAPS */
+  .images img {
+    cursor: zoom-in !important;
+  }
+
+  /* 5. IMAGE LIGHTBOX OVERLAY (PORTED FROM THE OLD SITE'S lightbox-modal.css) */
+  .modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(5px);
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    // Visibility flips after the fade on close, but at once on open so the close button can take focus
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s !important;
+    z-index: 1000 !important;
+    overflow: auto !important;
+
+    &.is-active {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition-delay: 0s !important;
+    }
+  }
+
+  .modal-content {
+    position: relative !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    padding: 20px !important;
+    background: transparent !important;
+    min-width: 90px !important;
+    min-height: 90px !important;
+
+    @media (max-width: 768px) {
+      max-width: 95vw !important;
+      max-height: 95vh !important;
+    }
+  }
+
+  .modal-image {
+    display: block !important;
+    max-width: 100% !important;
+    max-height: calc(90vh - 40px) !important;
+    object-fit: contain !important;
+    border-radius: 8px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+
+    &:not([src]) {
+      display: none !important;
+    }
+  }
+
+  .close-btn {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    background: #fff !important;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    color: #333 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+
+    &:hover,
+    &:focus-visible {
+      background: #f44336 !important;
+      color: #fff !important;
+      transform: scale(1.1) !important;
+    }
+  }
+
+  .loading {
+    display: none;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
+    border: 5px solid rgba(255, 255, 255, 0.3) !important;
+    border-top-color: #fff !important;
+    border-radius: 50% !important;
+    animation: legacy-lightbox-spin 1s linear infinite !important;
+  }
+
+  /* 6. UTOPIA BREAKPOINT COLLAPSE CONSTRAINTS MAPS */
   @media only screen and (max-width: 850px) {
     .card1, .card2, .card3 {
       grid-column-start: 1 !important;
       grid-column-end: 7 !important; // Automatically collapses cell items full width on mobile viewports safely
     }
   }
+}
+
+@keyframes legacy-lightbox-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 // Global baseline screen safeguard overrides adjustments
