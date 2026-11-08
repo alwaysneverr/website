@@ -3,6 +3,10 @@ import path from 'node:path';
 
 const gitCache = new Map();
 
+// Commits with this in their message (tag-only edits and the like) don't count as an update:
+// their files keep the date of the commit before
+const KEEP_DATES_MARKER = '[keep-dates]';
+
 function bulkLoadGitData() {
 	let stdout;
 	try {
@@ -32,7 +36,7 @@ function bulkLoadGitData() {
 			const match = trimmed.match(/^([^|]+)\|([^|]+)\|(.*)$/);
 			if (match) {
 				const [_, unixTimestamp, longHash, message] = match;
-				currentGitInfo = {
+				currentGitInfo = message.includes(KEEP_DATES_MARKER) ? null : {
 					unixTimestamp: parseInt(unixTimestamp, 10),
 					longHash,
 					message: message || "Updated content"
