@@ -61,6 +61,18 @@ export function initImageHover(selector) {
 }
 
 /**
+ * Crossfades a Field Notes card's two stacked images (its image and hoverImage) while the card is hovered or tapped.
+ */
+export function initFieldNotesSwap() {
+  document.querySelectorAll('.field-notes__card').forEach((card) => {
+    if (!card.querySelector('.field-notes__image--swap')) return;
+    bindHoverSwap(card, (swapped) => {
+      card.classList.toggle('is-swapped', swapped);
+    });
+  });
+}
+
+/**
  * Crossfades the two stacked avatars on the legacy about page.
  */
 export function initAvatarHover() {

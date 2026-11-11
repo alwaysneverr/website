@@ -12,7 +12,8 @@ import { initFieldNotesImageFallbacks } from './modules/field-notes-image-fallba
 import { initVersionSelector } from './modules/version-selector';
 import { initNavDropdowns } from './modules/nav-dropdown.js';
 import { initAvatarCycler } from './modules/avatar-cycler.js';
-import { initAvatarHover } from './modules/hover-swap.js';
+import { initAvatarHover, initFieldNotesSwap } from './modules/hover-swap.js';
+import { initFieldNotesMedia } from './modules/field-notes-media.js';
 
 // 1. FIXED GLOBAL SCOPE ANCHOR: Tracks your active theme state globally across all pages!
 let currentThemeSetting = "dark";
@@ -73,6 +74,8 @@ function initPageModules() {
   initNavDropdowns();
   initAvatarCycler();
   initAvatarHover();
+  initFieldNotesSwap();
+  initFieldNotesMedia();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,20 +1,57 @@
 {#
   FIELD NOTES PAGE BODY
   Shared by every series page under Field Notes. Before including, set:
-    notes          the series data file (see src/_data/imosae.js)
+    notes          the series data file (see src/_data/imosae.js, or chiramune.js for numbered chapters)
     notesTitle     the big header line
     notesSubtitle  the small line under it
-  Optional in the data file: theme ("beer" puts the cards in a pint glass).
+  Optional in the data file: logos (white tiles for brand logos), theme ("ramune" puts the cards in a bottle,
+  "beer" in a pint glass),
+  and hoverImage on an item (shown instead of its image on hover or tap).
+  media: a list of { key, label, title, icon }. The page then gets a dropdown to switch between them (the first
+  shows first) and each item says which one it belongs to with `medium` (see chiramune.js).
 #}
-<div class="container field-notes{% if notes.theme %} field-notes--{{ notes.theme }}{% endif %}" style="padding-top: var(--step-2, 24px); padding-bottom: var(--step-5, 64px);">
+<div class="container field-notes{% if notes.theme %} field-notes--{{ notes.theme }}{% endif %}" style="padding-top: var(--step-2, 24px); padding-bottom: var(--step-5, 64px);"{% if notes.media %} data-notes-media{% endif %}>
 
   <!-- HEADER TEXT CORE DISPLAY -->
   <header class="field-notes__header">
-    <h1 class="field-notes__title">{{ notesTitle }}</h1>
+    {#- With media, the title follows the medium picked below ("Songs!"); notesTitle is the fallback -#}
+    <h1 class="field-notes__title"{% if notes.media %} data-notes-title{% endif %}>{{ notes.media[0].title if notes.media else notesTitle }}</h1>
     <p class="field-notes__subtitle">{{ notesSubtitle }}</p>
   </header>
 
-  {%- if notes.theme == "beer" %}
+  {%- if notes.media %}
+  <!-- MEDIUM PICKER -->
+  <div class="field-notes__picker">
+    <label class="field-notes__picker-label" for="notes-medium">Showing</label>
+    <select class="field-notes__picker-select" id="notes-medium" data-notes-medium>
+      {%- for m in notes.media %}
+      {%- set count %}{% for vol in notes.volumes %}{% for item in vol.items %}{% if (item.medium or "products") == m.key %}x{% endif %}{% endfor %}{% endfor %}{% endset %}
+      <option value="{{ m.key }}" data-title="{{ m.title }}">{{ m.label }} ({{ count | length }})</option>
+      {%- endfor %}
+    </select>
+  </div>
+  {#- Without scripts the dropdown can't switch, so every medium shows, one after another -#}
+  <noscript><style>.field-notes__panel[hidden] { display: block !important; } .field-notes__picker { display: none !important; }</style></noscript>
+  {%- endif %}
+
+  {%- if notes.theme == "ramune" %}
+  {# Neck, marble and cap of a ramune bottle; the volumes below are its body #}
+  <svg class="field-notes__bottle-neck" viewBox="0 0 160 210" width="160" height="210" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="ramune-marble" cx="38%" cy="34%" r="70%">
+        <stop offset="0%" class="ramune-marble__light"/>
+        <stop offset="100%" class="ramune-marble__dark"/>
+      </radialGradient>
+    </defs>
+    <path class="ramune-glass" d="M0,210 C20,210 63,170 63,126 C63,112 38,110 38,94 C38,76 50,68 50,58 V34 H110 V58 C110,68 122,76 122,94 C122,110 97,112 97,126 C97,170 140,210 160,210 Z"/>
+    <path class="ramune-edge" d="M0,210 C20,210 63,170 63,126 C63,112 38,110 38,94 C38,76 50,68 50,58 V34 H110 V58 C110,68 122,76 122,94 C122,110 97,112 97,126 C97,170 140,210 160,210"/>
+    <path class="ramune-shine" d="M56,40 V58 C56,66 46,76 46,92"/>
+    <circle cx="80" cy="99" r="19" fill="url(#ramune-marble)" class="ramune-marble"/>
+    <ellipse cx="73" cy="92" rx="6" ry="4" class="ramune-marble__glint"/>
+    <rect x="46" y="28" width="68" height="9" rx="3" class="ramune-cap-ring"/>
+    <rect x="48" y="4" width="64" height="27" rx="7" class="ramune-cap"/>
+  </svg>
+  {%- elif notes.theme == "beer" %}
   {# Foam head spilling over the rim of the pint glass below #}
   <div class="field-notes__foam" aria-hidden="true">
     <span class="field-notes__drip" style="--at: 14%; --len: 34px"></span>
@@ -24,7 +61,7 @@
   {%- endif %}
 
   <div class="field-notes__volumes">
-    {%- if notes.theme == "beer" %}
+    {%- if notes.theme in ["ramune", "beer"] %}
     {# Fizz rising behind the cards; positions are spread by index so the build stays reproducible #}
     <div class="field-notes__bubbles" aria-hidden="true">
       {%- for i in range(0, 32) %}
@@ -32,6 +69,16 @@
       {%- endfor %}
     </div>
     {%- endif %}
+    {%- if notes.media %}
+    {%- for m in notes.media %}
+    {%- set medium = m.key %}{% set mediumInfo = m %}
+    <div class="field-notes__panel" id="medium-{{ m.key }}" data-notes-panel="{{ m.key }}" role="region" aria-label="{{ m.label }}"{% if not loop.first %} hidden{% endif %}>
+      <h2 class="field-notes__panel-title">{{ m.label }}</h2>
+      {% include "field-notes-cards.njk" %}
+    </div>
+    {%- endfor %}
+    {%- else %}
     {% include "field-notes-cards.njk" %}
+    {%- endif %}
   </div>
 </div>

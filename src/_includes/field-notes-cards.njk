@@ -2,20 +2,42 @@
   FIELD NOTES CARDS
   One section of cards per volume, from notes.volumes[].items. Volumes without items are skipped.
   Used by field-notes.njk; expects `notes` to be set.
+
+  Optional, per item: page, note (a short visible explanation),
+  spotify + artist (a song: the card shows a music tile with a Spotify link instead of an image).
+
+  Series with `media` (chiramune.js) include this once per medium, with `medium` set to its key and
+  `mediumInfo` to its entry: only items of that medium show (an item without `medium` counts as "products").
+  Outside product placements, `by` / `artist` shows under the name, and the tile at the bottom is either
+  the item's `image` shown whole like a cover (book, album art, poster, photo; `imageAlt` describes it) over a
+  blurred copy of itself, or, without an image, the medium's icon. Either way `spotify` or `link` (with
+  `linkLabel`) becomes a button on the tile. Product placements keep the white logo tile.
 #}
     {% for vol in notes.volumes %}
-    {%- if vol.items | length %}
-    {%- set volumeId = "volume-" ~ vol.volume %}
+    {#- A plain set inside a loop doesn't reach outside it, so this collects one mark per matching item -#}
+    {%- set matches %}{% for item in vol.items %}{% if not medium or (item.medium or "products") == medium %}x{% endif %}{% endfor %}{% endset %}
+    {%- if matches | length %}
+    {%- set volumeId = "volume-" ~ (medium ~ "-" if medium else "") ~ vol.volume %}
     <section class="field-notes__volume" aria-labelledby="{{ volumeId }}">
       <h2 class="field-notes__volume-title" id="{{ volumeId }}">Volume {{ vol.volume }}</h2>
 
       <ul class="field-notes__grid" role="list">
         {% for item in vol.items %}
+        {%- if not medium or (item.medium or "products") == medium %}
         {% set citation %}<i>{{ notes.series }}</i>, Volume {{ vol.volume }}{% if item.page %}, page {{ item.page }}{% endif %}{% endset %}
         {% set hoverQuote %}<i>"{{ item.quote | safe }}"</i><br>{{ citation | safe }}{% endset %}
         <!-- CARD MODULE: {{ item.name | upper }} -->
         <li class="field-notes__card" id="vol{{ vol.volume }}-{{ item.name | slugify }}" tabindex="0" data-hover-quote="{{ hoverQuote | forceescape }}">
+          {%- if item.type %}
+          <span class="custom-menu__badge field-notes__type">{{ item.type }}</span>
+          {%- endif %}
+          {#- Pages without media, and the product placements tab, show everything as products (logo tiles) -#}
+          {%- set isProduct = not medium or medium == "products" %}
+          {%- set byline = item.by or item.artist %}
           <h3 class="field-notes__name">{{ item.name }}</h3>
+          {%- if byline and (not isProduct or item.spotify) %}
+          <p class="field-notes__by">{{ byline }}</p>
+          {%- endif %}
           <p class="field-notes__chapter">
             {%- if vol.chapters -%}
               {#- Numbered series: item.chapter is a key into the volume's chapters list -#}
@@ -25,15 +47,47 @@
             {%- else -%}
               Chapter: <i>{{ item.chapter }}</i>
             {%- endif %}{% if item.page %} · p. {{ item.page }}{% endif %}</p>
+          {%- if item.note %}
+          <p class="field-notes__note">{{ item.note | safe }}</p>
+          {%- endif %}
           <p class="field-notes__quote">"{{ item.quote | safe }}" ({{ citation | safe }})</p>
-          <div class="field-notes__image">
-            {% if item.image %}
+          {#- The tile's button: Spotify for songs (a search link says so), otherwise the item's own link -#}
+          {%- set tileLink = item.spotify or item.link %}
+          {%- set tileLabel %}{% if item.spotify %}{{ "Search on Spotify" if "/search/" in item.spotify else "Listen on Spotify" }}{% else %}{{ item.linkLabel or "Learn more" }}{% endif %}{% endset %}
+          {%- set tileButton %}
+            {%- if tileLink %}
+            <a class="field-notes__tile-link{% if item.spotify %} field-notes__tile-link--spotify{% endif %}" href="{{ tileLink }}" target="_blank" rel="noopener noreferrer">
+              {{- tileLabel | trim -}}
+              <span class="field-notes__sr"> ({{ item.name }}, opens in a new tab)</span>
+            </a>
+            {%- endif %}
+          {%- endset %}
+          {%- if item.image and not isProduct %}
+          {#- A cover, poster or photo: shown whole, over a blurred copy of itself that fills the frame -#}
+          <div class="field-notes__image field-notes__image--cover" style="--cover: url('{{ item.image }}')">
+            <img src="{{ item.image }}" alt="{{ item.imageAlt or item.name }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-field-notes-image>
+            {{- tileButton | safe }}
+          </div>
+          {%- elif item.spotify or (mediumInfo and not isProduct) %}
+          {#- No image yet: the medium's icon (♪ for songs), with the button -#}
+          <div class="field-notes__ref{% if item.spotify %} field-notes__ref--song{% endif %}">
+            <span class="field-notes__ref-icon" aria-hidden="true">{{ "♪" if item.spotify else mediumInfo.icon }}</span>
+            {{- tileButton | safe }}
+          </div>
+          {%- else %}
+          <div class="field-notes__image{% if notes.logos %} field-notes__image--logo{% endif %}{% if item.image and item.hoverImage %} field-notes__image--swap{% endif %}">
+            {% if item.image and item.hoverImage %}
+            <img class="field-notes__swap field-notes__swap--default" src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-field-notes-image>
+            <img class="field-notes__swap field-notes__swap--hover" src="{{ item.hoverImage }}" alt="" aria-hidden="true" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-field-notes-image>
+            {% elif item.image %}
             <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-field-notes-image>
             {% else %}
             <img src="/assets/images/default-fallback.png" alt="" loading="lazy" decoding="async">
             {% endif %}
           </div>
+          {%- endif %}
         </li>
+        {%- endif %}
         {% endfor %}
       </ul>
     </section>
@@ -41,3 +95,10 @@
     {% else %}
     <p class="field-notes__empty">Nothing logged yet. Notes from {{ notes.series }} are on the way.</p>
     {% endfor %}
+    {%- if medium %}
+    {#- A medium with nothing in it yet still says so, rather than showing an empty bottle #}
+    {%- set anyInMedium %}{% for vol in notes.volumes %}{% for item in vol.items %}{% if (item.medium or "products") == medium %}x{% endif %}{% endfor %}{% endfor %}{% endset %}
+    {%- if not (anyInMedium | length) %}
+    <p class="field-notes__empty">No {{ mediumInfo.label | lower if mediumInfo else "references" }} logged yet.</p>
+    {%- endif %}
+    {%- endif %}

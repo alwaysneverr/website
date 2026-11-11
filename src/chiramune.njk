@@ -1,0 +1,17 @@
+---
+layout: base
+title: "Ramune & Co."
+description: "Real-world references in the Japanese Light Novel series 'Chitose-kun wa Ramune Bin no Naka', or 'Chitose Is in the Ramune Bottle': product placements, songs, books, TV and more."
+permalink: "/chiramune/"
+eleventyNavigation:
+  key: Chiramune
+  parent: Field Notes
+  order: 2
+  excerpt: "Product placements, songs, books and other real-world references in Chitose Is in the Ramune Bottle."
+---
+
+{# Cards come from src/_data/chiramune.js, one section per volume, split by medium with a dropdown #}
+{% set notes = chiramune %}
+{% set notesTitle = "References!" %}
+{% set notesSubtitle = "in Chiramune." %}
+{% include "field-notes.njk" %}

@@ -124,11 +124,181 @@
     }
   }
 
+  // What kind of product a brand is (Chiramune), in the site's badge pill
+  &__type {
+    align-self: flex-start !important; // Keeps the pill its own width in the column card
+    margin-bottom: 8px !important;
+  }
+
   &__chapter {
     font-family: monospace !important;
     font-size: 0.8rem !important;
     margin: 0 0 12px 0 !important; // The least space above the image
     color: var(--text-muted) !important;
+  }
+
+  // A short explanation shown on the card itself (Ryuo no Oshigoto's terms and quirks)
+  &__note {
+    margin: 10px 0 12px !important; // The bottom margin keeps it off the image tile below
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    color: var(--text-main) !important;
+  }
+
+  // Medium picker (Chiramune): one dropdown above the bottle
+  &__picker {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin: 0 auto var(--step-3, 32px) !important;
+  }
+
+  &__picker-label {
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: var(--text-muted) !important;
+  }
+
+  &__picker-select {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 8px 12px !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 6px !important;
+    background: var(--site-card-bg) !important;
+    color: var(--text-main) !important;
+    font: inherit !important;
+    font-weight: 600 !important;
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-color-accent, #00f2fe) !important;
+      outline-offset: 2px !important;
+    }
+
+    option {
+      background: #0f172a;
+      color: #f8fafc;
+
+      [data-theme="light"] & {
+        background: #fff;
+        color: #0f172a;
+      }
+    }
+  }
+
+  // Each medium's heading is for the no-script view, where every medium shows in turn
+  &__panel-title {
+    font-size: var(--step-2, 1.75rem) !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin: 0 0 16px !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  &.is-enhanced &__panel-title {
+    display: none !important;
+  }
+
+  &__panel + &__panel {
+    margin-top: var(--step-4, 48px) !important;
+  }
+
+  // Books, shows, people…: a tile with the medium's icon and who it's by, where a logo would go
+  &__ref {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+    height: 220px !important;
+    margin-top: auto !important;
+    padding: 16px !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--border-subtle) !important;
+    background: linear-gradient(160deg, rgba(0, 242, 254, 0.08), rgba(31, 111, 209, 0.16)) !important;
+    text-align: center !important;
+
+    [data-theme="light"] & {
+      background: linear-gradient(160deg, rgba(3, 105, 161, 0.06), rgba(3, 105, 161, 0.14)) !important;
+    }
+  }
+
+  &__ref-icon {
+    font-size: 3rem !important;
+    line-height: 1 !important;
+  }
+
+  // Songs without cover art: Spotify-ish near-black with a green note
+  &__ref--song {
+    background: linear-gradient(160deg, #191414, #1f2d24) !important;
+
+    [data-theme="light"] & {
+      background: linear-gradient(160deg, #191414, #1f2d24) !important;
+    }
+
+    .field-notes__ref-icon {
+      color: #1ed760 !important;
+    }
+  }
+
+  // Who it's by (author, artist, studio…), under the name on non-product cards
+  &__by {
+    margin: 0 0 4px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    color: var(--text-main) !important;
+  }
+
+  // The tile's button (Spotify, or any other link): sits in the tile, and over the image when there is one
+  &__tile-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 7px 16px !important;
+    border-radius: 999px !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    color: #f8fafc !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+
+    &:hover {
+      background: rgba(15, 23, 42, 1) !important;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #fff !important;
+      outline-offset: 2px !important;
+    }
+
+    &--spotify {
+      background: #1ed760 !important;
+      color: #0b0b0b !important;
+
+      &:hover {
+        background: #3be477 !important;
+      }
+    }
+  }
+
+
+
+  &__sr {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
   }
 
   // The hover popup shows the quote on screen; this copy is for screen readers
@@ -166,10 +336,159 @@
     }
   }
 
+  // Brand logos (Chiramune) come in every colour, so they always sit on a white tile, like a printed logo wall
+  &__image--logo {
+    background: #fff !important;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+
+    img {
+      padding: 24px !important;
+    }
+  }
+
+  // Cover art, posters and photos: the whole image, over a blurred, zoomed copy that fills the frame
+  &__image--cover {
+    background: #0b1220 !important;
+
+    &::before {
+      content: "" !important;
+      position: absolute !important;
+      inset: -24px !important;
+      background: var(--cover) center / cover no-repeat !important;
+      filter: blur(18px) brightness(0.65) !important;
+    }
+
+    img {
+      position: relative !important;
+      padding: 10px !important;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45)) !important;
+    }
+
+    .field-notes__tile-link {
+      position: absolute !important;
+      right: 10px !important;
+      bottom: 10px !important;
+      z-index: 1 !important;
+    }
+  }
+
   &__card:hover &__image img {
     transform: scale(1.04) !important;
   }
 
+  // Two stacked images (image + hoverImage): hover-swap.js sets .is-swapped on the card
+  &__image--swap &__swap {
+    position: absolute !important;
+    inset: 0 !important;
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+  }
+
+  &__swap--hover {
+    opacity: 0 !important;
+  }
+
+  &__card.is-swapped &__swap--default,
+  &__card:focus-visible &__swap--default {
+    opacity: 0 !important;
+  }
+
+  &__card.is-swapped &__swap--hover,
+  &__card:focus-visible &__swap--hover {
+    opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   FIELD NOTES THEME: RAMUNE BOTTLE (Chiramune)
+   The volumes panel is the bottle's glass body; the SVG above it is the neck, marble and cap.
+   The glass is opaque so the neck can sit over the body's top edge without a seam.
+   ========================================================================== */
+
+.field-notes--ramune {
+  --ramune-glass: #0d2730;
+  --ramune-shine: rgba(160, 235, 250, 0.1);
+  --ramune-edge: rgba(140, 220, 240, 0.55);
+  --ramune-card: rgba(6, 18, 26, 0.78);
+  --fizz-color: rgba(190, 240, 255, 0.45);
+  --ramune-cap: #1f6fd1;
+  --ramune-cap-ring: #5aa3f0;
+  --ramune-marble-light: #f2fdff;
+  --ramune-marble-dark: #6fbfd6;
+  --ramune-neck: 160px; // Width of the neck's base, which is also the flat top of the body
+  --ramune-shoulder: 170px;
+
+  [data-theme="light"] & {
+    --ramune-glass: #def3f9;
+    --ramune-shine: rgba(255, 255, 255, 0.65);
+    --ramune-edge: rgba(30, 130, 165, 0.45);
+    --ramune-card: rgba(255, 255, 255, 0.86);
+    --fizz-color: rgba(30, 140, 180, 0.35);
+    --ramune-marble-dark: #8fd0e2;
+  }
+
+  @media (max-width: 600px) {
+    --ramune-shoulder: 90px;
+  }
+
+  // Neck, marble and cap
+  .field-notes__bottle-neck {
+    display: block !important;
+    width: var(--ramune-neck) !important;
+    height: auto !important;
+    margin: 0 auto -2px !important; // Overlaps the body's top edge so the two read as one piece of glass
+    position: relative !important;
+    z-index: 2 !important;
+    overflow: visible !important;
+  }
+
+  .ramune-glass { fill: var(--ramune-glass); }
+  .ramune-edge { fill: none; stroke: var(--ramune-edge); stroke-width: 2; }
+  .ramune-shine { fill: none; stroke: var(--ramune-shine); stroke-width: 3; stroke-linecap: round; }
+  .ramune-marble { stroke: var(--ramune-edge); stroke-width: 1; }
+  .ramune-marble__light { stop-color: var(--ramune-marble-light); }
+  .ramune-marble__dark { stop-color: var(--ramune-marble-dark); }
+  .ramune-marble__glint { fill: rgba(255, 255, 255, 0.8); }
+  .ramune-cap { fill: var(--ramune-cap); }
+  .ramune-cap-ring { fill: var(--ramune-cap-ring); }
+
+  // Glass body: the shoulders curve down from a flat top exactly as wide as the neck's base
+  .field-notes__volumes {
+    position: relative !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+    max-width: 920px !important;
+    margin: 0 auto !important;
+    padding: calc(var(--ramune-shoulder) * 0.8) 24px 48px !important;
+    border: 2px solid var(--ramune-edge) !important;
+    border-radius: calc(50% - var(--ramune-neck) / 2) calc(50% - var(--ramune-neck) / 2) 44px 44px / var(--ramune-shoulder) var(--ramune-shoulder) 44px 44px !important;
+    background:
+      linear-gradient(90deg, transparent 3%, var(--ramune-shine) 6%, transparent 12%, transparent 86%, var(--ramune-shine) 91%, transparent 95%),
+      var(--ramune-glass) !important;
+    box-shadow: inset 0 -14px 0 rgba(255, 255, 255, 0.04), 0 18px 40px rgba(0, 0, 0, 0.18) !important;
+
+    @media (max-width: 600px) {
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+    }
+  }
+
+  .field-notes__volume,
+  .field-notes__empty {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .field-notes__volume-title {
+    background: rgba(31, 111, 209, 0.18) !important;
+    border-bottom-color: var(--ramune-edge) !important;
+  }
+
+  // No backdrop-filter here: blurring what's behind every card made the browser redraw all of them as the
+  // bubbles moved, and cards flickered or went blank (worst on hover). The card colour is opaque enough on its own.
+  .field-notes__card {
+    background: var(--ramune-card) !important;
+    border-color: var(--ramune-edge) !important;
+  }
 
 }
 
