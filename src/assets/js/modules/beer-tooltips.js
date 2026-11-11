@@ -27,6 +27,16 @@ export function initBeerQuotesTooltips() {
     tooltip.style.top = `${y}px`;
   };
 
+  // Keyboard focus has no pointer, so the panel sits under the card instead
+  const belowCard = (card) => {
+    const rect = card.getBoundingClientRect();
+    const x = Math.min(Math.max(rect.left, EDGE_MARGIN), window.innerWidth - tooltip.offsetWidth - EDGE_MARGIN);
+    const below = rect.bottom + EDGE_MARGIN;
+    const y = below + tooltip.offsetHeight > window.innerHeight ? rect.top - tooltip.offsetHeight - EDGE_MARGIN : below;
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${Math.max(y, EDGE_MARGIN)}px`;
+  };
+
   novelBeerCards.forEach(card => {
     card.addEventListener('mouseenter', (event) => {
       tooltip.innerHTML = card.getAttribute('data-hover-quote');
@@ -35,6 +45,15 @@ export function initBeerQuotesTooltips() {
     });
     card.addEventListener('mousemove', followPointer);
     card.addEventListener('mouseleave', () => {
+      if (document.activeElement === card) belowCard(card);
+      else tooltip.hidden = true;
+    });
+    card.addEventListener('focus', () => {
+      tooltip.innerHTML = card.getAttribute('data-hover-quote');
+      tooltip.hidden = false;
+      belowCard(card);
+    });
+    card.addEventListener('blur', () => {
       tooltip.hidden = true;
     });
   });

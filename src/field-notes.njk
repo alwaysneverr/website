@@ -1,0 +1,26 @@
+---
+layout: base
+title: "Field Notes"
+description: "Real-world things that light novels keep coming back to: drinks, snacks, places, games."
+permalink: "/field-notes/"
+eleventyNavigation:
+  key: Field Notes
+  order: 5
+---
+
+{# Lists every page whose eleventyNavigation parent is "Field Notes" #}
+<div class="container field-notes" style="padding-top: var(--step-2, 24px); padding-bottom: var(--step-5, 64px);">
+  <header class="field-notes__header">
+    <h1 class="field-notes__title">Field Notes</h1>
+    <p class="field-notes__subtitle">from light novels.</p>
+  </header>
+
+  <ul class="field-notes__grid field-notes__series" role="list">
+    {%- for series in collections.all | eleventyNavigation("Field Notes") %}
+    <li class="field-notes__card">
+      <h2 class="field-notes__name"><a href="{{ series.url }}">{{ series.title }}</a></h2>
+      {%- if series.excerpt %}<p class="field-notes__chapter">{{ series.excerpt }}</p>{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+</div>

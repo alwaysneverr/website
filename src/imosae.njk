@@ -1,0 +1,18 @@
+---
+layout: base
+title: "Beers!"
+description: "...as depicted on the Japanese Light Novel series 'Imouto Sae Ireba Ii.', or 'A Sister's All You Need'. A modernized version of the web page tracking craft beer appearances inside the Imouto Sae Ireba Ii light novel series."
+permalink: "/imosae/"
+legacy_url: "/legacy-site/imosae/"
+eleventyNavigation:
+  key: Imosae
+  parent: Field Notes
+  order: 1
+  excerpt: "Beers in A Sister's All You Need."
+---
+
+{# Cards come from src/_data/imosae.js, one section per volume #}
+{% set notes = imosae %}
+{% set notesTitle = "Beers!" %}
+{% set notesSubtitle = "in Imosae." %}
+{% include "field-notes.njk" %}

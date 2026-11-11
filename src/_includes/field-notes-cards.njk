@@ -1,0 +1,43 @@
+{#
+  FIELD NOTES CARDS
+  One section of cards per volume, from notes.volumes[].items. Volumes without items are skipped.
+  Used by field-notes.njk; expects `notes` to be set.
+#}
+    {% for vol in notes.volumes %}
+    {%- if vol.items | length %}
+    {%- set volumeId = "volume-" ~ vol.volume %}
+    <section class="field-notes__volume" aria-labelledby="{{ volumeId }}">
+      <h2 class="field-notes__volume-title" id="{{ volumeId }}">Volume {{ vol.volume }}</h2>
+
+      <ul class="field-notes__grid" role="list">
+        {% for item in vol.items %}
+        {% set citation %}<i>{{ notes.series }}</i>, Volume {{ vol.volume }}{% if item.page %}, page {{ item.page }}{% endif %}{% endset %}
+        {% set hoverQuote %}<i>"{{ item.quote | safe }}"</i><br>{{ citation | safe }}{% endset %}
+        <!-- CARD MODULE: {{ item.name | upper }} -->
+        <li class="field-notes__card" id="vol{{ vol.volume }}-{{ item.name | slugify }}" tabindex="0" data-hover-quote="{{ hoverQuote | forceescape }}">
+          <h3 class="field-notes__name">{{ item.name }}</h3>
+          <p class="field-notes__chapter">
+            {%- if vol.chapters -%}
+              {#- Numbered series: item.chapter is a key into the volume's chapters list -#}
+              {%- set chapterName = vol.chapters[item.chapter] -%}
+              {%- if item.chapter | int == item.chapter -%}Chapter {{ item.chapter | numberToWords }}{% if chapterName %}: {% endif %}{%- endif -%}
+              {%- if chapterName %}<i>{{ chapterName }}</i>{% endif -%}
+            {%- else -%}
+              Chapter: <i>{{ item.chapter }}</i>
+            {%- endif %}{% if item.page %} · p. {{ item.page }}{% endif %}</p>
+          <p class="field-notes__quote">"{{ item.quote | safe }}" ({{ citation | safe }})</p>
+          <div class="field-notes__image">
+            {% if item.image %}
+            <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-field-notes-image>
+            {% else %}
+            <img src="/assets/images/default-fallback.png" alt="" loading="lazy" decoding="async">
+            {% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+    {% else %}
+    <p class="field-notes__empty">Nothing logged yet. Notes from {{ notes.series }} are on the way.</p>
+    {% endfor %}

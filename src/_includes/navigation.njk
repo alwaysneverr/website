@@ -4,9 +4,39 @@
       {%- if item.url -%}
         {%- set isCurrent = (item.url == page.url) -%}
         {%- set isParent = item.url != '/' and item.url in page.url -%}
-        
+        {#- A set inside a for loop doesn't leave it, so match against the joined child URLs instead -#}
+        {%- set childUrls = "," + ((item.children or []) | join(",", "url")) + "," -%}
+        {%- set isParent = isParent or ("," + page.url + ",") in childUrls -%}
+
+        {%- if (item.children or []) | length -%}
+        {# Entries with child pages (Field Notes) get a dropdown; the link itself still leads to their own page #}
+        <li class="custom-menu__item custom-menu__item--dropdown" data-nav-dropdown>
+          <div class="custom-menu__parent">
+            <a class="custom-menu__link {% if isCurrent or isParent %}is-active{% endif %}"
+               href="{% if isCurrent %}#main{% else %}{{ item.url | url }}{% endif %}"
+               {% if isCurrent %}aria-current="page"{% endif %}>
+              <span class="custom-menu__text">{{ item.title }}</span>
+              <span class="custom-menu__indicator"></span>
+            </a>
+            <button type="button" class="custom-menu__toggle" aria-expanded="false"
+                    aria-controls="submenu-{{ item.key | slugify }}" aria-label="{{ item.title }} pages">
+              <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+          <ul class="custom-menu__submenu" id="submenu-{{ item.key | slugify }}" hidden>
+            {%- for child in item.children %}
+            <li>
+              <a class="custom-menu__sublink" href="{{ child.url | url }}" {% if child.url == page.url %}aria-current="page"{% endif %}>
+                {{ child.title }}
+                {%- if child.excerpt %}<small>{{ child.excerpt }}</small>{% endif %}
+              </a>
+            </li>
+            {%- endfor %}
+          </ul>
+        </li>
+        {%- else -%}
         <li class="custom-menu__item">
-          <a class="custom-menu__link {% if isCurrent or isParent %}is-active{% endif %}" 
+          <a class="custom-menu__link {% if isCurrent or isParent %}is-active{% endif %}"
              href="{% if isCurrent %}#main{% else %}{{ item.url | url }}{% endif %}"
              {% if isCurrent %}
                aria-current="page"
@@ -15,6 +45,7 @@
             <span class="custom-menu__indicator"></span>
           </a>
         </li>
+        {%- endif -%}
       {%- endif -%}
     {%- endfor -%}
   </ul>

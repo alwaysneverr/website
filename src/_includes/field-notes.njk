@@ -1,0 +1,37 @@
+{#
+  FIELD NOTES PAGE BODY
+  Shared by every series page under Field Notes. Before including, set:
+    notes          the series data file (see src/_data/imosae.js)
+    notesTitle     the big header line
+    notesSubtitle  the small line under it
+  Optional in the data file: theme ("beer" puts the cards in a pint glass).
+#}
+<div class="container field-notes{% if notes.theme %} field-notes--{{ notes.theme }}{% endif %}" style="padding-top: var(--step-2, 24px); padding-bottom: var(--step-5, 64px);">
+
+  <!-- HEADER TEXT CORE DISPLAY -->
+  <header class="field-notes__header">
+    <h1 class="field-notes__title">{{ notesTitle }}</h1>
+    <p class="field-notes__subtitle">{{ notesSubtitle }}</p>
+  </header>
+
+  {%- if notes.theme == "beer" %}
+  {# Foam head spilling over the rim of the pint glass below #}
+  <div class="field-notes__foam" aria-hidden="true">
+    <span class="field-notes__drip" style="--at: 14%; --len: 34px"></span>
+    <span class="field-notes__drip" style="--at: 47%; --len: 22px"></span>
+    <span class="field-notes__drip" style="--at: 81%; --len: 44px"></span>
+  </div>
+  {%- endif %}
+
+  <div class="field-notes__volumes">
+    {%- if notes.theme == "beer" %}
+    {# Fizz rising behind the cards; positions are spread by index so the build stays reproducible #}
+    <div class="field-notes__bubbles" aria-hidden="true">
+      {%- for i in range(0, 32) %}
+      <span style="--x: {{ (i * 37 + 11) % 94 + 3 }}%; --y: {{ (i * 29) % 96 + 2 }}%; --s: {{ 4 + (i * 5) % 9 }}px; --d: {{ 9 + (i * 7) % 9 }}s; --t: -{{ (i * 11) % 17 }}s"></span>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+    {% include "field-notes-cards.njk" %}
+  </div>
+</div>

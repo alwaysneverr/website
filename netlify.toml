@@ -19,3 +19,14 @@
   for = "/assets/js/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, must-revalidate"
+
+# The beer pages moved under their series name
+[[redirects]]
+  from = "/beers/"
+  to = "/imosae/"
+  status = 301
+
+[[redirects]]
+  from = "/legacy-site/beer/"
+  to = "/legacy-site/imosae/"
+  status = 301
