@@ -145,6 +145,18 @@
     color: var(--text-main) !important;
   }
 
+  &__board-link {
+    display: inline-block !important;
+    margin-top: 10px !important;
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+
+    [data-theme="light"] & {
+      color: #0369a1 !important;
+    }
+  }
+
   // Medium picker (Chiramune): one dropdown above the bottle
   &__picker {
     display: flex !important;

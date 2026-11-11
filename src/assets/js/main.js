@@ -13,6 +13,7 @@ import { initVersionSelector } from './modules/version-selector';
 import { initNavDropdowns } from './modules/nav-dropdown.js';
 import { initAvatarCycler } from './modules/avatar-cycler.js';
 import { initAvatarHover, initFieldNotesSwap } from './modules/hover-swap.js';
+import { initShogiBoard } from './modules/shogi/board.js';
 import { initFieldNotesMedia } from './modules/field-notes-media.js';
 
 // 1. FIXED GLOBAL SCOPE ANCHOR: Tracks your active theme state globally across all pages!
@@ -75,6 +76,7 @@ function initPageModules() {
   initAvatarCycler();
   initAvatarHover();
   initFieldNotesSwap();
+  initShogiBoard();
   initFieldNotesMedia();
 }
 

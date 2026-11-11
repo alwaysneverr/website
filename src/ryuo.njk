@@ -1,0 +1,133 @@
+---
+layout: base
+title: "Ryuo's Kifu"
+description: "The shogi games, positions and puzzles in the Japanese Light Novel series 'Ryuo no Oshigoto!', or 'The Ryuo's Work Is Never Done!'."
+permalink: "/ryuo/"
+eleventyNavigation:
+  key: Ryuo no Oshigoto
+  parent: Field Notes
+  order: 3
+  excerpt: "The shogi games in The Ryuo's Work Is Never Done!"
+---
+
+{#
+  Games, positions and puzzles come from src/_data/ryuo.js and play on the board below
+  (src/assets/js/modules/shogi/board.js). Cards for places and terms use the shared Field Notes cards.
+#}
+{% set notes = ryuo %}
+{% set notesTitle = "Shogi Games!" %}
+{% set notesSubtitle = "in Ryuo no Oshigoto." %}
+
+{#- "Record Two: First Morning", the same wording as the cards -#}
+{%- macro chapterLabel(vol, entry) -%}
+  {%- set chapterName = entry.section or (vol.chapters[entry.chapter] if vol.chapters) -%}
+  {%- if entry.chapter | int == entry.chapter -%}{{ ryuo.chapterWord or "Chapter" }} {{ entry.chapter | numberToWords }}{% if chapterName %}: {{ chapterName }}{% endif %}
+  {%- elif entry.chapter -%}{{ entry.chapter }}{%- endif -%}
+{%- endmacro -%}
+
+{#- A plain set inside a loop doesn't reach outside it, so these collect the loop's output instead -#}
+{%- set gameMarks %}{% for vol in ryuo.volumes %}{% if vol.games | length %}x{% endif %}{% endfor %}{% endset -%}
+{%- set itemMarks %}{% for vol in ryuo.volumes %}{% if vol.items | length %}x{% endif %}{% endfor %}{% endset -%}
+{%- set hasGames = gameMarks | trim | length > 0 -%}
+{%- set hasItems = itemMarks | trim | length > 0 -%}
+
+<div class="container field-notes field-notes--{{ ryuo.theme }}" style="padding-top: var(--step-2, 24px); padding-bottom: var(--step-5, 64px);">
+
+  <header class="field-notes__header">
+    <h1 class="field-notes__title">{{ notesTitle }}</h1>
+    <p class="field-notes__subtitle">{{ notesSubtitle }}</p>
+  </header>
+
+  <!-- GAME VIEWER -->
+  <section class="shogi-viewer" data-shogi-viewer aria-label="Game viewer">
+    <div class="shogi-viewer__bar">
+      <label class="shogi-viewer__label" for="shogi-game">Game</label>
+      <select class="shogi-viewer__select" id="shogi-game" data-shogi-select{% if not hasGames %} disabled{% endif %}>
+        {%- if hasGames %}
+        {%- for vol in ryuo.volumes %}{% if vol.games | length %}
+        <optgroup label="Volume {{ vol.volume }}">
+          {%- for game in vol.games %}
+          <option value="{{ game.id }}" data-chapter="{{ chapterLabel(vol, game) | trim }}">{{ game.title or game.id }}</option>
+          {%- endfor %}
+        </optgroup>
+        {%- endif %}{% endfor %}
+        {%- else %}
+        <option>Nothing logged yet</option>
+        {%- endif %}
+      </select>
+    </div>
+
+    <div class="shogi-viewer__info" data-shogi-info></div>
+
+    <div class="shogi-viewer__layout">
+      <div class="shogi-viewer__table" role="group" tabindex="0" aria-label="Board. Left and right arrow keys step through the moves.">
+        <div class="shogi-stand shogi-stand--top" data-shogi-stand-top></div>
+        <div class="shogi-board">
+          <div class="shogi-board__files" data-shogi-files aria-hidden="true"></div>
+          <div class="shogi-board__frame">
+            <div class="shogi-board__grid" data-shogi-board role="img" aria-label="Board at the start position"></div>
+            {#- Star points where the third and sixth lines cross #}
+            <span class="shogi-board__star" style="--x: 1; --y: 1" aria-hidden="true"></span>
+            <span class="shogi-board__star" style="--x: 2; --y: 1" aria-hidden="true"></span>
+            <span class="shogi-board__star" style="--x: 1; --y: 2" aria-hidden="true"></span>
+            <span class="shogi-board__star" style="--x: 2; --y: 2" aria-hidden="true"></span>
+          </div>
+          <div class="shogi-board__ranks" data-shogi-ranks aria-hidden="true"></div>
+        </div>
+        <div class="shogi-stand shogi-stand--bottom" data-shogi-stand-bottom></div>
+
+        <div class="shogi-viewer__controls">
+          <div class="shogi-viewer__steps">
+            <button type="button" class="shogi-viewer__button" data-shogi-first aria-label="First move">&#x23EE;&#xFE0E;</button>
+            <button type="button" class="shogi-viewer__button" data-shogi-prev aria-label="Previous move">&#x25C0;&#xFE0E;</button>
+            <span class="shogi-viewer__counter" data-shogi-counter></span>
+            <button type="button" class="shogi-viewer__button" data-shogi-next aria-label="Next move">&#x25B6;&#xFE0E;</button>
+            <button type="button" class="shogi-viewer__button" data-shogi-last aria-label="Last move">&#x23ED;&#xFE0E;</button>
+          </div>
+          <div class="shogi-viewer__options">
+            <button type="button" class="shogi-viewer__button shogi-viewer__button--accent" data-shogi-reveal hidden>Show answer</button>
+            <button type="button" class="shogi-viewer__button" data-shogi-flip aria-pressed="false">Flip</button>
+            <button type="button" class="shogi-viewer__button" data-shogi-labels>Letters</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="shogi-viewer__side">
+        <p class="shogi-viewer__error" data-shogi-error role="alert" hidden></p>
+        <div class="shogi-viewer__note" data-shogi-note hidden></div>
+        <p class="shogi-viewer__result" data-shogi-result hidden></p>
+        <h3 class="shogi-viewer__list-title">Moves</h3>
+        <ol class="shogi-viewer__list" data-shogi-list role="list"></ol>
+      </div>
+    </div>
+
+    <p class="shogi-viewer__live" data-shogi-live aria-live="polite"></p>
+
+    {#- The board needs JavaScript; without it, the games are listed as text #}
+    <noscript>
+      <div class="shogi-viewer__fallback">
+        {%- if hasGames %}
+        {%- for vol in ryuo.volumes %}{% for game in vol.games %}
+        <h3>Volume {{ vol.volume }}: {{ game.title or game.id }}</h3>
+        <p>{{ chapterLabel(vol, game) | trim }}{% if game.page %} · p. {{ game.page }}{% endif %}{% if game.sente or game.gote %} · ☗ {{ game.sente }} vs. ☖ {{ game.gote }}{% endif %}</p>
+        {%- if game.quote %}<p><i>"{{ game.quote | safe }}"</i></p>{% endif %}
+        {%- for move in game.moves %}{% if move.quote %}<p>Move {{ loop.index }}: <i>"{{ move.quote | safe }}"</i>{% if move.page %} (page {{ move.page }}){% endif %}</p>{% endif %}{% endfor %}
+        {%- endfor %}{% endfor %}
+        {%- else %}
+        <p>Nothing logged yet. Games from {{ ryuo.series }} are on the way.</p>
+        {%- endif %}
+      </div>
+    </noscript>
+  </section>
+
+  {#- The games for the viewer; "<" is escaped so a quote can never close this tag early #}
+  <script type="application/json" id="shogi-games">{{ ryuo | dump | replace("<", "\\u003c") | safe }}</script>
+
+  {%- if hasItems %}
+  <!-- PLACES & TERMS -->
+  <h2 class="shogi-viewer__section-title">Places, Terms &amp; Quirks</h2>
+  <div class="field-notes__volumes">
+    {% include "field-notes-cards.njk" %}
+  </div>
+  {%- endif %}
+</div>

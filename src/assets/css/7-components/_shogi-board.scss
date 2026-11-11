@@ -1,0 +1,512 @@
+/* ==========================================================================
+   COMPONENT: SHOGI GAME VIEWER (Ryuo no Oshigoto, src/ryuo.njk)
+   A wooden board with piece stands above and below, step controls, and a side column with the
+   move list, quotes and result. Drawn by src/assets/js/modules/shogi/board.js.
+   The board and pieces keep their wood colours in both themes, like a real board on any table;
+   the frame around them follows the site theme.
+   ========================================================================== */
+
+.field-notes--shogi {
+  --shogi-wood: #e6bc72;
+  --shogi-wood-edge: #d2a356;
+  --shogi-stand: #c99a52;
+  --shogi-line: #4a3214;
+  --shogi-piece-light: #fcebc4;
+  --shogi-piece: #f2d79c;
+  --shogi-piece-dark: #ddb877;
+  --shogi-ink: #1d140a;
+  --shogi-promoted: #b3261e;
+  --shogi-to: #f7cf5b;
+  --shogi-from: #efc773;
+  --shogi-margin: 10px; // Wood outside the outer line
+}
+
+.shogi-viewer {
+  text-align: left !important;
+  background: var(--site-card-bg) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  margin: 0 0 var(--step-4, 48px) !important;
+
+  [hidden] {
+    display: none !important;
+  }
+
+  /* 1. GAME PICKER AND HEADING */
+  &__bar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 8px 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  &__label {
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: var(--text-muted) !important;
+  }
+
+  &__select {
+    flex: 1 1 240px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 8px 10px !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 6px !important;
+    background: var(--site-card-bg) !important;
+    color: var(--text-main) !important;
+    font: inherit !important;
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-color-accent, #00f2fe) !important;
+      outline-offset: 2px !important;
+    }
+
+    option, optgroup {
+      background: #0f172a;
+      color: #f8fafc;
+
+      [data-theme="light"] & {
+        background: #fff;
+        color: #0f172a;
+      }
+    }
+  }
+
+  &__info {
+    margin-bottom: 16px !important;
+  }
+
+  &__title {
+    font-size: 1.3rem !important;
+    font-style: italic !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    margin: 8px 0 2px !important;
+    color: var(--nav-color-accent, #00f2fe) !important;
+
+    [data-theme="light"] & {
+      color: #0369a1 !important;
+    }
+  }
+
+  &__where,
+  &__empty {
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    margin: 0 !important;
+    color: var(--text-muted) !important;
+  }
+
+  &__empty {
+    font-family: inherit !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* 2. LAYOUT: BOARD ON THE LEFT, MOVES ON THE RIGHT; ONE COLUMN ON TABLETS AND PHONES */
+  &__layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 520px) minmax(0, 1fr) !important;
+    gap: 24px !important;
+    align-items: start !important;
+
+    @media only screen and (max-width: 850px) {
+      grid-template-columns: minmax(0, 1fr) !important;
+    }
+  }
+
+  &__table {
+    min-width: 0 !important;
+    max-width: 520px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 8px !important;
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-color-accent, #00f2fe) !important;
+      outline-offset: 4px !important;
+    }
+  }
+
+  /* 3. STEP CONTROLS */
+  &__controls {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    margin-top: 12px !important;
+  }
+
+  &__steps,
+  &__options {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  &__button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    padding: 0 12px !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    color: var(--text-main) !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease, border-color 0.2s ease !important;
+
+    &:hover:not(:disabled),
+    &[aria-pressed="true"] {
+      background: var(--site-card-hover) !important;
+      border-color: var(--nav-color-accent, #00f2fe) !important;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-color-accent, #00f2fe) !important;
+      outline-offset: 2px !important;
+    }
+
+    &:disabled {
+      opacity: 0.4 !important;
+      cursor: default !important;
+    }
+
+    &--accent {
+      border-color: var(--nav-color-accent, #00f2fe) !important;
+    }
+  }
+
+  &__counter {
+    min-width: 9ch !important;
+    text-align: center !important;
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    color: var(--text-muted) !important;
+  }
+
+  /* 4. SIDE COLUMN: ERRORS, QUOTES, RESULT, MOVE LIST */
+  &__error {
+    margin: 0 0 12px !important;
+    padding: 10px 12px !important;
+    border: 1px solid #f44336 !important;
+    border-radius: 6px !important;
+    background: rgba(244, 67, 54, 0.08) !important;
+    color: #ff8a80 !important;
+    font-size: 0.85rem !important;
+
+    [data-theme="light"] & {
+      color: #b3261e !important;
+    }
+  }
+
+  &__note {
+    margin-bottom: 12px !important;
+  }
+
+  &__note-text {
+    margin: 0 0 8px !important;
+    font-size: 0.9rem !important;
+    color: var(--text-main) !important;
+  }
+
+  // Same look as the quote popup on the other Field Notes cards
+  &__quote {
+    margin: 0 !important;
+    padding: 10px !important;
+    background-color: gold !important;
+    border: 2px solid black !important;
+    border-radius: 4px !important;
+    color: #000 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+
+  &__result {
+    margin: 0 0 12px !important;
+    padding: 8px 12px !important;
+    border-left: 3px solid var(--nav-color-accent, #00f2fe) !important;
+    background: var(--site-card-hover) !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+  }
+
+  &__list-title {
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin: 0 0 6px !important;
+    color: var(--text-muted) !important;
+  }
+
+  &__list {
+    max-height: 440px !important;
+    overflow-y: auto !important;
+    margin: 0 !important;
+    padding: 4px !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 6px !important;
+
+    @media only screen and (max-width: 850px) {
+      max-height: 260px !important;
+    }
+  }
+
+  &__move {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 5px 10px !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    background: transparent !important;
+    color: var(--text-main) !important;
+    font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", monospace !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    line-height: 1.4 !important;
+    text-align: left !important;
+    white-space: normal !important;
+    cursor: pointer !important;
+
+    &:hover {
+      background: var(--site-card-hover) !important;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-color-accent, #00f2fe) !important;
+      outline-offset: -2px !important;
+    }
+
+    &[aria-current] {
+      background: var(--nav-color-accent, #00f2fe) !important;
+      color: #0f172a !important;
+      font-weight: 700 !important;
+
+      [data-theme="light"] & {
+        background: #0369a1 !important;
+        color: #fff !important;
+      }
+    }
+
+    // Moves with a quote or note
+    &.has-note::after {
+      content: " ✎";
+      opacity: 0.7;
+    }
+  }
+
+  // Screen readers hear each move; nothing shows on screen
+  &__live {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+
+  &__section-title {
+    font-size: var(--step-2, 1.75rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    margin: 0 0 16px !important;
+  }
+}
+
+/* 5. PIECE STANDS (KOMADAI) */
+.shogi-stand {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px 10px !important;
+  min-height: 46px !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(180deg, var(--shogi-stand), var(--shogi-wood-edge)) !important;
+  color: var(--shogi-ink) !important;
+  box-shadow: inset 0 0 0 1px rgba(74, 50, 20, 0.35) !important;
+
+  &--top {
+    margin-bottom: 8px !important;
+  }
+
+  &--bottom {
+    margin-top: 8px !important;
+  }
+
+  &__name {
+    margin-right: auto !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: var(--shogi-ink) !important;
+  }
+
+  &__piece {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 2px !important;
+
+    // Fixed size off the board; the extra class outranks the letters rule's board-relative size
+    .shogi-viewer & .shogi-piece {
+      width: 28px !important;
+      height: 32px !important;
+      font-size: 17px !important;
+    }
+  }
+
+  &__count {
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: var(--shogi-ink) !important;
+  }
+
+  &__empty {
+    font-size: 0.75rem !important;
+    color: var(--shogi-ink) !important;
+    opacity: 0.65 !important;
+  }
+}
+
+/* 6. BOARD: FILE NUMBERS ON TOP, RANKS ON THE RIGHT, AS PRINTED IN THE BOOKS */
+.shogi-board {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  grid-template-areas: "files ." "frame ranks" !important;
+
+  &__files,
+  &__ranks {
+    display: grid !important;
+    font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", sans-serif !important;
+    font-size: 0.75rem !important;
+    color: var(--text-muted) !important;
+    text-align: center !important;
+  }
+
+  &__files {
+    grid-area: files !important;
+    grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
+    padding: 0 calc(var(--shogi-margin) + 2px) 2px !important;
+  }
+
+  &__ranks {
+    grid-area: ranks !important;
+    grid-template-rows: repeat(9, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    padding: calc(var(--shogi-margin) + 2px) 0 calc(var(--shogi-margin) + 2px) 6px !important;
+  }
+
+  &__frame {
+    grid-area: frame !important;
+    position: relative !important;
+    padding: var(--shogi-margin) !important;
+    border-radius: 4px !important;
+    background: linear-gradient(135deg, var(--shogi-wood), var(--shogi-wood-edge)) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25) !important;
+    container-type: inline-size; // Pieces size themselves to the board's width
+  }
+
+  &__grid {
+    display: grid !important;
+    grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
+    gap: 1px !important;
+    border: 2px solid var(--shogi-line) !important;
+    background: var(--shogi-line) !important; // Shows through the gaps as the board's lines
+  }
+
+  &__square {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    aspect-ratio: 1 / 1.09 !important; // Shogi squares are a little taller than wide
+    background: var(--shogi-wood) !important;
+
+    &.is-from {
+      background: var(--shogi-from) !important;
+    }
+
+    &.is-to {
+      background: var(--shogi-to) !important;
+    }
+  }
+
+  // The four dots where the third and sixth lines cross
+  &__star {
+    position: absolute !important;
+    left: calc(var(--shogi-margin) + 2px + (100% - 2 * var(--shogi-margin) - 4px) * var(--x) / 3) !important;
+    top: calc(var(--shogi-margin) + 2px + (100% - 2 * var(--shogi-margin) - 4px) * var(--y) / 3) !important;
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: var(--shogi-line) !important;
+    transform: translate(-50%, -50%) !important;
+    pointer-events: none !important;
+  }
+}
+
+/* 7. PIECES: PENTAGONS POINTING AT THE OPPONENT */
+.shogi-piece {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 86% !important;
+  height: 90% !important;
+  padding-top: 8% !important;
+  clip-path: polygon(50% 0, 86% 15%, 100% 100%, 0 100%, 14% 15%) !important;
+  background: linear-gradient(170deg, var(--shogi-piece-light), var(--shogi-piece) 55%, var(--shogi-piece-dark)) !important;
+  color: var(--shogi-ink) !important;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", "MS Mincho", serif !important;
+  font-size: 6cqi !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  user-select: none !important;
+
+  &--promoted {
+    color: var(--shogi-promoted) !important;
+  }
+
+  &--turned {
+    transform: rotate(180deg) !important;
+  }
+
+  [data-labels="letters"] & {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important;
+    font-size: 4.6cqi !important;
+  }
+}
+
+/* 8. WITHOUT JAVASCRIPT: THE GAMES AS TEXT */
+.shogi-viewer__fallback {
+  margin-top: 16px !important;
+
+  h3 {
+    font-size: 1.1rem !important;
+    margin: 16px 0 4px !important;
+  }
+
+  p {
+    margin: 0 0 6px !important;
+  }
+}
+
+// The board needs JavaScript, so it's hidden when scripts are off (the list in <noscript> shows instead)
+@media (scripting: none) {
+  .shogi-viewer__layout {
+    display: none !important;
+  }
+}

@@ -1,9 +1,13 @@
 {#
   FIELD NOTES CARDS
-  One section of cards per volume, from notes.volumes[].items. Volumes without items are skipped.
-  Used by field-notes.njk; expects `notes` to be set.
+  One section of cards per volume, from notes.volumes[].items. Volumes without items are skipped, so a series
+  can keep other things per volume (the shogi games in ryuo.js) without leaving empty headings.
+  Used by field-notes.njk and ryuo.njk; expects `notes` to be set.
 
-  Optional, per item: page, note (a short visible explanation),
+  Optional, per series: chapterWord ("Record" instead of "Chapter"), fallbackImage: false (no image frame
+  when an item has no image), imageStyle: "cover" (every image is shown whole over a blurred copy of itself,
+  like the references' covers, instead of the plain frame; suits photos). Optional, per item: page, section (a section title, used with a numbered
+  chapter), note (a short visible explanation), game (the id of a board entry on the same page, for a link),
   spotify + artist (a song: the card shows a music tile with a Spotify link instead of an image).
 
   Series with `media` (chiramune.js) include this once per medium, with `medium` set to its key and
@@ -24,7 +28,7 @@
       <ul class="field-notes__grid" role="list">
         {% for item in vol.items %}
         {%- if not medium or (item.medium or "products") == medium %}
-        {% set citation %}<i>{{ notes.series }}</i>, Volume {{ vol.volume }}{% if item.page %}, page {{ item.page }}{% endif %}{% endset %}
+        {% set citation %}<i>{{ notes.series }}</i>, Volume {{ vol.volume }}{% if item.page %}, page {{ item.page }}{% elif item.section %}, “{{ item.section }}”{% endif %}{% endset %}
         {% set hoverQuote %}<i>"{{ item.quote | safe }}"</i><br>{{ citation | safe }}{% endset %}
         <!-- CARD MODULE: {{ item.name | upper }} -->
         <li class="field-notes__card" id="vol{{ vol.volume }}-{{ item.name | slugify }}" tabindex="0" data-hover-quote="{{ hoverQuote | forceescape }}">
@@ -39,16 +43,21 @@
           <p class="field-notes__by">{{ byline }}</p>
           {%- endif %}
           <p class="field-notes__chapter">
-            {%- if vol.chapters -%}
-              {#- Numbered series: item.chapter is a key into the volume's chapters list -#}
-              {%- set chapterName = vol.chapters[item.chapter] -%}
-              {%- if item.chapter | int == item.chapter -%}Chapter {{ item.chapter | numberToWords }}{% if chapterName %}: {% endif %}{%- endif -%}
+            {%- if vol.chapters or item.section -%}
+              {#- Numbered series: item.chapter is a key into the volume's chapters list, or has its own section title -#}
+              {%- set chapterName = item.section or (vol.chapters[item.chapter] if vol.chapters) -%}
+              {%- if item.chapter | int == item.chapter -%}{{ notes.chapterWord or "Chapter" }} {{ item.chapter | numberToWords }}{% if chapterName %}: {% endif %}{%- endif -%}
               {%- if chapterName %}<i>{{ chapterName }}</i>{% endif -%}
+            {%- elif notes.chapterWord -%}
+              <i>{{ item.chapter }}</i>
             {%- else -%}
               Chapter: <i>{{ item.chapter }}</i>
             {%- endif %}{% if item.page %} · p. {{ item.page }}{% endif %}</p>
           {%- if item.note %}
           <p class="field-notes__note">{{ item.note | safe }}</p>
+          {%- endif %}
+          {%- if item.game %}
+          <a class="field-notes__board-link" href="#{{ item.game }}/0" data-shogi-open="{{ item.game }}">See it on the board ↑</a>
           {%- endif %}
           <p class="field-notes__quote">"{{ item.quote | safe }}" ({{ citation | safe }})</p>
           {#- The tile's button: Spotify for songs (a search link says so), otherwise the item's own link -#}
@@ -62,7 +71,7 @@
             </a>
             {%- endif %}
           {%- endset %}
-          {%- if item.image and not isProduct %}
+          {%- if item.image and (not isProduct or notes.imageStyle == "cover") %}
           {#- A cover, poster or photo: shown whole, over a blurred copy of itself that fills the frame -#}
           <div class="field-notes__image field-notes__image--cover" style="--cover: url('{{ item.image }}')">
             <img src="{{ item.image }}" alt="{{ item.imageAlt or item.name }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-field-notes-image>
@@ -74,7 +83,7 @@
             <span class="field-notes__ref-icon" aria-hidden="true">{{ "♪" if item.spotify else mediumInfo.icon }}</span>
             {{- tileButton | safe }}
           </div>
-          {%- else %}
+          {%- elif item.image or notes.fallbackImage != false %}
           <div class="field-notes__image{% if notes.logos %} field-notes__image--logo{% endif %}{% if item.image and item.hoverImage %} field-notes__image--swap{% endif %}">
             {% if item.image and item.hoverImage %}
             <img class="field-notes__swap field-notes__swap--default" src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-field-notes-image>
