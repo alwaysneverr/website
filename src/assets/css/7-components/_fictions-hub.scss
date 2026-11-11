@@ -1,3 +1,20 @@
+// Each card is three rows (title, image, text) shared with the other cards in its grid row through subgrid,
+// so a title that wraps onto more lines moves every image in the row down together instead of just its own.
+// A card with no image lets its text take the image row too.
+@mixin card-rows {
+  .card1, .card2, .card3, .cardfull {
+    display: grid !important;
+    grid-row: span 3 !important;
+    grid-template-rows: subgrid !important;
+    row-gap: 0 !important;
+  }
+
+  .card-head { grid-row: 1 !important; }
+  .image, .images { grid-row: 2 !important; }
+  .card-body { grid-row: 3 !important; }
+  .card-head + .card-body { grid-row: 2 / 4 !important; }
+}
+
 .fictions-canvas {
   // FIX: Clamps your portfolio canvas layout tightly so it never over-stretches on ultrawide PC monitors
   width: 100% !important;
@@ -93,6 +110,8 @@
   .card2 { grid-column: 3 / 5 !important; } // Spans center 2 column lanes
   .card3 { grid-column: 5 / 7 !important; } // Spans final 2 column lanes
   .cardfull { grid-column: 1 / 7 !important; } // Stretches fully across the grid floor to wrap game engines blocks
+
+  @include card-rows;
 
   .card-title {
     font-size: 1.2rem !important;
@@ -315,6 +334,8 @@
   .card2 { grid-column-start: 3 !important; grid-column-end: 5 !important; }
   .card3 { grid-column-start: 5 !important; grid-column-end: 7 !important; }
   .cardfull { grid-column-start: 1 !important; grid-column-end: 7 !important; padding: 10px !important; }
+
+  @include card-rows;
 
   .card-title {
     font-size: 20px !important;
