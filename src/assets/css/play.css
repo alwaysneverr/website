@@ -96,7 +96,7 @@ body {
 }
 
 #wrapper {
-    font-family: 'Courier Final Draft', 'Courier Screenplay', Courier;
+    font-family: 'Courier Final Draft', 'Courier Screenplay', 'Courier Prime', 'Courier New', Courier, monospace;
     font-size: 12pt;
     text-align: left;
     width: 480pt;
@@ -147,7 +147,7 @@ h2,
 h3,
 h4,
 h5 {
-    font-family: 'Gill Sans', 'Helvetiva Neue', Helvetica, sans-serif;
+    font-family: 'Gill Sans', 'Helvetica Neue', Helvetica, sans-serif;
     margin-top: 24pt;
     font-weight: 400;
     color: rgb(110, 110, 110);
@@ -187,7 +187,7 @@ h5,
 .h4-synopsis,
 .h5-synopsis,
 .h6-synopsis {
-    font-family: 'Gill Sans', 'Helvetiva Neue', Helvetica, sans-serif;
+    font-family: 'Gill Sans', 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 10pt;
     font-style: italic;
     color: rgb(145, 145, 145);
