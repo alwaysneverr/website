@@ -1,0 +1,29 @@
+{#
+  FIELD NOTES SOURCES
+  The pages behind the notes, images and board lines, collected from `sources` and `imageSource` on each
+  item (and each board entry on the Ryuo page). Quotes come from the novels and need no link.
+  Expects `notes` to be set. Shows nothing when no entry has a source.
+#}
+{%- set sourceRows = notes | fieldNotesSources %}
+{%- if sourceRows | length %}
+<details class="field-notes__sources">
+  <summary class="field-notes__sources-title">Sources <span class="field-notes__sources-count">({{ sourceRows | length }})</span></summary>
+  <p class="field-notes__sources-intro">Quotes are from the novels. Notes{% if notes.theme == "shogi" %}, images and board lines{% else %} and images{% endif %} that came from elsewhere link to their sources here.</p>
+  <ul class="field-notes__sources-list" role="list">
+    {%- for row in sourceRows %}
+    <li class="field-notes__sources-row">
+      <span class="field-notes__sources-name">{{ row.name }}</span>
+      <span class="field-notes__sources-volume">Volume{{ "s" if row.volumes | length > 1 }} {{ row.volumes | join(", ") }}</span>
+      {%- if row.sources | length %}
+      <span class="field-notes__sources-group"><span class="field-notes__sources-label">{{ "Board" if row.kind == "game" else "Note" }}:</span>
+        {% for s in row.sources %}<a href="{{ s.url }}" target="_blank" rel="noopener noreferrer">{{ s.label }}</a>{{ ", " if not loop.last }}{% endfor %}</span>
+      {%- endif %}
+      {%- if row.images | length %}
+      <span class="field-notes__sources-group"><span class="field-notes__sources-label">Image:</span>
+        {% for s in row.images %}<a href="{{ s.url }}" target="_blank" rel="noopener noreferrer">{{ s.label }}</a>{{ ", " if not loop.last }}{% endfor %}</span>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+</details>
+{%- endif %}

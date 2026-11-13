@@ -5,6 +5,8 @@
 // Quotes are the BookWalker English translation, word for word. The ebook has no page numbers, so entries
 // point to their Record and section instead: `chapter` is the Record number, `section` the section title.
 // `note` is our own explanation, shown on the card; the book's words stay in `quote`.
+// `sources` (on cards and board entries) lists the pages a note or board line relies on, and `imageSource` where
+// a card's image came from: URLs, or { url, label }. They show in the Sources list at the bottom of the page.
 //
 // HOW TO WRITE MOVES (coordinates, file then rank; ranks a–i run from gote's side down to sente's):
 //   "7g7f"   move the piece on 7g to 7f
@@ -50,8 +52,14 @@ export default {
           section: "First Morning",
           start: "9/4k4/9/4P4/9/9/9/9/9 b 2G 1",
           quote: "Just for reference, this is a normal (Three Move Check) Shogi puzzle.",
-          note: "The book shows the position, not the answer.",
+          note: "The book shows the position, not the answer. Press Show answer for one worked out here; it isn't from the book.",
           moves: [],
+          solution: [
+            { move: "G*5c", note: "Drop a gold right in front of the king (頭金, atama-kin, \"gold on the head\"). The pawn on 5四 protects it, so the king can't take it, and the gold covers the squares beside and below the king." },
+            { move: "5b5a", note: "The king can only step back to 4一, 5一 or 6一." },
+            { move: "G*5b", note: "The second gold goes in front of the king again, protected by the first: checkmate. If the king had gone to 4一 or 6一, a gold on 4二 or 6二 mates the same way." },
+          ],
+          result: "Checkmate in 3 moves.",
         },
         {
           id: "vol1-longevity",
@@ -59,10 +67,12 @@ export default {
           title: "Longevity, the last problem in Shogi Zukou",
           chapter: 2,
           section: "First Morning",
-          // As drawn in the book. Its pieces add up to 17 pawns rather than a full set's 18; kept as printed.
+          // As drawn in the book. Its pieces add up to 17 pawns rather than a full set's 18: the real problem also has
+          // a sente pawn on 1四 (1d). Kept as printed, and the 611-move answer isn't shown.
           start: "g3p3+r/3lPG3/1s4ppp/1l1B5/L2b1kPl1/3+p3+R+p/3+p2+s1S/+NP+p1gS3/1g+p2P3 b 4P3n 1",
           quote: "And this is the last problem in Shogi Zukou, called Longevity. It borders on profane, am I right?",
           note: "Ai solves all 611 moves without a board. The book shows the starting position only.",
+          sources: ["https://kazemidori.fool.jp/?p=5956"],
           moves: [],
         },
         // Strategies: standard lines from outside the novel, showing what the book is talking about
@@ -74,6 +84,7 @@ export default {
           section: "Aigakari (Double Wing Attack)",
           quote: "Both players lead with the Pawn in front of their Rook, the simplest and most aggressive pattern there is but furthest from standard strategy.",
           note: "A standard Double Wing Attack (相掛かり) opening from shogi theory, not a game from the novel.",
+          sources: ["https://en.wikipedia.org/wiki/Double_Wing_Attack","https://ja.wikipedia.org/wiki/相掛かり"],
           moves: [
             { move: "2g2f", note: "Sente pushes the pawn in front of the rook…" },
             { move: "8c8d", note: "…and gote answers with the pawn in front of theirs. Neither side opens a bishop diagonal: that's the Double Wing Attack." },
@@ -105,6 +116,7 @@ export default {
           start: "lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",
           quote: "I help Ai get ready for her Practice League test during our walk back to the apartment too.",
           note: "Ai's blindfold drill, played out. In a two-piece handicap the stronger player plays without rook and bishop and moves first. The book starts at move 3; the first two moves, the handicap giver's usual silver to 6二 and a bishop-opening pawn, are added so the sequence can be played.",
+          sources: ["https://ja.wikipedia.org/wiki/二枚落ち"],
           moves: [
             { move: "7a6b", note: "The handicap giver's usual first move." },
             "7g7f",
@@ -132,6 +144,7 @@ export default {
           section: "Curry Master",
           quote: "“Tell me the best way to surround the King on your own.”",
           note: "How the Crab Castle (蟹囲い) is built: the king on 6九 between two golds, with a silver in front, like a crab with its claws out. Both players build one here so the moves can alternate; it's a demonstration, not a game.",
+          sources: ["https://ja.wikipedia.org/wiki/カニ囲い"],
           moves: [
             "7g7f",
             "8c8d",
@@ -153,6 +166,7 @@ export default {
           chapter: "Prologue",
           quote: "Ai and I have been playing a game of Shogi beneath a particularly marvelous blossoming cherry tree in the middle of a park on the west of Osaka Castle, <b><u>Maruteien</u></b>, known for cherry blossoms.",
           note: "Nishinomaru Garden (西の丸庭園), inside Osaka Castle Park and one of the city's best-known cherry blossom spots.",
+          sources: ["https://ja.wikipedia.org/wiki/大阪城公園"],
         },
         {
           name: "Wakura Onsen",
@@ -161,6 +175,7 @@ export default {
           section: "Ryuo Title Match, 7th Round",
           quote: "The Ryuo Title Match taking place at a high-class Japanese-style inn near a hot spring in <b><u>Wakura, Ishikawa Prefecture</u></b> had reached full set, the final match was about to begin.",
           note: "A real hot-spring town on Nanao Bay, on Ishikawa's Noto Peninsula.",
+          sources: ["https://en.wikipedia.org/wiki/Wakura_Onsen"],
         },
         {
           name: "Double Wing Attack",
@@ -169,6 +184,7 @@ export default {
           section: "Aigakari (Double Wing Attack)",
           quote: "Both players lead with the Pawn in front of their Rook, the simplest and most aggressive pattern there is but furthest from standard strategy. It’s like both players are sitting ducks, throwing axes at each other. That’s a <b><u>Double Wing Attack</u></b>.",
           note: "Aigakari (相掛かり) in Japanese: both players push the pawn in front of their rook.",
+          sources: ["https://en.wikipedia.org/wiki/Double_Wing_Attack","https://ja.wikipedia.org/wiki/相掛かり"],
           game: "vol1-strategy-double-wing-attack",
         },
         {
@@ -178,6 +194,7 @@ export default {
           section: "First Morning",
           quote: "The <b><u>Shogi Zukou</u></b> is a collection of extremely difficult Shogi puzzles, kind of like brainteasers, written in the 1700s by a pro named Kanju Itou.",
           note: "将棋図巧 by Itō Kanju (伊藤看寿). Its last problem, Kotobuki (寿, \"Longevity\"), runs 611 moves.",
+          sources: ["https://ja.wikipedia.org/wiki/将棋図巧","https://book.mynavi.jp/shogi/detail/id=115545","https://kazemidori.fool.jp/?p=5956"],
           game: "vol1-longevity",
         },
         {
@@ -187,6 +204,7 @@ export default {
           section: "Beneath a Shogi Board",
           quote: "“Dara.” “Huh?” “<b><u>Darabuchi</u></b>.” “… Hey, Yaichi. What’s Brat trying to say?” “Beats me ……” Maybe it’s something from her hometown in Ishikawa?",
           note: "だらぶち: Kanazawa dialect (Ishikawa) for \"idiot\". \"Dara\" on its own means much the same.",
+          sources: ["https://ja.wikipedia.org/wiki/金沢弁"],
         },
         {
           name: "Kansai Shogi Kaikan",
@@ -195,6 +213,7 @@ export default {
           section: "To the Association",
           quote: "The five-story building is a two-minute walk from Fukushima Station, just one stop down from Osaka Station on the Kanjou line. It’s the Kansai branch headquarters of the Japan Shogi Association, <b><u>Kansai Shogi Kaikan</u></b>—or just the association for short.",
           note: "A real building in Osaka's Fukushima Ward; the \"Kanjou line\" is the JR Osaka Loop Line. The association has since moved its Kansai headquarters to Takatsuki.",
+          sources: ["https://ja.wikipedia.org/wiki/関西将棋会館"],
         },
         {
           name: "Practice League",
@@ -203,6 +222,7 @@ export default {
           section: "The Association’s Classroom",
           quote: "“… The <b><u>Practice League</u></b> is like a school for people who want to join the Women’s League. You play against other people wanting to become pros and your rank goes up if you win.”",
           note: "The translation renames the real institutions: Practice League is the Kenshūkai (研修会), Sub League the Shōreikai (奨励会), Women's League the women's professionals (女流棋士), and Throne League the Jun'isen (順位戦).",
+          sources: ["https://ja.wikipedia.org/wiki/新進棋士奨励会","https://en.wikipedia.org/wiki/Professional_shogi_player"],
         },
         {
           name: "Onjyoudan no Ma",
@@ -211,6 +231,7 @@ export default {
           section: "The Match Begins",
           quote: "The whole floor is a replica of the Black Corridor in Edo Castle (apparently it has one) and is divided into the <b><u>Onjyoudan no Ma</u></b> or “Throne Room,” Ongedan no Ma or “Lower Guard Room” and Fuyou no Ma or “Lotus Room.” The Throne Room is one step higher than the others.",
           note: "御上段の間: a real game room at the Kansai Shogi Kaikan, kept for title matches and top-level games.",
+          sources: ["https://ja.wikipedia.org/wiki/関西将棋会館"],
         },
         {
           name: "Kannabe-Style 1 Five Lance",
@@ -227,6 +248,7 @@ export default {
           section: "Curry Master",
           quote: "We are playing <b><u>Blind Shogi</u></b> for practice. Several people do a double take as we pass by, having no idea what we’re talking about.",
           note: "目隠し将棋 (mekakushi shogi): playing without a board by calling out each move, like \"5 Four Pawn\" (5四歩).",
+          sources: ["https://ja.wikipedia.org/wiki/目隠し将棋"],
         },
         {
           name: "Two Pawn Advance & Silver Tandem",
@@ -235,6 +257,7 @@ export default {
           section: "Curry Master",
           quote: "Advanced players will leave out their strongest pieces, the Rook and Bishop, when playing less experienced players as a handicap. The two standard styles in those games are <b><u>Two Pawn Advance</u></b> and <b><u>Silver Tandem</u></b>.",
           note: "The textbook answers to a two-piece handicap (二枚落ち): nifu tsukkiri (二歩突っ切り) and gin taden (銀多伝).",
+          sources: ["https://ja.wikipedia.org/wiki/二枚落ち","https://ja.wikipedia.org/wiki/多伝囲い"],
           game: "vol1-strategy-two-pawn-advance",
         },
         {
@@ -244,6 +267,7 @@ export default {
           section: "Curry Master",
           quote: "“Kyanigakooi!!” That’s kani gakoi, the <b><u>Crab Castle</u></b>.",
           note: "蟹囲い (kani-gakoi), a simple castle for the king; \"kyanigakooi\" is Ai shouting it.",
+          sources: ["https://ja.wikipedia.org/wiki/カニ囲い","https://en.wikipedia.org/wiki/Castle_(shogi)"],
           game: "vol1-strategy-crab-castle",
         },
         {
@@ -253,6 +277,7 @@ export default {
           section: "Curry Master",
           quote: "“Please! I’ll treat you to real <b><u>Kanazawa curry</u></b>!” … “Kanazawa curry always has cabbage on the side.”",
           note: "Ishikawa's local curry: thick, dark roux with shredded cabbage on the side, often topped with a pork cutlet and eaten with a fork.",
+          sources: ["https://ja.wikipedia.org/wiki/金沢カレー"],
         },
       ],
     },
@@ -301,6 +326,7 @@ export default {
           section: "First Shinken Match",
           quote: "“It’s a Ranging Rook style sneak attack. The full name is kakutou fu senpo, Bishop-head Pawn Strategy.”",
           note: "The standard line from Wikipedia's <a href=\"https://en.wikipedia.org/wiki/Bishop_Head_Pawn\" target=\"_blank\" rel=\"noopener noreferrer\">Bishop Head Pawn</a> article, not a game from the novel. The first three moves are the same as Panther's.",
+          sources: ["https://en.wikipedia.org/wiki/Bishop_Head_Pawn"],
           moves: [
             "7g7f",
             "3c3d",
@@ -319,6 +345,7 @@ export default {
           section: "Pink Panther",
           quote: "“Haven’t seen that in ages. It’s Pac-Man.”",
           note: "The trap line from Japanese Wikipedia's <a href=\"https://ja.wikipedia.org/wiki/4%E5%9B%9B%E6%AD%A9%E3%83%91%E3%83%83%E3%82%AF%E3%83%9E%E3%83%B3\" target=\"_blank\" rel=\"noopener noreferrer\">4四歩パックマン</a> article, not a game from the novel. Professionals say taking the pawn is good for sente with careful play; this line shows what happens when sente slips.",
+          sources: ["https://ja.wikipedia.org/wiki/4四歩パックマン","https://en.wikipedia.org/wiki/Pac-Man_(shogi)"],
           moves: [
             "7g7f",
             { move: "4c4d", note: "Gote offers the 4四 pawn to sente's bishop." },
@@ -354,6 +381,7 @@ export default {
           section: "Kobe",
           quote: "“It’s so close to Osaka! The trip didn’t take any time at all!!” … the whole trip only takes about thirty minutes once you factor in the time it takes to change trains.",
           note: "The port city next door to Osaka, in Hyōgo Prefecture.",
+          sources: ["https://en.wikipedia.org/wiki/Kobe"],
         },
         {
           name: "New World",
@@ -362,6 +390,7 @@ export default {
           section: "New World",
           quote: "“This area is known as <b><u>New World</u></b>. Think of it as Osaka’s deepest underground.” With Tsutenkaku Tower standing right overhead, this used to be Osaka’s greatest Shogi hotspot.",
           note: "Shinsekai (新世界), around Tsūtenkaku tower. \"Jyan Jyan Alley\" is Jan Jan Yokochō, whose official name, the one Yaichi can't remember, is Nan'yō-dōri Shōtengai.",
+          sources: ["https://en.wikipedia.org/wiki/Shinsekai"],
         },
         {
           name: "Shinken",
@@ -370,6 +399,7 @@ export default {
           section: "New World",
           quote: "<b><u>Shinken</u></b> players in the underground scene all over the country came here looking for money and a good battle. Laws have really clamped down on betting in recent years, but there was a time when these shinken players made more money than pros.",
           note: "真剣師 (shinkenshi): players who play shogi for money.",
+          sources: ["https://ja.wikipedia.org/wiki/真剣師"],
         },
         {
           name: "Osakan Leopard Print",
@@ -386,6 +416,7 @@ export default {
           section: "First Shinken Match",
           quote: "“It’s a Ranging Rook style sneak attack. The full name is <b><u>kakutou fu senpo</u></b>, Bishop-head Pawn Strategy.”",
           note: "角頭歩戦法: pushing the pawn in front of your own bishop (8 Six Pawn) on move three.",
+          sources: ["https://en.wikipedia.org/wiki/Bishop_Head_Pawn","https://ja.wikipedia.org/wiki/角頭歩戦法"],
           game: "vol2-strategy-bishop-head-pawn",
         },
         {
@@ -395,6 +426,7 @@ export default {
           section: "Grade Schooler Practice Group Again",
           quote: "I stopped by one of New World’s <b><u>fried kebab</u></b> places to pick up some food before going home.",
           note: "Kushikatsu (串カツ): deep-fried skewers, Shinsekai's signature food, dipped once in a shared sauce pot (no double dipping).",
+          sources: ["https://en.wikipedia.org/wiki/Kushikatsu"],
         },
         {
           name: "Pac-Man",
@@ -403,6 +435,7 @@ export default {
           section: "Pink Panther",
           quote: "“Haven’t seen that in ages. It’s <b><u>Pac-Man</u></b>.” … It’s where the defensive player appears to offer up a Pawn to their opponent, a strange strategy that makes it seem like they’re at a disadvantage no matter how you look at it.",
           note: "パックマン戦法: gote's 4 Four Pawn on move two, a pawn offered to sente's bishop.",
+          sources: ["https://en.wikipedia.org/wiki/Pac-Man_(shogi)","https://ja.wikipedia.org/wiki/4四歩パックマン"],
           game: "vol2-strategy-pac-man",
         },
         {
@@ -420,6 +453,7 @@ export default {
           section: "Ray of Light",
           quote: "My destination: enemy territory. <b><u>Nyuugyoku</u></b>. Get my King across the board. … Since most pieces in Shogi can’t move backward, it’s really hard to put a King in check once it gets through the front lines.",
           note: "入玉 (nyūgyoku): marching your king into the opponent's camp.",
+          sources: ["https://ja.wikipedia.org/wiki/入玉"],
         },
       ],
     },

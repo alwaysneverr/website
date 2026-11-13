@@ -133,6 +133,50 @@ export default {
         return mdCompiler.render(rawContentString);
     },
 
+    /**
+     * Field Notes sources: one row per card or board entry that names where its facts or image came from.
+     * Reads `sources` (the note's sources; for a board entry, its moves) and `imageSource` on items and games.
+     * Each source is a URL, or { url, label } when the site's name alone isn't clear enough.
+     * Entries sharing a name (the same beer in several volumes) become one row, with their sources merged.
+     */
+    fieldNotesSources: function (notes) {
+        const toLink = (source) => {
+            const url = typeof source === "string" ? source : source.url;
+            let host = url;
+            try { host = new URL(url).hostname.replace(/^www\./, ""); } catch { /* Not a full URL: show it as written */ }
+            // Friendlier names for the sites that come up most
+            // Wikipedia links name their article, so two on one row can be told apart
+            const wiki = host.match(/^([a-z]+)\.wikipedia\.org$/);
+            let article = "";
+            if (wiki) {
+                try { article = decodeURIComponent(new URL(url).pathname.replace(/^\/wiki\//, "")).replace(/_/g, " "); } catch { /* Keep the bare site name */ }
+            }
+            const site = wiki ? (wiki[1] === "en" ? "Wikipedia" : wiki[1] === "ja" ? "Japanese Wikipedia" : `Wikipedia (${wiki[1]})`) : "";
+            const named = wiki ? (article ? `${site}: ${article}` : site)
+                : { "commons.wikimedia.org": "Wikimedia Commons", "web.archive.org": "Internet Archive" }[host];
+            return { url, label: (typeof source === "object" && source.label) || named || host };
+        };
+        const addUnique = (list, link) => { if (!list.some((l) => l.url === link.url)) list.push(link); };
+        const rows = new Map();
+        for (const vol of (notes && notes.volumes) || []) {
+            const entries = [
+                ...(vol.items || []).map((item) => ({ entry: item, name: item.name, kind: "item" })),
+                ...(vol.games || []).map((game) => ({ entry: game, name: game.title || game.id, kind: "game" })),
+            ];
+            for (const { entry, name, kind } of entries) {
+                const sources = [].concat(entry.sources || []);
+                if (!sources.length && !entry.imageSource) continue;
+                const key = `${kind}:${name}`;
+                const row = rows.get(key) || { name, kind, volumes: [], sources: [], images: [] };
+                if (!row.volumes.includes(vol.volume)) row.volumes.push(vol.volume);
+                sources.forEach((s) => addUnique(row.sources, toLink(s)));
+                if (entry.imageSource) addUnique(row.images, toLink(entry.imageSource));
+                rows.set(key, row);
+            }
+        }
+        return [...rows.values()];
+    },
+
     randomItem: function (array) {
         if(!Array.isArray(array) || array.length === 0) {
             return null;

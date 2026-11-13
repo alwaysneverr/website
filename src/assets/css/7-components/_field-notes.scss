@@ -61,6 +61,72 @@
     color: var(--text-muted) !important;
   }
 
+  /* SOURCES: a closed list under the cards, one row per card that drew on a web page */
+  &__sources {
+    position: relative !important; // Above the bottle and glass artwork, like the cards
+    z-index: 1 !important;
+    margin: var(--step-4, 48px) auto 0 !important;
+    max-width: 960px !important;
+    padding: 0 16px !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 8px !important;
+    background: var(--site-bg) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+  }
+
+  &__sources-title {
+    cursor: pointer !important;
+    padding: 12px 0 !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+  }
+
+  &__sources-count {
+    font-weight: 400 !important;
+    color: var(--text-muted) !important;
+  }
+
+  &__sources-intro {
+    margin: 0 0 12px !important;
+  }
+
+  &__sources-list {
+    list-style: none !important;
+    margin: 0 0 16px !important;
+    padding: 0 !important;
+  }
+
+  &__sources-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2px 12px !important;
+    padding: 6px 0 !important;
+    border-top: 1px solid var(--border-subtle) !important;
+    overflow-wrap: anywhere !important; // Long site names never push the page sideways
+  }
+
+  &__sources-name {
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+  }
+
+  &__sources-label {
+    font-style: italic !important;
+  }
+
+  &__sources a {
+    color: var(--nav-color-accent) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+
+    [data-theme="light"] & {
+      color: #0369a1 !important; // The same readable blue the quotes use in light mode
+    }
+  }
+
   /* 3. CARD GRID: TWO PER ROW, A VOLUME'S ODD LAST CARD RUNS FULL WIDTH (THE OLD card3) */
   &__grid {
     display: grid !important;
