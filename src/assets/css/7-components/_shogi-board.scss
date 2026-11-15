@@ -341,6 +341,7 @@
   background: linear-gradient(180deg, var(--shogi-stand), var(--shogi-wood-edge)) !important;
   color: var(--shogi-ink) !important;
   box-shadow: inset 0 0 0 1px rgba(74, 50, 20, 0.35) !important;
+  touch-action: pan-y; // Sideways swipes step through the moves (board.js); up and down still scroll
 
   &--top {
     margin-bottom: 8px !important;
@@ -385,6 +386,7 @@
 
 /* 6. BOARD: FILE NUMBERS ON TOP, RANKS ON THE RIGHT, AS PRINTED IN THE BOOKS */
 .shogi-board {
+  touch-action: pan-y; // Sideways swipes step through the moves (board.js); up and down still scroll
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) auto !important;
   grid-template-areas: "files ." "frame ranks" !important;

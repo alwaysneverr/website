@@ -249,6 +249,26 @@ export function initShogiBoard() {
     event.preventDefault();
   });
 
+  // On a touch screen, swiping the board sideways steps through the moves like the arrow keys: swipe left for
+  // the next move, right for the one before. The board and stands have touch-action: pan-y (_shogi-board.scss),
+  // so an up-or-down swipe still scrolls the page. Swipes that start on the buttons below are left alone.
+  const SWIPE_MIN = 40; // px across before it counts, so a tap or a wobble doesn't step
+  let swipe = null;
+  const table = root.querySelector('.shogi-viewer__table');
+  table.addEventListener('pointerdown', (event) => {
+    swipe = event.pointerType !== 'mouse' && !event.target.closest('.shogi-viewer__controls')
+      ? { id: event.pointerId, x: event.clientX, y: event.clientY } : null;
+  });
+  table.addEventListener('pointerup', (event) => {
+    if (!swipe || event.pointerId !== swipe.id || !state.game) return;
+    const dx = event.clientX - swipe.x;
+    const dy = event.clientY - swipe.y;
+    swipe = null;
+    // Mostly sideways: a diagonal drag is more likely someone scrolling
+    if (Math.abs(dx) >= SWIPE_MIN && Math.abs(dx) > Math.abs(dy) * 1.5) goTo(state.ply + (dx < 0 ? 1 : -1));
+  });
+  table.addEventListener('pointercancel', () => { swipe = null; });
+
   // "See it on the board" links on the cards below open their entry and bring the viewer into view
   document.querySelectorAll('[data-shogi-open]').forEach((link) => {
     link.addEventListener('click', (event) => {
