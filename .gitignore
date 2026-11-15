@@ -17,3 +17,7 @@ _site/
 
 # Local Netlify folder
 .netlify
+
+# Files kept on this computer only, never deployed or committed
+# (fonts used to make images, such as YD Myungjo for the Persona deal image)
+_local/
