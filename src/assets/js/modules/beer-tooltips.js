@@ -37,18 +37,34 @@ export function initBeerQuotesTooltips() {
     tooltip.style.top = `${Math.max(y, EDGE_MARGIN)}px`;
   };
 
+  // On touch screens a tap opens the quote in a modal instead (field-notes-quote-modal.js), so a tap skips this popup.
+  // Pointer events arrive before the mouse events a browser fakes after a tap, so they say which input it was;
+  // a key press clears it, so tabbing to a card shows the popup even on a touch screen with a keyboard.
+  let lastPointerType = '';
+  document.addEventListener('pointerdown', (event) => { lastPointerType = event.pointerType; }, true);
+  document.addEventListener('pointerover', (event) => { lastPointerType = event.pointerType; }, true);
+  document.addEventListener('keydown', () => { lastPointerType = ''; }, true);
+  const isModalTouch = () => lastPointerType !== '' && lastPointerType !== 'mouse';
+
   novelBeerCards.forEach(card => {
+
     card.addEventListener('mouseenter', (event) => {
+      if (isModalTouch()) return;
       tooltip.innerHTML = card.getAttribute('data-hover-quote');
       tooltip.hidden = false;
       followPointer(event);
     });
-    card.addEventListener('mousemove', followPointer);
+    card.addEventListener('mousemove', (event) => {
+      if (!isModalTouch()) followPointer(event);
+    });
     card.addEventListener('mouseleave', () => {
+      if (isModalTouch()) return;
       if (document.activeElement === card) belowCard(card);
       else tooltip.hidden = true;
     });
     card.addEventListener('focus', () => {
+      // A tap also focuses the card; only keyboard (or mouse) focus shows the popup
+      if (isModalTouch()) return;
       tooltip.innerHTML = card.getAttribute('data-hover-quote');
       tooltip.hidden = false;
       belowCard(card);

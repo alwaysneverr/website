@@ -17,6 +17,7 @@
     {#- With media, the title follows the medium picked below ("Songs!"); notesTitle is the fallback -#}
     <h1 class="field-notes__title"{% if notes.media %} data-notes-title{% endif %}>{{ notes.media[0].title if notes.media else notesTitle }}</h1>
     <p class="field-notes__subtitle">{{ notesSubtitle }}</p>
+    {% include "field-notes-hint.njk" %}
   </header>
 
   {%- if notes.media %}

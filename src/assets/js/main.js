@@ -8,6 +8,7 @@ import * as theme from './modules/theme.js';
 import { initModernLightbox } from './modules/legacy-lightbox-modal';
 import './modules/legacy-testquery.js';
 import { initBeerQuotesTooltips } from './modules/beer-tooltips.js';
+import { initFieldNotesQuoteModal } from './modules/field-notes-quote-modal.js';
 import { initFieldNotesImageFallbacks } from './modules/field-notes-image-fallback.js';
 import { initVersionSelector } from './modules/version-selector';
 import { initNavDropdowns } from './modules/nav-dropdown.js';
@@ -69,6 +70,7 @@ function handleThemeToggle() {
 function initPageModules() {
   initThemeEngine();
   initBeerQuotesTooltips();
+  initFieldNotesQuoteModal();
   initFieldNotesImageFallbacks();
   initModernLightbox();
   initVersionSelector();

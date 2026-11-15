@@ -36,6 +36,10 @@ eleventyNavigation:
   <header class="field-notes__header">
     <h1 class="field-notes__title">{{ notesTitle }}</h1>
     <p class="field-notes__subtitle">{{ notesSubtitle }}</p>
+    {%- if hasItems %}
+    {%- set hintSwipe = hasGames %}
+    {% include "field-notes-hint.njk" %}
+    {%- endif %}
   </header>
 
   <!-- GAME VIEWER -->

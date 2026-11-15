@@ -1,0 +1,11 @@
+{#
+  FIELD NOTES HINT
+  The line under a Field Notes page's title saying how to see a card's quote: hover with a mouse, tap on a
+  touch screen. Both are in the page and CSS shows the one that fits the device (&__hint in _field-notes.scss).
+  Screen readers skip it: they read each quote straight from its card.
+  Optional: set hintSwipe to true on a page with the shogi board, to mention swiping it on touch screens.
+#}
+<p class="field-notes__hint" aria-hidden="true">
+  <span class="field-notes__hint-hover">Hover over a card to see its quote from the novel.</span>
+  <span class="field-notes__hint-touch">Tap a card to see its quote from the novel{% if hintSwipe %}, and swipe the board sideways to step through the moves{% endif %}.</span>
+</p>
