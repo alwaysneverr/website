@@ -40,7 +40,7 @@ export default function() {
       total: 100,
       meta: "On Casino Palace",
       coverImage: "",
-      accentColor: "var(--media-gaming)"
+      accentColor: "var(--media-game)"
     }
   ];
 }

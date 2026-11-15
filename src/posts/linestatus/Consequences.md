@@ -1,6 +1,6 @@
 ---
 title: Consequences
-description: This is the xth of LINE Status series, titled "Consequences".
+description: This is the eighteenth of LINE Status series, titled "Consequences".
 date: 2019-04-23
 lastUpdated: 2024-05-03
 tags: 

@@ -1,6 +1,6 @@
 ---
 title: Experience
-description: This is the sixteenth of LINE Status series, titled "Experience".
+description: This is the nineteenth of LINE Status series, titled "Experience".
 date: 2019-05-02
 lastUpdated: 2024-05-03
 tags: 

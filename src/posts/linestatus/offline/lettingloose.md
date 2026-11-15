@@ -1,6 +1,6 @@
 ---
 title: Letting Loose
-description: This is the xth of the offLINE subseries, titled "Letting Loose".
+description: This is the third of the offLINE subseries, titled "Letting Loose".
 date: 2018-11-23
 lastUpdated: 2024-05-03
 tags: 

@@ -1,6 +1,6 @@
 ---
 title: love
-description: This is the xth of the offLINE subseries, titled "love".
+description: This is the fifth of the offLINE subseries, titled "love".
 date: 2019-02-19
 lastUpdated: 2024-05-03
 tags: 

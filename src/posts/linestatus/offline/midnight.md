@@ -1,6 +1,6 @@
 ---
 title: Midnight
-description: This is the xth of the offLINE subseries, titled "Midnight".
+description: This is the sixth of the offLINE subseries, titled "Midnight".
 date: 2019-03-04
 lastUpdated: 2024-05-26
 tags: 

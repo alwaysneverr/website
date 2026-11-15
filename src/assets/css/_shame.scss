@@ -27,7 +27,15 @@
 .images{
     display: flex;
     justify-content: center;
+    // Each cover keeps its own shape; without this a shorter cover was stretched to its neighbour's height
+    align-items: flex-start;
     padding: 10px;
+}
+
+// Two covers side by side (a review with images2) share the row. Images in a flex row won't shrink below
+// their own width unless told they may, so on a phone the pair ran wider than the screen.
+.images img{
+    min-width: 0;
 }
 
 @media only screen and (min-width: 1024px) {

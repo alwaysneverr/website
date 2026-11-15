@@ -1,6 +1,6 @@
 ---
 title: See Hear Speak
-description: This is the xth of LINE Status series, titled "See Hear Speak".
+description: This is the seventeenth of LINE Status series, titled "See Hear Speak".
 date: 2019-04-02
 lastUpdated: 2024-05-03
 tags: 

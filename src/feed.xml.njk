@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
     <link href="{{ meta.url }}/feed.xml" rel="self" type="application/atom+xml" />
     <link href="{{ meta.url }}" rel="alternate" type="text/html"/>
     <author>
-        <name>{{ meta.title }}</name>
+        <name>{{ meta.author }}</name>
     </author>
     {% if collections.posts %}
     <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>

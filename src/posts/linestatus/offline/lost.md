@@ -1,6 +1,6 @@
 ---
 title: lost
-description: This is the xth of the offLINE subseries, titled "lost".
+description: This is the fourth of the offLINE subseries, titled "lost".
 date: 2018-12-03
 lastUpdated: 2024-05-03
 tags: 

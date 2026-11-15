@@ -1,5 +1,5 @@
 ---
-title: Day 24.
+title: Day 25.
 description: ...where Al talks about the 24 hours of his twenty-fourth birthday.
 date: 2024-01-25
 lastUpdated: 2024-03-10
