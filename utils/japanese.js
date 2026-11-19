@@ -95,6 +95,19 @@ export const WIKIPEDIA_TITLES = {
   '金沢カレー': ['金[かな]沢[ざわ]カレー', 'Kanazawa karē'],
   '金沢弁': ['金[かな]沢[ざわ]弁[べん]', 'Kanazawa-ben'],
   '関西将棋会館': ['関[かん]西[さい]将[しょう]棋[ぎ]会[かい]館[かん]', 'Kansai Shōgi Kaikan'],
+  // Volume 3
+  'ゴキゲン中飛車': ['ゴキゲン中[なか]飛[び]車[しゃ]', 'Gokigen nakabisha'],
+  'とん平焼き': ['とん平[ぺい]焼[や]き', 'tonpei-yaki'],
+  '京橋 (大阪市)': ['京[きょう]橋[ばし] (大[おお]阪[さか]市[し])', 'Kyōbashi (Ōsaka-shi)'],
+  '合駒': ['合[あい]駒[ごま]', 'aigoma'],
+  '将棋会館': ['将[しょう]棋[ぎ]会[かい]館[かん]', 'Shōgi Kaikan'],
+  '後手番一手損角換わり': ['後[ご]手[て]番[ばん]一[いっ]手[て]損[ぞん]角[かく]換[が]わり', 'gotteban ittezon kakugawari'],
+  '横歩取り8五飛': ['横[よこ]歩[ふ]取[ど]り8五[ご]飛[ひ]', 'yokofudori hachi-go hi'],
+  '石田流': ['石[いし]田[だ]流[りゅう]', 'Ishida-ryū'],
+  '相振り飛車': ['相[あい]振[ふ]り飛[び]車[しゃ]', 'aifuribisha'],
+  '穴熊囲い': ['穴[あな]熊[ぐま]囲[がこ]い', 'anaguma-gakoi'],
+  '美濃囲い': ['美[み]濃[の]囲[がこ]い', 'mino-gakoi'],
+  '超速3七銀': ['超[ちょう]速[そく]3七[なな]銀[ぎん]', 'chōsoku san-nana gin'],
 };
 
 /** "Japanese Wikipedia: <title with readings> (romaji)" as HTML, for a Japanese article title. */
