@@ -855,3 +855,25 @@ html:has(.field-notes-quote[open]) {
     animation: none;
   }
 }
+
+/* Japanese with readings (utils/japanese.js): hiragana over each kanji, romaji written beside it in the text.
+   Japanese stays upright even inside italic text, since slanted kanji and kana are hard to read. */
+.field-notes {
+  [lang="ja"] {
+    font-style: normal;
+  }
+
+  ruby {
+    ruby-position: over;
+    ruby-align: center;
+  }
+
+  rt {
+    font-size: 0.6em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}

@@ -16,11 +16,11 @@
       <span class="field-notes__sources-volume">Volume{{ "s" if row.volumes | length > 1 }} {{ row.volumes | join(", ") }}</span>
       {%- if row.sources | length %}
       <span class="field-notes__sources-group"><span class="field-notes__sources-label">{{ "Board" if row.kind == "game" else "Note" }}:</span>
-        {% for s in row.sources %}<a href="{{ s.url }}" target="_blank" rel="noopener noreferrer">{{ s.label }}</a>{{ ", " if not loop.last }}{% endfor %}</span>
+        {% for s in row.sources %}<a href="{{ s.url }}" target="_blank" rel="noopener noreferrer">{{ s.label | safe }}</a>{{ ", " if not loop.last }}{% endfor %}</span>
       {%- endif %}
       {%- if row.images | length %}
       <span class="field-notes__sources-group"><span class="field-notes__sources-label">Image:</span>
-        {% for s in row.images %}<a href="{{ s.url }}" target="_blank" rel="noopener noreferrer">{{ s.label }}</a>{{ ", " if not loop.last }}{% endfor %}</span>
+        {% for s in row.images %}<a href="{{ s.url }}" target="_blank" rel="noopener noreferrer">{{ s.label | safe }}</a>{{ ", " if not loop.last }}{% endfor %}</span>
       {%- endif %}
     </li>
     {%- endfor %}

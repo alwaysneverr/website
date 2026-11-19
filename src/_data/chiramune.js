@@ -18,11 +18,13 @@
 //   by       songs (or `artist`), books, shows, people: who it's by, shown under the name
 //   spotify  songs: a Spotify track link (or a search link, open.spotify.com/search/…, when there's no one recording)
 //   link, linkLabel   optional link on a non-product card (e.g. a Wikipedia page), with its button text
-//   note     a short explanation shown on the card
+//   note     a short explanation shown on the card. Japanese in it: give every kanji its reading, 夜[よる],
+//            and put romaji beside it (utils/japanese.js shows the readings and stops the build if one is missing)
 //   sources  the pages the note relies on: URLs, or { url, label } (listed under Sources at the bottom of the page)
 //   imageSource  where the image came from (a URL, or { url, label })
 //            Logos live in public/assets/images/chiramune/logos/.
-export default {
+import { withRuby } from '../../utils/japanese.js';
+export default withRuby({
   series: "Chitose Is in the Ramune Bottle",
   // Product placement images are brand logos: they sit on a white tile in both themes so dark and coloured logos
   // stay visible. Other media's images are shown as covers instead.
@@ -300,4 +302,4 @@ export default {
       ]
     }
   ]
-}
+}, 'chiramune.js');

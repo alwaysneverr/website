@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import MarkdownIt from 'markdown-it'
 import { isContentTag, tagSlug } from './taxonomy.js'
+import { escapeHtml, wikipediaTitleHtml } from './japanese.js'
 const mdCompiler = new MarkdownIt({
   html: true, // Guarantees your custom {% divider %} HTML fragments pass through un-shredded
   breaks: true,
@@ -152,9 +153,12 @@ export default {
                 try { article = decodeURIComponent(new URL(url).pathname.replace(/^\/wiki\//, "")).replace(/_/g, " "); } catch { /* Keep the bare site name */ }
             }
             const site = wiki ? (wiki[1] === "en" ? "Wikipedia" : wiki[1] === "ja" ? "Japanese Wikipedia" : `Wikipedia (${wiki[1]})`) : "";
-            const named = wiki ? (article ? `${site}: ${article}` : site)
+            // Labels are HTML: a Japanese article title gets its readings and romaji (utils/japanese.js)
+            const titleHtml = wiki && wiki[1] === "ja" ? wikipediaTitleHtml(article) : escapeHtml(article);
+            const named = wiki ? (article ? `${site}: ${titleHtml}` : site)
                 : { "commons.wikimedia.org": "Wikimedia Commons", "web.archive.org": "Internet Archive" }[host];
-            return { url, label: (typeof source === "object" && source.label) || named || host };
+            const label = (typeof source === "object" && source.label) ? escapeHtml(source.label) : (named || escapeHtml(host));
+            return { url, label };
         };
         const addUnique = (list, link) => { if (!list.some((l) => l.url === link.url)) list.push(link); };
         const rows = new Map();

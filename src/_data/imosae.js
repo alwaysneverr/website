@@ -3,7 +3,9 @@
 // and the page shows the fallback image instead. Images live in public/assets/images/imosae/beers/.
 // `sources` lists the pages behind the note and `imageSource` where the image came from (a URL, or
 // { url, label }); both show in the Sources list at the bottom of the page. Rendered by _includes/field-notes.njk.
-export default {
+// Japanese in a note: give every kanji its reading, 感[かん]謝[しゃ], and put romaji beside it (utils/japanese.js).
+import { withRuby } from '../../utils/japanese.js';
+export default withRuby({
   series: "A Sister's All You Need",
   // The cards sit inside a pint glass of beer (see _field-notes.scss)
   theme: "beer",
@@ -109,7 +111,7 @@ export default {
       },
       items: [
         { name: "Bieken", chapter: 4, page: 27, quote: "Ui poured beer into Haruto's glass. It was <b><u>Bieken</u></b>, a Belgian beer notable for its honey content,...", note: "8.5% ABV, from Brouwerij Boelens. <i>Bieken</i> is Sint-Niklaas dialect for \"bee\".", image: "/assets/images/imosae/beers/bieken.webp", sources: ["https://beerbuddy.be/en-eu/collections/brouwerij-boelens"], imageSource: "https://www.beersofeurope.co.uk/wp-content/uploads/2023/01/BoelensBiekenHoningbier060917.jpg" },
-        { name: "Sankt Gallen Kansha no Nama Gold", chapter: 19, page: 132, quote: "...as Itsuki poured beer...into everyone's glasses. The brand was <b><u>Kansha no Nama Gold</u></b>, literally gratitude draft gold—produced by Sankt Gallen...", note: "Probably Sankt Gallen's 1.8-litre <i>isshōbin</i> gift beer: its gold version is a 5% ale with 感謝 (\"thanks\") printed on a washi-paper label.", image: "/assets/images/imosae/beers/sankt-gallen-kansha-no-nama-gold.webp", sources: ["https://www.value-press.com/pressrelease/119348"], imageSource: "https://momoncojp.com/wp-content/uploads/2017/08/SanktGallen_KanshaGold.png" }
+        { name: "Sankt Gallen Kansha no Nama Gold", chapter: 19, page: 132, quote: "...as Itsuki poured beer...into everyone's glasses. The brand was <b><u>Kansha no Nama Gold</u></b>, literally gratitude draft gold—produced by Sankt Gallen...", note: "Probably Sankt Gallen's 1.8-litre <i>isshōbin</i> gift beer: its gold version is a 5% ale with 感[かん]謝[しゃ] (kansha, \"thanks\") printed on a washi-paper label.", image: "/assets/images/imosae/beers/sankt-gallen-kansha-no-nama-gold.webp", sources: ["https://www.value-press.com/pressrelease/119348"], imageSource: "https://momoncojp.com/wp-content/uploads/2017/08/SanktGallen_KanshaGold.png" }
       ]
     },
     {
@@ -164,4 +166,4 @@ export default {
       ]
     }
   ]
-}
+}, 'imosae.js');

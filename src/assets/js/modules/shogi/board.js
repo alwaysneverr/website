@@ -197,7 +197,8 @@ export function initShogiBoard() {
     // The result waits for the last move (and for a puzzle's answer)
     const atEnd = g && state.ply === lastPly() && !state.played.error && (g.kind !== 'puzzle' || state.revealed);
     el.result.hidden = !(atEnd && g.result);
-    el.result.textContent = el.result.hidden ? '' : g.result;
+    // HTML, like the notes: Japanese in it carries its readings as <ruby> (utils/japanese.js)
+    el.result.innerHTML = el.result.hidden ? '' : g.result;
 
     const err = state.played.error;
     el.error.hidden = !err;
