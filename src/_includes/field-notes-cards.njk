@@ -29,7 +29,7 @@
         {% for item in vol.items %}
         {%- if not medium or (item.medium or "products") == medium %}
         {% set citation %}<i>{{ notes.series }}</i>, Volume {{ vol.volume }}{% if item.page %}, page {{ item.page }}{% elif item.section %}, “{{ item.section }}”{% endif %}{% endset %}
-        {% set hoverQuote %}<i>"{{ item.quote | safe }}"</i><br>{{ citation | safe }}{% endset %}
+        {% set hoverQuote %}<i>{{ item.quote | quoted | safe }}</i><br>{{ citation | safe }}{% endset %}
         <!-- CARD MODULE: {{ item.name | upper }} -->
         <li class="field-notes__card" id="vol{{ vol.volume }}-{{ item.name | slugify }}" tabindex="0" data-hover-quote="{{ hoverQuote | forceescape }}">
           {%- if item.type %}
@@ -59,7 +59,7 @@
           {%- if item.game %}
           <a class="field-notes__board-link" href="#{{ item.game }}/0" data-shogi-open="{{ item.game }}">See it on the board ↑</a>
           {%- endif %}
-          <p class="field-notes__quote">"{{ item.quote | safe }}" ({{ citation | safe }})</p>
+          <p class="field-notes__quote">{{ item.quote | quoted | safe }} ({{ citation | safe }})</p>
           {#- The tile's button: Spotify for songs (a search link says so), otherwise the item's own link -#}
           {%- set tileLink = item.spotify or item.link %}
           {%- set tileLabel %}{% if item.spotify %}{{ "Search on Spotify" if "/search/" in item.spotify else "Listen on Spotify" }}{% else %}{{ item.linkLabel or "Learn more" }}{% endif %}{% endset %}

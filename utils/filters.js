@@ -186,5 +186,16 @@ export default {
             return null;
         }
         return array[Math.floor(Math.random() * array.length)];
+    },
+
+    // Field Notes quotes: wrap in quote marks, unless the quote already has its own at the edge, which would show
+    // doubled as "“…”": it opens with one (“Dara.” “Huh?” …), or it's the end of a line split across moves
+    // (… 8 Two Silver to checkmate.”). Same rule as quoted() in src/assets/js/modules/shogi/board.js.
+    quoted: function (quote) {
+        const text = String(quote ?? '');
+        const plain = text.replace(/<[^>]+>/g, '');
+        const count = (re) => (plain.match(re) || []).length;
+        const ownMarks = /^[“"‘「『]/.test(plain) || count(/”/g) > count(/“/g);
+        return ownMarks ? text : `"${text}"`;
     }
 }

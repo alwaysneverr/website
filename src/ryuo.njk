@@ -114,8 +114,8 @@ eleventyNavigation:
         {%- for vol in ryuo.volumes %}{% for game in vol.games %}
         <h3>Volume {{ vol.volume }}: {{ game.title or game.id }}</h3>
         <p>{{ chapterLabel(vol, game) | trim }}{% if game.page %} · p. {{ game.page }}{% endif %}{% if game.sente or game.gote %} · ☗ {{ game.sente }} vs. ☖ {{ game.gote }}{% endif %}</p>
-        {%- if game.quote %}<p><i>"{{ game.quote | safe }}"</i></p>{% endif %}
-        {%- for move in game.moves %}{% if move.quote %}<p>Move {{ loop.index }}: <i>"{{ move.quote | safe }}"</i>{% if move.page %} (page {{ move.page }}){% endif %}</p>{% endif %}{% endfor %}
+        {%- if game.quote %}<p><i>{{ game.quote | quoted | safe }}</i></p>{% endif %}
+        {%- for move in game.moves %}{% if move.quote %}<p>Move {{ loop.index }}: <i>{{ move.quote | quoted | safe }}</i>{% if move.page %} (page {{ move.page }}){% endif %}</p>{% endif %}{% endfor %}
         {%- endfor %}{% endfor %}
         {%- else %}
         <p>Nothing logged yet. Games from {{ ryuo.series }} are on the way.</p>

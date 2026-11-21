@@ -16,6 +16,16 @@ const saveLabels = (labels) => {
 const moveText = (move) => (typeof move === 'string' ? move : move.move);
 
 /**
+ * Wraps a quote in quote marks, unless it already has its own at the edge: it opens with one, or it's the end of a
+ * line split across moves (… 8 Two Silver to checkmate.”). Same rule as the `quoted` filter in utils/filters.js.
+ */
+const quoted = (quote) => {
+  const plain = quote.replace(/<[^>]+>/g, '');
+  const count = (re) => (plain.match(re) || []).length;
+  return /^[“"‘「『]/.test(plain) || count(/”/g) > count(/“/g) ? quote : `"${quote}"`;
+};
+
+/**
  * RYUO NO OSHIGOTO GAME VIEWER
  * Steps through the games in src/_data/ryuo.js, which ryuo.njk embeds as JSON.
  */
@@ -189,7 +199,7 @@ export function initShogiBoard() {
     if (entry.note) parts.push(`<p class="shogi-viewer__note-text">${entry.note}</p>`);
     if (entry.quote) {
       const page = entry.page ? `, page ${entry.page}` : '';
-      parts.push(`<p class="shogi-viewer__quote"><i>"${entry.quote}"</i><br><i>${series}</i>, Volume ${g.volume}${page}</p>`);
+      parts.push(`<p class="shogi-viewer__quote"><i>${quoted(entry.quote)}</i><br><i>${series}</i>, Volume ${g.volume}${page}</p>`);
     }
     el.note.innerHTML = parts.join('');
     el.note.hidden = !parts.length;
