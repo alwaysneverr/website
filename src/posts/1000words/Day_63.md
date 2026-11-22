@@ -11,7 +11,7 @@ Pages. (translated)
 
 One.
 Loving something.
-Do we love it only in certain moments, or we feel it everytime?
+Do we love it only in certain moments, or we feel it everytime(*sic*)?
 An idea, ideals of someone, or the true person?
 Is love an egoist emotion? When it was felt by someone but they didn't return it?
 Questions that floods the mind, will gone as we love.

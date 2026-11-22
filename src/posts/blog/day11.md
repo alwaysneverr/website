@@ -9,7 +9,7 @@ tags:
   - Magus of the Library
   - Your Throne
 ---
-Been really down the past few days, just sleeping on my bed. Before sleeping yesterday I forced myself to watch *Dead Mount Death Play* anime. Was not really the first thing on my list I have to watch, but I feel like it (this will be a common reoccurence throughout, so watch out).
+Been really down the past few days, just sleeping on my bed. Before sleeping yesterday I forced myself to watch *Dead Mount Death Play* anime. Was not really the first thing on my list I have to watch, but I feel like it (this will be a common reoccurence(*sic*) throughout, so watch out).
 
 Also Contracts update, I played a bit of *Darkest Dungeon*. Six hours in, and I'm not even close to finishing it, and I'm STILL at the easiest difficulty, trying things out. I need to speed things up.
 

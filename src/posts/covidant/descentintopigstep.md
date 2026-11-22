@@ -29,7 +29,7 @@ I need to move, I can't just sit here.
 Even if it's to type these words.  
 You see? I'm aware of it,  
 but I didn't do anything.  
-Everytime I tried, it wasn't enough.  
+Everytime(*sic*) I tried, it wasn't enough.  
 
 Fuck this life.  
 Fuck this mind.  

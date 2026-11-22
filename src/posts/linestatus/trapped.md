@@ -15,7 +15,7 @@ Angry at times.
 
 I was a coward, yes. I once challenged a guy to a fight and came home with injuries that is not visible to the surface, because I am not going to make my parent worries about me.
 
-My parent's worry became a trap for my whole life. I started withholding actions taht sometimes my emotiosn makes me want to do, just because I hate and I don't want to see my parents worry.
+My parent's worry became a trap for my whole life. I started withholding actions taht(*sic*) sometimes my emotiosn(*sic*) makes me want to do, just because I hate and I don't want to see my parents worry.
 
 I hide every emotion-like actions that I'm about to do and because of that I used to have a lot of emotional outburst at the very worst of times.
 

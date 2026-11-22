@@ -25,4 +25,4 @@ It was more like in her forehead, because it's just so blatant you wouldn't miss
 
 When she was not feeling like she would do something, you can tell. When she was kind of mad because of something you could tell.
 
-The only hard thing was to not get my hopes up, because it seems like that was what I'm always doing everytime I fall for someone.
+The only hard thing was to not get my hopes up, because it seems like that was what I'm always doing everytime(*sic*) I fall for someone.

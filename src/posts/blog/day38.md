@@ -8,7 +8,7 @@ tags:
   - AMQ
 ---
 
-Today I spent pretty much the day outside. Today is also the last day of class before we have another week breakdue to holidays coming up.
+Today I spent pretty much the day outside. Today is also the last day of class before we have another week breakdue(*sic*) to holidays coming up.
 
 After the class is over (it's about IT governance... kinda boring, not going to lie.) I spent the next 8 hours in my friend's place. We hung out in an air-conditioned room, played games. It's been a while since I hung out on someone's room like that. The last time was during pandemic.
 

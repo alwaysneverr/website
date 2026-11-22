@@ -10,4 +10,4 @@ Okay so I tinkered with Eleventy for a bit yesterday, and decided to just get a 
 
 The Daily Project will now move full time to this blog instead of [my old daily page](https://alwaysnever25.netlify.app/daily/daily.html). It's using Markdown which is much *much* cleaner to my eyes instead of hardcode HTML and CSS, which was fun to play with but gets messier the more I try to do something with it.
 
-Also oh yeah, I have finals as well today. I did... well, I supppose. Not terrible, at least not to the point where I feel bad about my answers, but these semesters are actually alright in terms of lesson. They're not as horrible as previous semester in my opinion.
+Also oh yeah, I have finals as well today. I did... well, I supppose(*sic*). Not terrible, at least not to the point where I feel bad about my answers, but these semesters are actually alright in terms of lesson. They're not as horrible as previous semester in my opinion.

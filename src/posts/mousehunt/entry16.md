@@ -10,7 +10,7 @@ tags:
 11:45 pm - Fiery Warpath
 I received the title of Count/Countess!
 I can now hunt at the Gnawnian Rift.
-I can now hunt at the The Sunken City.
+I can now hunt at the The(*sic*) Sunken City.
 I can now combine eleven items while crafting.
 I can now charge my Tower Amplifier to 175% when hunting in the Seasonal Garden
 

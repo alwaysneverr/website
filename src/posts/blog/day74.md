@@ -13,7 +13,7 @@ I said to my parents that I had to get to my uni today, cause the class can't be
 
 What I don't know is, the goddamn class before 5pm is relegated into online classes anyway. Apparently it's their turn this week to be an online class. I had no idea. I'm already in my uni by 12 pm. 12 FREAKING PM. What am I supposed to do? If I'm in my normal condition, I can just wait in the library but my ASS IS DYING. The wind can basically topple my telephone pole ass.
 
-So I had to call in some help. A friend live nearby, and he offered a while ago that I can wait there in this kind of condition, so I take his offer right now. He was accomodating, made me noodle and bought me some drink to alleviate my throat pain, and even let me sleep. What a stand up lad. I didn't really deserve all this...
+So I had to call in some help. A friend live nearby, and he offered a while ago that I can wait there in this kind of condition, so I take his offer right now. He was accomodating(*sic*), made me noodle and bought me some drink to alleviate my throat pain, and even let me sleep. What a stand up lad. I didn't really deserve all this...
 
 Anyway, our impromptu "hangout" are also joined by another friend, who is also sick but he still strong enough to use his bike to come to uni (I cannot ride a bike in this condition, so I took a taxi). We talked about some situation happening today, coincidentally White Day.
 

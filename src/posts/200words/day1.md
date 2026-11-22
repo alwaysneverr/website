@@ -29,7 +29,7 @@ tags:
 "It would never."  
 "The timer works?"  
 "Yes."  
-"Nothing came up in the diagnostic report post-booting down? No abberation inside the dream? No side effects?"  
+"Nothing came up in the diagnostic report post-booting down? No abberation(*sic*) inside the dream? No side effects?"  
 "No error logged, no discernible anomaly, no side effects."  
 "Bullshit."  
 "..."  

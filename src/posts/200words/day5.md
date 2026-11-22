@@ -21,7 +21,7 @@ Another sigh. "Alright, let's not dwell on that, just run post-processing checkl
 "Power is... down."  
 "Nodes detached?"  
 "Detached."  
-"BOOTHES propietry material stabilized?"  
+"BOOTHES propietry(*sic*) material stabilized?"  
 "On neutral with 0 readings."  
 "Terminal clear?"  
 "No signs of errant logs."  

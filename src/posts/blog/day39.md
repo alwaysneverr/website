@@ -9,7 +9,7 @@ tags:
   - AMQ
 ---
 
-I played the AMQ match today, and it was... exhilirating. I was unable to go to sleep from yesterday, even though I came home near midnight, because I spent the hours training with someone I know on Discord, for AMQ. Honestly, I feel like without those extra time practicing, I would've been cooked in the match.
+I played the AMQ match today, and it was... exhilirating(*sic*). I was unable to go to sleep from yesterday, even though I came home near midnight, because I spent the hours training with someone I know on Discord, for AMQ. Honestly, I feel like without those extra time practicing, I would've been cooked in the match.
 
 Not like I wasn't already cooked in the match...
 

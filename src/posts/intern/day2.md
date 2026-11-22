@@ -7,4 +7,4 @@ tags:
   - February 2025
 ---
 
-fighting against a thousand sheets today... and fixing some mistake that a pdf to excel converter made... is this all the jobs I'll be doing everyday in this intership???
+fighting against a thousand sheets today... and fixing some mistake that a pdf to excel converter made... is this all the jobs I'll be doing everyday in this intership(*sic*)???

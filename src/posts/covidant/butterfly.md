@@ -9,7 +9,7 @@ tags:
 
 The wings flutter in the wind,  
 lightly flapping to keep them afloat.  
-The flap however is weak, unnoticable,  
+The flap however is weak, unnoticable(*sic*),  
 to any other being but other butterfly.  
 It's running, from what?  
 

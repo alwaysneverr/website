@@ -49,6 +49,6 @@ He looked at me confused. I know he think of nothing else but designs, but surel
 
 His face turns cold as I mentioned the very project that inspired me to make my design for this competition. His works at the time was broad, encompassing multiple features, and by the end, he was only able to showcase a little of the list of features he has planned. I was sure that that time, he only won because of how his list of planned features that never came to be was more interesting than his prototype that he ended up making.
 
-"You didn't even remember, did you?" I said, looking away, part embarassed, part annoyed. This has always been a one-sided rivalry, and now I have proof of it. Before I can turn around and forget this ever happened, he put his hands on my shoulder.
+"You didn't even remember, did you?" I said, looking away, part embarassed(*sic*), part annoyed. This has always been a one-sided rivalry, and now I have proof of it. Before I can turn around and forget this ever happened, he put his hands on my shoulder.
 
 I turned around to look at him, shocked. His face was now aghast, his victorious smile no longer in sight, as he said to me. "It worked?"

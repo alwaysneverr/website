@@ -13,7 +13,7 @@ Worked on the beer page for Imosae, as I started volume 4. Kaiko.... anyway, I'l
 
 Continued watching *Boku no Kokoro no Yabai Yatsu* anime, episode 5 through 8. I'm on time to watch it before the season 2 drops in Sunday, day 7.
 
-Got a movie groupwatch today, working our way through films directed by the honorable Christopher Nolan. We went on watching his premiere debut film *Following* a week ago, and now doing a double feature of his iconic film, *Memento*, and the Norwegian film adapatation *Insomnia*.
+Got a movie groupwatch today, working our way through films directed by the honorable Christopher Nolan. We went on watching his premiere debut film *Following* a week ago, and now doing a double feature of his iconic film, *Memento*, and the Norwegian film adapatation(*sic*) *Insomnia*.
 
 *Memento* was as mind bending as his later movies be, especially in the likes of *Tenet* or *Inception*. The way the movie is structured was supposed to represent how life like for the main character Lenny, who is afflicted by Anterograde Amnesia. He is played by Guy Pearce, and honestly it gave me fear to watch someone basically losing his memories after a couple of minutes.
 
