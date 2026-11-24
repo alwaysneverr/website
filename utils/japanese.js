@@ -122,6 +122,24 @@ export const WIKIPEDIA_TITLES = {
   '雁木造': ['雁[がん]木[ぎ]造[づくり]', 'gangi-zukuri'],
   '高美濃囲い': ['高[たか]美[み]濃[の]囲[がこ]い', 'taka-mino-gakoi'],
   '鳩森八幡神社': ['鳩[はとの]森[もり]八[はち]幡[まん]神[じん]社[じゃ]', 'Hatonomori Hachiman Jinja'],
+  // Volume 5
+  'いしる': ['いしる', 'ishiru'],
+  'サンダーバード (列車)': ['サンダーバード (列[れっ]車[しゃ])', 'Sandābādo (ressha)'],
+  '二歩': ['二[に]歩[ふ]', 'nifu'],
+  '千日手': ['千[せん]日[にち]手[て]', 'sennichite'],
+  '天童市': ['天[てん]童[どう]市[し]', 'Tendō-shi'],
+  '封じ手': ['封[ふう]じ手[て]', 'fūjite'],
+  '小学生将棋名人戦': ['小[しょう]学[がく]生[せい]将[しょう]棋[ぎ]名[めい]人[じん]戦[せん]', 'Shōgakusei Shōgi Meijin-sen'],
+  '尾崎豊': ['尾[お]崎[ざき]豊[ゆたか]', 'Ozaki Yutaka'],
+  '振り駒': ['振[ふ]り駒[ごま]', 'furigoma'],
+  '打ち歩詰め': ['打[う]ち歩[ふ]詰[づ]め', 'uchifuzume'],
+  '曲詰': ['曲[きょく]詰[づめ]', 'kyokuzume'],
+  '最後の審判 (詰将棋)': ['最[さい]後[ご]の審[しん]判[ぱん] (詰[つめ]将[しょう]棋[ぎ])', 'Saigo no Shinpan (tsume shōgi)'],
+  '羽生善治': ['羽[は]生[ぶ]善[よし]治[はる]', 'Habu Yoshiharu'],
+  '肉吸い (料理)': ['肉[にく]吸[す]い (料[りょう]理[り])', 'nikusui (ryōri)'],
+  '壊れた扉から': ['壊[こわ]れた扉[とびら]から', 'Kowareta Tobira kara'],
+  '谷川浩司': ['谷[たに]川[がわ]浩[こう]司[じ]', 'Tanigawa Kōji'],
+  '頭陀袋': ['頭[ず]陀[だ]袋[ぶくろ]', 'zudabukuro'],
 };
 
 /** "Japanese Wikipedia: <title with readings> (romaji)" as HTML, for a Japanese article title. */
