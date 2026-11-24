@@ -1047,6 +1047,9 @@ export default withRuby({
           chapter: 4,
           section: "August 1st",
           quote: "I got a message from Akira almost immediately afterward: “<b><u>Tokyo Banana</u></b>.” She must want me to pick up some of the cream-filled banana-flavored pastries as a souvenir",
+          image: "/assets/images/ryuo/tokyo-banana.jpg",
+          imageAlt: "Three Tokyo Banana sponge cakes, banana-shaped and pale yellow, one cut open to show the cream filling",
+          imageSource: { url: "https://commons.wikimedia.org/wiki/File:Tokyo_Banana_(1).jpg", label: "Wikimedia Commons (CC0)" },
         },
         {
           name: "Bridge of Glory",
