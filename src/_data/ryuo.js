@@ -1225,6 +1225,14 @@ export default withRuby({
       ],
       items: [
         {
+          name: "The Meijin",
+          type: "Shogi World",
+          chapter: "Premise",
+          quote: "That boy learned how to play at the age of seven and became Elementary Meijin at the age of eleven. A member of the Sub League by twelve, he became only the third junior high school professional player in history when he was fifteen. He claimed his first title at nineteen and possessed all seven titles at once by the age of twenty-five. … That prodigy, currently in his mid-forties, is on the brink of accomplishing something that’s never been done before: achieving <b><u>100 combined seasons as a titleholder</u></b>.",
+          note: "The Meijin is never named, but this is Habu Yoshiharu's (羽[は]生[ぶ]善[よし]治[はる]) life, shogi's great champion when the series was written. Born in 1970, Habu learned shogi in first grade, won the Elementary School Meijin in 1982 and joined the 奨[しょう]励[れい]会[かい] (shōreikai) that year. In 1985 he became the third junior high school professional, after Katō Hifumi and Tanigawa Kōji. His first title was the Ryūō in 1989, and on 14 February 1996 he held all seven at once. Volume 4's trembling hand and Eternal Septuple, and this volume's Hachioji childhood, are his too. In real life the hundredth title hasn't come: he is still on 99.",
+          sources: ["https://ja.wikipedia.org/wiki/羽生善治", "https://en.wikipedia.org/wiki/Yoshiharu_Habu"],
+        },
+        {
           name: "Pawn Drop Mate",
           type: "Shogi World",
           chapter: 1,
