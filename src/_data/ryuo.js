@@ -1025,6 +1025,14 @@ export default withRuby({
           sources: ["https://ja.wikipedia.org/wiki/居飛車穴熊","https://ja.wikipedia.org/wiki/高美濃囲い"],
         },
         {
+          name: "Blind Practice Session",
+          type: "Shogi World",
+          chapter: 3,
+          section: "Practice Session",
+          quote: "“△4 Five Pawn,” Ayumu says out of nowhere the second I step into the room. … I doubt that most people would understand our conversation <b><u>even if they wrote everything down and tracked our moves on an actual board</u></b>.",
+          note: "Why there's no board for it: the calls aren't one game. They start from a Yagura position the book never shows, since Ayumu's opening △4五[ご]歩[ふ] (yon-go fu) can't be a first move. Ayumu calls that same move again five calls later, and later still makes two calls in a row for the same side. The two of them are jumping between positions from their research.",
+        },
+        {
           name: "Schneewittchen",
           type: "Brand",
           chapter: 3,
