@@ -108,6 +108,20 @@ export const WIKIPEDIA_TITLES = {
   '穴熊囲い': ['穴[あな]熊[ぐま]囲[がこ]い', 'anaguma-gakoi'],
   '美濃囲い': ['美[み]濃[の]囲[がこ]い', 'mino-gakoi'],
   '超速3七銀': ['超[ちょう]速[そく]3七[なな]銀[ぎん]', 'chōsoku san-nana gin'],
+  // Volume 4
+  'ニコニコ生放送': ['ニコニコ生[なま]放[ほう]送[そう]', 'Nikoniko Namahōsō'],
+  'パレスサイドビルディング': ['パレスサイドビルディング', 'Paresu Saido Birudingu'],
+  'ひねり飛車': ['ひねり飛[び]車[しゃ]', 'hineri-bisha'],
+  'マイナビ女子オープン': ['マイナビ女[じょ]子[し]オープン', 'Mainabi Joshi Ōpun'],
+  '向かい飛車': ['向[む]かい飛[び]車[しゃ]', 'mukai-bisha'],
+  '居飛車穴熊': ['居[い]飛[び]車[しゃ]穴[あな]熊[ぐま]', 'ibisha anaguma'],
+  '栄光の架橋': ['栄[えい]光[こう]の架[かけ]橋[はし]', 'Eikō no Kakehashi'],
+  '矢倉囲い': ['矢[や]倉[ぐら]囲[がこ]い', 'yagura-gakoi'],
+  '角交換四間飛車': ['角[かく]交[こう]換[かん]四[し]間[けん]飛[び]車[しゃ]', 'kakukōkan shikenbisha'],
+  '雁木囲い': ['雁[がん]木[ぎ]囲[がこ]い', 'gangi-gakoi'],
+  '雁木造': ['雁[がん]木[ぎ]造[づくり]', 'gangi-zukuri'],
+  '高美濃囲い': ['高[たか]美[み]濃[の]囲[がこ]い', 'taka-mino-gakoi'],
+  '鳩森八幡神社': ['鳩[はとの]森[もり]八[はち]幡[まん]神[じん]社[じゃ]', 'Hatonomori Hachiman Jinja'],
 };
 
 /** "Japanese Wikipedia: <title with readings> (romaji)" as HTML, for a Japanese article title. */
