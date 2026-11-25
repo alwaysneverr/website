@@ -64,6 +64,15 @@ eleventyComputed:
         <ul class="cbook-abilities__grid">
           {% for s in skills %}
             {% if s.label %}<li class="cbook-abilities__label">{{ s.label }}</li>
+            {% elif s.children.length and (s.meta | join(" ")).indexOf("Toggle") != -1 %}
+              {# A form you toggle into (Rufus): its own row, like I's modes, with the toggle in its own column
+                 and the skills of that form as separate cards beside it #}
+              <li class="cbook-abilities__mode">
+                <div class="cbook-ability cbook-ability--toggle"><ul class="cbook-skills">{{ cb.skill(s, false) }}</ul></div>
+                <ul class="cbook-abilities__mode-skills">
+                  {% for k in s.children %}<li class="cbook-ability"><ul class="cbook-skills">{{ cb.skill(k) }}</ul></li>{% endfor %}
+                </ul>
+              </li>
             {% else %}<li class="cbook-ability"><ul class="cbook-skills">{{ cb.skill(s) }}</ul></li>{% endif %}
           {% endfor %}
         </ul>

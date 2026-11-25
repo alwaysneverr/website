@@ -3,8 +3,9 @@
   (book1-characters.njk). Import with: {% import "character-book.njk" as cb %}
 #}
 
-{# A skill row. Marks: * aura/buff on self, ** can be applied to allies (the document's own legend) #}
-{% macro skill(s) %}
+{# A skill row. Marks: * aura/buff on self, ** can be applied to allies (the document's own legend).
+   nested=false leaves out the skill's sub-skills (the character page shows a form's skills beside it instead) #}
+{% macro skill(s, nested=true) %}
   {%- if s.label -%}
     <li class="cbook-skills__label">{{ s.label }}</li>
   {%- elif not s.name -%}
@@ -17,7 +18,7 @@
         {%- for m in s.meta %} <span class="cbook-chip">{{ m }}</span>{% endfor -%}
       </div>
       {%- for t in s.text %}<p class="cbook-skill__text">{{ t }}</p>{% endfor -%}
-      {%- if s.children and s.children.length -%}
+      {%- if nested and s.children and s.children.length -%}
         <ul class="cbook-skills cbook-skills--sub">{% for c in s.children %}{{ skill(c) }}{% endfor %}</ul>
       {%- endif -%}
     </li>

@@ -832,3 +832,28 @@ html[data-theme="light"] .cbook--weapons {
 
   .cbook-pager__next { grid-column: 2; text-align: right; }
 }
+
+// A form you toggle into (Rufus): a full row, the toggle in its own column, that form's skills beside it
+.cbook-abilities__mode {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(12rem, 17rem) 1fr;
+  gap: 0.85rem;
+  align-items: start;
+
+  @media (max-width: 40rem) { grid-template-columns: 1fr; }
+}
+
+.cbook-ability--toggle {
+  border-color: var(--cb-accent-soft);
+  border-width: 2px;
+}
+
+.cbook-abilities__mode-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
