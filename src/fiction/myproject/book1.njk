@@ -9,102 +9,34 @@ font: "allerta-stencil"
 {#
   Book 1 of MYPROJECT: the character book, from the user's own text file (decapitalised, nothing else changed),
   with the later edits from the old site's alphabet pages laid over the Alphabet Heroes. Data: book1.json beside
-  this file, made by _local/myproject (parse, decap, build). The Gravity entries are held back until the user decides on them, so they're not in the data at all.
+  this file, made by _local/myproject (parse, decap, build). The Gravity entries are held back until the user
+  decides on them, so they're not in the data at all.
+
+  This page lists the names; each character has its own page (book1-characters.njk), like the old site.
+  Entries that are only a name (Healers, Trapmakers...) have no page and are listed as plain names.
 #}
+{% import "character-book.njk" as cb %}
 {% set book = book1 %}
 
-{# A skill row. Marks: * aura/buff on self, ** can be applied to allies (the document's own legend) #}
-{% macro skill(s) %}
-  {%- if s.label -%}
-    <li class="cbook-skills__label">{{ s.label }}</li>
-  {%- elif not s.name -%}
-    <li class="cbook-skill cbook-skill--empty" aria-label="Empty skill slot"></li>
-  {%- else -%}
-    <li class="cbook-skill{% if s.code %} cbook-skill--code{% endif %}">
-      <div class="cbook-skill__head">
-        <span class="cbook-skill__name">{{ s.name }}</span>
-        {%- if s.mark %} <abbr class="cbook-mark" title="{{ 'Aura/buff that can be applied to allies' if s.mark == '**' else 'Aura/buff, self only' }}">{{ s.mark }}</abbr>{% endif -%}
-        {%- for m in s.meta %} <span class="cbook-chip">{{ m }}</span>{% endfor -%}
-      </div>
-      {%- for t in s.text %}<p class="cbook-skill__text">{{ t }}</p>{% endfor -%}
-      {%- if s.children and s.children.length -%}
-        <ul class="cbook-skills cbook-skills--sub">{% for c in s.children %}{{ skill(c) }}{% endfor %}</ul>
-      {%- endif -%}
-    </li>
-  {%- endif -%}
-{% endmacro %}
-
-{# A hidden passive: blacked out until opened #}
-{% macro hiddenPassive(h) %}
-  <details class="cbook-hidden{% if h.code %} cbook-hidden--code{% endif %}">
-    <summary><span class="cbook-hidden__label">{{ h.label }}</span><span class="cbook-hidden__bar" aria-hidden="true"></span></summary>
-    <p><strong>{{ h.name }}</strong>{% for m in h.meta %} <span class="cbook-chip">{{ m }}</span>{% endfor %}{% if h.text %} – {{ h.text }}{% endif %}</p>
-  </details>
-{% endmacro %}
-
-{# Lines that are a status rather than a description get a stamp #}
-{% set STAMPS = ["Content locked", "(Classified)", "Subject to change", "(Non-combat)", "(Wrote more on this later)", "(More on this later)"] %}
-{% macro infoLines(lines) %}
-  {%- for t in lines -%}
-    {%- if t in STAMPS -%}<p class="cbook-stamp">{{ t }}</p>{%- else -%}<p>{{ t }}</p>{%- endif -%}
-  {%- endfor -%}
-{% endmacro %}
-
-{# The document's own entry: info, quote, members, skills, hidden passives #}
-{% macro documentBody(e, skipHidden) %}
-  {%- if e.info.length %}<div class="cbook-card__info">{{ infoLines(e.info) }}</div>{% endif -%}
-  {%- if e.quote.length -%}
-    <blockquote class="cbook-card__quote">{% for q in e.quote %}<p>{{ q }}</p>{% endfor %}</blockquote>
-  {%- endif -%}
-  {%- if e.attribution %}<p class="cbook-card__attribution">– {{ e.attribution }}</p>{% endif -%}
-  {%- if e.children.length -%}
-    <ul class="cbook-card__members">{% for c in e.children %}<li>{{ c }}</li>{% endfor %}</ul>
-  {%- endif -%}
-  {%- if e.skills.length -%}
-    <h4 class="cbook-card__subhead">Skills</h4>
-    <ul class="cbook-skills">{% for s in e.skills %}{{ skill(s) }}{% endfor %}</ul>
-  {%- endif -%}
-  {%- for h in e.hidden %}{% if not (skipHidden and loop.index0 in skipHidden) %}{{ hiddenPassive(h) }}{% endif %}{% endfor -%}
-{% endmacro %}
-
-{% macro card(e) %}
-  {% set ed = e.edit %}
-  {% set shown = ed.name if ed else e.name %}
-  <article class="cbook-card{% if ed %} cbook-card--edited{% endif %}" id="{{ e.id }}">
-    <header class="cbook-card__head">
-      <span class="cbook-card__tab" aria-hidden="true">{{ shown | replace('"', '') | replace('(', '') | trim | first }}</span>
-      <div>
-        <h3 class="cbook-card__name"><a href="#{{ e.id }}">{{ shown }}</a></h3>
-        {%- if ed and ed.power %}<p class="cbook-card__power">{{ ed.power }}</p>{% endif -%}
-        {%- if ed and ed.tags.length -%}
-          <ul class="cbook-card__tags" aria-label="Roles">{% for t in ed.tags %}<li>{{ t }}</li>{% endfor %}</ul>
-        {%- endif -%}
-      </div>
-    </header>
-    <div class="cbook-card__body">
-      {% if ed %}
-        <div class="cbook-card__bio">{% for p in ed.bio %}<p>{{ p }}</p>{% endfor %}</div>
-        <h4 class="cbook-card__subhead">Skills</h4>
-        <ul class="cbook-skills">{% for s in (ed.skills or e.skills) %}{{ skill(s) }}{% endfor %}</ul>
-        {%- for h in e.hidden %}{% if not (loop.index0 in ed.usesHidden) %}{{ hiddenPassive(h) }}{% endif %}{% endfor -%}
-        <details class="cbook-original">
-          <summary>Original notes</summary>
-          <div class="cbook-original__body">
-            <p class="cbook-original__name">{{ e.name }}</p>
-            {{ documentBody(e) }}
-          </div>
-        </details>
-      {% else %}
-        {{ documentBody(e) }}
-      {% endif %}
-    </div>
-  </article>
-{% endmacro %}
-
-{# Cards for full entries; entries that are only a name (Healers, Trapmakers...) go in a roster of name tags #}
-{% macro entries(list) %}
+{# A chapter's (or group's) names: linked tiles for characters with a page, plain name tags for the rest #}
+{% macro names(list) %}
   {% set full = list | rejectattr("bare") %}{% set bare = list | selectattr("bare") %}
-  {% if full.length %}<div class="cbook-grid">{% for e in full %}{{ card(e) }}{% endfor %}</div>{% endif %}
+  {% if full.length %}
+    <ul class="cbook-names">
+      {% for e in full %}
+        {% set shown = e.edit.name if e.edit else e.name %}
+        <li>
+          <a class="cbook-name" href="/fiction/myproject/book1/{{ e.id }}/">
+            <span class="cbook-name__tab" aria-hidden="true">{{ cb.monogram(shown) }}</span>
+            <span class="cbook-name__text">
+              <span class="cbook-name__name">{{ shown }}</span>
+              {% if e.edit and e.edit.power %}<span class="cbook-name__power">{{ e.edit.power }}</span>{% endif %}
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
   {% if bare.length %}<ul class="cbook-roster">{% for e in bare %}<li id="{{ e.id }}">{{ e.name }}</li>{% endfor %}</ul>{% endif %}
 {% endmacro %}
 
@@ -112,10 +44,7 @@ font: "allerta-stencil"
   <header class="cbook__header">
     <p class="cbook__kicker">{{ book.title }} · {{ book.subtitle }}</p>
     <h1 class="cbook__title">Book of Original Characters</h1>
-    <div class="cbook__legend">
-      <p><abbr class="cbook-mark" title="Aura/buff, self only">*</abbr> <abbr class="cbook-mark" title="Aura/buff that can be applied to allies">**</abbr></p>
-      {% for l in book.legend %}<p>{{ l }}</p>{% endfor %}
-    </div>
+    {{ cb.legend(book) }}
   </header>
 
   <nav class="cbook__index" aria-label="Chapters">
@@ -137,15 +66,15 @@ font: "allerta-stencil"
 
       {% if s.title == "Alphabet Hero" %}
         <nav class="cbook-letters" aria-label="Alphabet heroes">
-          <ol>{% for e in s.entries %}{% set shown = e.edit.name if e.edit else e.name %}<li><a href="#{{ e.id }}" title="{{ shown }}">{{ shown | replace('"', '') | replace('(', '') | trim | first }}</a></li>{% endfor %}</ol>
+          <ol>{% for e in s.entries %}{% set shown = e.edit.name if e.edit else e.name %}<li><a href="/fiction/myproject/book1/{{ e.id }}/" title="{{ shown }}">{{ cb.monogram(shown) }}</a></li>{% endfor %}</ol>
         </nav>
       {% endif %}
 
-      {{ entries(s.entries) }}
+      {{ names(s.entries) }}
       {% for g in s.groups %}
         <h3 class="cbook-group" id="{{ g.id }}">{{ g.title }}</h3>
         {% for p in g.intro %}<p class="cbook-chapter__intro">{{ p }}</p>{% endfor %}
-        {{ entries(g.entries) }}
+        {{ names(g.entries) }}
       {% endfor %}
     </section>
   {% endfor %}

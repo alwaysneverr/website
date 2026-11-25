@@ -1,0 +1,90 @@
+---
+layout: base
+pagination:
+  data: book1Characters
+  size: 1
+  alias: c
+  # Every page (not just the first) goes into collections.all, so the sitemap lists them all
+  addAllPagesToCollections: true
+permalink: "/fiction/myproject/book1/{{ c.id }}/"
+font: "allerta-stencil"
+# Kept out of the fiction/myproject tag lists (130 pages would bury the books); still in the sitemap
+override:tags: []
+eleventyComputed:
+  title: "{{ c.shownName }} · Book of Original Characters"
+  description: "{{ c.chapter.title }}: {{ c.shownName }}, from MYPROJECT Book 1 (the Stickverse's original characters)."
+---
+
+{#
+  One page per character of MYPROJECT Book 1, like the old site's alphabet pages. Data: book1-characters.11tydata.js
+  (from book1.json). The index at /fiction/myproject/book1/ lists every name.
+#}
+{% import "character-book.njk" as cb %}
+{% set e = c %}
+{% set ed = e.edit %}
+
+<div class="cbook cbook--sheet">
+  <nav class="cbook-crumbs" aria-label="Breadcrumb">
+    <a href="/fiction/myproject/book1/">Book of Original Characters</a>
+    <span aria-hidden="true">›</span>
+    <a href="/fiction/myproject/book1/#{{ c.chapter.id }}">{{ c.chapter.title }}</a>
+    {% if c.group %}<span aria-hidden="true">›</span> <span>{{ c.group }}</span>{% endif %}
+  </nav>
+
+  <header class="cbook-sheet__head">
+    <span class="cbook-sheet__tab" aria-hidden="true">{{ cb.monogram(c.shownName) }}</span>
+    <div>
+      <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ c.chapter.number }}</span> {{ c.chapter.title }}</p>
+      <h1 class="cbook-sheet__name">{{ c.shownName }}</h1>
+      {% if ed and ed.power %}<p class="cbook-card__power">{{ ed.power }}</p>{% endif %}
+      {% if ed and ed.tags.length %}
+        <ul class="cbook-card__tags" aria-label="Roles">{% for t in ed.tags %}<li>{{ t }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="cbook-sheet__body">
+    {% if ed %}
+      <div class="cbook-card__bio">{% for p in ed.bio %}<p>{{ p }}</p>{% endfor %}</div>
+      {% set skills = ed.skills or e.skills %}
+    {% else %}
+      {% if e.info.length %}<div class="cbook-card__info">{{ cb.infoLines(e.info) }}</div>{% endif %}
+      {% if e.quote.length %}<blockquote class="cbook-card__quote">{% for q in e.quote %}<p>{{ q }}</p>{% endfor %}</blockquote>{% endif %}
+      {% if e.attribution %}<p class="cbook-card__attribution">– {{ e.attribution }}</p>{% endif %}
+      {% if e.children.length %}<ul class="cbook-card__members">{% for m in e.children %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+      {% set skills = e.skills %}
+    {% endif %}
+
+    {% if skills.length %}
+      <section class="cbook-abilities" aria-labelledby="skills-title">
+        <div class="cbook-abilities__head">
+          <h2 class="cbook-card__subhead" id="skills-title">Skills</h2>
+          {% if skills | selectattr("mark") | length %}<p class="cbook-abilities__key">{{ cb.mark('*') }} {{ book1Legend[0] }}</p>{% endif %}
+        </div>
+        <ul class="cbook-abilities__grid">
+          {% for s in skills %}
+            {% if s.label %}<li class="cbook-abilities__label">{{ s.label }}</li>
+            {% else %}<li class="cbook-ability"><ul class="cbook-skills">{{ cb.skill(s) }}</ul></li>{% endif %}
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    {% for h in e.hidden %}{% if not (ed and loop.index0 in ed.usesHidden) %}{{ cb.hiddenPassive(h) }}{% endif %}{% endfor %}
+
+    {% if ed %}
+      <details class="cbook-original">
+        <summary>Original notes</summary>
+        <div class="cbook-original__body">
+          <p class="cbook-original__name">{{ e.name }}</p>
+          {{ cb.documentBody(e) }}
+        </div>
+      </details>
+    {% endif %}
+  </div>
+
+  <nav class="cbook-pager" aria-label="Characters">
+    {% if c.prev %}<a class="cbook-pager__prev" href="/fiction/myproject/book1/{{ c.prev.id }}/" rel="prev"><span>Previous</span>{{ c.prev.name }}</a>{% else %}<span></span>{% endif %}
+    {% if c.next %}<a class="cbook-pager__next" href="/fiction/myproject/book1/{{ c.next.id }}/" rel="next"><span>Next</span>{{ c.next.name }}</a>{% endif %}
+  </nav>
+</div>
