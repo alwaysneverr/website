@@ -73,3 +73,13 @@
     {% for l in book.legend %}<p>{{ l }}</p>{% endfor %}
   </div>
 {% endmacro %}
+
+{# The page's picture: the image when one has been added (public/assets/images/myproject/<book>/<id>.<ext>,
+   see src/fiction/myproject/images.js), otherwise an empty frame with the monogram, waiting for one #}
+{% macro imageSlot(image, name) %}
+  {%- if image -%}
+    <figure class="cbook-figure"><img src="{{ image }}" alt="{{ name }}" loading="lazy" decoding="async"></figure>
+  {%- else -%}
+    <div class="cbook-figure cbook-figure--empty" aria-hidden="true"><span>{{ monogram(name) }}</span></div>
+  {%- endif -%}
+{% endmacro %}

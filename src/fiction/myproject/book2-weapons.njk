@@ -1,0 +1,78 @@
+---
+layout: base
+pagination:
+  data: book2Weapons
+  size: 1
+  alias: w
+  # Every page (not just the first) goes into collections.all, so the sitemap lists them all
+  addAllPagesToCollections: true
+permalink: "/fiction/myproject/book2/{{ w.id }}/"
+font: "allerta-stencil"
+# Kept out of the fiction/myproject tag lists; still in the sitemap
+override:tags: []
+eleventyComputed:
+  title: "{{ w.name }} · Book of Weapons"
+  description: "{{ w.chapter.title }}: {{ w.name }}, from MYPROJECT Book 2 (the Stickverse's weapons)."
+---
+
+{#
+  One page per weapon of MYPROJECT Book 2, like Book 1's character pages. Data: book2-weapons.11tydata.js
+  (from book2.json). The index at /fiction/myproject/book2/ lists every weapon. Empty fields in the document
+  stay as blank lines.
+#}
+{% import "character-book.njk" as cb %}
+
+{% macro blank() %}<span class="cbook-blank" aria-label="Not filled in"></span>{% endmacro %}
+{% macro alt(name) %}{% if name %} <span class="cbook-alt" title="Name on the old Book 2 page">({{ name }})</span>{% endif %}{% endmacro %}
+
+<div class="cbook cbook--weapons cbook--sheet">
+  <nav class="cbook-crumbs" aria-label="Breadcrumb">
+    <a href="/fiction/myproject/book2/">Book of Weapons</a>
+    <span aria-hidden="true">›</span>
+    <a href="/fiction/myproject/book2/#{{ w.chapter.id }}">{{ w.chapter.title }}</a>
+  </nav>
+
+  <header class="cbook-sheet__head">
+    {{ cb.imageSlot(w.image, w.name) }}
+    <div>
+      <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ w.chapter.number }}</span> {{ w.chapter.title }}</p>
+      <h1 class="cbook-sheet__name">{{ w.name }}</h1>
+      {% if w.dangerLevel %}
+        <p class="cbook-sheet__danger"><span class="cbook-danger cbook-danger--{{ w.danger | lower }}">{{ w.danger }}</span> {{ w.dangerLevel.name }}{{ alt(w.dangerLevel.oldName) }}</p>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="cbook-sheet__body">
+    {% if w.info.length %}<div class="cbook-card__info">{{ cb.infoLines(w.info) }}</div>{% endif %}
+
+    <dl class="cbook-fields cbook-fields--sheet">
+      <div>
+        <dt>{{ book2Legend.danger.title }}</dt>
+        <dd>{% if w.dangerLevel %}<span class="cbook-danger cbook-danger--{{ w.danger | lower }}">{{ w.danger }}</span> {{ w.dangerLevel.name }}{{ alt(w.dangerLevel.oldName) }}{% else %}{{ blank() }}{% endif %}</dd>
+      </div>
+      <div>
+        <dt>{{ book2Legend.availability.title }}</dt>
+        <dd>
+          {% if w.availabilityLevel %}
+            <strong>{{ w.availabilityLevel.name }}</strong>{{ alt(w.availabilityLevel.oldName) }}
+            <span class="cbook-fields__note">{{ w.availabilityLevel.text }}</span>
+          {% else %}{{ blank() }}{% endif %}
+        </dd>
+      </div>
+      <div>
+        <dt>Skills</dt>
+        <dd>
+          {% if w.skills.length %}
+            <ul class="cbook-skills">{% for k in w.skills %}<li class="cbook-skill"><span class="cbook-skill__name">{{ k }}</span></li>{% endfor %}</ul>
+          {% else %}{{ blank() }}{% endif %}
+        </dd>
+      </div>
+    </dl>
+  </div>
+
+  <nav class="cbook-pager" aria-label="Weapons">
+    {% if w.prev %}<a class="cbook-pager__prev" href="/fiction/myproject/book2/{{ w.prev.id }}/" rel="prev"><span>Previous</span>{{ w.prev.name }}</a>{% else %}<span></span>{% endif %}
+    {% if w.next %}<a class="cbook-pager__next" href="/fiction/myproject/book2/{{ w.next.id }}/" rel="next"><span>Next</span>{{ w.next.name }}</a>{% endif %}
+  </nav>
+</div>

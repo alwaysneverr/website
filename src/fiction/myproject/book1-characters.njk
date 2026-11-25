@@ -32,7 +32,7 @@ eleventyComputed:
   </nav>
 
   <header class="cbook-sheet__head">
-    <span class="cbook-sheet__tab" aria-hidden="true">{{ cb.monogram(c.shownName) }}</span>
+    {{ cb.imageSlot(c.image, c.shownName) }}
     <div>
       <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ c.chapter.number }}</span> {{ c.chapter.title }}</p>
       <h1 class="cbook-sheet__name">{{ c.shownName }}</h1>

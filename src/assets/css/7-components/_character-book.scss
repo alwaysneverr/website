@@ -857,3 +857,65 @@ html[data-theme="light"] .cbook--weapons {
   padding: 0;
   list-style: none;
 }
+
+/* ==========================================================================
+   PICTURES (character and weapon pages): the image, or an empty frame waiting for one
+   ========================================================================== */
+
+.cbook-figure {
+  width: clamp(6.5rem, 24vw, 12rem);
+  aspect-ratio: 3 / 4;
+  margin: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--cb-paper);
+  border: 1px solid var(--cb-rule);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// No picture yet: a dashed frame with the monogram
+.cbook-figure--empty {
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--cb-accent-soft);
+  background: repeating-linear-gradient(-45deg, transparent 0 8px, var(--cb-grid) 8px 9px), var(--cb-paper);
+
+  span {
+    font-family: 'Allerta Stencil', sans-serif;
+    font-size: clamp(2.25rem, 9vw, 4.5rem);
+    color: var(--cb-accent);
+    opacity: 0.8;
+  }
+}
+
+/* Book 2 weapon pages and index */
+.cbook-sheet__danger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.35rem 0 0;
+}
+
+.cbook-fields--sheet {
+  max-width: 46rem;
+  margin-top: 1.25rem;
+  gap: 0.75rem;
+
+  > div { grid-template-columns: 9rem 1fr; padding-bottom: 0.6rem; border-bottom: 1px dotted var(--cb-rule); }
+}
+
+.cbook-fields__note {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--cb-muted);
+}
+
+.cbook-name__badge {
+  margin-left: auto;
+  flex: none;
+}

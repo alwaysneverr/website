@@ -2,6 +2,7 @@
 // to show, in book order, with its chapter and its previous/next neighbours. Entries that are only a name
 // (Healers, Trapmakers...) get no page; the index lists them as plain names.
 import fs from 'node:fs';
+import { findImage } from './images.js';
 
 const { book1 } = JSON.parse(fs.readFileSync(new URL('./book1.json', import.meta.url), 'utf8'));
 
@@ -12,7 +13,8 @@ book1.sections.forEach((section, i) => {
   for (const { group, entries } of lists) {
     for (const entry of entries) {
       if (entry.bare) continue;
-      characters.push({ ...entry, chapter, group, shownName: entry.edit ? entry.edit.name : entry.name });
+      // image: public/assets/images/myproject/book1/<id>.<ext> when one has been added (see images.js)
+      characters.push({ ...entry, chapter, group, shownName: entry.edit ? entry.edit.name : entry.name, image: findImage('book1', entry.id) });
     }
   }
 });

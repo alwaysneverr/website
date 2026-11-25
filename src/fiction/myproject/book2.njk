@@ -10,14 +10,12 @@ font: "allerta-stencil"
   Book 2 of MYPROJECT: the weapon book, from the user's own text file (decapitalised, nothing else changed).
   Data: book2.json beside this file, made by _local/myproject/book2.mjs. Three legend names differ on the old
   site's Book 2 page; both are shown, the old page's in brackets. Styles: _character-book.scss (shared with Book 1).
+  This page lists the weapons; each has its own page (book2-weapons.njk).
 #}
 {% set book = book2 %}
 
 {# Danger level code -> its name in the legend, for the badge's title #}
 {% macro dangerName(code) %}{% for d in book.legend.danger.items %}{% if d.code == code %}{{ d.name }}{% endif %}{% endfor %}{% endmacro %}
-
-{# An empty field in the document stays an empty line, like a form not filled in yet #}
-{% macro blank() %}<span class="cbook-blank" aria-label="Not filled in"></span>{% endmacro %}
 
 {% macro alt(name) %}{% if name %} <span class="cbook-alt" title="Name on the old Book 2 page">({{ name }})</span>{% endif %}{% endmacro %}
 
@@ -54,40 +52,24 @@ font: "allerta-stencil"
       </header>
 
       <nav class="cbook-letters" aria-label="Weapons by letter">
-        <ol>{% for e in s.entries %}<li><a href="#{{ e.id }}" title="{{ e.name }}">{{ e.name | replace('"', '') | trim | first }}</a></li>{% endfor %}</ol>
+        <ol>{% for e in s.entries %}<li><a href="/fiction/myproject/book2/{{ e.id }}/" title="{{ e.name }}">{{ e.name | replace('"', '') | trim | first }}</a></li>{% endfor %}</ol>
       </nav>
 
-      <div class="cbook-grid">
+      {# Each weapon has its own page (book2-weapons.njk); this lists them with their danger level #}
+      <ul class="cbook-names">
         {% for e in s.entries %}
-          <article class="cbook-card cbook-card--weapon" id="{{ e.id }}">
-            <header class="cbook-card__head">
-              <span class="cbook-card__tab" aria-hidden="true">{{ e.name | replace('"', '') | trim | first }}</span>
-              <h3 class="cbook-card__name"><a href="#{{ e.id }}">{{ e.name }}</a></h3>
-            </header>
-            <div class="cbook-card__body">
-              {% if e.info.length %}<div class="cbook-card__info">{% for t in e.info %}<p>{{ t }}</p>{% endfor %}</div>{% endif %}
-              <dl class="cbook-fields">
-                <div>
-                  <dt>{{ book.legend.danger.title }}</dt>
-                  <dd>{% if e.danger %}<span class="cbook-danger cbook-danger--{{ e.danger | lower }}" title="{{ dangerName(e.danger) | trim }}">{{ e.danger }}</span>{% else %}{{ blank() }}{% endif %}</dd>
-                </div>
-                <div>
-                  <dt>{{ book.legend.availability.title }}</dt>
-                  <dd>{% if e.availability %}{{ e.availability }}{% else %}{{ blank() }}{% endif %}</dd>
-                </div>
-                <div>
-                  <dt>Skills</dt>
-                  <dd>
-                    {% if e.skills.length %}
-                      <ul class="cbook-skills">{% for k in e.skills %}<li class="cbook-skill"><span class="cbook-skill__name">{{ k }}</span></li>{% endfor %}</ul>
-                    {% else %}{{ blank() }}{% endif %}
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </article>
+          <li>
+            <a class="cbook-name" href="/fiction/myproject/book2/{{ e.id }}/">
+              <span class="cbook-name__tab" aria-hidden="true">{{ e.name | replace('"', '') | trim | first }}</span>
+              <span class="cbook-name__text">
+                <span class="cbook-name__name">{{ e.name }}</span>
+                {% if e.availability %}<span class="cbook-name__power">{{ e.availability }}</span>{% endif %}
+              </span>
+              {% if e.danger %}<span class="cbook-danger cbook-danger--{{ e.danger | lower }} cbook-name__badge" title="{{ book.legend.danger.title }}: {{ dangerName(e.danger) | trim }}">{{ e.danger }}</span>{% endif %}
+            </a>
+          </li>
         {% endfor %}
-      </div>
+      </ul>
     </section>
   {% endfor %}
 </div>
