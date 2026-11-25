@@ -1,4 +1,93 @@
 ---
 layout: base
-draft: true
+title: "Book of Weapons"
+description: "MYPROJECT Book 2: Weapons. Weapons of the Stickverse, converted from a pencil-written book."
+permalink: "/fiction/myproject/book2/"
+font: "allerta-stencil"
 ---
+
+{#
+  Book 2 of MYPROJECT: the weapon book, from the user's own text file (decapitalised, nothing else changed).
+  Data: book2.json beside this file, made by _local/myproject/book2.mjs. Three legend names differ on the old
+  site's Book 2 page; both are shown, the old page's in brackets. Styles: _character-book.scss (shared with Book 1).
+#}
+{% set book = book2 %}
+
+{# Danger level code -> its name in the legend, for the badge's title #}
+{% macro dangerName(code) %}{% for d in book.legend.danger.items %}{% if d.code == code %}{{ d.name }}{% endif %}{% endfor %}{% endmacro %}
+
+{# An empty field in the document stays an empty line, like a form not filled in yet #}
+{% macro blank() %}<span class="cbook-blank" aria-label="Not filled in"></span>{% endmacro %}
+
+{% macro alt(name) %}{% if name %} <span class="cbook-alt" title="Name on the old Book 2 page">({{ name }})</span>{% endif %}{% endmacro %}
+
+<div class="cbook cbook--weapons">
+  <header class="cbook__header">
+    <p class="cbook__kicker">{{ book.title }} · {{ book.subtitle }}</p>
+    <h1 class="cbook__title">Book of Weapons</h1>
+
+    <div class="cbook-legends">
+      <section class="cbook__legend" aria-labelledby="legend-danger">
+        <h2 class="cbook-legends__title" id="legend-danger">{{ book.legend.danger.title }}</h2>
+        <dl class="cbook-legends__list">
+          {% for d in book.legend.danger.items %}
+            <div><dt><span class="cbook-danger cbook-danger--{{ d.code | lower }}">{{ d.code }}</span></dt><dd>{{ d.name }}{{ alt(d.oldName) }}</dd></div>
+          {% endfor %}
+        </dl>
+      </section>
+      <section class="cbook__legend" aria-labelledby="legend-availability">
+        <h2 class="cbook-legends__title" id="legend-availability">{{ book.legend.availability.title }}</h2>
+        <dl class="cbook-legends__list cbook-legends__list--wide">
+          {% for a in book.legend.availability.items %}
+            <div><dt>{{ a.name }}{{ alt(a.oldName) }}</dt><dd>{{ a.text }}</dd></div>
+          {% endfor %}
+        </dl>
+      </section>
+    </div>
+  </header>
+
+  {% for s in book.sections %}
+    <section class="cbook-chapter" id="{{ s.id }}" aria-labelledby="{{ s.id }}-title">
+      <header class="cbook-chapter__head">
+        <span class="cbook-chapter__number" aria-hidden="true">{{ loop.index }}</span>
+        <h2 class="cbook-chapter__title" id="{{ s.id }}-title">{{ s.title }}</h2>
+      </header>
+
+      <nav class="cbook-letters" aria-label="Weapons by letter">
+        <ol>{% for e in s.entries %}<li><a href="#{{ e.id }}" title="{{ e.name }}">{{ e.name | replace('"', '') | trim | first }}</a></li>{% endfor %}</ol>
+      </nav>
+
+      <div class="cbook-grid">
+        {% for e in s.entries %}
+          <article class="cbook-card cbook-card--weapon" id="{{ e.id }}">
+            <header class="cbook-card__head">
+              <span class="cbook-card__tab" aria-hidden="true">{{ e.name | replace('"', '') | trim | first }}</span>
+              <h3 class="cbook-card__name"><a href="#{{ e.id }}">{{ e.name }}</a></h3>
+            </header>
+            <div class="cbook-card__body">
+              {% if e.info.length %}<div class="cbook-card__info">{% for t in e.info %}<p>{{ t }}</p>{% endfor %}</div>{% endif %}
+              <dl class="cbook-fields">
+                <div>
+                  <dt>{{ book.legend.danger.title }}</dt>
+                  <dd>{% if e.danger %}<span class="cbook-danger cbook-danger--{{ e.danger | lower }}" title="{{ dangerName(e.danger) | trim }}">{{ e.danger }}</span>{% else %}{{ blank() }}{% endif %}</dd>
+                </div>
+                <div>
+                  <dt>{{ book.legend.availability.title }}</dt>
+                  <dd>{% if e.availability %}{{ e.availability }}{% else %}{{ blank() }}{% endif %}</dd>
+                </div>
+                <div>
+                  <dt>Skills</dt>
+                  <dd>
+                    {% if e.skills.length %}
+                      <ul class="cbook-skills">{% for k in e.skills %}<li class="cbook-skill"><span class="cbook-skill__name">{{ k }}</span></li>{% endfor %}</ul>
+                    {% else %}{{ blank() }}{% endif %}
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+</div>

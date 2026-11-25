@@ -1,0 +1,321 @@
+{
+ "book2": {
+  "title": "MyProject",
+  "subtitle": "Book 2 : Weapons",
+  "legend": {
+   "danger": {
+    "title": "Danger Level",
+    "items": [
+     {
+      "code": "S",
+      "name": "Safe",
+      "oldName": null
+     },
+     {
+      "code": "A",
+      "name": "Alpha",
+      "oldName": null
+     },
+     {
+      "code": "B",
+      "name": "Blue",
+      "oldName": null
+     },
+     {
+      "code": "C",
+      "name": "Crescent",
+      "oldName": null
+     },
+     {
+      "code": "D",
+      "name": "Dangerous",
+      "oldName": "Devil"
+     },
+     {
+      "code": "DD",
+      "name": "Deadly Dangerous",
+      "oldName": "Daredevil"
+     },
+     {
+      "code": "F",
+      "name": "Forbidden",
+      "oldName": null
+     }
+    ]
+   },
+   "availability": {
+    "title": "Availability",
+    "items": [
+     {
+      "name": "Common",
+      "oldName": null,
+      "text": "Can be found anywhere"
+     },
+     {
+      "name": "Uncommon",
+      "oldName": null,
+      "text": "Can be found in most places"
+     },
+     {
+      "name": "Rare",
+      "oldName": null,
+      "text": "Only available in some places"
+     },
+     {
+      "name": "Very Rare",
+      "oldName": null,
+      "text": "Only available in a specific place"
+     },
+     {
+      "name": "Very Very Rare",
+      "oldName": "Ultra Rare",
+      "text": "Dispersed around the Stickverse, and hard to find"
+     },
+     {
+      "name": "Artifact Rare",
+      "oldName": null,
+      "text": "There's only one available"
+     }
+    ]
+   }
+  },
+  "sections": [
+   {
+    "id": "alphabetical-artifact-weapon",
+    "title": "Alphabetical Artifact Weapon",
+    "entries": [
+     {
+      "id": "axe-of-array-lightning",
+      "name": "Axe of Array : Lightning",
+      "info": [
+       "Artifact weapons that was accidentally mass produced in the past",
+       "It grants the people who wield it lightning powers",
+       "Hunted for either its powers or to melt it so"
+      ],
+      "danger": "B",
+      "availability": "Very Very Rare",
+      "skills": [
+       "Lightning Parry"
+      ]
+     },
+     {
+      "id": "beams-bazooka",
+      "name": "Beam's Bazooka",
+      "info": [
+       "Michael Beam's magnum opus",
+       "Michael Beam created the weapons and its magazine",
+       "The weapon can only work with its accompanying Beam magazine, a very very rare item"
+      ],
+      "danger": "C",
+      "availability": "Artifact Rare",
+      "skills": [
+       "Beam of Light"
+      ]
+     },
+     {
+      "id": "coin-cosh",
+      "name": "Coin Cosh",
+      "info": [
+       "Also known as a blackjack",
+       "Infused with a wrath of a father, this weapon is capable to turn people deadly with rage"
+      ],
+      "danger": "C",
+      "availability": "Artifact Rare",
+      "skills": []
+     },
+     {
+      "id": "dumb-droid",
+      "name": "Dumb Droid",
+      "info": [
+       "Plain dumb droid",
+       "Be careful not to hand it any weapon"
+      ],
+      "danger": "A",
+      "availability": "Uncommon",
+      "skills": []
+     },
+     {
+      "id": "excalibur",
+      "name": "Excalibur",
+      "info": [
+       "Sword that was held by one of the legendary swordsmen"
+      ],
+      "danger": "F",
+      "availability": "Artifact Rare",
+      "skills": []
+     },
+     {
+      "id": "fiery-fan",
+      "name": "Fiery Fan",
+      "info": [],
+      "danger": "D",
+      "availability": "Very Rare",
+      "skills": []
+     },
+     {
+      "id": "green-glider",
+      "name": "Green Glider",
+      "info": [
+       "An object from 616World that has history of being the one that killed its user"
+      ],
+      "danger": "C",
+      "availability": "Artifact Rare",
+      "skills": []
+     },
+     {
+      "id": "hells-hollow-heart",
+      "name": "Hell's Hollow Heart",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "interspersal",
+      "name": "Interspersal",
+      "info": [],
+      "danger": "F",
+      "availability": "Artifact Rare",
+      "skills": []
+     },
+     {
+      "id": "jacks-sword",
+      "name": "Jack's Sword",
+      "info": [],
+      "danger": "",
+      "availability": "Artifact Rare",
+      "skills": []
+     },
+     {
+      "id": "kobe-of-the-stickverse",
+      "name": "Kobe of the Stickverse",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "little-guy",
+      "name": "\"Little Guy\"",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "mini",
+      "name": "Mini",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "n",
+      "name": "N",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "o",
+      "name": "O",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "p",
+      "name": "P",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "q",
+      "name": "Q",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "r",
+      "name": "R",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "s",
+      "name": "S",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "t",
+      "name": "T",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "u",
+      "name": "U",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "v",
+      "name": "V",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "world-shredder",
+      "name": "\"World Shredder\"",
+      "info": [],
+      "danger": "F",
+      "availability": "Artifact Rare",
+      "skills": []
+     },
+     {
+      "id": "x",
+      "name": "X",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "y",
+      "name": "Y",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "id": "z",
+      "name": "Z",
+      "info": [],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     }
+    ]
+   }
+  ]
+ }
+}
