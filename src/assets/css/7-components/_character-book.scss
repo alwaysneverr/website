@@ -1,0 +1,494 @@
+/* ==========================================================================
+   COMPONENT: CHARACTER BOOK (MYPROJECT Book 1)
+   A dossier casebook: graph-paper ground (the book began as a pencil notebook), index cards with a
+   monogram tab, skill rows with the document's own aura marks, hidden passives blacked out until opened.
+   Page: src/fiction/myproject/book1.njk
+   ========================================================================== */
+
+.cbook {
+  // Blueprint at night, notebook by day
+  --cb-paper: #0c1322;
+  --cb-card: #111a2e;
+  --cb-grid: rgba(125, 211, 252, 0.07);
+  --cb-ink: #e2e8f0;
+  --cb-muted: #94a3b8;
+  --cb-rule: rgba(148, 163, 184, 0.22);
+  --cb-accent: #fbbf24;      // pencil-highlighter amber
+  --cb-accent-ink: #1c1407;  // text on the accent
+  --cb-accent-soft: rgba(251, 191, 36, 0.35);
+  --cb-stamp: #f87171;
+  --cb-redact: #e2e8f0;
+
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+  color: var(--cb-ink);
+  background-color: var(--cb-paper);
+  background-image:
+    linear-gradient(var(--cb-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cb-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+
+  p { margin: 0 0 0.5em; }
+  a { color: inherit; }
+}
+
+html[data-theme="light"] .cbook {
+  --cb-paper: #fbf8ef;
+  --cb-card: #fffdf7;
+  --cb-grid: rgba(37, 99, 235, 0.08);
+  --cb-ink: #1f2937;
+  --cb-muted: #57534e;
+  --cb-rule: rgba(87, 83, 78, 0.25);
+  --cb-accent: #b45309;
+  --cb-accent-ink: #fffbeb;
+  --cb-accent-soft: rgba(180, 83, 9, 0.28);
+  --cb-stamp: #b91c1c;
+  --cb-redact: #1f2937;
+}
+
+/* ---- Header and legend ---- */
+.cbook__header {
+  padding: 2.5rem 0 1.5rem;
+}
+
+.cbook__kicker {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cb-muted);
+}
+
+.cbook__title,
+.cbook-chapter__title,
+.cbook-card__tab,
+.cbook-chapter__number,
+.cbook-stamp,
+.cbook-card__subhead,
+.cbook-group {
+  font-family: 'Allerta Stencil', 'DM Sans', sans-serif;
+}
+
+.cbook__title {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1.05;
+  margin: 0.25rem 0 1.25rem;
+}
+
+.cbook__legend {
+  max-width: 44rem;
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--cb-rule);
+  border-radius: 6px;
+  background: var(--cb-card);
+  font-size: 0.9rem;
+
+  p:first-child { display: flex; gap: 0.5rem; }
+  p:last-child { margin: 0; }
+}
+
+/* ---- Chapter rail ---- */
+.cbook__index {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -1rem;
+  padding: 0.5rem 1rem;
+  background: var(--cb-paper);
+  border-bottom: 1px solid var(--cb-rule);
+
+  ol {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0 0 0.25rem;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  a {
+    display: block;
+    white-space: nowrap;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--cb-rule);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    background: var(--cb-card);
+    overflow-wrap: normal;
+
+    &:hover, &:focus-visible { border-color: var(--cb-accent); color: var(--cb-accent); }
+  }
+}
+
+/* ---- Chapters ---- */
+.cbook-chapter {
+  padding-top: 2.5rem;
+  scroll-margin-top: 3rem;
+}
+
+.cbook-chapter__head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--cb-ink);
+}
+
+.cbook-chapter__number {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--cb-accent);
+  border-radius: 50%;
+  color: var(--cb-accent);
+  font-size: 1.3rem;
+}
+
+.cbook-chapter__title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  margin: 0;
+}
+
+.cbook-chapter__subtitle {
+  margin: 0.15rem 0 0;
+  color: var(--cb-muted);
+}
+
+.cbook-chapter__intro {
+  max-width: 48rem;
+}
+
+.cbook-group {
+  margin: 2rem 0 1rem;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &::after { content: ''; flex: 1; border-top: 1px dashed var(--cb-rule); }
+}
+
+/* A–Z strip for the Alphabet Heroes */
+.cbook-letters ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--cb-rule);
+    border-radius: 4px;
+    background: var(--cb-card);
+    font-family: 'Allerta Stencil', sans-serif;
+    text-decoration: none;
+
+    &:hover, &:focus-visible { background: var(--cb-accent); color: var(--cb-accent-ink); border-color: var(--cb-accent); }
+  }
+}
+
+/* ---- Cards ---- */
+.cbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 23rem), 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.cbook-card {
+  position: relative;
+  scroll-margin-top: 3.5rem;
+  background: var(--cb-card);
+  border: 1px solid var(--cb-rule);
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 var(--cb-rule); // a second card peeking out underneath
+
+  &:target { outline: 2px solid var(--cb-accent); outline-offset: 3px; }
+}
+
+.cbook-card__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  padding: 1rem 1rem 0.75rem;
+  border-bottom: 1px solid var(--cb-rule);
+}
+
+.cbook-card__tab {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 4px;
+  background: var(--cb-accent);
+  color: var(--cb-accent-ink);
+  font-size: 1.5rem;
+}
+
+.cbook-card__name {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.25;
+
+  a { text-decoration: none; }
+  a:hover, a:focus-visible { text-decoration: underline; text-decoration-color: var(--cb-accent); }
+}
+
+.cbook-card__power {
+  margin: 0.2rem 0 0;
+  font-style: italic;
+  color: var(--cb-muted);
+  font-size: 0.92rem;
+}
+
+.cbook-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 0.05rem 0.5rem;
+    border: 1px solid var(--cb-accent-soft);
+    border-radius: 999px;
+    font-size: 0.75rem;
+  }
+}
+
+.cbook-card__body {
+  padding: 0.85rem 1rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+// The document's notes read like lines on an index card
+.cbook-card__info p,
+.cbook-card__bio p {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dotted var(--cb-rule);
+}
+
+.cbook-card__quote {
+  margin: 0 0 0.5rem;
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--cb-accent-soft);
+  font-style: italic;
+}
+
+.cbook-card__attribution {
+  font-size: 0.85rem;
+  color: var(--cb-muted);
+}
+
+.cbook-card__members {
+  margin: 0.25rem 0 0.5rem;
+  padding-left: 1.1rem;
+}
+
+.cbook-card__subhead {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cb-muted);
+}
+
+/* ---- Skills ---- */
+.cbook-skills {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.cbook-skills--sub {
+  margin: 0.5rem 0 0 0.6rem;
+  padding-left: 0.75rem;
+  border-left: 1px dashed var(--cb-rule);
+}
+
+.cbook-skill {
+  padding: 0.35rem 0 0.35rem 0.65rem;
+  border-left: 3px solid var(--cb-accent-soft);
+}
+
+.cbook-skill__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.cbook-skill__name {
+  font-weight: 700;
+}
+
+.cbook-skill__text {
+  margin: 0.15rem 0 0;
+}
+
+.cbook-skill--code .cbook-skill__name,
+.cbook-hidden--code strong {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-weight: 600;
+}
+
+// A blank slot in the document ("-" with nothing after it)
+.cbook-skill--empty {
+  height: 1.5rem;
+  border: 1px dashed var(--cb-rule);
+  border-radius: 4px;
+  background: repeating-linear-gradient(-45deg, transparent 0 6px, var(--cb-grid) 6px 7px);
+}
+
+.cbook-skills__label {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cb-muted);
+}
+
+.cbook-chip {
+  display: inline-block;
+  padding: 0 0.45rem;
+  border: 1px solid var(--cb-rule);
+  border-radius: 999px;
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 0.72rem;
+  color: var(--cb-muted);
+  white-space: nowrap;
+}
+
+.cbook abbr.cbook-mark {
+  display: inline-block;
+  border-bottom: 0;
+  min-width: 1.4em;
+  padding: 0 0.3em;
+  border-radius: 4px;
+  background: var(--cb-accent);
+  color: var(--cb-accent-ink);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: help;
+}
+
+/* ---- Hidden passives: redacted until opened ---- */
+.cbook-hidden {
+  margin-top: 0.75rem;
+
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cb-muted);
+
+    &::-webkit-details-marker { display: none; }
+  }
+
+  .cbook-hidden__bar {
+    flex: 1;
+    height: 0.9rem;
+    border-radius: 2px;
+    background: var(--cb-redact);
+  }
+
+  &[open] .cbook-hidden__bar { display: none; }
+  p { margin: 0.35rem 0 0; }
+}
+
+/* ---- Original notes (the document's text under an edited entry) ---- */
+.cbook-original {
+  margin-top: 1rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--cb-rule);
+
+  > summary {
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--cb-muted);
+  }
+}
+
+.cbook-original__body {
+  margin-top: 0.6rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  background: var(--cb-paper);
+  font-size: 0.9rem;
+}
+
+.cbook-original__name {
+  font-weight: 700;
+}
+
+/* ---- Stamps for status lines ---- */
+.cbook-stamp {
+  display: inline-block;
+  margin: 0.25rem 0;
+  padding: 0.15rem 0.6rem;
+  border: 2px solid var(--cb-stamp);
+  border-radius: 3px;
+  color: var(--cb-stamp);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  transform: rotate(-2deg);
+}
+
+.cbook-card__info p.cbook-stamp { border-bottom: 2px solid var(--cb-stamp); padding-bottom: 0.15rem; }
+
+/* ---- Roster: entries that are only a name ---- */
+.cbook-roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding: 0.45rem 0.9rem 0.45rem 1.6rem;
+    border: 1px solid var(--cb-rule);
+    border-radius: 4px 14px 14px 4px;
+    background: var(--cb-card);
+    scroll-margin-top: 3.5rem;
+
+    // the hole of a name tag
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.55rem;
+      top: 50%;
+      width: 0.45rem;
+      height: 0.45rem;
+      margin-top: -0.225rem;
+      border-radius: 50%;
+      border: 1px solid var(--cb-muted);
+    }
+  }
+}
