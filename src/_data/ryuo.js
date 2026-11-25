@@ -1447,11 +1447,11 @@ export default withRuby({
           sources: ["https://ja.wikipedia.org/wiki/羽生善治"],
         },
         {
-          name: "Pen Names",
-          type: "Shogi World",
+          name: "Ms. Mato",
+          type: "Name",
           chapter: "Review Session",
-          quote: "Shogi writers are known for using <b><u>pen names</u></b>. That’s what tipped her off, for sure. … “This can be read as kugui, yes?”",
-          note: "Machi's pen name is 鵠[くぐい] (kugui), an old word for a swan, which Ryou reads the Chinese way as koku. Machi's own family name is Kugui, so it was in the email all along.",
+          quote: "Shogi writers are known for using pen names. That’s what tipped her off, for sure. … That’s the way <b><u>Ms. Mato</u></b> writes her pen name. … “This can be read as <b><u>kugui</u></b>, yes?”",
+          note: "The journalist everyone calls Ms. Mato is Machi Kugui all along. Her byline is the single kanji 鵠[まと], which has two native readings: まと (mato), the bull's-eye of a target, as in 正[せい]鵠[こく] (seikoku), and くぐい (kugui), an old word for a swan. The series only ever uses the first. Ryou tries the Chinese reading, koku, and Machi points out the second: her own family name, in the email all along.",
         },
         {
           name: "Ozaki",
