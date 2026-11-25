@@ -19,3 +19,9 @@ body {
     padding: 2rem 1rem; // fallback
     padding: 2rem clamp(var(--spacing-medium), 3.75vw, var(--spacing-x-large));
 }
+
+
+// The page's main area and containers take the theme's text colour (was in 2-design-tokens/_colors.scss)
+main, .container {
+  color: var(--text-main) !important;
+}

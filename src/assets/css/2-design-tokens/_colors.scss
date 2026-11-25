@@ -60,13 +60,4 @@ html[data-theme="light"] {
   --score-bad: #9f1239 !important;
 }
 
-/* ==========================================================================
-   CORE SCAFFOLD LAYOUT SHEET BINDINGS
-   ========================================================================== */
-
-
-// Automatically ensure your master container layouts match background variables
-main, .container {
-  color: var(--text-main) !important;
-}
-
+// The text colour of main and .container is set in 6-skeleton/_layouts.scss (tokens output no rules)

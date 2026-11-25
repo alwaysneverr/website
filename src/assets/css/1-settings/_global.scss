@@ -1,21 +1,6 @@
 /**
- * Global settings
+ * Global settings: project-wide configuration (Sass variables or custom properties).
+ *
+ * Settings output no CSS. The body colours and the theme-switch transition that used to sit here are in
+ * 5-elements/_body.scss.
  */
-
-/* ==========================================================================
-   FLICKER-FREE CORE CANVAS CONFIGURATIONS
-   ========================================================================== */
-
-body {
-  background-color: var(--site-bg) !important;
-  color: var(--text-main) !important;
-  
-  // FIX 2: Restrict transition animations purely to interactive clicks.
-  // This completely stops page loads from accidentally animating background frames!
-  transition: color 0.1s ease !important;
-}
-
-// Target active theme attribute changes explicitly for smooth interactive click updates
-html[data-theme] body {
-  transition: background-color 0.25s ease, color 0.25s ease !important;
-}

@@ -22,16 +22,3 @@
     color: #000000 !important;
   }
 }
-
-/* SYSTEM-WIDE HEADER VERSION DROPDOWN MISC LABEL MAPPING */
-.site-version-selector__label {
-  font-size: var(--step--1) !important;
-  font-family: monospace !important;
-  color: var(--text-muted) !important;
-}
-
-.site-version-selector__dropdown {
-  background: var(--input-fill) !important;
-  border-color: var(--border-subtle) !important;
-  color: var(--text-main) !important;
-}

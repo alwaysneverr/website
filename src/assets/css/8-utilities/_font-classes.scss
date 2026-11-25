@@ -1,0 +1,40 @@
+/**
+ * Font utilities: classes that give one element a different family (stencil titles, the Book of Creation, …)
+ */
+
+.merriweather-regular {
+    font-family: 'Merriweather';
+}
+
+.allerta-stencil {
+    font-family: 'Allerta Stencil';
+}
+
+.kosugi-maru-regular {
+    font-family: 'Kosugi Maru';
+}
+
+.cinzel-unique {
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+    font-weight: 550;
+    font-style: normal;
+}
+
+.cardo-regular {
+    font-family: "Cardo", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.cardo-bold {
+    font-family: "Cardo", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.cardo-regular-italic {
+    font-family: "Cardo", serif;
+    font-weight: 400;
+    font-style: italic;
+}

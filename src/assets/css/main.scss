@@ -1,5 +1,24 @@
+/* ==========================================================================
+   CSS STRUCTURE (after Matthias Ott, "How I Structure My CSS")
+   https://matthiasott.com/notes/how-i-structure-my-css
+
+   Numbered folders, imported one file per line, from general to specific:
+   1-settings       project configuration                 no CSS output
+   2-design-tokens  colours, fonts, spacing, type scale   only custom properties
+   3-tools          helpers from the template
+   4-generic        reset (cssremedy), @font-face, normalize, print: the first real CSS
+   5-elements       bare HTML elements: body, headings, links, lists...
+   6-skeleton       page layout, containers and small layout objects
+   7-components     one file per component (BEM-style class names)
+   8-utilities      helper classes, last so they win (font classes, states)
+   _shame.scss      documented hacks only, with why and how to fix them properly
+
+   Outside this bundle:
+   pages/   stylesheets linked by one page each (reviews, the play layout)
+   legacy/  the old site's styles, loaded at the end inside .legacy-archive-content
+   ========================================================================== */
+
 /* 1. Settings */
-@use 'cssremedy/css/remedy';
 @use "sass:meta";
 @use "1-settings/global";
 
@@ -17,6 +36,8 @@
 @use "3-tools/clearfix";
 
 /* 4. Generic */
+@use 'cssremedy/css/remedy';
+@use "4-generic/font-face";
 @use "4-generic/normalize";
 @use "4-generic/print";
 
@@ -39,12 +60,11 @@
 @use "7-components/header";
 @use "7-components/footer";
 @use "7-components/postlist";
-@use "7-components/animations";
 @use "7-components/badges";
 @use "7-components/field-notes";
 @use "7-components/shogi-board";
 @use "7-components/beer-legacy";
-@use "7-components/review_cards";
+@use "7-components/review-cards";
 @use "7-components/tag-cloud";
 @use "7-components/content-showcase";
 @use "7-components/review-pagination";
@@ -56,11 +76,13 @@
 @use "7-components/stories";
 @use "7-components/character-book";
 @use "7-components/homepage";
-@use "7-components/post-layout"; 
+@use "7-components/post-layout";
+@use "7-components/review-masks";
 
 // 8. Utilities
 @use "8-utilities/modifiers";
 @use "8-utilities/states";
+@use "8-utilities/font-classes";
 
 /* Shame on you! */
 @use "shame";
@@ -71,6 +93,6 @@
 
 // FIX: This wrapper acts as a firewall, trapping all retro styles inside it!
 .legacy-archive-content {
-  @include meta.load-css("legacy-site-style.css");
-  @include meta.load-css("testquery.css");
+  @include meta.load-css("legacy/legacy-site-style.css");
+  @include meta.load-css("legacy/testquery.css");
 }

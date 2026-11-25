@@ -1,7 +1,36 @@
+/* Theme background and text colour, and their transition when the theme is switched (was in 1-settings) */
+body {
+  background-color: var(--site-bg) !important;
+  color: var(--text-main) !important;
+  
+  // FIX 2: Restrict transition animations purely to interactive clicks.
+  // This completely stops page loads from accidentally animating background frames!
+  transition: color 0.1s ease !important;
+}
+
+// Target active theme attribute changes explicitly for smooth interactive click updates
+html[data-theme] body {
+  transition: background-color 0.25s ease, color 0.25s ease !important;
+}
+
 body {
     background-color: var(--site-bg) !important;
     color: var(--text-main) !important;
     transition: background-color 0.3s ease, color 0.3s ease !important;
     padding-right: var(--scrollbarComp);
     overflow-x: hidden;
+}
+
+
+// Body font: a system font first, then the DM Sans subset and full DM Sans once loaded (FOFT script in base.njk)
+body {
+    font-family: sans-serif;
+}
+
+.fonts-loaded-1 body {
+    font-family: 'DM Sans Subset';
+}
+
+.fonts-loaded-2 body {
+    font-family: 'DM Sans';
 }

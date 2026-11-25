@@ -1,0 +1,37 @@
+/**
+ * Objects: small reusable layout patterns (moved from _shame.scss)
+ *
+ * .intro-paragraph, .column and .images lay out the intro and cover images of reviews and hub pages.
+ */
+
+.intro-paragraph{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+  
+.column{
+    flex-direction: column;
+    padding: 20px;
+}
+  
+.images{
+    display: flex;
+    justify-content: center;
+    // Each cover keeps its own shape; without this a shorter cover was stretched to its neighbour's height
+    align-items: flex-start;
+    padding: 10px;
+}
+
+// Two covers side by side (a review with images2) share the row. Images in a flex row won't shrink below
+// their own width unless told they may, so on a phone the pair ran wider than the screen.
+.images img{
+    min-width: 0;
+}
+
+@media only screen and (min-width: 1024px) {
+    .images img{
+        width: 50%;
+    }
+  }

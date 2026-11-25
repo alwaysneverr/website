@@ -1,0 +1,115 @@
+/**
+ * Font faces: the self-hosted fonts in /assets/fonts. Families are applied in 5-elements/_body.scss
+ * (the body text) and 8-utilities/_font-classes.scss (one-off font classes).
+ */
+@font-face {
+    font-family: 'DM Sans Subset';
+    src: url('/assets/fonts/dm-sans/dm-sans-v11-latin-regular-subset.woff2') format('woff2'),
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-regular-subset.woff') format('woff');
+    unicode-range: U+21-80, U+91-94, U+BF-D6, U+D8-F6, U+F8-122; // U+21-80,U+91-94,U+DF,U+E4,U+F6,U+FC
+}
+
+
+/* dm-sans-regular - latin */
+@font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-regular.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-regular.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* dm-sans-italic - latin */
+@font-face {
+    font-family: 'DM Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local(''),
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-italic.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-italic.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* dm-sans-700italic - latin */
+@font-face {
+    font-family: 'DM Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: local(''),
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-bolditalic.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-bolditalic.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* dm-sans-700 - latin */
+@font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-bold.woff2') format('woff2'),
+        /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url('/assets/fonts/dm-sans/dm-sans-v11-latin-bold.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* AllertaStencil-Regular */
+@font-face {
+    font-family: 'Allerta Stencil';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+        url('/assets/fonts/allerta-stencil/allerta-stencil-v24-latin-regular.woff2') format('woff2');
+}
+
+/* Merriweather */
+@font-face {
+    font-display: swap;
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+        url('/assets/fonts/merriweather/merriweather-v33-latin-regular.woff2') format('woff2');
+}
+
+/* kosugi-maru-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Kosugi Maru';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.woff2') format('woff2'),
+        /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+        url('/assets/fonts/kosugi-maru/kosugi-maru-v17-latin-regular.ttf') format('truetype');
+    /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+}
+
+/*
+ * Montserrat and Playfair Display: the Field Notes cards and headings, and the legacy fiction hub.
+ * Variable fonts (every weight in one file), saved from Google Fonts with their OFL licences beside them.
+ * Each style is split like Google's own CSS: "latin" covers English and Western European accents,
+ * "latin-ext" the rest (macrons like the ō in Kojirō), and a browser only downloads the part a page uses.
+ */
+$latin: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+$latin-ext: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+
+@each $family, $folder, $version, $weights in ('Montserrat', 'montserrat', 'v31', 100 900), ('Playfair Display', 'playfair-display', 'v40', 400 900) {
+    @each $style, $suffix in (normal, ''), (italic, '-italic') {
+        @each $subset, $range in ('latin', $latin), ('latin-ext', $latin-ext) {
+            @font-face {
+                font-display: swap;
+                font-family: $family;
+                font-style: $style;
+                font-weight: $weights;
+                src: url('/assets/fonts/#{$folder}/#{$folder}-#{$version}-#{$subset}#{$suffix}.woff2') format('woff2');
+                unicode-range: $range;
+            }
+        }
+    }
+}
