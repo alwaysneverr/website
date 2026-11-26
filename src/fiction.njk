@@ -11,6 +11,18 @@ eleventyNavigation:
 <!-- ==========================================================================
      CUSTOM PORTFOLIO CONTENT FIELD
      ========================================================================== -->
+{#
+  Story links appear only when the story's page is built. Draft pages (draft: true) are built while serving,
+  so their links work on the dev server and disappear from the production build instead of leading to a 404.
+#}
+{% macro storyTitle(url, title) -%}
+  {%- if collections.all | hasPage(url) %}<a href="{{ url }}" class="card-title"><i>{{ title }}</i></a>
+  {%- else %}<span class="card-title"><i>{{ title }}</i></span>{% endif -%}
+{%- endmacro %}
+{% macro storyLink(url) -%}
+  {%- if collections.all | hasPage(url) %}<a href="{{ url }}">{{ caller() }}</a>{% else %}{{ caller() }}{% endif -%}
+{%- endmacro %}
+
 <div class="fictions-canvas">
   <div>
 
@@ -68,10 +80,10 @@ eleventyNavigation:
 
         <div class="card3" id="creation">
           <div class="card-head">
-            <span class="card-title"><i>Book of Creation</i></span>
+            {{ storyTitle("/fiction/creation/", "Book of Creation") }}
           </div>
           <div class="image">
-            <img src="/assets/images/experiments/creation.jpg" alt="A Star Filled with lots of stars" loading="lazy">
+            {% call storyLink("/fiction/creation/") %}<img src="/assets/images/experiments/creation.jpg" alt="A Star Filled with lots of stars" loading="lazy">{% endcall %}
           </div>
           <div class="card-body">
             <p><i>The</i> Holy Book in-world of <i>Stickverse</i>.</p>
@@ -81,10 +93,10 @@ eleventyNavigation:
 
         <div class="card1" id="fourthday">
           <div class="card-head">
-            <span class="card-title"><i>The Fourth Day, Six Hours Left</i></span>
+            {{ storyTitle("/fiction/finalday/", "The Fourth Day, Six Hours Left") }}
           </div>
           <div class="image">
-            <img src="/assets/images/experiments/bench.jpg" alt="Park bench backdrop" loading="lazy">
+            {% call storyLink("/fiction/finalday/") %}<img src="/assets/images/experiments/bench.jpg" alt="Park bench backdrop" loading="lazy">{% endcall %}
           </div>
           <div class="card-body">
             <p>An unfinished short story about two people finding each other at the end of the world.</p>
@@ -93,10 +105,10 @@ eleventyNavigation:
 
         <div class="card2" id="finalday">
           <div class="card-head">
-            <span class="card-title"><i>The Final Day, Six Hours Remain</i></span>
+            {{ storyTitle("/fiction/finalday/play/", "The Final Day, Six Hours Remain") }}
           </div>
           <div class="image">
-            <img src="/assets/images/experiments/bench-couple.jpg" alt="Two people sitting on a bench in a park" loading="lazy">
+            {% call storyLink("/fiction/finalday/play/") %}<img src="/assets/images/experiments/bench-couple.jpg" alt="Two people sitting on a bench in a park" loading="lazy">{% endcall %}
           </div>
           <div class="card-body">
             <p>A semi-finished play based on the unfinished short story <i>The Fourth Day, Six Hours Left</i> with a definitive ending, more characters, and expanded backstory.</p>
@@ -131,10 +143,10 @@ eleventyNavigation:
 
         <div class="card2" id="sleep">
           <div class="card-head">
-            <span class="card-title"><i>Sleep</i></span>
+            {{ storyTitle("/fiction/sleep/", "Sleep") }}
           </div>
           <div class="image">
-            <img src="/assets/images/experiments/dreams.jpg" alt="Dream logs panorama" loading="lazy">
+            {% call storyLink("/fiction/sleep/") %}<img src="/assets/images/experiments/dreams.jpg" alt="Dream logs panorama" loading="lazy">{% endcall %}
           </div>
           <div class="card-body">
             <p>A collection of story taking place within someone's dream, containing the stories <i>Cover</i> and <i>Shadow</i>.</p>
@@ -143,10 +155,10 @@ eleventyNavigation:
 
         <div class="card3" id="fantasia">
           <div class="card-head">
-            <span class="card-title"><i>Fantasia</i></span>
+            {{ storyTitle("/fiction/fantasia/", "Fantasia") }}
           </div>
           <div class="image">
-            <img src="/assets/images/experiments/cyberpunk.jpg" alt="Cyberpunk city grid" loading="lazy">
+            {% call storyLink("/fiction/fantasia/") %}<img src="/assets/images/experiments/cyberpunk.jpg" alt="Cyberpunk city grid" loading="lazy">{% endcall %}
           </div>
           <div class="card-body">
             <p>A collection of stories taking place in the <i>Fantasia</i> cluster of the <i>Stickverse</i>, in the point of view of a group that will be known in the future as The Seven.</p>

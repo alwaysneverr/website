@@ -99,3 +99,119 @@
   opacity: 1 !important;
   transform: scale(1.12) rotate(5deg) !important;
 }
+
+/* ==========================================================================
+   SLEEP AND FANTASIA (ported from the old site's dream and fantasia pages)
+   ========================================================================== */
+.fiction-story-container {
+  // The opening line and the choices: Sleep's start page, Fantasia's start page, the end of each dream
+  .sleep-door {
+    text-align: center;
+    margin: var(--step-3, 36px) 0;
+  }
+
+  .sleep-door__line {
+    font-size: var(--step-2, 1.6rem);
+    font-weight: 700;
+  }
+
+  .sleep-choices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: var(--step-3, 36px);
+
+    a {
+      padding: 8px 16px;
+      border: 1px solid var(--story-link);
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      text-decoration: none !important;
+      transition: background-color 0.2s ease;
+
+      &:hover,
+      &:focus-visible {
+        background: color-mix(in srgb, var(--story-link) 15%, transparent);
+      }
+    }
+  }
+
+  // One section per old page
+  .sleep-chapter + .sleep-chapter {
+    margin-top: var(--step-4, 48px);
+    padding-top: var(--step-3, 36px);
+    border-top: 1px dashed color-mix(in srgb, currentColor 25%, transparent);
+  }
+
+  .sleep-chapter__title {
+    margin: 0 0 var(--step-2, 24px);
+    text-align: center;
+    font-size: var(--step-2, 1.6rem);
+
+    span {
+      display: block;
+      font-size: 0.6em;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      opacity: 0.7;
+    }
+  }
+
+  // The title that closes Cover's prologue
+  .sleep-reveal {
+    margin-top: var(--step-3, 36px) !important;
+    text-align: center;
+    font-size: var(--step-3, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.3em;
+  }
+
+  .sleep-break {
+    width: 40px;
+    margin: var(--step-2, 24px) auto;
+    border: 0;
+    border-top: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  }
+
+  // Fantasia's five starts, each with its index of stories
+  .fantasia-paths {
+    display: grid;
+    gap: 16px;
+  }
+
+  .fantasia-path {
+    padding: 16px 20px;
+    border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    border-radius: 8px;
+
+    h2 {
+      margin: 0 0 4px;
+      font-size: var(--step-1, 1.2rem);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+  }
+
+  .fantasia-path__index {
+    margin-bottom: 8px !important;
+    font-family: monospace;
+    font-size: 0.8rem;
+    opacity: 0.75;
+  }
+}
+
+// No drop cap on the start pages' lines or Fantasia's index labels
+.fiction-story-container .sleep-door p::first-letter,
+.fiction-story-container .fantasia-path p::first-letter {
+  float: none !important;
+  margin-right: 0 !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}

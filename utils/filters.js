@@ -36,6 +36,11 @@ export default {
         return DateTime.fromISO(dateStr).toFormat(format || "dd LLLL yyyy");
     },
 
+    // True when a page with this URL is built. Draft pages only exist while serving, so links to them disappear in production.
+    hasPage: function (collection, url) {
+        return (collection || []).some((page) => page.url === url);
+    },
+
     // 21 -> "Twenty-One", for chapter headings written out the way the books print them
     numberToWords: function (value) {
         const n = Number(value);
