@@ -31,22 +31,6 @@
   text-indent: 0 !important;
 }
 
-.fiction-story-container p:first-of-type::first-letter {
-  font-weight: 800 !important;
-  float: left !important;
-  line-height: 1 !important;
-  margin-right: 10px !important;
-  color: var(--story-link) !important;
-  
-  // MOBILE FIRST: Scaled down gracefully on phone screens to prevent text overlap
-  font-size: var(--step-2, 1.75rem) !important;
-
-  // DESKTOP UPGRADE: Snaps cleanly onto your immersive large scale display footprint
-  @media (min-width: 480px) {
-    font-size: var(--step-3, 2.5rem) !important;
-  }
-}
-
 .fiction-story-container a {
   color: var(--story-link) !important;
   text-decoration: underline !important;
@@ -203,15 +187,4 @@
     font-size: 0.8rem;
     opacity: 0.75;
   }
-}
-
-// No drop cap on the start pages' lines or Fantasia's index labels
-.fiction-story-container .sleep-door p::first-letter,
-.fiction-story-container .fantasia-path p::first-letter {
-  float: none !important;
-  margin-right: 0 !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
-  line-height: inherit !important;
-  color: inherit !important;
 }
