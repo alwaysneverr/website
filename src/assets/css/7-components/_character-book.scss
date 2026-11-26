@@ -700,6 +700,15 @@ html[data-theme="light"] .cbook--weapons {
   a:hover, a:focus-visible { color: var(--cb-accent); }
 }
 
+// The Return link at the top of each book's index page
+.cbook-crumbs--return {
+  padding-top: 1.5rem;
+}
+
+.cbook-crumbs--return + .cbook__header {
+  padding-top: 1rem;
+}
+
 .cbook-sheet__head {
   display: grid;
   grid-template-columns: auto 1fr;

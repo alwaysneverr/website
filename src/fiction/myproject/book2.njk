@@ -20,6 +20,7 @@ font: "allerta-stencil"
 {% macro alt(name) %}{% if name %} <span class="cbook-alt" title="Name on the old Book 2 page">({{ name }})</span>{% endif %}{% endmacro %}
 
 <div class="cbook cbook--weapons">
+  <nav class="cbook-crumbs cbook-crumbs--return" aria-label="Back to fictions"><a href="/fiction/">← Return</a></nav>
   <header class="cbook__header">
     <p class="cbook__kicker">{{ book.title }} · {{ book.subtitle }}</p>
     <h1 class="cbook__title">Book of Weapons</h1>

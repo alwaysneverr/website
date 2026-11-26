@@ -1,0 +1,20 @@
+/* Book of Creation (src/fiction/creation.njk): the Return link above the title, in the page's Cinzel lettering */
+.creation-return {
+    padding-top: 24px;
+}
+
+.creation-return a {
+    color: inherit;
+    opacity: 0.75;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.creation-return a:hover,
+.creation-return a:focus-visible {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}

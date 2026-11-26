@@ -303,3 +303,18 @@ span.scnumr {
 footer{
     text-align: center;
 }
+/* The Return link above the title page, set like a scene heading */
+.play-return {
+    margin-bottom: 24pt;
+    text-transform: uppercase;
+}
+
+.play-return a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.play-return a:hover,
+.play-return a:focus-visible {
+    text-decoration: underline;
+}
