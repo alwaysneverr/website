@@ -5533,6 +5533,336 @@
         "children": []
        }
       ]
+     },
+     {
+      "id": "gravity",
+      "title": "Gravity",
+      "intro": [],
+      "entries": [
+       {
+        "id": "the-protagonist",
+        "name": "The Protagonist",
+        "info": [
+         "Memories from the past come forth to his present"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "Lampshade is Hanging",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "I Am the Main Character",
+          "meta": [
+           "Passive"
+          ],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "Plot Exposition",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "The Plot Gave Me Power",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "the-celebrity",
+        "name": "The Celebrity",
+        "info": [
+         "From friendly and social to a small celebrity"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "What the Hell.",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "What the Shit?",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "What the What?",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "What the Fuck?!",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "the-rival",
+        "name": "The Rival",
+        "info": [
+         "The best friend to the bitter rival"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "The Reason You Suck Speech",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "A Poke of Knife to the Back",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "the-protagonists-mother",
+        "name": "The Protagonist's Mother",
+        "info": [
+         "The emotional mother"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "Demoralizing Shout",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "Speech of Anguish",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "the-protagonists-sister",
+        "name": "The Protagonist's Sister",
+        "info": [
+         "The best friend one could possibly have"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "Tough Sister",
+          "meta": [
+           "Passive"
+          ],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "10-guys",
+        "name": "10 Guys",
+        "info": [
+         "Those guys you know in junior high school"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "Strength in Number",
+          "meta": [
+           "Passive"
+          ],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "The Beat Up",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "10-coworkers",
+        "name": "10 Coworkers",
+        "info": [
+         "Those guys you know from work"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "Strength in Numbers",
+          "meta": [
+           "Passive"
+          ],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "The Beat Up, Adult Version",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "love-interest",
+        "name": "Love Interest",
+        "info": [
+         "The mysterious girl"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       },
+       {
+        "id": "it",
+        "name": "\"It\"",
+        "info": [
+         "The being from the box"
+        ],
+        "quote": [],
+        "attribution": null,
+        "skills": [
+         {
+          "name": "Malleable Dimension Creature",
+          "meta": [
+           "Passive"
+          ],
+          "mark": null,
+          "text": [],
+          "children": []
+         },
+         {
+          "name": "Personified Posession Attack",
+          "meta": [],
+          "mark": null,
+          "text": [],
+          "children": []
+         }
+        ],
+        "hidden": [],
+        "children": []
+       }
+      ]
      }
     ]
    },
@@ -6757,7 +7087,7 @@
   ],
   "counts": {
    "sections": 22,
-   "entries": 120
+   "entries": 129
   }
  }
 }
