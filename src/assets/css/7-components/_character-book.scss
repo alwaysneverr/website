@@ -301,6 +301,17 @@ html[data-theme="light"] .cbook {
   padding-left: 1.1rem;
 }
 
+// A member's placeholder page (the Ancient Ones' members): who they belong to, and that nothing's written yet
+.cbook-member-of {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.cbook-member-of--empty {
+  font-style: italic;
+  color: var(--cb-muted);
+}
+
 .cbook-card__subhead {
   margin: 1rem 0 0.5rem;
   font-size: 0.8rem;

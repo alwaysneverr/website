@@ -11,6 +11,11 @@ const { book1 } = JSON.parse(fs.readFileSync(new URL('./book1.json', import.meta
 const isAncient = (id) => id.startsWith('ancient-');
 const scriptName = (name) => name.replace(/[()]/g, '').trim();
 
+// Entries whose members get placeholder pages of their own (just the name, until they're written), placed right
+// after the entry. The members' names come from the book; nothing else is added to them.
+const MEMBER_PAGES = new Set(['ancient-ones']);
+const slug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 const characters = [];
 book1.sections.forEach((section, i) => {
   const chapter = { id: section.id, title: section.title, number: i + 1 };
@@ -20,11 +25,21 @@ book1.sections.forEach((section, i) => {
       if (entry.bare) continue;
       // image: public/assets/images/myproject/book1/<id>.<ext> when one has been added (see images.js)
       const shownName = entry.edit ? entry.edit.name : entry.name;
+      const members = MEMBER_PAGES.has(entry.id) ? entry.children.map((name) => ({ name, id: slug(name) })) : null;
       characters.push({
-        ...entry, chapter, group, shownName,
+        ...entry, chapter, group, shownName, members,
         image: findImage('book1', entry.id),
         script: isAncient(entry.id) ? scriptName(shownName) : null,
       });
+      for (const m of members || []) {
+        characters.push({
+          id: m.id, name: m.name, shownName: m.name, chapter, group,
+          info: [], quote: [], attribution: null, skills: [], hidden: [], children: [],
+          memberOf: { id: entry.id, name: shownName },
+          image: findImage('book1', m.id),
+          script: null,
+        });
+      }
     }
   }
 });
@@ -32,6 +47,10 @@ book1.sections.forEach((section, i) => {
 // Neighbours for the page's previous/next links
 const link = (c) => (c ? { id: c.id, name: c.shownName } : null);
 characters.forEach((c, i) => { c.prev = link(characters[i - 1]); c.next = link(characters[i + 1]); });
+
+// Two pages may not share an address
+const ids = new Set();
+for (const c of characters) { if (ids.has(c.id)) throw new Error(`Book 1: two pages with the id "${c.id}"`); ids.add(c.id); }
 
 export default {
   book1Characters: characters,

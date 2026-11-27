@@ -59,7 +59,13 @@ eleventyComputed:
       {% if e.info.length %}<div class="cbook-card__info">{{ cb.infoLines(e.info) }}</div>{% endif %}
       {% if e.quote.length %}<blockquote class="cbook-card__quote">{% for q in e.quote %}<p>{{ q }}</p>{% endfor %}</blockquote>{% endif %}
       {% if e.attribution %}<p class="cbook-card__attribution">– {{ e.attribution }}</p>{% endif %}
-      {% if e.children.length %}<ul class="cbook-card__members">{% for m in e.children %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+      {% if c.members %}<ul class="cbook-card__members">{% for m in c.members %}<li><a href="/fiction/myproject/book1/{{ m.id }}/">{{ m.name }}</a></li>{% endfor %}</ul>
+      {% elif e.children.length %}<ul class="cbook-card__members">{% for m in e.children %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+      {% if c.memberOf %}
+        {# A member's placeholder page: only the name so far, and who they belong to #}
+        <p class="cbook-member-of">Member of {% if c.memberOf.id.startsWith('ancient-') %}<a href="/fiction/myproject/book1/{{ c.memberOf.id }}/" title="{{ c.memberOf.name }}">{{ cb.script(c.memberOf.name) }}</a>{% else %}<a href="/fiction/myproject/book1/{{ c.memberOf.id }}/">{{ c.memberOf.name }}</a>{% endif %}</p>
+        <p class="cbook-member-of cbook-member-of--empty">Nothing written yet.</p>
+      {% endif %}
       {% set skills = e.skills %}
     {% endif %}
 
