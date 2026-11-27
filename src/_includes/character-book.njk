@@ -63,6 +63,10 @@
 {# The name shown for an entry: the later edit's name when there is one #}
 {% macro shownName(e) %}{{ e.edit.name if e.edit else e.name }}{% endmacro %}
 
+{# A name in Ancient Script: the glyphs are hidden from screen readers, which get the plain name instead.
+   The script drops the brackets the book puts round deleted entries: "(Ancient Ohm)" is written "Ancient Ohm". #}
+{% macro script(name) %}<span class="ancient-script cbook-ancient" aria-hidden="true">{{ name | string | replace('(', '') | replace(')', '') | trim }}</span><span class="cbook-sr">{{ name }}</span>{% endmacro %}
+
 {# Monogram: the first letter or digit of the name #}
 {% macro monogram(name) %}{{ name | string | replace('"', '') | replace('(', '') | trim | first }}{% endmacro %}
 

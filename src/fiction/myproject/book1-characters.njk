@@ -35,13 +35,14 @@ eleventyComputed:
     {{ cb.imageSlot(c.image, c.shownName) }}
     <div>
       <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ c.chapter.number }}</span> {{ c.chapter.title }}</p>
-      <h1 class="cbook-sheet__name">{{ c.shownName }}</h1>
       {% if c.script %}
-        {# The name in Ancient Script; hover, focus or tap shows the translation. Screen readers get the translation only. #}
-        <p class="cbook-script" tabindex="0">
-          <span class="cbook-script__glyphs ancient-script" aria-hidden="true">{{ c.script }}</span>
-          <span class="cbook-script__translation">{{ c.script }}</span>
-        </p>
+        {# The Ancient ones: the name in Ancient Script, its meaning in brackets as a small addendum (what screen readers read) #}
+        <h1 class="cbook-sheet__name cbook-sheet__name--ancient">
+          <span class="ancient-script" aria-hidden="true">{{ c.script }}</span>
+          <small class="cbook-sheet__meaning">({{ c.script }})</small>
+        </h1>
+      {% else %}
+        <h1 class="cbook-sheet__name">{{ c.shownName }}</h1>
       {% endif %}
       {% if ed and ed.power %}<p class="cbook-card__power">{{ ed.power }}</p>{% endif %}
       {% if ed and ed.tags.length %}
@@ -100,7 +101,7 @@ eleventyComputed:
   </div>
 
   <nav class="cbook-pager" aria-label="Characters">
-    {% if c.prev %}<a class="cbook-pager__prev" href="/fiction/myproject/book1/{{ c.prev.id }}/" rel="prev"><span>Previous</span>{{ c.prev.name }}</a>{% else %}<span></span>{% endif %}
-    {% if c.next %}<a class="cbook-pager__next" href="/fiction/myproject/book1/{{ c.next.id }}/" rel="next"><span>Next</span>{{ c.next.name }}</a>{% endif %}
+    {% if c.prev %}<a class="cbook-pager__prev" href="/fiction/myproject/book1/{{ c.prev.id }}/" rel="prev"><span>Previous</span>{% if c.prev.id.startsWith('ancient-') %}{{ cb.script(c.prev.name) }}{% else %}{{ c.prev.name }}{% endif %}</a>{% else %}<span></span>{% endif %}
+    {% if c.next %}<a class="cbook-pager__next" href="/fiction/myproject/book1/{{ c.next.id }}/" rel="next"><span>Next</span>{% if c.next.id.startsWith('ancient-') %}{{ cb.script(c.next.name) }}{% else %}{{ c.next.name }}{% endif %}</a>{% endif %}
   </nav>
 </div>

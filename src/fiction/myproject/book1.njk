@@ -26,10 +26,11 @@ font: "allerta-stencil"
       {% for e in full %}
         {% set shown = e.edit.name if e.edit else e.name %}
         <li>
-          <a class="cbook-name" href="/fiction/myproject/book1/{{ e.id }}/">
-            <span class="cbook-name__tab" aria-hidden="true">{{ cb.monogram(shown) }}</span>
+          {% set ancient = e.id.startsWith('ancient-') %}
+          <a class="cbook-name" href="/fiction/myproject/book1/{{ e.id }}/"{% if ancient %} title="{{ shown }}"{% endif %}>
+            <span class="cbook-name__tab{% if ancient %} ancient-script{% endif %}" aria-hidden="true">{{ cb.monogram(shown) }}</span>
             <span class="cbook-name__text">
-              <span class="cbook-name__name">{{ shown }}</span>
+              <span class="cbook-name__name">{% if ancient %}{{ cb.script(shown) }}{% else %}{{ shown }}{% endif %}</span>
               {% if e.edit and e.edit.power %}<span class="cbook-name__power">{{ e.edit.power }}</span>{% endif %}
             </span>
           </a>
@@ -37,7 +38,7 @@ font: "allerta-stencil"
       {% endfor %}
     </ul>
   {% endif %}
-  {% if bare.length %}<ul class="cbook-roster">{% for e in bare %}<li id="{{ e.id }}">{{ e.name }}</li>{% endfor %}</ul>{% endif %}
+  {% if bare.length %}<ul class="cbook-roster">{% for e in bare %}<li id="{{ e.id }}"{% if e.id.startsWith('ancient-') %} title="{{ e.name }}">{{ cb.script(e.name) }}{% else %}>{{ e.name }}{% endif %}</li>{% endfor %}</ul>{% endif %}
 {% endmacro %}
 
 <div class="cbook">

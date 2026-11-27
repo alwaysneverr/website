@@ -753,67 +753,38 @@ html[data-theme="light"] .cbook--weapons {
   line-height: 1.1;
 }
 
-// The Ancient ones' name in Ancient Script, with its translation in a tag that appears on hover, focus or tap
-.cbook-script {
-  position: relative;
-  display: inline-block;
-  margin: 0.4rem 0 0.2rem;
-  padding: 0.1rem 0.2rem;
-  border-radius: 4px;
-  cursor: help;
-  outline: none;
-
-  &:focus-visible {
-    box-shadow: 0 0 0 2px var(--cb-accent);
-  }
-}
-
-.cbook-script__glyphs {
+// The Ancient ones: the name in Ancient Script, its meaning in brackets as a small line under it
+.cbook-sheet__name--ancient .ancient-script {
   display: block;
   color: var(--cb-accent);
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  line-height: 1.2;
   letter-spacing: 0.04em;
 }
 
-.cbook-script__translation {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 6px);
-  z-index: 2;
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-  background: var(--cb-accent);
-  color: var(--cb-accent-ink);
-  font-size: 0.8rem;
-  font-weight: 600;
+.cbook-sheet__meaning {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 400;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: var(--cb-muted);
+}
+
+// Ancient names in the list and the pager
+.cbook-ancient { letter-spacing: 0.04em; }
+.cbook-pager a .cbook-ancient { font-size: inherit; font-weight: inherit; text-transform: none; color: inherit; }
+.cbook-name__tab.ancient-script { font-family: 'Ancient Script', 'Allerta Stencil', sans-serif; }
+
+// Text for screen readers only (the plain name next to Ancient Script)
+.cbook-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
   white-space: nowrap;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  pointer-events: none;
-
-  // a small pointer up to the script
-  &::before {
-    content: "";
-    position: absolute;
-    left: 14px;
-    bottom: 100%;
-    border: 5px solid transparent;
-    border-bottom-color: var(--cb-accent);
-  }
-}
-
-.cbook-script:hover .cbook-script__translation,
-.cbook-script:focus .cbook-script__translation {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cbook-script__translation { transition: none; }
+  border: 0;
 }
 
 .cbook-sheet__body {

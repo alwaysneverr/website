@@ -6,7 +6,7 @@ import { findImage } from './images.js';
 
 const { book1 } = JSON.parse(fs.readFileSync(new URL('./book1.json', import.meta.url), 'utf8'));
 
-// The Ancient ones' pages show their name in Ancient Script (the user's cipher font), with the translation on hover.
+// The Ancient ones' pages show their name in Ancient Script (the user's cipher font), with the meaning in brackets under it.
 // The name is written without the brackets the book puts round deleted entries: "(Ancient Ohm)" -> "Ancient Ohm".
 const isAncient = (id) => id.startsWith('ancient-');
 const scriptName = (name) => name.replace(/[()]/g, '').trim();
