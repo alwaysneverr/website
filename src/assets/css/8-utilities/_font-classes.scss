@@ -10,6 +10,11 @@
     font-family: 'Allerta Stencil';
 }
 
+// Characters the cipher lacks (9, punctuation) fall back to the site's sans
+.ancient-script {
+    font-family: 'Ancient Script', 'DM Sans', sans-serif;
+}
+
 .kosugi-maru-regular {
     font-family: 'Kosugi Maru';
 }

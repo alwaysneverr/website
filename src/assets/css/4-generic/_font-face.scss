@@ -67,6 +67,16 @@
         url('/assets/fonts/allerta-stencil/allerta-stencil-v24-latin-regular.woff2') format('woff2');
 }
 
+/* Ancient Script: the user's hand-drawn cipher alphabet for MYPROJECT's Ancient ones (A-Z, 0-8; built in _local/font).
+   block, not swap: while it loads the text stays hidden instead of flashing the plain Latin underneath. */
+@font-face {
+    font-display: block;
+    font-family: 'Ancient Script';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/ancient-script/ancient-script.woff2') format('woff2');
+}
+
 /* Merriweather */
 @font-face {
     font-display: swap;
