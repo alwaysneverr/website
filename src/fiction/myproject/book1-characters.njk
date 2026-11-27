@@ -36,6 +36,13 @@ eleventyComputed:
     <div>
       <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ c.chapter.number }}</span> {{ c.chapter.title }}</p>
       <h1 class="cbook-sheet__name">{{ c.shownName }}</h1>
+      {% if c.script %}
+        {# The name in Ancient Script; hover, focus or tap shows the translation. Screen readers get the translation only. #}
+        <p class="cbook-script" tabindex="0">
+          <span class="cbook-script__glyphs ancient-script" aria-hidden="true">{{ c.script }}</span>
+          <span class="cbook-script__translation">{{ c.script }}</span>
+        </p>
+      {% endif %}
       {% if ed and ed.power %}<p class="cbook-card__power">{{ ed.power }}</p>{% endif %}
       {% if ed and ed.tags.length %}
         <ul class="cbook-card__tags" aria-label="Roles">{% for t in ed.tags %}<li>{{ t }}</li>{% endfor %}</ul>
