@@ -45,3 +45,85 @@ h1:has(+ .creation-original) {
     letter-spacing: 0.08em;
     opacity: 0.7;
 }
+
+/* Translator's note markers in the verses: a small number linking to the note */
+.creation-tn-ref {
+    font-size: 0.7em;
+    line-height: 0;
+}
+
+.creation-tn-ref a {
+    margin-left: 0.1em;
+    padding: 0 0.2em;
+    color: inherit;
+    opacity: 0.75;
+    text-decoration: none;
+}
+
+.creation-tn-ref a:hover,
+.creation-tn-ref a:focus-visible {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* The scribe's closing line: set apart from the verses, in Magika with the English beneath */
+.creation-colophon {
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    max-width: 40rem;
+    border-top: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+    text-align: center;
+}
+
+.creation-colophon__original {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+.creation-colophon__translation {
+    margin: 0;
+    font-style: italic;
+    opacity: 0.75;
+}
+
+/* The translator's notes: the modern translator's voice, quieter and outside the scripture */
+.creation-notes {
+    margin: 4rem 0 2rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    border-radius: 6px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.creation-notes__title {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    opacity: 0.8;
+}
+
+.creation-notes ol {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.creation-notes li {
+    margin-bottom: 0.5rem;
+    scroll-margin-top: 2rem;
+}
+
+.creation-notes li:target {
+    outline: 1px dashed currentColor;
+    outline-offset: 4px;
+}
+
+.creation-notes__back {
+    color: inherit;
+    opacity: 0.6;
+    text-decoration: none;
+}

@@ -3,6 +3,13 @@ layout: empty
 title: Book of Creation
 description: "The Holy Book in-world of Stickverse. Based on Book of Genesis, it covers the initial creation of Stickverse itself, and The Creator's struggle against the Entropy system (known as the Deep) and the intricate balance The Creator must maintain to control the Deep."
 draft: true
+# The scribe's closing line, shown at the end of the book in Magika (Ancient Script) with the English beneath.
+colophon: "[The scribe's closing line]"
+# Translator's notes: how the Church's translation differs from this one. To attach a note to a verse, put
+# {{ tn("its-id") }} right after the word it is about. Notes are numbered in the order they are listed here.
+translatorNotes:
+  - id: deep
+    text: "[How the Church's translation differs here]"
 ---
 
 <head>
@@ -21,6 +28,8 @@ draft: true
 </head>
 
 <body>
+    {# A translator's note marker; the note itself is in the front matter (translatorNotes) #}
+    {% macro tn(id) %}{% for n in translatorNotes %}{% if n.id == id %}<sup class="creation-tn-ref"><a href="#tn-{{ id }}" id="tn-ref-{{ id }}" aria-label="Translator's note {{ loop.index }}">{{ loop.index }}</a></sup>{% endif %}{% endfor %}{% endmacro %}
     <main class="container">
         <nav class="creation-return" aria-label="Back to fictions">
             <a href="/fiction/" class="cinzel-unique">← Return</a>
@@ -31,7 +40,7 @@ draft: true
         </header>
         <section class="cardo-regular" id="chapter-1">
             <h1 class="cinzel-unique">Chapter 1</h1>
-            <p>[1:1] In the beginning, The Creator exists. As the Creator exists, so does the everything and the deep.
+            <p>[1:1] In the beginning, The Creator exists. As the Creator exists, so does the everything and the deep{{ tn("deep") }}.
             </p>
             <p>[1:2] The deep was dark and filled with nothing, and the everything is shining yet malleable. </p>
             <p>[1:3] Then The Creator said, "<ruby class="creation-word"><span class="ancient-script" aria-hidden="true">Centro</span><rt>Centro</rt></ruby>"; and there was Centro. </p>
@@ -92,6 +101,25 @@ draft: true
             <h1 class="cinzel-unique" id="chapter-2">Chapter 2</h1>
             
         </section>
+        {# The scribe's closing line: written in Magika, so it is shown in the script with the English beneath #}
+        {% if colophon %}
+        <footer class="creation-colophon">
+            <p class="creation-colophon__original ancient-script" aria-hidden="true">{{ colophon }}</p>
+            <p class="creation-colophon__translation cardo-regular">{{ colophon }}</p>
+        </footer>
+        {% endif %}
+
+        {# The translator's notes: modern, so plain English only #}
+        {% if translatorNotes.length %}
+        <aside class="creation-notes" aria-labelledby="creation-notes-title">
+            <h2 class="creation-notes__title cinzel-unique" id="creation-notes-title">Translator's Notes</h2>
+            <ol>
+                {% for n in translatorNotes %}
+                <li id="tn-{{ n.id }}">{{ n.text }} <a href="#tn-ref-{{ n.id }}" class="creation-notes__back" aria-label="Back to the verse">↩</a></li>
+                {% endfor %}
+            </ol>
+        </aside>
+        {% endif %}
     </main>
     
     {% include "footer.njk" %}
