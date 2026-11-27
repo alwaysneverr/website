@@ -18,3 +18,30 @@
     text-decoration: underline;
     text-underline-offset: 4px;
 }
+
+/* The original title, in Magika (Ancient Script), small beneath the translated heading */
+h1:has(+ .creation-original) {
+    margin-bottom: 0.15em;
+}
+
+.creation-original {
+    margin: 0 0 1.5rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+}
+
+/* The words the Creator speaks, left in Magika, with the translation as a small line beneath */
+.creation-word {
+    ruby-position: under;
+}
+
+.creation-word .ancient-script {
+    letter-spacing: 0.04em;
+}
+
+.creation-word rt {
+    font-size: 0.6em;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+}
