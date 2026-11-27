@@ -3,6 +3,7 @@
 // (Healers, Trapmakers...) get no page; the index lists them as plain names.
 import fs from 'node:fs';
 import { findImage } from './images.js';
+import { SUBGROUPS, slug } from './subgroups.js';
 
 const { book1 } = JSON.parse(fs.readFileSync(new URL('./book1.json', import.meta.url), 'utf8'));
 
@@ -12,11 +13,8 @@ const { book1 } = JSON.parse(fs.readFileSync(new URL('./book1.json', import.meta
 const isAncient = (id) => id.startsWith('ancient-');
 const scriptName = (name) => name.replace(/[()]/g, '').trim();
 
-// Subgroups: entries of the book that are a heading over their members, not a character. "Ancient Ones" holds Roy Nesis
-// and Fleur De La Magika. The subgroup gets no page; each member gets a placeholder page (just the name, until it's
-// written) with the subgroup in its breadcrumb. book1.njk lists the same ids. The members' names come from the book.
-const SUBGROUPS = ['ancient-ones'];
-const slug = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Subgroups (subgroups.js): the subgroup gets no page; each member gets a placeholder page (just the name, until it's
+// written) with the subgroup in its breadcrumb. The members' names come from the book.
 
 const characters = [];
 book1.sections.forEach((section, i) => {

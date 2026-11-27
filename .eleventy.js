@@ -12,6 +12,7 @@ import path from 'node:path'
 import filters from './utils/filters.js'
 import shortcodes from './utils/shortcodes.js'
 import { isContentTag, tagSlug } from './utils/taxonomy.js'
+import { checkData } from './utils/check-data.js'
 
 // The dev server's Vite compiles CSS/JS straight from src instead of from copies in _site.
 // Copying them on every rebuild made Vite recompile main.scss dozens of times mid-reload,
@@ -20,6 +21,10 @@ const isServing = process.env.ELEVENTY_RUN_MODE === 'serve'
 const srcAssets = path.resolve('src/assets').replace(/\\/g, '/')
 
 export default function (eleventyConfig) {
+	// The MYPROJECT book data is checked before every build and dev-server rebuild; a problem stops the build
+	// with a list of what's wrong (utils/check-data.js, or run it alone with `npm run check`)
+	eleventyConfig.on('eleventy.before', () => checkData());
+
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
 		if (data.draft) {
