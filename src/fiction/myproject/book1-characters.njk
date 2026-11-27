@@ -32,7 +32,7 @@ eleventyComputed:
   </nav>
 
   <header class="cbook-sheet__head">
-    {{ cb.imageSlot(c.image, c.shownName) }}
+    {{ cb.imageSlot(c.image, c.shownName, c.script) }}
     <div>
       <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ c.chapter.number }}</span> {{ c.chapter.title }}</p>
       {% if c.script %}

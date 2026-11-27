@@ -80,10 +80,11 @@
 
 {# The page's picture: the image when one has been added (public/assets/images/myproject/<book>/<id>.<ext>,
    see src/fiction/myproject/images.js), otherwise an empty frame with the monogram, waiting for one #}
-{% macro imageSlot(image, name) %}
+{# script: the Ancient ones, whose placeholder letter is in Ancient Script #}
+{% macro imageSlot(image, name, script=false) %}
   {%- if image -%}
     <figure class="cbook-figure"><img src="{{ image }}" alt="{{ name }}" loading="lazy" decoding="async"></figure>
   {%- else -%}
-    <div class="cbook-figure cbook-figure--empty" aria-hidden="true"><span>{{ monogram(name) }}</span></div>
+    <div class="cbook-figure cbook-figure--empty" aria-hidden="true"><span{% if script %} class="ancient-script"{% endif %}>{{ monogram(name) }}</span></div>
   {%- endif -%}
 {% endmacro %}

@@ -772,7 +772,8 @@ html[data-theme="light"] .cbook--weapons {
 // Ancient names in the list and the pager
 .cbook-ancient { letter-spacing: 0.04em; }
 .cbook-pager a .cbook-ancient { font-size: inherit; font-weight: inherit; text-transform: none; color: inherit; }
-.cbook-name__tab.ancient-script { font-family: 'Ancient Script', 'Allerta Stencil', sans-serif; }
+.cbook-name__tab.ancient-script,
+.cbook-figure--empty span.ancient-script { font-family: 'Ancient Script', 'Allerta Stencil', sans-serif; }
 
 // Text for screen readers only (the plain name next to Ancient Script)
 .cbook-sr {
