@@ -39,7 +39,7 @@
 {% macro infoLines(lines) %}
   {%- set stamps = ["Content locked", "(Classified)", "Subject to change", "(Non-combat)", "(Wrote more on this later)", "(More on this later)"] -%}
   {%- for t in lines -%}
-    {%- if t in stamps -%}<p class="cbook-stamp">{{ t }}</p>{%- else -%}<p>{{ t }}</p>{%- endif -%}
+    {%- if t in stamps -%}<p class="cbook-stamp">{{ t }}</p>{%- else -%}<p>{{ t | magika | safe }}</p>{%- endif -%}
   {%- endfor -%}
 {% endmacro %}
 

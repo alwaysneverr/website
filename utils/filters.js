@@ -9,6 +9,17 @@ const mdCompiler = new MarkdownIt({
 });
 
 export default {
+    // Writes every "Magika" in the text in Ancient Script (the user's cipher font). The text is escaped first, so the
+    // result is safe to print with | safe. Screen readers get the plain word; hovering the script shows it.
+    magika: function (text) {
+        const escaped = String(text ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        return escaped.replace(/\bMagika\b/gi, (w) => `<span class="ancient-script cbook-ancient" aria-hidden="true" title="${w}">${w}</span><span class="cbook-sr">${w}</span>`);
+    },
+    // The items of a list whose id isn't one of ids
+    withoutIds: function (list, ids) {
+        return (list || []).filter((item) => !(ids || []).includes(item.id));
+    },
+
     dateToFormat: function (date, format) {
         return DateTime.fromJSDate(date, { zone: 'utc' }).toFormat(
             String(format)

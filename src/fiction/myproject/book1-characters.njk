@@ -27,22 +27,23 @@ eleventyComputed:
   <nav class="cbook-crumbs" aria-label="Breadcrumb">
     <a href="/fiction/myproject/book1/">Book of Original Characters</a>
     <span aria-hidden="true">›</span>
-    <a href="/fiction/myproject/book1/#{{ c.chapter.id }}">{{ c.chapter.title }}</a>
-    {% if c.group %}<span aria-hidden="true">›</span> <span>{{ c.group }}</span>{% endif %}
+    <a href="/fiction/myproject/book1/#{{ c.chapter.id }}">{{ c.chapter.title | magika | safe }}</a>
+    {% if c.group %}<span aria-hidden="true">›</span> <span>{{ c.group | magika | safe }}</span>{% endif %}
+    {% if c.subgroup %}<span aria-hidden="true">›</span> <a href="/fiction/myproject/book1/#{{ c.subgroup.id }}">{% if c.subgroup.script %}{{ cb.script(c.subgroup.name) }}{% else %}{{ c.subgroup.name }}{% endif %}</a>{% endif %}
   </nav>
 
   <header class="cbook-sheet__head">
     {{ cb.imageSlot(c.image, c.shownName, c.script) }}
     <div>
-      <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ c.chapter.number }}</span> {{ c.chapter.title }}</p>
+      <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ c.chapter.number }}</span> {{ c.chapter.title | magika | safe }}</p>
       {% if c.script %}
-        {# The Ancient ones: the name in Ancient Script, its meaning in brackets as a small addendum (what screen readers read) #}
+        {# Names in Ancient Script: the name in Ancient Script, its meaning in brackets as a small addendum (what screen readers read) #}
         <h1 class="cbook-sheet__name cbook-sheet__name--ancient">
           <span class="ancient-script" aria-hidden="true">{{ c.script }}</span>
           <small class="cbook-sheet__meaning">({{ c.script }})</small>
         </h1>
       {% else %}
-        <h1 class="cbook-sheet__name">{{ c.shownName }}</h1>
+        <h1 class="cbook-sheet__name">{{ c.shownName | magika | safe }}</h1>
       {% endif %}
       {% if ed and ed.power %}<p class="cbook-card__power">{{ ed.power }}</p>{% endif %}
       {% if ed and ed.tags.length %}
@@ -59,13 +60,9 @@ eleventyComputed:
       {% if e.info.length %}<div class="cbook-card__info">{{ cb.infoLines(e.info) }}</div>{% endif %}
       {% if e.quote.length %}<blockquote class="cbook-card__quote">{% for q in e.quote %}<p>{{ q }}</p>{% endfor %}</blockquote>{% endif %}
       {% if e.attribution %}<p class="cbook-card__attribution">– {{ e.attribution }}</p>{% endif %}
-      {% if c.members %}<ul class="cbook-card__members">{% for m in c.members %}<li><a href="/fiction/myproject/book1/{{ m.id }}/">{{ m.name }}</a></li>{% endfor %}</ul>
-      {% elif e.children.length %}<ul class="cbook-card__members">{% for m in e.children %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
-      {% if c.memberOf %}
-        {# A member's placeholder page: only the name so far, and who they belong to #}
-        <p class="cbook-member-of">Member of {% if c.memberOf.id.startsWith('ancient-') %}<a href="/fiction/myproject/book1/{{ c.memberOf.id }}/" title="{{ c.memberOf.name }}">{{ cb.script(c.memberOf.name) }}</a>{% else %}<a href="/fiction/myproject/book1/{{ c.memberOf.id }}/">{{ c.memberOf.name }}</a>{% endif %}</p>
-        <p class="cbook-member-of cbook-member-of--empty">Nothing written yet.</p>
-      {% endif %}
+      {% if e.children.length %}<ul class="cbook-card__members">{% for m in e.children %}<li>{{ m | magika | safe }}</li>{% endfor %}</ul>{% endif %}
+      {# A subgroup member's placeholder page: only the name so far #}
+      {% if c.placeholder %}<p class="cbook-placeholder">Nothing written yet.</p>{% endif %}
       {% set skills = e.skills %}
     {% endif %}
 
@@ -107,7 +104,7 @@ eleventyComputed:
   </div>
 
   <nav class="cbook-pager" aria-label="Characters">
-    {% if c.prev %}<a class="cbook-pager__prev" href="/fiction/myproject/book1/{{ c.prev.id }}/" rel="prev"><span>Previous</span>{% if c.prev.id.startsWith('ancient-') %}{{ cb.script(c.prev.name) }}{% else %}{{ c.prev.name }}{% endif %}</a>{% else %}<span></span>{% endif %}
-    {% if c.next %}<a class="cbook-pager__next" href="/fiction/myproject/book1/{{ c.next.id }}/" rel="next"><span>Next</span>{% if c.next.id.startsWith('ancient-') %}{{ cb.script(c.next.name) }}{% else %}{{ c.next.name }}{% endif %}</a>{% endif %}
+    {% if c.prev %}<a class="cbook-pager__prev" href="/fiction/myproject/book1/{{ c.prev.id }}/" rel="prev"><span>Previous</span>{% if c.prev.script %}{{ cb.script(c.prev.name) }}{% else %}{{ c.prev.name | magika | safe }}{% endif %}</a>{% else %}<span></span>{% endif %}
+    {% if c.next %}<a class="cbook-pager__next" href="/fiction/myproject/book1/{{ c.next.id }}/" rel="next"><span>Next</span>{% if c.next.script %}{{ cb.script(c.next.name) }}{% else %}{{ c.next.name | magika | safe }}{% endif %}</a>{% endif %}
   </nav>
 </div>

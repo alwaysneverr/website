@@ -301,13 +301,10 @@ html[data-theme="light"] .cbook {
   padding-left: 1.1rem;
 }
 
-// A member's placeholder page (the Ancient Ones' members): who they belong to, and that nothing's written yet
-.cbook-member-of {
+// A subgroup member's placeholder page (the Ancient Ones' members): nothing's written yet
+.cbook-placeholder {
   margin: 0 0 0.5rem;
   font-size: 0.95rem;
-}
-
-.cbook-member-of--empty {
   font-style: italic;
   color: var(--cb-muted);
 }

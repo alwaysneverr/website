@@ -18,19 +18,28 @@ font: "allerta-stencil"
 {% import "character-book.njk" as cb %}
 {% set book = book1 %}
 
-{# A chapter's (or group's) names: linked tiles for characters with a page, plain name tags for the rest #}
-{% macro names(list) %}
-  {% set full = list | rejectattr("bare") %}{% set bare = list | selectattr("bare") %}
+{#
+  Names in Ancient Script (the user's cipher font): the Ancient ones (ids "ancient-...") and the members of the
+  Ancient Ones; every "Magika" is in the script too (the magika filter). Subgroups are entries that are a heading over
+  their members, not a character: they're listed as a heading with a tile per member (the members' placeholder pages).
+  book1-characters.11tydata.js lists the same subgroup ids.
+#}
+{% set subgroups = ["ancient-ones"] %}
+
+{# A chapter's (or group's) names: linked tiles for characters with a page, plain name tags for the rest.
+   script: every name in the list is in Ancient Script (a subgroup's members). #}
+{% macro names(list, script=false) %}
+  {% set full = list | rejectattr("bare") | withoutIds(subgroups) %}{% set bare = list | selectattr("bare") %}
   {% if full.length %}
     <ul class="cbook-names">
       {% for e in full %}
         {% set shown = e.edit.name if e.edit else e.name %}
         <li>
-          {% set ancient = e.id.startsWith('ancient-') %}
+          {% set ancient = script or e.id.startsWith('ancient-') %}
           <a class="cbook-name" href="/fiction/myproject/book1/{{ e.id }}/"{% if ancient %} title="{{ shown }}"{% endif %}>
             <span class="cbook-name__tab{% if ancient %} ancient-script{% endif %}" aria-hidden="true">{{ cb.monogram(shown) }}</span>
             <span class="cbook-name__text">
-              <span class="cbook-name__name">{% if ancient %}{{ cb.script(shown) }}{% else %}{{ shown }}{% endif %}</span>
+              <span class="cbook-name__name">{% if ancient %}{{ cb.script(shown) }}{% else %}{{ shown | magika | safe }}{% endif %}</span>
               {% if e.edit and e.edit.power %}<span class="cbook-name__power">{{ e.edit.power }}</span>{% endif %}
             </span>
           </a>
@@ -38,7 +47,7 @@ font: "allerta-stencil"
       {% endfor %}
     </ul>
   {% endif %}
-  {% if bare.length %}<ul class="cbook-roster">{% for e in bare %}<li id="{{ e.id }}"{% if e.id.startsWith('ancient-') %} title="{{ e.name }}">{{ cb.script(e.name) }}{% else %}>{{ e.name }}{% endif %}</li>{% endfor %}</ul>{% endif %}
+  {% if bare.length %}<ul class="cbook-roster">{% for e in bare %}<li id="{{ e.id }}"{% if e.id.startsWith('ancient-') %} title="{{ e.name }}">{{ cb.script(e.name) }}{% else %}>{{ e.name | magika | safe }}{% endif %}</li>{% endfor %}</ul>{% endif %}
 {% endmacro %}
 
 <div class="cbook">
@@ -51,7 +60,7 @@ font: "allerta-stencil"
 
   <nav class="cbook__index" aria-label="Chapters">
     <ol>
-      {% for s in book.sections %}<li><a href="#{{ s.id }}">{{ s.title }}</a></li>{% endfor %}
+      {% for s in book.sections %}<li><a href="#{{ s.id }}">{{ s.title | magika | safe }}</a></li>{% endfor %}
     </ol>
   </nav>
 
@@ -60,7 +69,7 @@ font: "allerta-stencil"
       <header class="cbook-chapter__head">
         <span class="cbook-chapter__number" aria-hidden="true">{{ loop.index }}</span>
         <div>
-          <h2 class="cbook-chapter__title" id="{{ s.id }}-title">{{ s.title }}</h2>
+          <h2 class="cbook-chapter__title" id="{{ s.id }}-title">{{ s.title | magika | safe }}</h2>
           {% if s.subtitle %}<p class="cbook-chapter__subtitle">{{ s.subtitle }}</p>{% endif %}
         </div>
       </header>
@@ -73,8 +82,15 @@ font: "allerta-stencil"
       {% endif %}
 
       {{ names(s.entries) }}
+      {% for e in s.entries %}{% if e.id in subgroups %}
+        {% set ancient = e.id.startsWith('ancient-') %}
+        <h3 class="cbook-group" id="{{ e.id }}"{% if ancient %} title="{{ e.name }}"{% endif %}>{% if ancient %}{{ cb.script(e.name) }}{% else %}{{ e.name }}{% endif %}</h3>
+        {% set members = [] %}
+        {% for m in e.children %}{% set _ = members.push({ id: m | slugify, name: m }) %}{% endfor %}
+        {{ names(members, ancient) }}
+      {% endif %}{% endfor %}
       {% for g in s.groups %}
-        <h3 class="cbook-group" id="{{ g.id }}">{{ g.title }}</h3>
+        <h3 class="cbook-group" id="{{ g.id }}">{{ g.title | magika | safe }}</h3>
         {% for p in g.intro %}<p class="cbook-chapter__intro">{{ p }}</p>{% endfor %}
         {{ names(g.entries) }}
       {% endfor %}
