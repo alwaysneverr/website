@@ -30,3 +30,14 @@
   from = "/legacy-site/beer/"
   to = "/legacy-site/imosae/"
   status = 301
+
+# Book 1 characters renamed (the page address comes from the name)
+[[redirects]]
+  from = "/fiction/myproject/book1/darth-stickaul/"
+  to = "/fiction/myproject/book1/darth-sticker/"
+  status = 301
+
+[[redirects]]
+  from = "/fiction/myproject/book1/wright-wickedness-wilkinson/"
+  to = "/fiction/myproject/book1/wright-wicked-wilkinson/"
+  status = 301
