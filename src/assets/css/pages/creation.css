@@ -31,9 +31,14 @@ h1:has(+ .creation-original) {
     opacity: 0.7;
 }
 
-/* The words the Creator speaks, left in Magika, with the translation as a small line beneath */
+/* The words the Creator speaks, left in Magika, with the translation as a small line beneath.
+   Laid out as a column rather than as ruby: Firefox hides a ruby annotation whose text is the same as its base
+   (here both are the word, only the font differs), so ruby layout would show no translation there. The word sits on
+   the line's baseline (an inline-flex box takes its first item's baseline) and the translation hangs beneath. */
 .creation-word {
-    ruby-position: under;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .creation-word .ancient-script {
@@ -41,7 +46,9 @@ h1:has(+ .creation-original) {
 }
 
 .creation-word rt {
+    display: block;
     font-size: 0.6em;
+    line-height: 1.2;
     letter-spacing: 0.08em;
     opacity: 0.7;
 }
