@@ -33,7 +33,8 @@ eleventyComputed:
   </nav>
 
   <header class="cbook-sheet__head">
-    {{ cb.imageSlot(w.image, w.name) }}
+    {# The placeholder letter skips a leading "The" ("The Infinity" -> I), as the list page's tab does #}
+    {{ cb.imageSlot(w.image, w.name, false, w.name | replace(r/^The /, '') | replace('"', '') | trim | first) }}
     <div>
       <p class="cbook-sheet__chapter"><span class="cbook-chapter__number" aria-hidden="true">{{ w.chapter.number }}</span> {{ w.chapter.title }}</p>
       <h1 class="cbook-sheet__name">{{ w.name }}</h1>
@@ -45,6 +46,14 @@ eleventyComputed:
 
   <div class="cbook-sheet__body">
     {% if w.info.length %}<div class="cbook-card__info">{{ cb.infoLines(w.info) }}</div>{% endif %}
+
+    {# The weapon is listed again in another section (e.g. the 7 Great Swords), with lines of its own #}
+    {% for a in w.alsoIn %}
+      <section class="cbook-also" aria-labelledby="also-{{ a.id }}">
+        <h2 class="cbook-also__title" id="also-{{ a.id }}">Also one of the <a href="/fiction/myproject/book2/#{{ a.id }}">{{ a.title }}</a></h2>
+        {% if a.info.length %}<div class="cbook-card__info">{{ cb.infoLines(a.info) }}</div>{% endif %}
+      </section>
+    {% endfor %}
 
     <dl class="cbook-fields cbook-fields--sheet">
       <div>

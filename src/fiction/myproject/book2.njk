@@ -52,16 +52,25 @@ font: "allerta-stencil"
         <h2 class="cbook-chapter__title" id="{{ s.id }}-title">{{ s.title }}</h2>
       </header>
 
+      {% for p in s.intro %}<p class="cbook-chapter__intro">{{ p }}</p>{% endfor %}
+
+      {% if s.byLetter %}
       <nav class="cbook-letters" aria-label="Weapons by letter">
         <ol>{% for e in s.entries %}<li><a href="/fiction/myproject/book2/{{ e.id }}/" title="{{ e.name }}">{{ e.name | replace('"', '') | trim | first }}</a></li>{% endfor %}</ol>
       </nav>
+      {% endif %}
 
-      {# Each weapon has its own page (book2-weapons.njk); this lists them with their danger level #}
+      {# Each weapon has its own page (book2-weapons.njk); this lists them with their danger level.
+         A "see" entry is a weapon already in the book: it shows and links to that weapon. #}
       <ul class="cbook-names">
-        {% for e in s.entries %}
+        {% for entry in s.entries %}
+          {% set found = [] %}
+          {% if entry.see %}{% for s2 in book.sections %}{% for x in s2.entries %}{% if x.id == entry.see %}{% set _ = found.push(x) %}{% endif %}{% endfor %}{% endfor %}{% endif %}
+          {% set e = found[0] if entry.see else entry %}
           <li>
             <a class="cbook-name" href="/fiction/myproject/book2/{{ e.id }}/">
-              <span class="cbook-name__tab" aria-hidden="true">{{ e.name | replace('"', '') | trim | first }}</span>
+              {# The tab is the weapon's index letter: a leading "The" is skipped ("The Infinity" -> I) #}
+              <span class="cbook-name__tab" aria-hidden="true">{{ e.name | replace(r/^The /, '') | replace('"', '') | trim | first }}</span>
               <span class="cbook-name__text">
                 <span class="cbook-name__name">{{ e.name }}</span>
                 {% if e.availability %}<span class="cbook-name__power">{{ e.availability }}</span>{% endif %}

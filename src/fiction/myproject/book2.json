@@ -314,6 +314,46 @@
       "availability": "",
       "skills": []
      }
+    ],
+    "byLetter": true
+   },
+   {
+    "id": "7-great-swords",
+    "title": "7 Great Swords",
+    "intro": [
+     "Made by the Unknown Sword-maker, who created 2 Legendaries and the entire 7 Greats. His last work was the \"World Shredder\".",
+     "The swords were scattered throughout the worlds. Not all of them are wielded by the 7 Great Swordsmen, and some are still missing."
+    ],
+    "entries": [
+     {
+      "id": "the-infinity",
+      "name": "The Infinity",
+      "info": [
+       "Wielded by Ned \"Nothingness\" Neverbrau, No. 1 of the 7 Great Swordsmen",
+       "He found the sword in his backyard after a meteor shower hit his city"
+      ],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     },
+     {
+      "see": "world-shredder",
+      "info": [
+       "Owned by \"Sickness\", No. 2 of the 7 Great Swordsmen",
+       "The last work of the Unknown Sword-maker"
+      ]
+     },
+     {
+      "id": "the-minnesota-twin",
+      "name": "The Minnesota Twin",
+      "info": [
+       "Owned by Rain \"One Eyed Double Berserker\" Poschyte, No. 4 of the 7 Great Swordsmen",
+       "A dual big sword, held with his four hands"
+      ],
+      "danger": "",
+      "availability": "",
+      "skills": []
+     }
     ]
    }
   ]

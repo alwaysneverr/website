@@ -7,13 +7,24 @@ const { book2 } = JSON.parse(fs.readFileSync(new URL('./book2.json', import.meta
 const danger = Object.fromEntries(book2.legend.danger.items.map((d) => [d.code, d]));
 const availability = Object.fromEntries(book2.legend.availability.items.map((a) => [a.name, a]));
 
+// A "see" entry lists a weapon that is already in the book (e.g. "World Shredder" among the 7 Great Swords). It gets
+// no page of its own: the weapon's page shows the section and the entry's lines under "Also one of ...".
+const alsoIn = {};
+book2.sections.forEach((section, i) => {
+  for (const entry of section.entries) {
+    if (entry.see) (alsoIn[entry.see] ||= []).push({ id: section.id, title: section.title, number: i + 1, info: entry.info });
+  }
+});
+
 const weapons = [];
 book2.sections.forEach((section, i) => {
   const chapter = { id: section.id, title: section.title, number: i + 1 };
   for (const entry of section.entries) {
+    if (entry.see) continue;
     weapons.push({
       ...entry,
       chapter,
+      alsoIn: alsoIn[entry.id] || [],
       dangerLevel: entry.danger ? danger[entry.danger] : null,
       availabilityLevel: entry.availability ? availability[entry.availability] : null,
       // public/assets/images/myproject/book2/<id>.<ext> when one has been added (see images.js)

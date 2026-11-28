@@ -6,7 +6,8 @@
 //   - ids are unique, and so are the anchors on the Book 1 list page (chapters, groups, plain names, subgroups)
 //   - Book 1: "bare" (no page) is set exactly when an entry has nothing to show; usesHidden points at real hidden
 //     passives; the counts match; the subgroups exist, and book1.njk lists the same ones as the data file
-//   - Book 2: every weapon's danger level and availability are in the legend
+//   - Book 2: every weapon's danger level and availability are in the legend; a "see" entry (a weapon listed again
+//     in another section) points at a real weapon
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
@@ -96,8 +97,14 @@ const book2Schema = z.strictObject({
     sections: z.array(z.strictObject({
       id,
       title: text,
-      // danger and availability are empty when the book doesn't give them yet
-      entries: z.array(z.strictObject({ id, name: text, info: lines, danger: z.string(), availability: z.string(), skills: lines })),
+      intro: lines.optional(),
+      byLetter: z.literal(true).optional(), // listed A to Z: the page shows a letter index
+      entries: z.array(z.union([
+        // danger and availability are empty when the book doesn't give them yet
+        z.strictObject({ id, name: text, info: lines, danger: z.string(), availability: z.string(), skills: lines }),
+        // a weapon already in the book, listed again here: links to its page, which shows these lines
+        z.strictObject({ see: id, info: lines }),
+      ])),
     })),
   }),
 });
@@ -185,10 +192,15 @@ function checkBook2(problems) {
   const { sections, legend } = data.book2;
   const dangers = legend.danger.items.map((i) => i.code);
   const availabilities = legend.availability.items.map((i) => i.name);
-  const all = sections.flatMap((s, si) => s.entries.map((e, ei) => ({ e, at: `sections[${si}].entries[${ei}]` })));
+  const listed = sections.flatMap((s, si) => s.entries.map((e, ei) => ({ e, at: `sections[${si}].entries[${ei}]` })));
+  const all = listed.filter(({ e }) => !e.see);
+  const ids = new Set(all.map(({ e }) => e.id));
 
   unique(file, 'weapons\' ids', all.map(({ e }) => e.id), problems);
   unique(file, 'section ids', sections.map((s) => s.id), problems);
+  for (const { e, at } of listed) {
+    if (e.see && !ids.has(e.see)) problems.push(`${file} › ${at}: "see" is "${e.see}", but no weapon has that id`);
+  }
   for (const { e, at } of all) {
     const label = `${file} › ${at} ("${e.name}")`;
     if (e.danger && !dangers.includes(e.danger)) problems.push(`${label}: danger "${e.danger}" isn't in the legend (${dangers.join(', ')})`);
