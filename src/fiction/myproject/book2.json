@@ -353,6 +353,17 @@
       "danger": "",
       "availability": "",
       "skills": []
+     },
+     {
+      "id": "the-invisible-twin",
+      "name": "The Invisible Twin",
+      "info": [
+       "Wielded by Wright \"Wicked\" Wilkinson, No. 5 of the 7 Great Swordsmen",
+       "The sword is famously invisible and cannot be perceived by any means, except if its owner allow you to see it"
+      ],
+      "danger": "",
+      "availability": "",
+      "skills": []
      }
     ]
    }
